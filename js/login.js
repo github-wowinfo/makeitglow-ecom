@@ -16,13 +16,17 @@ document.getElementById("login").addEventListener("click", function (e) {
   // Validate email format using a simple regex
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(EmailId)) {
-    alert("Please enter a valid email address.");
+    // alert("Please enter a valid email address.");
+    toastr.error("Please enter a valid email address.");
+
     return;
   }
 
   // Validate password (at least 8 characters)
   if (Passwords.length < 8) {
-    alert("Password must be at least 8 characters.");
+    // alert("Password must be at least 8 characters.");
+    toastr.error("Please enter a valid Password. only using");
+
     return;
   }
   // console.log(FirstName);
@@ -102,28 +106,28 @@ document.getElementById("handleConfirmation")
     });
 
 
-    fetch(
-      `https://mig-dev.lifelinemegacorp.com/api/Auth/ConfirmAccountByEmail?Email=${email}`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: "Bearer " + token,
-          "Content-Type": "application/json",
-        },
-        // success: function (response) {
-        //   console.log("Email sent :", response);
-        //   toastr.success("Email sent successful! ");
-        //   // window.location.href="./index.html";
-        // },
+    // fetch(
+    //   `https://mig-dev.lifelinemegacorp.com/api/Auth/ConfirmAccountByEmail?Email=${email}`,
+    //   {
+    //     method: "POST",
+    //     headers: {
+    //       Authorization: "Bearer " + token,
+    //       "Content-Type": "application/json",
+    //     },
+    //     // success: function (response) {
+    //     //   console.log("Email sent :", response);
+    //     //   toastr.success("Email sent successful! ");
+    //     //   // window.location.href="./index.html";
+    //     // },
      
-        // error: function (error) {
-        //   console.log("Sign in Error:", error.responseJSON.message);
-        //   toastr.error(error.responseJSON.message);
-        // },
+    //     // error: function (error) {
+    //     //   console.log("Sign in Error:", error.responseJSON.message);
+    //     //   toastr.error(error.responseJSON.message);
+    //     // },
 
       
-      }
-    )
+    //   }
+    // )
     // .then(response => {
     //   if (!response.ok) {
     //     // If the response status is not OK, throw an error
