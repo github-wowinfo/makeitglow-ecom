@@ -5,7 +5,7 @@ $.ajax({
     success: function (response) {
         let li = ``;
         $.each(response, function (index, value) {
-            console.log('response', value);
+            // console.log('response', value);
             li += `<li><a href="./products.html?catId=${value.catgEntryId}">${value.catgName}</a></li>`;
         });
         $('#categoryListing').append(li);
