@@ -6,7 +6,7 @@
 //         dataType: 'json',
 //         success: function(data) {
 //             data.forEach(option => {
-                
+
 //                     console.log('option', option.locationName);
 //                 $('#dropdown').append('<option>' + option.locationName +'</option>')
 //             });
@@ -41,7 +41,7 @@
 
 //     function populateDropdown(countries) {
 //       const selectElement = $('#countrySelect');
-      
+
 //       // Clear existing options
 //       selectElement.empty();
 
@@ -74,7 +74,7 @@
 
 //   function populateDropdown(countries) {
 //     const selectElement = $('#countrySelect');
-    
+
 //     // Clear existing options
 //     selectElement.empty();
 
@@ -124,20 +124,20 @@ $.ajax({
 })
 
 // $(document).ready(function() {
-    // Data to be sent in the POST request
-    // var postData = {
-    //     userType: 2,
-    //     firstName: "string",
-    //     lastName: "string",
-    //     phoneNumber: "string",
-    //     lctnId: 1,
-    //     refID: 1,
-    //     email: "string",
-    //     password: "string",
-    //     addressLine1: "string"
-    // };
+// Data to be sent in the POST request
+// var postData = {
+//     userType: 2,
+//     firstName: "string",
+//     lastName: "string",
+//     phoneNumber: "string",
+//     lctnId: 1,
+//     refID: 1,
+//     email: "string",
+//     password: "string",
+//     addressLine1: "string"
+// };
 
-    // Make POST request
+// Make POST request
 //     $.ajax({
 //         url: 'https://mig-dev.lifelinemegacorp.com/api/Auth/Register',
 //         type: 'POST',
@@ -158,17 +158,17 @@ $.ajax({
 
 
 // $(document).ready(function() {
-    // Data to be sent in the POST request
-    document.getElementById("postButton").addEventListener("click", function(e){
-      e.preventDefault()
-        const FirstName = document.getElementById("firstname").value;
-        const LastName = document.getElementById("lastname").value;
-        const EmailId = document.getElementById("email").value;
-        const Passwords = document.getElementById("password").value;
-        const PhoneNum = document.getElementById("phone").value;
-        const Addresses = document.getElementById("address").value;
-        const Countries = document.getElementById("countrySelect").value;
-        const RefId = document.getElementById("refrenceSelect").value;
+// Data to be sent in the POST request
+document.getElementById("postButton").addEventListener("click", function (e) {
+  e.preventDefault()
+  const FirstName = document.getElementById("firstname").value;
+  const LastName = document.getElementById("lastname").value;
+  const EmailId = document.getElementById("email").value;
+  const Passwords = document.getElementById("password").value;
+  const PhoneNum = document.getElementById("phone").value;
+  const Addresses = document.getElementById("address").value;
+  const Countries = document.getElementById("countrySelect").value;
+  const RefId = document.getElementById("refrenceSelect").value;
   // Validate first name  (not empty)
   document.querySelectorAll('.error').forEach(element => {
     element.textContent = '';
@@ -225,70 +225,70 @@ $.ajax({
 
     return;
   }  // console.log(FirstName);
-  
-    var userData = {
-        "userType": 2,
-        "email": EmailId,
-        "password": Passwords,
-        "firstName": FirstName,
-        "lastName": LastName,
-        "phoneNumber": PhoneNum,
-        "addressLine1":Addresses,
-        // "addressLine2": "",
-        "lctnId": Countries,
-        "refId": RefId  
-        // Add any other required fields for user registration
-    };
-console.log('userData :',userData);
 
-    $.ajax({
-        url: `${SETTINGS.backendUrl}/Auth/Register`,
-        type: 'POST',
-        dataType: 'json', // Change the datatype according to your response type
-        contentType: 'application/json', // Set the Content-Type
-        data: JSON.stringify(userData), // Convert object to JSON string
-        success: function(response) {
-          // var token = 'your_generated_token';
+  var userData = {
+    "userType": 2,
+    "email": EmailId,
+    "password": Passwords,
+    "firstName": FirstName,
+    "lastName": LastName,
+    "phoneNumber": PhoneNum,
+    "addressLine1": Addresses,
+    // "addressLine2": "",
+    "lctnId": Countries,
+    "refId": RefId
+    // Add any other required fields for user registration
+  };
+  console.log('userData :', userData);
 
-          // Save the token in localStorage
-          localStorage.setItem('token', response.token);
-            console.log('Registration Success:', response);
-            
-            // Handle the response from the server after successful registration
-            // Show success toast
-            toastr.success("Registered successful! ");
-            window.location.href="./login.html";
+  $.ajax({
+    url: `${SETTINGS.backendUrl}/Auth/Register`,
+    type: 'POST',
+    dataType: 'json', // Change the datatype according to your response type
+    contentType: 'application/json', // Set the Content-Type
+    data: JSON.stringify(userData), // Convert object to JSON string
+    success: function (response) {
+      // var token = 'your_generated_token';
+
+      // Save the token in localStorage
+      localStorage.setItem('token', response.token);
+      console.log('Registration Success:', response);
+
+      // Handle the response from the server after successful registration
+      // Show success toast
+      toastr.success("Registered successful! ");
+      window.location.href = "./login.html";
 
 
-          //   $.ajax({
-          //     url: `${SETTINGS.backendUrl}Auth/ConfirmAccountByEmail?Email=${EmailId}`,
-          //     type: 'POST', // or 'POST' or other method
-          //     dataType: 'json',
-          //     // Add headers or other configurations as needed
-  
-          //     success: function(secondApiResponse) {
-          //         console.log('Second API Success:', secondApiResponse);
-          //         // Handle the response from the second API
-          //         toastr.success("Confirmation mail sent to your mail id ");
-          //         // Redirect to another page or perform other actions as needed
-          //         // window.location.href = "./login.html";
-          //     },
-          //     error: function(secondApiError) {
-          //         console.log('Second API Error:', secondApiError);
-          //         // Handle errors from the second API
-          //     }
-          // });
-            // window.location.href = "./login.html"; // Replace with your desired redirect URL
-        },
-        error: function(error) {
-            // console.log('Registration Error:', error);
-            console.log("Registration Error::", error.responseJSON.message);
-            toastr.error(error.responseJSON.message);
-          // toastr.error("error occured");
+      //   $.ajax({
+      //     url: `${SETTINGS.backendUrl}Auth/ConfirmAccountByEmail?Email=${EmailId}`,
+      //     type: 'POST', // or 'POST' or other method
+      //     dataType: 'json',
+      //     // Add headers or other configurations as needed
 
-            
-        }
-    });
+      //     success: function(secondApiResponse) {
+      //         console.log('Second API Success:', secondApiResponse);
+      //         // Handle the response from the second API
+      //         toastr.success("Confirmation mail sent to your mail id ");
+      //         // Redirect to another page or perform other actions as needed
+      //         // window.location.href = "./login.html";
+      //     },
+      //     error: function(secondApiError) {
+      //         console.log('Second API Error:', secondApiError);
+      //         // Handle errors from the second API
+      //     }
+      // });
+      // window.location.href = "./login.html"; // Replace with your desired redirect URL
+    },
+    error: function (error) {
+      // console.log('Registration Error:', error);
+      console.log("Registration Error::", error.responseJSON.message);
+      toastr.error(error.responseJSON.message);
+      // toastr.error("error occured");
+
+
+    }
+  });
 });
 
 
