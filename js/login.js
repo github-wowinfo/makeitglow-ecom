@@ -56,7 +56,7 @@ document.getElementById("login").addEventListener("click", function (e) {
 
       console.log("Sign In Success:", response);
       toastr.success("Login In successful! ");
-      // window.location.href="./index.html";
+      window.location.href = "./index.html";
     },
     error: function (error) {
       console.log("Sign in Error:", error);
@@ -94,7 +94,12 @@ document.getElementById("handleConfirmation").addEventListener("click", function
 
     success: function (response) {
       console.log("Sign In Success:", response);
-      toastr.success("Login In successful! ");
+      toastr.success("Please Confirm your mail ");
+      // contentTy  // window.location.href="./index.html";
+      // if (response === "Account confirmed!") {
+      $("#openConfirmationM").modal("hide");
+      console.log("Close modal");
+      // }
       // window.location.href="./index.html";
     },
     error: function (error) {
