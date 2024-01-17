@@ -165,10 +165,10 @@
                     <div class="row">
                       <div class="col-lg-12 col-md-12 col-sm-12">
                         <!-- <a href="#" class="menu-title">Shop Structure</a> -->
-                        <ul>
-                          <li><a href="./whipped-soap.html">Whipped Soap</a></li>
+                        <ul id="categoryListing">
+                          <!-- <li><a href="./whipped-soap.html">Whipped Soap</a></li>
                           <li><a href="./soap-bar.html">Soap Bar </a></li>
-                          <li><a href="#">Face Wash </a></li>
+                          <li><a href="#">Face Wash </a></li> -->
                         </ul>
                       </div>
                     </div>
@@ -621,54 +621,8 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-xl-4 col-md-4">
-              <div class="dz-product-detail sticky-top">
-                <div class="swiper-btn-center-lr">
-                  <div class="swiper product-gallery-swiper2">
-                    <div class="swiper-wrapper" id="lightgallery">
-                      <div class="swiper-slide">
-                        <div class="dz-media DZoomImage">
-                          <a class="mfp-link lg-item" href="images/product/strawberry/straw.jpg"
-                            data-src="images/products/product-detail2/product2.png">
-                            <!-- <i  class="feather icon-maximize dz-maximize top-left"></i> -->
-                          </a>
-                          <img src="images/product/strawberry/straw.jpg" alt="image" />
-                        </div>
-                      </div>
-                      <div class="swiper-slide">
-                        <div class="dz-media DZoomImage">
-                          <a class="mfp-link lg-item" href="images/product/strawberry/2.jpg"
-                            data-src="images/products/product-detail2/product1.png">
-                            <!-- <i class="feather icon-maximize dz-maximize top-left"></i> -->
-                          </a>
-                          <img src="images/product/strawberry/2.jpg" alt="image" />
-                        </div>
-                      </div>
+              <div class="dz-product-detail sticky-top" id="imageContent">
 
-                      <div class="swiper-slide">
-                        <div class="dz-media DZoomImage">
-                          <a class="mfp-link lg-item" href="images/product/strawberry/3.jpg"
-                            data-src="images/products/product-detail2/product3.png">
-                            <!-- <i class="feather icon-maximize dz-maximize top-left"></i> -->
-                          </a>
-                          <img src="images/product/strawberry/3.jpg" alt="image" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="swiper product-gallery-swiper thumb-swiper-lg">
-                    <div class="swiper-wrapper">
-                      <div class="swiper-slide">
-                        <img src="images/product/strawberry/straw.jpg" alt="image" />
-                      </div>
-                      <div class="swiper-slide">
-                        <img src="images/product/strawberry/2.jpg" alt="image" />
-                      </div>
-                      <div class="swiper-slide">
-                        <img src="images/product/strawberry/3.jpg" alt="image" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
             <div class="col-xl-8 col-md-8">
@@ -774,11 +728,7 @@
                         hydrated and delicately scented. -->
                       </p>
                       <div class="meta-content m-b20 d-flex align-items-end">
-                        <div class="me-3">
-                          <span class="price-name">Price</span>
-                          <span class="price-num Tab-contents" id="tab1">55 AED <del>70 AED</del></span>
-                          <span class="price-num Tab-contents" id="tab2" style="display: none;">70 AED <del>80
-                              AED</del></span>
+                        <div class="me-3" id="pricing">
 
                         </div>
                         <div class="btn-quantity quantity-sm light d-xl-none d-blcok d-sm-block">
@@ -787,52 +737,15 @@
                         </div>
                       </div>
                       <div class="product-num">
-                        <div class="btn-quantity light d-xl-block d-sm-none d-none">
-                          <label class="form-label">Quantity</label>
-                          <input type="text" value="1" name="demo_vertical2" />
-                        </div>
-                        <div class="d-block">
-                          <label class="form-label">Size</label>
-                          <div class="btn-group product-size mb-0">
-                            <input type="radio" class="btn-check" name="btnradio1" id="btnradio11" checked="" />
-                            <!-- onclick="openTab(event, 'tab1')" -->
-                            <!-- onclick="openTab(event, 'tab2')" -->
-                            <!-- <button  class="" style="border: none;" >  -->
-                            <label class="btn btn-light active Tab" for="btnradio11" onclick="openTab(event, 'tab1')"
-                              style="width: 60px;">70ml</label>
-                            <!-- </button> -->
-                            <input type="radio" class="btn-check" name="btnradio1" id="btnradio21" />
-                            <!-- <button  class=""  style="border: none;" >  -->
-
-                            <label class="btn btn-light Tab " for="btnradio21" onclick="openTab(event, 'tab2')"
-                              style="width: 60px;">150ml</label>
-                            <!-- </button> -->
-
-                            <!-- <input type="radio" class="btn-check" name="btnradio1" id="btnradio31">
-													<label class="btn btn-light" for="btnradio31">L</label> -->
+                        <div id="quantity">
+                          <div class="btn-quantity light d-xl-block d-sm-none d-none">
+                            <label class="form-label">Quantity</label>
+                            <input type="text" value="1" name="demo_vertical2" />
                           </div>
                         </div>
-                        <!-- <div class="meta-content">
-												<label class="form-label">Color</label>
-												<div class="d-flex align-items-center color-filter">
-													<div class="form-check">
-														<input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel1" value="#24262B" aria-label="..." checked>
-														<span></span>
-													</div>
-													<div class="form-check">
-														<input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel2" value="#8CB2D1" aria-label="...">
-														<span></span>
-													</div>
-													<div class="form-check">
-														<input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel3" value="#0D775E" aria-label="...">
-														<span></span>
-													</div>
-													<div class="form-check">
-														<input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel4" value="#C7D1CF" aria-label="...">
-														<span></span>
-													</div>
-												</div>
-											</div> -->
+                        <div class="d-block" id="volume">
+
+                        </div>
                       </div>
                       <div class="dz-info">
                         <ul>
@@ -842,13 +755,10 @@
                           </li>
                           <li>
                             <strong>Category:</strong>
-                            <span>Bottles,</span>
-                            <span>Accessories,</span>
-                            <span>Mats,</span>
-                            <span>Bottles,</span>
-                            <span>Trackers</span>
+                            <span id="categoryName"></span>
+
                           </li>
-                          <li>
+                          <!-- <li>
                             <strong>Tags:</strong>
                             <span>Trackers,</span>
                             <span>Bags,</span>
@@ -862,14 +772,6 @@
                                 <i class="fa-brands fa-facebook-f"></i>
                               </a>
                             </span>
-                            <!-- <span>
-                                <a
-                                  href="https://www.linkedin.com/showcase/3686700/admin/"
-                                  target="_blank"
-                                >
-                                  <i class="fa-brands fa-linkedin-in"></i>
-                                </a>
-                              </span> -->
                             <span>
                               <a href="javascript:void(0);" target="_blank">
                                 <i class="fa-brands fa-instagram"></i>
@@ -880,7 +782,7 @@
                                 <i class="fa-brands fa-whatsapp"></i>
                               </a>
                             </span>
-                          </li>
+                          </li> -->
                         </ul>
                       </div>
                     </div>
@@ -999,7 +901,7 @@
                     </p>
                     <h3 class="text-start">How to use it : </h3>
                     <div id="howtouse">
-                      <ul class="feature-detail">
+                      <!-- <ul class="feature-detail">
                         <li>
                           <i class="icon feather icon-check"></i>
                           <h5>Dampen Your Skin And Take A Small Amount Of The Whipped Soap And Apply It To Your Hands Or
@@ -1019,7 +921,7 @@
                           <h5><span style="color: palevioletred;">Important </span>tip this soap can be used for shaving
                             for women and men both. This product leaves ur skin soft and supple after shave.</h5>
                         </li>
-                      </ul>
+                      </ul> -->
                     </div>
                   </div>
                   <!-- <div class="row g-lg-4 g-3">
@@ -1898,6 +1800,7 @@
   <!-- JAVASCRIPT FILES ========================================= -->
   <script src="js/jquery.min.js"></script>
   <script src="js/core/app-setting.js"></script>
+  <script src="js/header.js"></script>
   <script src="js/productDetails.js"></script>
   <!-- JQUERY MIN JS -->
   <script src="vendor/wow/wow.min.js"></script>

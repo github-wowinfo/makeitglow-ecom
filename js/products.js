@@ -1,7 +1,7 @@
 // Function to get query parameter by name
 function getQueryParam(name) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(name);
+	const urlParams = new URLSearchParams(window.location.search);
+	return urlParams.get(name);
 }
 
 // Get category ID from the URL
@@ -19,24 +19,25 @@ const catId = getQueryParam('catId');
 
 
 $(document).ready(function () {
-    // Fetch data from the API
-    $.ajax({
-        url: `${SETTINGS.backendUrl}/Items/GetItemByCategoryId?id=${catId}`,
-        method: 'GET',
-        dataType: 'json',
-        success: function (data) {
-            // Iterate over the products in the response and append them to the masonry layout
-            $.each(data, function (index, product) {
-                // Generate HTML for the product card with actual data
-                var variantMrp = (product.vrnts.length > 0) ? product.vrnts[0].mrp : 0;
-                var sellingPrice = (product.vrnts.length > 0) ? product.vrnts[0].sellingPrice : 0;
+	// Fetch data from the API
+	$.ajax({
+		url: `${SETTINGS.backendUrl}/Items/GetItemByCategoryId?id=${catId}`,
+		method: 'GET',
+		dataType: 'json',
+		success: function (data) {
+			// Iterate over the products in the response and append them to the masonry layout
+			$.each(data, function (index, product) {
+				console.log('product', product);
+				// Generate HTML for the product card with actual data
+				var variantMrp = (product.vrnts.length > 0) ? product.vrnts[0].mrp : 0;
+				var sellingPrice = (product.vrnts.length > 0) ? product.vrnts[0].sellingPrice : 0;
 
-                var productCardHtml = `
+				var productCardHtml = `
           <div class="col-6 col-xl-3 col-lg-3 col-md-4 col-sm-6 m-md-b15 m-b30 grid-5">
 							<div class="shop-card">
 								<div class="dz-media">
 									<a href="./productDetails.html?Id=${product.itemEntryId}">
-										<img src="images/product/strawberry/straw.jpg" alt="image">
+										<img src="${product.thumbnail}" alt="image">
 										<div class="shop-meta">
 											<a href="javascript:void(0);" class="btn btn-secondary btn-icon"
 												data-bs-toggle="modal" data-bs-target="#strawberry">
@@ -96,18 +97,18 @@ $(document).ready(function () {
 						</div>
           `;
 
-                // Append the product card HTML to the masonry layout
-                $('#productList').append(productCardHtml);
-            });
+				// Append the product card HTML to the masonry layout
+				$('#productList').append(productCardHtml);
+			});
 
-            // Initialize or update your Masonry layout here (if needed)
-            // ...
+			// Initialize or update your Masonry layout here (if needed)
+			// ...
 
-            // Optionally, apply any other logic or styles needed after appending the cards
-            // ...
-        },
-        error: function (error) {
-            console.error('Error fetching data:', error);
-        }
-    });
+			// Optionally, apply any other logic or styles needed after appending the cards
+			// ...
+		},
+		error: function (error) {
+			console.error('Error fetching data:', error);
+		}
+	});
 });
