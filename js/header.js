@@ -1,3 +1,20 @@
+
+var token = localStorage.getItem("token");
+console.log('token', token);
+if (token === null) {
+    var dropdown = `
+    <ul>
+    <li><a href="./login.html">Login / Registration</a></li>
+</ul>`
+    $('#user-dropdown').append(dropdown)
+} else {
+    var dropdown = `
+    <ul>
+    <li><a href="./changepass.html">Change Password</a></li> 
+</ul>`
+    $('#user-dropdown').append(dropdown)
+}
+
 $.ajax({
     type: "GET",
     url: `${SETTINGS.backendUrl}/Masters/GetAllCategories`,
