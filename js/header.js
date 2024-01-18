@@ -1,6 +1,6 @@
 
 var token = localStorage.getItem("token");
-console.log('token', token);
+// console.log('token', token);
 if (token === null) {
     var dropdown = `
     <ul>
