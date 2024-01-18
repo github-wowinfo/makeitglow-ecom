@@ -126,8 +126,18 @@ $(document).ready(function () {
         $("input[name='demo_vertical2']").on('change', function () {
           // Get the selected quantity
           var quantity = $(this).val();
+
+          // Get the variant information from the API response
+          var variantInfo = {
+            // Assuming you have the relevant variant information here
+            "mrp": 30, // Example MRP
+            "sellingPrice": 30 // Example Selling Price
+            // Add other variant details if needed
+          };
+
           // Calculate the new price based on quantity
           var totalPrice = quantity * variant.mrp;
+
           // Update the displayed price on the page
           updateDisplayedPrice(totalPrice);
         });
@@ -265,3 +275,6 @@ function updateDisplayedPrice(price) {
 // updateDisplayedPrice(totalPrice);
 // };
 // });
+
+
+
