@@ -40,7 +40,9 @@
 	<link rel="stylesheet" type="text/css" href="vendor/lightgallery/dist/css/lg-thumbnail.css">
 	<link rel="stylesheet" type="text/css" href="vendor/lightgallery/dist/css/lg-zoom.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
-
+	<!-- toastr msg. ... -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	
 	<!-- GOOGLE FONTS-->
 	<link rel="preconnect" href="https://fonts.googleapis.com/">
 	<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
@@ -677,7 +679,7 @@
 								<div class="col-md-12">
 									<div class="form-group m-b25">
 										<label class="label-title">Email address *</label>
-										<input name="dzName" required="" class="form-control">
+										<input name="dzName" required="" class="form-control" id="email">
 									</div>
 									<div class="_1ip0g651 _1fragemfi _1frageme0 _1fragemg9 _1fragemgq">
 										<div>
@@ -702,8 +704,8 @@
 								<div class="col-md-12">
 									<div class="m-b25">
 										<label class="label-title">Country / Region *</label>
-										<div class="form-select">
-											<select class="default-select w-100">
+										<!-- <div class="form-select"> -->
+											<select class="default-select w-100" id="country">
 												<option selected>United Arab Erimates</option>
 												<option value="1">Bahrain</option>
 												<option value="2">Kuwait</option>
@@ -711,25 +713,25 @@
 												<option value="3">Qatar</option>
 												<option value="3">Saudi Arabia</option>
 											</select>
-										</div>
+										<!-- </div> -->
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group m-b25">
 										<label class="label-title">First Name</label>
-										<input name="dzName" required="" class="form-control">
+										<input name="dzName" required="" class="form-control" id="firstname">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group m-b25">
 										<label class="label-title">Last Name</label>
-										<input name="dzName" required="" class="form-control">
+										<input name="dzName" required="" class="form-control" id="lastname">
 									</div>
 								</div>
 								<div class="col-md-12">
 									<div class="form-group m-b25">
 										<label class="label-title">Company (optional)</label>
-										<input name="dzName" required="" class="form-control">
+										<input name="dzName" required="" class="form-control" id="company">
 									</div>
 								</div>
 
@@ -737,25 +739,38 @@
 									<div class="form-group m-b25">
 										<label class="label-title">Street address *</label>
 										<input name="dzName" required="" class="form-control m-b15"
-											placeholder="House number and street name">
+											placeholder="House number and street name" id="address">
 
 									</div>
 								</div>
-								<label class="label-title">Town / City *</label>
+								<label class="label-title">State / City *</label>
 								<div class="col-md-6">
 									<div class="m-b25">
+										<select class="default-select w-100" id="state">
+											<option selected>State</option>
+											<option >Emirate</option>
+											<option value="1">Abu Dhabi</option>
+											<option value="2">Ajman</option>
+											<option value="3">Dubai</option>
+											<option value="3">Fujairah</option>
+											<option value="3">Ras Al-Khaimah</option>
+											<option value="3">Sharjah</option>
+											<option value="3">Umm al-Quwain</option>
+
+										</select>
 
 										<!-- <div class="form-select col-md-6"> -->
-										<input name="dzName" required="" class="form-control m-b15" placeholder="city">
+										<!-- <input name="dzName" required="" class="form-control m-b15" placeholder="State"> -->
 										<!-- </div> -->
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="m-b25">
 										<!-- <label class="label-title">Town / City *</label> -->
-										<div class="form-select col-md-6">
-											<select class="default-select w-100">
-												<option selected>Emirate</option>
+										<!-- <div class="form-select col-md-6"> -->
+											<select class="default-select w-100" id="city">
+												<option selected>City</option>
+												<option >Emirate</option>
 												<option value="1">Abu Dhabi</option>
 												<option value="2">Ajman</option>
 												<option value="3">Dubai</option>
@@ -765,36 +780,16 @@
 												<option value="3">Umm al-Quwain</option>
 
 											</select>
-										</div>
+										<!-- </div> -->
 									</div>
 								</div>
 
 								<div class="col-md-12">
 									<div class="form-group m-b25">
 										<label class="label-title">Phone *</label>
-										<input name="dzName" required="" class="form-control">
+										<input name="dzName" required="" class="form-control" type="tel" maxlength="10" id="phone">
 									</div>
 								</div>
-
-								<!-- <div class="col-md-12">
-									<div class="m-b25">
-										<label class="label-title">State *</label>
-										<div class="form-select">
-											<select class="default-select w-100">
-												<option selected>Rajasthan</option>
-												<option value="1">Another option</option>
-												<option value="2">Rajasthan</option>
-												<option value="3">Rajasthan</option>
-											</select>
-										</div>
-									</div>
-								</div> -->
-								<!-- <div class="col-md-12">
-									<div class="form-group m-b25">
-										<label class="label-title">ZIP Code *</label>
-										<input name="dzName" required="" class="form-control">
-									</div>
-								</div> -->
 
 								<div class="col-md-12 m-b25">
 									<div class="form-group m-b5">
@@ -924,52 +919,7 @@
 										</div>
 									</div>
 
-									<!-- <label>Card Number</label> -->
-
-									<!-- <div class="accordion dz-accordion accordion-sm" id="accordionFaq2">
-
-										<div class="accordion-item">
-
-											<div id="collapse2" class="accordion-collapse collapse"
-												aria-labelledby="collapse2" data-bs-parent="#accordionFaq1">
-												<div class="accordion-body">
-													<p class="m-b0">Make your payment directly into our bank account.
-														Please
-														use your Order ID as the payment reference. Your order will not
-														be
-														shipped until the funds have cleared in our account.</p>
-												</div>
-											</div>
-										</div>
-										<div class="accordion-item">
-											<div class="accordion-header" id="heading3">
-												<div class="accordion-button collapsed custom-control custom-checkbox"
-													data-bs-toggle="collapse" data-bs-target="#collapse3"
-													role="navigation" aria-expanded="true" aria-controls="collapse3">
-													<input class="form-check-input radio" type="radio"
-														name="flexRadioDefault" id="flexRadioDefault4">
-													<label class="form-check-label" for="flexRadioDefault4">
-														Paypal
-													</label>
-													<img src="images/shop/payment.jpg" alt="/">
-													<a href="javascript:void(0);">What is PayPal?</a>
-												</div>
-											</div>
-
-
-											<div id="collapse3" class="accordion-collapse collapse"
-												aria-labelledby="heading3" data-bs-parent="#accordionFaq1">
-												<div class="accordion-body">
-													<p class="m-b0">Make your payment directly into our bank account.
-														Please
-														use your Order ID as the payment reference. Your order will not
-														be
-														shipped until the funds have cleared in our account.</p>
-												</div>
-											</div>
-										</div>
-									</div> -->
-
+							
 									<div class="form-group">
 										<div class="custom-control custom-checkbox d-flex m-b15">
 											<input type="checkbox" class="form-check-input" id="basic_checkbox_3">
@@ -977,7 +927,7 @@
 												to the website terms and conditions </label>
 										</div>
 									</div>
-									<a href="shop-checkout.html" class="btn btn-secondary w-100">PLACE ORDER</a>
+									<button class="btn btn-secondary w-100" id="placeorder">PLACE ORDER</button>
 
 								</div>
 							</form>
@@ -1059,63 +1009,7 @@
 					</div>
 				</div>
 			</div>
-			<!-- Icon Box Start -->
-			<!-- <section class="content-inner py-0">
-				<div class="container-fluid px-0">
-					<div class="row gx-0">
-						<div class="col-xl-3 col-lg-3 col-sm-6">
-							<div class="icon-bx-wraper style-2 bg-light">
-								<div class="icon-bx">
-									<img src="images/svg/icon-bx/password-check.svg" alt="/">
-								</div>
-								<div class="icon-content">
-									<h5 class="dz-title">Filter & Discover</h5>
-									<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
-								</div>
-								<div class="data-text">01</div>
-							</div>	
-						</div>
-						<div class="col-xl-3 col-lg-3 col-sm-6">
-							<div class="icon-bx-wraper style-2">
-								<div class="icon-bx">
-									<img src="images/svg/icon-bx/cart.svg" alt="/">
-								</div>
-								<div class="icon-content">
-									<h5 class="dz-title">Add to cart</h5>
-									<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
-								</div>
-								<div class="data-text">02</div>
-							</div>	
-						</div>
-						<div class="col-xl-3 col-lg-3 col-sm-6">
-							<div class="icon-bx-wraper style-2 bg-light">
-								<div class="icon-bx">
-									<img src="images/svg/icon-bx/discovery.svg" alt="/">
-								</div>
-								<div class="icon-content">
-									<h5 class="dz-title">Fast Shipping</h5>
-									<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
-								</div>
-								<div class="data-text">03</div>
-							</div>	
-						</div>
-						<div class="col-xl-3 col-lg-3 col-sm-6">
-							<div class="icon-bx-wraper style-2">
-								<div class="icon-bx">
-									<img src="images/svg/icon-bx/box-tick.svg" alt="/">
-								</div>
-								<div class="icon-content">
-									<h5 class="dz-title">Enjoy The Product</h5>
-									<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
-								</div>
-								<div class="data-text">04</div>
-							</div>	
-						</div>
-					</div>
-				</div>
-			</section> -->
-			<!-- Icon Box End -->
-
+	
 		</div>
 
 		<!-- Footer -->
@@ -1209,10 +1103,12 @@
 	<script src="js/jquery.min.js"></script><!-- JQUERY MIN JS -->
 	<script src="js/core/app-setting.js"></script><!-- JQUERY MIN JS -->
 	<script src="js/header.js"></script><!-- JQUERY MIN JS -->
+	<script src="./js/checkout.js"></script>
 	<script src="vendor/wow/wow.min.js"></script><!-- WOW JS -->
 	<script src="vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script><!-- BOOTSTRAP MIN JS -->
 	<script src="vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script><!-- BOOTSTRAP SELECT MIN JS -->
 	<script src="vendor/bootstrap-touchspin/bootstrap-touchspin.js"></script><!-- BOOTSTRAP TOUCHSPIN JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script><!-- toaster JS -->
 
 	<script src="vendor/counter/waypoints-min.js"></script><!-- WAYPOINTS JS -->
 	<script src="vendor/counter/counterup.min.js"></script><!-- COUNTERUP JS -->
