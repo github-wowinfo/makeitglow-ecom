@@ -56,7 +56,7 @@ document.getElementById("login").addEventListener("click", function (e) {
 
       console.log("Sign In Success:", response);
       toastr.success("Login In successful! ");
-      window.location.href = "./index.html";
+      // window.location.href = "./index.html";
     },
     error: function (error) {
       console.log("Sign in Error:", error);

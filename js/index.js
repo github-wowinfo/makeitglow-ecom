@@ -54,7 +54,7 @@ function createSwiperSlide(product) {
               </div>
               <div class="content-btn" data-swiper-parallax="-60">
                 <a class="btn btn-secondary me-xl-3 me-2 btnhover20" href="shop-cart.html">ADD TO CART</a>
-                <a class="btn btn-outline-secondary btnhover20" href="${product.DetailsLink}">VIEW DETAILS</a>
+                <a class="btn btn-outline-secondary btnhover20" href="./productDetails.html?Id=${product.itemId}">VIEW DETAILS</a>
               </div>
             </div>
           </div>
@@ -109,11 +109,11 @@ $(document).ready(function () {
           var productCardHtml = `
               <li class="card-container col-6 col-xl-3 col-lg-3 col-md-4 col-sm-6 Begs wow fadeInUp" data-wow-delay="0.1s">
                 <div class="shop-card">
-                  <a href=''>
+                  <a href='./productDetails.html?Id=${product.itemId}'>
                     <div class="dz-media">
                       <img src="images/product/straw.jpg" alt="${product.itemTitle}">
                       <div class="shop-meta">
-													<a href="javascript:void(0);" class="btn btn-secondary btn-icon"
+													<a href="./productDetails.html?Id=${product.itemId}" class="btn btn-secondary btn-icon"
 														data-bs-toggle="modal" class="open-quick-view" data-bs-target="#quickViewModal" onclick="quckview(${product.itemId})" >
 														<i class="fa-solid fa-eye d-md-none d-block"></i>
 														<span class="d-md-block d-none">Quick View</span>
@@ -164,7 +164,7 @@ $(document).ready(function () {
                     </div>
                   </a>
                   <div class="dz-content">
-                    <h4 class="title"><a href="">${product.itemTitle}</a></h4>
+                    <h4 class="title"><a href="./productDetails.html?Id=${product.itemId}">${product.itemTitle}</a></h4>
                     <ul class="star-rating">
                       <!-- ... (star rating code) ... -->
                     </ul>
