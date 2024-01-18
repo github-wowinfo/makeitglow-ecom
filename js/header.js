@@ -11,8 +11,14 @@ if (token === null) {
     var dropdown = `
     <ul>
     <li><a href="./changepass.html">Change Password</a></li> 
+    <li><a href="#/" onClick="logout()">Logout</a></li> 
 </ul>`
     $('#user-dropdown').append(dropdown)
+}
+
+function logout() {
+    window.location.href = "./login.html";
+    localStorage.removeItem('token')
 }
 
 $.ajax({
