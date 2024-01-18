@@ -87,28 +87,28 @@ $(document).ready(function () {
       var pricingHTML = '';
       var initialTab = 1; // You can set this to the index of the initially selected tab
 
-         // Generate volume HTML dynamically based on API response
-         var volumeHTML = '<label class="form-label">Size</label><div class="btn-group product-size mb-0">';
-         data.vrnts.forEach(function (variant, index) {
-   
-   
-           volumeHTML += `
+      // Generate volume HTML dynamically based on API response
+      var volumeHTML = '<label class="form-label">Size</label><div class="btn-group product-size mb-0">';
+      data.vrnts.forEach(function (variant, index) {
+
+
+        volumeHTML += `
            <input type="radio" class="btn-check" name="btnradio1" id="btnradio${index + 1}" ${index === 0 ? 'checked' : ''} />
            <label style="padding:5px; width:fit-content" class="btn btn-light Tab ${index === 0 ? 'active' : ''}" for="btnradio${index + 1}" onclick="handleButtonClick(event, 'tab${index + 1}', ${variant.vrntEntryId})">
                ${variant.unitVolume}ml
            </label>`;
-          //  <input type="radio" class="btn-check" name="btnradio1" id="btnradio${index + 1}" ${index === 0 ? 'checked' : ''} />
-          //  <label style="padding:5px; width:fit-content" class="btn btn-light Tab ${index === 0 ? 'active' : ''}" for="btnradio${index + 1}" onclick="updateVariantId(event, ${variant.vrntEntryId})">
-          //      ${variant.unitVolume}ml
-          //  </label>`;
-           
-         });
-         volumeHTML += '</div>';
-   
-         // Append volume HTML to the '#volume' element
-         $('#volume').append(volumeHTML);
-   
-   
+        //  <input type="radio" class="btn-check" name="btnradio1" id="btnradio${index + 1}" ${index === 0 ? 'checked' : ''} />
+        //  <label style="padding:5px; width:fit-content" class="btn btn-light Tab ${index === 0 ? 'active' : ''}" for="btnradio${index + 1}" onclick="updateVariantId(event, ${variant.vrntEntryId})">
+        //      ${variant.unitVolume}ml
+        //  </label>`;
+
+      });
+      volumeHTML += '</div>';
+
+      // Append volume HTML to the '#volume' element
+      $('#volume').append(volumeHTML);
+
+
 
 
       data.vrnts.forEach(function (variant, index) {
@@ -119,32 +119,32 @@ $(document).ready(function () {
         if (data.vrnts.length > 0) {
           variantId = data.vrnts[0].vrntEntryId;
           console.log('Initial variantId', variantId);
-        pricingHTML += `
+          pricingHTML += `
         <span class="price-num Tab-contents" id="tab${index + 1}" ${index + 1 === initialTab ? '' : 'style="display: none;"'}>
             ${variant.sellingPrice} AED <del>${variant.mrp} AED</del>
         </span>`;
-        $("input[name='demo_vertical2']").on('change', function () {
-          // Get the selected quantity
-          var quantity = $(this).val();
+          $("input[name='demo_vertical2']").on('change', function () {
+            // Get the selected quantity
+            var quantity = $(this).val();
 
-          // Get the variant information from the API response
-          var variantInfo = {
-            // Assuming you have the relevant variant information here
-            "mrp": 30, // Example MRP
-            "sellingPrice": 30 // Example Selling Price
-            // Add other variant details if needed
-          };
+            // Get the variant information from the API response
+            var variantInfo = {
+              // Assuming you have the relevant variant information here
+              "mrp": 30, // Example MRP
+              "sellingPrice": 30 // Example Selling Price
+              // Add other variant details if needed
+            };
 
-          // Calculate the new price based on quantity
-          var totalPrice = quantity * variant.mrp;
+            // Calculate the new price based on quantity
+            var totalPrice = quantity * variant.mrp;
 
-          // Update the displayed price on the page
-          updateDisplayedPrice(totalPrice);
-        });
-      }
+            // Update the displayed price on the page
+            updateDisplayedPrice(totalPrice);
+          });
+        }
 
       });
-    
+
 
       // Append pricing HTML to the '#pricing' element
       $('#pricing').append(pricingHTML);
@@ -161,7 +161,7 @@ $(document).ready(function () {
 
     var quantity = $("input[name='demo_vertical2']").val();
     var totalPrice = quantity * /* Get the price for the new variantId */
-    updateDisplayedPrice(totalPrice);
+      updateDisplayedPrice(totalPrice);
   };
 });
 
@@ -278,3 +278,66 @@ function updateDisplayedPrice(price) {
 
 
 
+document.getElementById("cart").addEventListener("click", function (e) {
+  e.preventDefault();
+  var obj = {
+    "itmVrntId": 23,
+    "qty": 1
+  }
+
+  $.ajax({
+    url: `${SETTINGS.backendUrl}/Ecom/AddToCart`,
+    type: "POST",
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-Type": "application/json",
+      // Add other headers as needed
+    },
+    dataType: "json", // Change the datatype according to your response type
+    contentType: "application/json", // Set the Content-Type
+    data: JSON.stringify(obj),
+
+    success: function (response) {
+      console.log("Sign In Success:", response);
+      toastr.success("Item Added to Cart");
+    },
+    error: function (error) {
+      console.log("Sign in Error:", error);
+      toastr.error(error.responseJSON.title);
+
+    },
+  });
+
+});
+
+
+document.getElementById("whislist").addEventListener("click", function (e) {
+  e.preventDefault();
+  var obj = {
+    "itmVrntId": 24
+  }
+
+  $.ajax({
+    url: `${SETTINGS.backendUrl}/Ecom/AddToWishlist`,
+    type: "POST",
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-Type": "application/json",
+      // Add other headers as needed
+    },
+    dataType: "json", // Change the datatype according to your response type
+    contentType: "application/json", // Set the Content-Type
+    data: JSON.stringify(obj),
+
+    success: function (response) {
+      console.log("Sign In Success:", response);
+      toastr.success("Item Added to Cart");
+    },
+    error: function (error) {
+      console.log("Sign in Error:", error);
+      toastr.error(error.responseJSON.title);
+
+    },
+  });
+
+});
