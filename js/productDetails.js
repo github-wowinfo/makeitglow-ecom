@@ -6,10 +6,10 @@ function getQueryParam(name) {
 
 // Get category ID from the URL
 const itemId = getQueryParam('Id');
+// console.log('id', itemId);
+
 
 $(document).ready(function () {
-  let variantId = ''
-  console.log('id', variantId);
   // Fetch data from the API
   $.ajax({
     url: `${SETTINGS.backendUrl}/Items/GetItemById?id=${itemId}`,
@@ -86,8 +86,6 @@ $(document).ready(function () {
       var pricingHTML = '';
       var initialTab = 1; // You can set this to the index of the initially selected tab
       data.vrnts.forEach(function (variant, index) {
-        variantId = variant.vrntEntryId
-        console.log('variantId', variantId);
         pricingHTML += `
         <span class="price-num Tab-contents" id="tab${index + 1}" ${index + 1 === initialTab ? '' : 'style="display: none;"'}>
             ${variant.sellingPrice} AED <del>${variant.mrp} AED</del>
@@ -95,8 +93,18 @@ $(document).ready(function () {
         $("input[name='demo_vertical2']").on('change', function () {
           // Get the selected quantity
           var quantity = $(this).val();
+
+          // Get the variant information from the API response
+          var variantInfo = {
+            // Assuming you have the relevant variant information here
+            "mrp": 30, // Example MRP
+            "sellingPrice": 30 // Example Selling Price
+            // Add other variant details if needed
+          };
+
           // Calculate the new price based on quantity
           var totalPrice = quantity * variant.mrp;
+
           // Update the displayed price on the page
           updateDisplayedPrice(totalPrice);
         });
@@ -108,8 +116,6 @@ $(document).ready(function () {
       // Generate volume HTML dynamically based on API response
       var volumeHTML = '<label class="form-label">Size</label><div class="btn-group product-size mb-0">';
       data.vrnts.forEach(function (variant, index) {
-
-
         volumeHTML += `
         <input type="radio" class="btn-check" name="btnradio1" id="btnradio${index + 1}" ${index === 0 ? 'checked' : ''} />
         <label style="padding:5px; width:fit-content" class="btn btn-light Tab ${index === 0 ? 'active' : ''}" for="btnradio${index + 1}" onclick="openTab(event, 'tab${index + 1}')">
@@ -158,7 +164,7 @@ $(document).ready(function () {
 
 // Function to update the displayed price on the page
 function updateDisplayedPrice(price) {
-  // console.log(price);
+  console.log(price);
   // Assuming you have an element to display the price with id="displayedPrice"
   $("#displayedPrice").text("Total Price: $" + price);
 
