@@ -221,7 +221,7 @@ document.getElementById("postButton").addEventListener("click", function (e) {
   // Validate address (not empty)
   if (Addresses === '') {
     // alert("Address is a required field.");
-    toastr.error("Please enter a valid phone number.");
+    toastr.error("Please enter a valid address.");
 
     return;
   }  // console.log(FirstName);
