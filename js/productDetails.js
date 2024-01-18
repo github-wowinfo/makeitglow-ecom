@@ -169,3 +169,68 @@ function updateDisplayedPrice(price) {
   $("#displayedPrice").text("Total Price: $" + price);
 
 }
+
+
+document.getElementById("cart").addEventListener("click", function (e) {
+  e.preventDefault();
+  var obj = {
+    "itmVrntId": 23,
+    "qty": 1
+  }
+
+  $.ajax({
+    url: `${SETTINGS.backendUrl}/Ecom/AddToCart`,
+    type: "POST",
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-Type": "application/json",
+      // Add other headers as needed
+    },
+    dataType: "json", // Change the datatype according to your response type
+    contentType: "application/json", // Set the Content-Type
+    data: JSON.stringify(obj),
+
+    success: function (response) {
+      console.log("Sign In Success:", response);
+      toastr.success("Item Added to Cart");
+    },
+    error: function (error) {
+      console.log("Sign in Error:", error);
+      toastr.error(error.responseJSON.title);
+
+    },
+  });
+
+});
+
+
+document.getElementById("whislist").addEventListener("click", function (e) {
+  e.preventDefault();
+  var obj = {
+    "itmVrntId": 24
+  }
+
+  $.ajax({
+    url: `${SETTINGS.backendUrl}/Ecom/AddToWishlist`,
+    type: "POST",
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-Type": "application/json",
+      // Add other headers as needed
+    },
+    dataType: "json", // Change the datatype according to your response type
+    contentType: "application/json", // Set the Content-Type
+    data: JSON.stringify(obj),
+
+    success: function (response) {
+      console.log("Sign In Success:", response);
+      toastr.success("Item Added to Cart");
+    },
+    error: function (error) {
+      console.log("Sign in Error:", error);
+      toastr.error(error.responseJSON.title);
+
+    },
+  });
+
+});
