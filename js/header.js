@@ -19,6 +19,8 @@ if (token === null) {
 function logout() {
     window.location.href = "./login.html";
     localStorage.removeItem('token')
+    localStorage.removeItem('userId')
+    localStorage.removeItem('uid')
 }
 
 $.ajax({

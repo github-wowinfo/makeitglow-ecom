@@ -52,11 +52,13 @@ document.getElementById("login").addEventListener("click", function (e) {
     data: JSON.stringify(userData), // Convert object to JSON string
 
     success: function (response) {
-      localStorage.setItem('token', response.token);
 
-      console.log("Sign In Success:", response);
+      localStorage.setItem('token', response.token);
+      localStorage.setItem('userId', response.profile.userId)
+      localStorage.setItem('uid', response.profile.uid)
+      console.log("Sign In Success:", response.profile);
       toastr.success("Login In successful! ");
-      // window.location.href = "./index.html";
+      window.location.href = "./index.html";
     },
     error: function (error) {
       console.log("Sign in Error:", error);
