@@ -7,7 +7,10 @@ function getQueryParam(name) {
 // Get category ID from the URL
 const itemId = getQueryParam('Id');
 let variantId = ''; // Declare variantId globally
+let quantity = '1' ;
 console.log('var', variantId);
+// console.log('var', Quantity);
+
 
 $(document).ready(function () {
   // let variantId = ''
@@ -121,7 +124,7 @@ $(document).ready(function () {
         </span>`;
           $("input[name='demo_vertical2']").on('change', function () {
             // Get the selected quantity
-            var quantity = $(this).val();
+             quantity = $(this).val();
 
             // Get the variant information from the API response
             var variantInfo = {
@@ -131,11 +134,17 @@ $(document).ready(function () {
               // Add other variant details if needed
             };
 
-            // Calculate the new price based on quantity
+            var selectedVariant = data.vrnts.find(function (variant) {
+              return variant.vrntEntryId === variantId;
+            }); 
+          if (selectedVariant) {
             var totalPrice = quantity * variant.mrp;
 
             // Update the displayed price on the page
             updateDisplayedPrice(totalPrice);
+          }
+            // Calculate the new price based on quantity
+           
           });
         }
 
@@ -164,8 +173,10 @@ $(document).ready(function () {
 window.handleButtonClick = function (event, tabId, newVariantId) {
   openTab(event, tabId);
   updateVariantId(event, newVariantId);
-
+// Reset the quantity to its initial value when changing tabs
+quantity = 1;
   // You can perform additional actions here if needed
+  $("input[name='demo_vertical2']").val(quantity);
   // ...
 };
 // });
@@ -200,7 +211,8 @@ $(document).ready(function () {
 function updateDisplayedPrice(price) {
 console.log("Total Price: $", + price)
   // Assuming you have an element to display the price with id="displayedPrice"
-  $("#total").content.text("Total Price: $" + price);
+  $("#total").text("Total Price: $" + price);
+  handleBootstrapTouchSpin()
 }
 
 // const Price= document.getElementById("price").value;
@@ -210,11 +222,14 @@ console.log("Total Price: $", + price)
 
 document.getElementById("cart").addEventListener("click", function (e) {
   e.preventDefault();
-  var obj = {
-    "itmVrntId": 23,
-    "qty": 1
-  }
+  // console.log('U variantId', variantId);
 
+  var obj = {
+    "itmVrntId": variantId,
+    "qty": quantity
+  }
+  console.log(obj)
+  
   $.ajax({
     url: `${SETTINGS.backendUrl}/Ecom/AddToCart`,
     type: "POST",
@@ -244,8 +259,10 @@ document.getElementById("cart").addEventListener("click", function (e) {
 document.getElementById("whislist").addEventListener("click", function (e) {
   e.preventDefault();
   var obj = {
-    "itmVrntId": 24
+    "itmVrntId": variantId,
+
   }
+  console.log(obj)
 
   $.ajax({
     url: `${SETTINGS.backendUrl}/Ecom/AddToWishlist`,
