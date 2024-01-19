@@ -122,7 +122,7 @@
                           d="M14.8315 17.8278C14.8315 17.1374 15.3912 16.5778 16.0815 16.5778H16.0899C16.7802 16.5778 17.3399 17.1374 17.3399 17.8278C17.3399 18.5182 16.7802 19.0778 16.0899 19.0778H16.0815C15.3912 19.0778 14.8315 18.5182 14.8315 17.8278Z"
                           fill="var(--white)" />
                       </svg>
-                      <span class="badge badge-circle">5</span>
+                      <span class="badge badge-circle" id="cartCount"></span>
                     </a>
                   </li>
                   <li class="nav-item user-icon ">
@@ -441,20 +441,20 @@
                   <button class="nav-link active" id="shopping-cart" data-bs-toggle="tab"
                     data-bs-target="#shopping-cart-pane" type="button" role="tab" aria-controls="shopping-cart-pane"
                     aria-selected="true">Shopping Cart
-                    <span class="badge badge-light">5</span>
+                    <span class="badge badge-light" id="cartCount1"></span>
                   </button>
                 </li>
                 <li class="nav-item" role="presentation">
                   <button class="nav-link" id="wishlist" data-bs-toggle="tab" data-bs-target="#wishlist-pane"
                     type="button" role="tab" aria-controls="wishlist-pane" aria-selected="false">Wishlist
-                    <span class="badge badge-light">2</span>
+                    <span class="badge badge-light" id="whislistCount"></span>
                   </button>
                 </li>
               </ul>
               <div class="tab-content pt-4" id="dz-shopcart-sidebar">
                 <div class="tab-pane fade show active" id="shopping-cart-pane" role="tabpanel"
                   aria-labelledby="shopping-cart" tabindex="0">
-                  <div class="shop-sidebar-cart " >
+                  <div class="shop-sidebar-cart ">
                     <ul class="sidebar-cart-list" id="cartItem">
                       <!-- <li>
                         <div class="cart-widget">
@@ -840,7 +840,7 @@
                           <td>
                             <h6 class="mb-0">Total</h6>
                           </td>
-                          <td class="price" ><span id="total"></span></td>
+                          <td class="price"><span id="total"></span></td>
                         </tr>
                       </tbody>
                     </table>
