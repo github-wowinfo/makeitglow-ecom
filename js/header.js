@@ -64,7 +64,7 @@ $(document).ready(function () {
           <li>
                         <div class="cart-widget">
                           <div class="dz-media me-3">
-                            <img src="images/shop/shop-cart/pic1.jpg" alt="">
+                            <img src="${cartItem.thumbnail}" alt="">
                           </div>
                           <div class="cart-content">
                             <h6 class="title"><a href="product-thumbnail.html">${cartItem.itemName}</a></h6>
@@ -124,21 +124,21 @@ $(document).ready(function () {
         // $('#shopping-cart-pane .sidebar-cart-list').empty();
   
         // Update cart items
-        cartData.forEach(function (cartItem) {
-            console.log(cartItem);
+        cartData.forEach(function (whishlistItem) {
+            console.log(whishlistItem);
           var cartItemHTML = `
                  <li>
                         <div class="cart-widget">
                           <div class="dz-media me-3">
-                            <img src="images/shop/shop-cart/pic1.jpg" alt="">
+                            <img src="${whishlistItem.mainImage1}" alt="${whishlistItem.itemName}">
                           </div>
                           <div class="cart-content">
-                            <h6 class="title"><a href="product-thumbnail.html">${cartItem.itemName}</a></h6>
+                            <h6 class="title"><a href="product-thumbnail.html">${whishlistItem.itemName}</a></h6>
                             <div class="d-flex align-items-center">
                               <div class="btn-quantity light quantity-sm me-3">
                                  
                               </div>
-                              <h6 class="dz-price text-primary mb-0">${cartItem.mrp}</h6>
+                              <h6 class="dz-price text-primary mb-0">${whishlistItem.mrp}</h6>
                             </div>
                           </div>
                           <a href="javascript:void(0);" class="dz-close">
@@ -148,7 +148,7 @@ $(document).ready(function () {
                       </li>`;
   
           // Append the item to the cart list
-          $('#cartItem').append(cartItemHTML);
+          $('#whishlistItem').append(cartItemHTML);
         });
   
         // Calculate and update subtotal
@@ -164,8 +164,8 @@ $(document).ready(function () {
   // Function to calculate subtotal based on cart data
   function calculateSubtotal(cartData) {
     var subtotal = 0;
-    cartData.forEach(function (cartItem) {
-      subtotal += cartItem.price;
+    cartData.forEach(function (whishlistItem) {
+      subtotal += whishlistItem.price;
     });
     return subtotal;
   }
