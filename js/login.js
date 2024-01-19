@@ -58,7 +58,17 @@ document.getElementById("login").addEventListener("click", function (e) {
       localStorage.setItem('uid', response.profile.uid)
       console.log("Sign In Success:", response.profile);
       toastr.success("Login In successful! ");
+      // window.location.href = "./index.html";
+
+       // Check for the stored redirect URL
+    var redirectUrl = sessionStorage.getItem('redirectUrl');
+    if (redirectUrl) {
+      sessionStorage.removeItem('redirectUrl'); // Clear the stored URL
+      window.location.href = redirectUrl;
+    } else {
+      // Redirect to the default URL if there is no stored URL
       window.location.href = "./index.html";
+    }
     },
     error: function (error) {
       console.log("Sign in Error:", error);

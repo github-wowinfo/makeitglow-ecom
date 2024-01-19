@@ -1,3 +1,6 @@
+
+
+
 // Function to get query parameter by name
 function getQueryParam(name) {
   const urlParams = new URLSearchParams(window.location.search);
@@ -218,8 +221,10 @@ console.log("Total Price: $", + price)
 // const Price= document.getElementById("price").value;
 // console.log("Total Price: $" + Price");
 
+var token = localStorage.getItem("token");
+// console.log('token', token);
 
-
+// add to cart  api.... 
 document.getElementById("cart").addEventListener("click", function (e) {
   e.preventDefault();
   // console.log('U variantId', variantId);
@@ -229,7 +234,10 @@ document.getElementById("cart").addEventListener("click", function (e) {
     "qty": quantity
   }
   console.log(obj)
-  
+  if (token === null) {
+    window.location.href = "./login.html";
+    
+} else {
   $.ajax({
     url: `${SETTINGS.backendUrl}/Ecom/AddToCart`,
     type: "POST",
@@ -246,16 +254,18 @@ document.getElementById("cart").addEventListener("click", function (e) {
       console.log("Sign In Success:", response);
       toastr.success("Item Added to Cart");
     },
+
     error: function (error) {
       console.log("Sign in Error:", error);
       toastr.error(error.responseJSON.title);
 
     },
   });
+}
 
 });
 
-
+// whish list api.... 
 document.getElementById("whislist").addEventListener("click", function (e) {
   e.preventDefault();
   var obj = {
@@ -263,7 +273,11 @@ document.getElementById("whislist").addEventListener("click", function (e) {
 
   }
   console.log(obj)
-
+  if (token === null) {
+ 
+    window.location.href = "./login.html";
+    
+} else {
   $.ajax({
     url: `${SETTINGS.backendUrl}/Ecom/AddToWishlist`,
     type: "POST",
@@ -278,7 +292,7 @@ document.getElementById("whislist").addEventListener("click", function (e) {
 
     success: function (response) {
       console.log("Sign In Success:", response);
-      toastr.success("Item Added to Cart");
+      toastr.success("Item Added to Whish list");
     },
     error: function (error) {
       console.log("Sign in Error:", error);
@@ -286,5 +300,11 @@ document.getElementById("whislist").addEventListener("click", function (e) {
 
     },
   });
+}
 
 });
+
+
+
+// Assuming you have the necessary variables like itemId, variantId, token, etc.
+
