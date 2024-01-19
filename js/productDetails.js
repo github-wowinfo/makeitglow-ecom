@@ -24,7 +24,7 @@ $(document).ready(function () {
     dataType: 'json',
     success: function (data) {
       // Iterate over the products in the response and append them to the masonry layout
-      console.log('data', data);
+      // console.log('data', data);
       $('#title').append(data.itemName)
       $('#shortDescription').append(data.shortDescription)
       $('#longDescription').append(data.longDescription)
