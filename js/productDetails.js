@@ -234,14 +234,10 @@ document.getElementById("cart").addEventListener("click", function (e) {
     "qty": quantity
   }
   console.log(obj)
-<<<<<<< HEAD
   if (token === null) {
     window.location.href = "./login.html";
     
 } else {
-=======
-
->>>>>>> f18e1e35295b409c34073bd1acb45839dee16cd8
   $.ajax({
     url: `${SETTINGS.backendUrl}/Ecom/AddToCart`,
     type: "POST",

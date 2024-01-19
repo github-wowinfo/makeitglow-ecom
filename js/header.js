@@ -38,6 +38,7 @@ $.ajax({
 });
 
 
+// add to cart api . . . . 
 
 $(document).ready(function () {
     // Fetch cart data from the API
@@ -61,6 +62,72 @@ $(document).ready(function () {
             console.log(cartItem);
           var cartItemHTML = `
           <li>
+                        <div class="cart-widget">
+                          <div class="dz-media me-3">
+                            <img src="images/shop/shop-cart/pic1.jpg" alt="">
+                          </div>
+                          <div class="cart-content">
+                            <h6 class="title"><a href="product-thumbnail.html">${cartItem.itemName}</a></h6>
+                            <div class="d-flex align-items-center">
+                              <div class="btn-quantity light quantity-sm me-3">
+                                 
+                              </div>
+                              <h6 class="dz-price text-primary mb-0">${cartItem.mrp}</h6>
+                            </div>
+                          </div>
+                          <a href="javascript:void(0);" class="dz-close">
+                            <i class="ti-close"></i>
+                          </a>
+                        </div>
+                      </li>`;
+  
+          // Append the item to the cart list
+          $('#cartItem').append(cartItemHTML);
+        });
+  
+        // Calculate and update subtotal
+        var subtotal = calculateSubtotal(cartData);
+        $('#shopping-cart-pane .cart-total h5:last-child').text('$' + subtotal.toFixed(2));
+      },
+      error: function (error) {
+        console.error('Error fetching cart data:', error);
+      }
+    });
+  });
+  
+  // Function to calculate subtotal based on cart data
+  function calculateSubtotal(cartData) {
+    var subtotal = 0;
+    cartData.forEach(function (cartItem) {
+      subtotal += cartItem.price;
+    });
+    return subtotal;
+  }
+
+  // Whish list api . . . . 
+
+$(document).ready(function () {
+    // Fetch cart data from the API
+    $.ajax({
+      url: `${SETTINGS.backendUrl}/Ecom/GetWishlistByCustId`,
+      method: 'GET',
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+        // Add other headers as needed
+      },
+      dataType: 'json',
+      success: function (cartData) {
+        // Assuming cartData is an array of items in the cart
+  
+        // Clear existing content
+        // $('#shopping-cart-pane .sidebar-cart-list').empty();
+  
+        // Update cart items
+        cartData.forEach(function (cartItem) {
+            console.log(cartItem);
+          var cartItemHTML = `
+                 <li>
                         <div class="cart-widget">
                           <div class="dz-media me-3">
                             <img src="images/shop/shop-cart/pic1.jpg" alt="">
