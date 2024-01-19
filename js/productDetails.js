@@ -10,7 +10,7 @@ function getQueryParam(name) {
 // Get category ID from the URL
 const itemId = getQueryParam('Id');
 let variantId = ''; // Declare variantId globally
-let quantity = '1' ;
+let quantity = '1';
 console.log('var', variantId);
 // console.log('var', Quantity);
 
@@ -24,7 +24,7 @@ $(document).ready(function () {
     dataType: 'json',
     success: function (data) {
       // Iterate over the products in the response and append them to the masonry layout
-      // console.log('data', data);
+      console.log('data', data);
       $('#title').append(data.itemName)
       $('#shortDescription').append(data.shortDescription)
       $('#longDescription').append(data.longDescription)
@@ -127,7 +127,7 @@ $(document).ready(function () {
         </span>`;
           $("input[name='demo_vertical2']").on('change', function () {
             // Get the selected quantity
-             quantity = $(this).val();
+            quantity = $(this).val();
 
             // Get the variant information from the API response
             var variantInfo = {
@@ -139,15 +139,15 @@ $(document).ready(function () {
 
             var selectedVariant = data.vrnts.find(function (variant) {
               return variant.vrntEntryId === variantId;
-            }); 
-          if (selectedVariant) {
-            var totalPrice = quantity * variant.mrp;
+            });
+            if (selectedVariant) {
+              var totalPrice = quantity * variant.mrp;
 
-            // Update the displayed price on the page
-            updateDisplayedPrice(totalPrice);
-          }
+              // Update the displayed price on the page
+              updateDisplayedPrice(totalPrice);
+            }
             // Calculate the new price based on quantity
-           
+
           });
         }
 
@@ -176,8 +176,8 @@ $(document).ready(function () {
 window.handleButtonClick = function (event, tabId, newVariantId) {
   openTab(event, tabId);
   updateVariantId(event, newVariantId);
-// Reset the quantity to its initial value when changing tabs
-quantity = 1;
+  // Reset the quantity to its initial value when changing tabs
+  quantity = 1;
   // You can perform additional actions here if needed
   $("input[name='demo_vertical2']").val(quantity);
   // ...
@@ -212,7 +212,7 @@ $(document).ready(function () {
 
 // Function to update the displayed price on the page
 function updateDisplayedPrice(price) {
-console.log("Total Price: $", + price)
+  console.log("Total Price: $", + price)
   // Assuming you have an element to display the price with id="displayedPrice"
   $("#total").text("Total Price: $" + price);
   handleBootstrapTouchSpin()
@@ -234,10 +234,14 @@ document.getElementById("cart").addEventListener("click", function (e) {
     "qty": quantity
   }
   console.log(obj)
+<<<<<<< HEAD
   if (token === null) {
     window.location.href = "./login.html";
     
 } else {
+=======
+
+>>>>>>> f18e1e35295b409c34073bd1acb45839dee16cd8
   $.ajax({
     url: `${SETTINGS.backendUrl}/Ecom/AddToCart`,
     type: "POST",
