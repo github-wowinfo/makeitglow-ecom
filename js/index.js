@@ -36,7 +36,7 @@ function createSwiperSlide(product) {
   }
   var swiperSlide = document.createElement('div');
   swiperSlide.className = 'swiper-slide bg-light';
- console.log(`${SETTINGS.backendUrl}${product.image2}`);
+  //  console.log(`${SETTINGS.backendUrl}${product.image2}`);
   var contentHTML = `
   <div class="container-fluid">
     <div class="banner-content">
@@ -62,7 +62,7 @@ function createSwiperSlide(product) {
         <div class="col-md-6 col-sm-6">
           <div class="banner-media">
             <div class="img-preview" data-swiper-parallax="-100">
-              <img src="${SETTINGS.backendUrl}${product.image2}" alt="banner-media">
+              <img src="${product.mainImage1}" alt="banner-media">
             </div>
           </div>
         </div>
@@ -71,7 +71,7 @@ function createSwiperSlide(product) {
   </div>
   `;
 
-  
+
 
   swiperSlide.innerHTML = contentHTML;
   return swiperSlide;
@@ -93,7 +93,7 @@ fetchDataAndPopulateSwiper();
 
 $(document).ready(function () {
 
-  
+
   // Fetch data from the API
   $.ajax({
     url: 'https://mig-dev.lifelinemegacorp.com/api/Ecom/GetAllTrendingProducts',
@@ -101,9 +101,9 @@ $(document).ready(function () {
     dataType: 'json',
     success: function (data) {
       // Iterate over the products in the response and append them to the masonry layout
-      console.log('product', data);
+      // console.log('product', data);
       $.each(data, function (index, product) {
-        console.log('producttrending',product);
+        // console.log('producttrending', product);
         // Generate HTML for the product card with actual data
         if (product !== null) {
           var productCardHtml = `
@@ -111,7 +111,7 @@ $(document).ready(function () {
                 <div class="shop-card">
                   <a href='./productDetails.html?Id=${product.itemId}'>
                     <div class="dz-media">
-                      <img src="images/product/straw.jpg" alt="${product.itemTitle}">
+                      <img src="${product.mainImage1}" alt="${product.itemTitle}">
                       <div class="shop-meta">
 													<a href="./productDetails.html?Id=${product.itemId}" class="btn btn-secondary btn-icon"
 														data-bs-toggle="modal" class="open-quick-view" data-bs-target="#quickViewModal" onclick="quckview(${product.itemId})" >
@@ -200,7 +200,7 @@ $(document).ready(function () {
 );
 
 function quckview(id) {
-  console.log(id);
+  // console.log(id);
 
   $('#modalBody').empty();
   // Make an AJAX request to fetch product data
@@ -208,12 +208,13 @@ function quckview(id) {
     url: `${SETTINGS.backendUrl}/Items/GetItemById?id=${id}`,
     method: 'GET',
     dataType: 'json',
-    success: function(product) {
+    success: function (product) {
       // Build the HTML for the product details using the API response
-     console.log('response',product);
+      //  console.log('response',product);
 
+      console.log('product', product);
 
-  var modalData=`<div class="row g-xl-4 g-3">
+      var modalData = `<div class="row g-xl-4 g-3">
   <div class="col-xl-6 col-md-6">
     <div class="dz-product-detail mb-0">
       <div class="swiper-btn-center-lr">
@@ -294,10 +295,10 @@ function quckview(id) {
     </div>
   </div>
 </div>`
-$('#modalBody').append(modalData)
+      $('#modalBody').append(modalData)
 
-},
- error: function(error) {
+    },
+    error: function (error) {
       console.error('Error fetching product data:', error);
     }
   });
