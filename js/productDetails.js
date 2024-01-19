@@ -104,12 +104,8 @@ $(document).ready(function () {
 
       });
       volumeHTML += '</div>';
-
       // Append volume HTML to the '#volume' element
       $('#volume').append(volumeHTML);
-
-
-
 
       data.vrnts.forEach(function (variant, index) {
         variantId = variant.vrntEntryId
@@ -197,84 +193,18 @@ var handleBootstrapTouchSpin = function () {
 $(document).ready(function () {
   // Initialize TouchSpin
   handleBootstrapTouchSpin();
-
   // Add event listener for quantity input change
-
 });
 
 // Function to update the displayed price on the page
 function updateDisplayedPrice(price) {
-  console.log(price);
+console.log("Total Price: $", + price)
   // Assuming you have an element to display the price with id="displayedPrice"
-  $("#displayedPrice").text("Total Price: $" + price);
-
+  $("#total").content.text("Total Price: $" + price);
 }
 
-
-
-
-
-
-// var volumeHTML = '<label class="form-label">Size</label><div class="btn-group product-size mb-0">';
-// data.vrnts.forEach(function (variant, index) {
-//   volumeHTML += `
-//     <input type="radio" class="btn-check" name="btnradio1" id="btnradio${index + 1}" ${index === 0 ? 'checked' : ''} />
-//     <label style="padding:5px; width:fit-content" class="btn btn-light Tab ${index === 0 ? 'active' : ''}" for="btnradio${index + 1}" onclick="updateVariantId(event, ${variant.vrntEntryId})">
-//         ${variant.unitVolume}ml
-//     </label>`;
-// });
-// volumeHTML += '</div>';
-
-// data.vrnts.forEach(function (variant, index) {
-//   variantId = variant.vrntEntryId
-//   console.log('variantId', variantId);
-
-
-// // Append volume HTML to the '#volume' element
-// $('#volume').append(volumeHTML);
-
-// // Store the initial variantId
-// if (data.vrnts.length > 0) {
-//   variantId = data.vrnts[0].vrntEntryId;
-//   console.log('Initial variantId', variantId);
-
-//   pricingHTML += `
-//   <span class="price-num Tab-contents" id="tab1">
-//       ${data.vrnts[0].sellingPrice} AED <del>${data.vrnts[0].mrp} AED</del>
-//   </span>`;
-
-//   $("input[name='demo_vertical2']").on('change', function () {
-//     // Get the selected quantity
-//     var quantity = $(this).val();
-//     // Calculate the new price based on quantity
-//     var totalPrice = quantity * data.vrnts[0].mrp;
-//     // Update the displayed price on the page
-//     updateDisplayedPrice(totalPrice);
-//   });
-// }
-
-// // ... (Your existing code)
-
-// },
-// error: function (error) {
-// console.error('Error fetching data:', error);
-// }
-// });
-
-// // Function to update variantId when a size is clicked
-// window.updateVariantId = function (event, newVariantId) {
-// variantId = newVariantId;
-// console.log('Updated variantId', variantId);
-
-// // Update pricing and other details based on the new variantId
-// // ...
-
-// // For example, you can update the displayed price
-// var quantity = $("input[name='demo_vertical2']").val();
-// var totalPrice = quantity * /* Get the price for the new variantId */;
-// updateDisplayedPrice(totalPrice);
-// };
-// });
+// const Price= document.getElementById("price").value;
+// console.log("Total Price: $" + Price");
 
 
 
