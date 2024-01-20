@@ -222,10 +222,7 @@ function quckview(id) {
           <div class="swiper-wrapper" id="lightgallery">
             <div class="swiper-slide">
               <div class="dz-media DZoomImage">
-                <a class="mfp-link lg-item" href="images/products/baby-seat.png"
-                  data-src="images/products/baby-seat.png">
-                  <!-- <i class="feather icon-maximize dz-maximize top-right"></i> -->
-                </a>
+               
                 <img src="${product.thumbnail}" alt="image">
               </div>
             </div>
@@ -256,9 +253,9 @@ function quckview(id) {
          
         </div>
         <div class="btn-group cart-btn">
-          <a href="shop-cart.html" class="btn btn-md btn-secondary text-uppercase">Add
+          <a href="/" class="btn btn-md btn-secondary text-uppercase" id="addToCartButton" onclick="addToCart()">Add
             To Cart</a>
-          <a href="shop-wishlist.html" class="btn btn-md btn-light btn-icon">
+          <a href="/" class="btn btn-md btn-light btn-icon">
             <svg width="19" height="17" viewBox="0 0 19 17" fill="none"
               xmlns="http://www.w3.org/2000/svg">
               <path

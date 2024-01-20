@@ -71,11 +71,14 @@ $(document).ready(function () {
                             <h6 class="title"><a href="product-thumbnail.html">${cartItem.itemName}</a></h6>
                             <div class="d-flex align-items-center">
                             <h6 class="dz-price text-primary mb-0">${cartItem.mrp}</h6>
-                              <div class="btn-quantity light quantity-sm me-5 ">
-                              <button class="btn btn-sm btn-light" onclick="decreaseQuantity(${cartItem.cartEntryId})">-</button>
-                              <span class="quantity-value" value=1 me-3 ms-3> 1</span>
-                              <button class="btn btn-sm btn-light" onclick="increaseQuantity(${cartItem.cartEntryId})">+</button>
-                              </div>
+                             
+                           </div>
+                           <div class="btn-quantity light quantity-sm me-5 ">
+                           <div class="input-group">
+                           <button class="btn btn-primary btn-sm quantity-up" type="button">+</button>
+                           <input type="text" class="form-control quantity-input" m-10 value="1">
+                           <button class="btn btn-primary btn-sm quantity-down" type="button">-</button>
+                           </div>
                             </div>
                           </div>
                           <a href="javascript:void(0);"  onclick="deleteCartItem(${cartItem.cartEntryId})" class="dz-close">

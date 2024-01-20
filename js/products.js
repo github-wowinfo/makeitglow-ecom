@@ -61,7 +61,7 @@ $(document).ready(function () {
 												</svg>
 
 											</div>
-											<div class="btn btn-primary meta-icon dz-carticon" id="cart">
+											<div class="btn btn-primary meta-icon dz-carticon" id="addToCartButton" onclick="addToCart()">
 												<svg class="dz-cart-check" width="15" height="15" viewBox="0 0 15 15"
 													fill="none" xmlns="http://www.w3.org/2000/svg">
 													<path d="M11.9144 3.73438L5.49772 10.151L2.58105 7.23438"
@@ -170,9 +170,9 @@ function quckview(id) {
 		   
 		  </div>
 		  <div class="btn-group cart-btn">
-			<a href="shop-cart.html" class="btn btn-md btn-secondary text-uppercase">Add
+			<a href="/" class="btn btn-md btn-secondary text-uppercase" id="addToCartButton" onclick="addToCart()">Add
 			  To Cart</a>
-			<a href="shop-wishlist.html" class="btn btn-md btn-light btn-icon">
+			<a href="/" class="btn btn-md btn-light btn-icon">
 			  <svg width="19" height="17" viewBox="0 0 19 17" fill="none"
 				xmlns="http://www.w3.org/2000/svg">
 				<path
@@ -219,46 +219,7 @@ function quckview(id) {
   }
 
  
-  // add to cart  api.... 
-document.getElementById("#cart").addEventListener("click", function (e) {
-	e.preventDefault();
-	// console.log('U variantId', variantId);
-  
-	var obj = {
-	  "itmVrntId": variantId,
-	  "qty": quantity
-	}
-	console.log(obj)
-	if (token === null) {
-	  window.location.href = "./login.html";
-	  
-  } else {
-	$.ajax({
-	  url: `${SETTINGS.backendUrl}/Ecom/AddToCart`,
-	  type: "POST",
-	  headers: {
-		Authorization: "Bearer " + token,
-		"Content-Type": "application/json",
-		// Add other headers as needed
-	  },
-	  dataType: "json", // Change the datatype according to your response type
-	  contentType: "application/json", // Set the Content-Type
-	  data: JSON.stringify(obj),
-  
-	  success: function (response) {
-		console.log("Sign In Success:", response);
-		toastr.success("Item Added to Cart");
-	  },
-  
-	  error: function (error) {
-		console.log("Sign in Error:", error);
-		toastr.error(error.responseJSON.title);
-  
-	  },
-	});
-  }
-  
-  });
+
   
   // whish list api.... 
   document.getElementById("#whislist").addEventListener("click", function (e) {
@@ -299,4 +260,46 @@ document.getElementById("#cart").addEventListener("click", function (e) {
   
   });
   
-
+// Define the function to handle adding an item to the cart
+function addToCart() {
+	// Assuming variantId and quantity are defined somewhere in your code
+	var variantId = '';
+	var quantity = '1';
+  
+	var obj = {
+	  "itmVrntId": variantId,
+	  "qty": quantity
+	};
+  
+	if (token === null) {
+	  window.location.href = "./login.html";
+	} else {
+	  $.ajax({
+		url: `${SETTINGS.backendUrl}/Ecom/AddToCart`,
+		type: "POST",
+		headers: {
+		  Authorization: "Bearer " + token,
+		  "Content-Type": "application/json",
+		  // Add other headers as needed
+		},
+		dataType: "json",
+		contentType: "application/json",
+		data: JSON.stringify(obj),
+		success: function (response) {
+		  console.log("Sign In Success:", response);
+		  toastr.success("Item Added to Cart");
+		},
+		error: function (error) {
+		  console.log("Sign in Error:", error);
+		  toastr.error(error.responseJSON.title);
+		},
+	  });
+	}
+  }
+  
+  // Optionally, you can also add an event listener programmatically
+  document.getElementById("addToCartButton").addEventListener("click", function (e) {
+	e.preventDefault();
+	addToCart();
+  });
+  
