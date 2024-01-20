@@ -53,7 +53,7 @@ function createSwiperSlide(product) {
                 </div>
               </div>
               <div class="content-btn" data-swiper-parallax="-60">
-                <a class="btn btn-secondary me-xl-3 me-2 btnhover20" href="shop-cart.html">ADD TO CART</a>
+                <a class="btn btn-secondary me-xl-3 me-2 btnhover20" href="#" id="addToCartButton" onclick="addToCart()">ADD TO CART</a>
                 <a class="btn btn-outline-secondary btnhover20" href="./productDetails.html?Id=${product.itemId}">VIEW DETAILS</a>
               </div>
             </div>
@@ -136,7 +136,7 @@ $(document).ready(function () {
 															</path>
 														</svg>
 													</div>
-													<div class="btn btn-primary meta-icon dz-carticon">
+													<div class="btn btn-primary meta-icon dz-carticon" id="addToCartButton" onclick="addToCart()">
 														<svg class="dz-cart-check" width="15" height="15"
 															viewBox="0 0 15 15" fill="none"
 															xmlns="http://www.w3.org/2000/svg">
@@ -303,3 +303,49 @@ function quckview(id) {
     }
   });
 }
+
+
+
+
+// Define the function to handle adding an item to the cart
+function addToCart() {
+  // Assuming variantId and quantity are defined somewhere in your code
+  var variantId = '';
+  var quantity = '1';
+
+  var obj = {
+    "itmVrntId": variantId,
+    "qty": quantity
+  };
+
+  if (token === null) {
+    window.location.href = "./login.html";
+  } else {
+    $.ajax({
+      url: `${SETTINGS.backendUrl}/Ecom/AddToCart`,
+      type: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+        // Add other headers as needed
+      },
+      dataType: "json",
+      contentType: "application/json",
+      data: JSON.stringify(obj),
+      success: function (response) {
+        console.log("Sign In Success:", response);
+        toastr.success("Item Added to Cart");
+      },
+      error: function (error) {
+        console.log("Sign in Error:", error);
+        toastr.error(error.responseJSON.title);
+      },
+    });
+  }
+}
+
+// Optionally, you can also add an event listener programmatically
+document.getElementById("addToCartButton").addEventListener("click", function (e) {
+  e.preventDefault();
+  addToCart();
+});

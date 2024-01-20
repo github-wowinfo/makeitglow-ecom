@@ -70,13 +70,15 @@ $(document).ready(function () {
                           <div class="cart-content">
                             <h6 class="title"><a href="product-thumbnail.html">${cartItem.itemName}</a></h6>
                             <div class="d-flex align-items-center">
-                              <div class="btn-quantity light quantity-sm me-3">
-                                 
+                            <h6 class="dz-price text-primary mb-0">${cartItem.mrp}</h6>
+                              <div class="btn-quantity light quantity-sm me-5 ">
+                              <button class="btn btn-sm btn-light" onclick="decreaseQuantity(${cartItem.cartEntryId})">-</button>
+                              <span class="quantity-value" value=1 me-3 ms-3> 1</span>
+                              <button class="btn btn-sm btn-light" onclick="increaseQuantity(${cartItem.cartEntryId})">+</button>
                               </div>
-                              <h6 class="dz-price text-primary mb-0">${cartItem.mrp}</h6>
                             </div>
                           </div>
-                          <a href="javascript:void(0);" class="dz-close">
+                          <a href="javascript:void(0);"  onclick="deleteCartItem(${cartItem.cartEntryId})" class="dz-close">
                             <i class="ti-close"></i>
                           </a>
                         </div>
@@ -142,9 +144,11 @@ $(document).ready(function () {
                                  
                               </div>
                               <h6 class="dz-price text-primary mb-0">${whishlistItem.mrp}</h6>
-                            </div>
+                              
+                              </div>
+                              <a href="shop-cart.html" id="cart" class="btn btn-secondary p-0">ADD TO CART</a>
                           </div>
-                          <a href="javascript:void(0);" class="dz-close">
+                          <a href="javascript:void(0);" onclick="deleteWishlistItem(${whishlistItem.wshLstEntryId})" class="dz-close">
                             <i class="ti-close"></i>
                           </a>
                         </div>
@@ -172,3 +176,111 @@ $(document).ready(function () {
     });
     return subtotal;
   }
+
+
+  //   delete item api . . . 
+// Assuming you have the cart item ID (replace '2' with the actual cart item ID)
+// var cartItemId = 4;
+
+// Use the deleteCartItem function to delete the item from the cart
+function deleteCartItem(cartEntryId) {
+  if (token === null) {
+    window.location.href = "./login.html";
+  } else {
+    $.ajax({
+      url: `${SETTINGS.backendUrl}/Ecom/DeleteCartItem?Id=${cartEntryId}`,
+      type: "POST", // Use POST instead of DELETE
+      headers: {
+        Authorization: "Bearer " + token,
+        // Add other headers as needed
+      },
+      data: {
+        Id: cartEntryId,
+      },
+      success: function (response) {
+        console.log("Item Deleted from Cart:", response);
+        toastr.success("Item Deleted from Cart");
+        // Optionally, you can update the UI or perform other actions after deletion
+      },
+      error: function (error) {
+        console.log("Delete from Cart Error:", error);
+        toastr.error(error.responseJSON.message);
+      },
+    });
+  }
+}
+
+// Example of using the deleteCartItem function with the cart item ID
+deleteCartItem(cartEntryId);
+
+
+function deleteWishlistItem(wshLstEntryId) {
+  if (token === null) {
+    window.location.href = "./login.html";
+  } else {
+    $.ajax({
+      url: `${SETTINGS.backendUrl}/Ecom/DeleteWishlistItem?Id=${wshLstEntryId}`,
+      type: "POST", // Use POST instead of DELETE
+      headers: {
+        Authorization: "Bearer " + token,
+        // Add other headers as needed
+      },
+      data: {
+        Id: wshLstEntryId,
+      },
+      success: function (response) {
+        console.log("Item Deleted from Wishlist:", response);
+        toastr.success("Item Deleted from Wishlist");
+        // Optionally, you can update the UI or perform other actions after deletion
+      },
+      error: function (error) {
+        console.log("Delete from Wishlist Error:", error);
+        toastr.error(error.responseJSON.message);
+      },
+    });
+  }
+}
+
+// Example of using the deleteCartItem function with the cart item ID
+deleteWishlistItem(wshLstEntryId);
+
+
+
+
+
+
+
+
+// Assuming you have the wishlist item ID (replace '2' with the actual wishlist item ID)
+// var wishlistItemId = 2;
+
+// // Use the deleteWishlistItem function to delete the item from the wishlist
+// function deleteWishlistItem(wshLstEntryId) {
+//   if (token === null) {
+//     window.location.href = "./login.html";
+//   } else {
+//     $.ajax({
+//       url: `${SETTINGS.backendUrl}/Ecom/DeleteWishlistItem?Id=${wshLstEntryId}`,
+//       type: "DELETE",
+//       headers: {
+//         Authorization: "Bearer " + token,
+//         // Add other headers as needed
+//       },
+//       data: {
+//         Id: wshLstEntryId,
+//       },
+//       success: function (response) {
+//         console.log("Item Deleted from Wishlist:", response);
+//         toastr.success("Item Deleted from Wishlist");
+//         // Optionally, you can update the UI or perform other actions after deletion
+//       },
+//       error: function (error) {
+//         console.log("Delete from Wishlist Error:", error);
+//         toastr.error(error.responseJSON.title);
+//       },
+//     });
+//   }
+// }
+
+// // Example of using the deleteWishlistItem function with the wishlist item ID
+// deleteWishlistItem(wshLstEntryId);
