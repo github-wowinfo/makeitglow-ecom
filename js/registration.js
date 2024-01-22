@@ -219,12 +219,12 @@ document.getElementById("postButton").addEventListener("click", function (e) {
   }
 
   // Validate address (not empty)
-  if (Addresses === '') {
-    // alert("Address is a required field.");
-    toastr.error("Please enter a valid address.");
+  // if (Addresses === '') {
+  //   // alert("Address is a required field.");
+  //   toastr.error("Please enter a valid address.");
 
-    return;
-  }  // console.log(FirstName);
+  //   return;
+  // }  // console.log(FirstName);
 
   var userData = {
     "userType": 2,
@@ -233,7 +233,7 @@ document.getElementById("postButton").addEventListener("click", function (e) {
     "firstName": FirstName,
     "lastName": LastName,
     "phoneNumber": PhoneNum,
-    "addressLine1": Addresses,
+    "addressLine1": '',
     // "addressLine2": "",
     "lctnId": Countries,
     "refId": RefId
