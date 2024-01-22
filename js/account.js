@@ -64,8 +64,41 @@ function getBillingInfo() {
         }
     });
 }
+function getshippingInfo() {
+    $.ajax({
+        url: `${SETTINGS.backendUrl}/CustomerAccount/GetAllCustShippingAddresses`,
+        method: 'GET',
+        headers: {
+            Authorization: "Bearer " + token,
+            "Content-Type": "application/json",
+            // Add other headers as needed
+        },
+        dataType: 'json',
+        success: function (profileData) {
+            profileData.forEach(function (shipping) {
+                console.log('shipping', shipping);
+
+                var profile = `<h4>Shipping Info</h4>
+                  <p>Customer ID: ${shipping.custId}</p>
+                  <p>Customer Name: ${shipping.name}</p>
+                  <p>Contact No: ${shipping.contactNo}</p>
+                  <p>Alt Contact No: ${shipping.altContactNo}</p>
+                  <p>Address Line 1: ${shipping.addressLine1}</p>
+                  <p>Address Line 2: ${shipping.addressLine2}</p>
+                  <p>Remark: ${shipping.remark}</p>
+                  <a href="">Edit Billing Info</a>`;
+                $('#shippinginfo').append(profile);
+            })
+
+        },
+        error: function (error) {
+            console.error('Error fetching cart data:', error);
+        }
+    });
+}
 
 $(document).ready(function () {
     getProfile()
     getBillingInfo()
+    getshippingInfo()
 });
