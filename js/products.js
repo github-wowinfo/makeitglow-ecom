@@ -116,19 +116,19 @@ $(document).ready(function () {
 
 function quckview(id) {
 	console.log(id);
-  
+
 	$('#modalBody').empty();
 	// Make an AJAX request to fetch product data
 	$.ajax({
-	  url: `${SETTINGS.backendUrl}/Items/GetItemById?id=${id}`,
-	  method: 'GET',
-	  dataType: 'json',
-	  success: function(product) {
-		// Build the HTML for the product details using the API response
-	   console.log('response',product);
-  
-  
-	var modalData=`<div class="row g-xl-4 g-3">
+		url: `${SETTINGS.backendUrl}/Items/GetItemById?id=${id}`,
+		method: 'GET',
+		dataType: 'json',
+		success: function (product) {
+			// Build the HTML for the product details using the API response
+			console.log('response', product);
+
+
+			var modalData = `<div class="row g-xl-4 g-3">
 	<div class="col-xl-6 col-md-6">
 	  <div class="dz-product-detail mb-0">
 		<div class="swiper-btn-center-lr">
@@ -209,97 +209,97 @@ function quckview(id) {
 	  </div>
 	</div>
   </div>`
-  $('#modalBody').append(modalData)
-  
-  },
-   error: function(error) {
-		console.error('Error fetching product data:', error);
-	  }
+			$('#modalBody').append(modalData)
+
+		},
+		error: function (error) {
+			console.error('Error fetching product data:', error);
+		}
 	});
-  }
+}
 
- 
 
-  
-  // whish list api.... 
-  document.getElementById("#whislist").addEventListener("click", function (e) {
+
+
+// whish list api.... 
+document.getElementById("#whislist").addEventListener("click", function (e) {
 	e.preventDefault();
 	var obj = {
-	  "itmVrntId": variantId,
-  
+		"itmVrntId": variantId,
+
 	}
 	console.log(obj)
 	if (token === null) {
-   
-	  window.location.href = "./login.html";
-	  
-  } else {
-	$.ajax({
-	  url: `${SETTINGS.backendUrl}/Ecom/AddToWishlist`,
-	  type: "POST",
-	  headers: {
-		Authorization: "Bearer " + token,
-		"Content-Type": "application/json",
-		// Add other headers as needed
-	  },
-	  dataType: "json", // Change the datatype according to your response type
-	  contentType: "application/json", // Set the Content-Type
-	  data: JSON.stringify(obj),
-  
-	  success: function (response) {
-		console.log("Sign In Success:", response);
-		toastr.success("Item Added to Whish list");
-	  },
-	  error: function (error) {
-		console.log("Sign in Error:", error);
-		toastr.error(error.responseJSON.title);
-  
-	  },
-	});
-  }
-  
-  });
-  
+
+		window.location.href = "./login.html";
+
+	} else {
+		$.ajax({
+			url: `${SETTINGS.backendUrl}/Ecom/AddToWishlist`,
+			type: "POST",
+			headers: {
+				Authorization: "Bearer " + token,
+				"Content-Type": "application/json",
+				// Add other headers as needed
+			},
+			dataType: "json", // Change the datatype according to your response type
+			contentType: "application/json", // Set the Content-Type
+			data: JSON.stringify(obj),
+
+			success: function (response) {
+				console.log("Sign In Success:", response);
+				toastr.success("Item Added to Whish list");
+			},
+			error: function (error) {
+				console.log("Sign in Error:", error);
+				toastr.error(error.responseJSON.title);
+
+			},
+		});
+	}
+
+});
+
 // Define the function to handle adding an item to the cart
 function addToCart() {
 	// Assuming variantId and quantity are defined somewhere in your code
 	var variantId = '';
 	var quantity = '1';
-  
+
 	var obj = {
-	  "itmVrntId": variantId,
-	  "qty": quantity
+		"itmVrntId": variantId,
+		"qty": quantity
 	};
-  
+
 	if (token === null) {
-	  window.location.href = "./login.html";
+		window.location.href = "./login.html";
 	} else {
-	  $.ajax({
-		url: `${SETTINGS.backendUrl}/Ecom/AddToCart`,
-		type: "POST",
-		headers: {
-		  Authorization: "Bearer " + token,
-		  "Content-Type": "application/json",
-		  // Add other headers as needed
-		},
-		dataType: "json",
-		contentType: "application/json",
-		data: JSON.stringify(obj),
-		success: function (response) {
-		  console.log("Sign In Success:", response);
-		  toastr.success("Item Added to Cart");
-		},
-		error: function (error) {
-		  console.log("Sign in Error:", error);
-		  toastr.error(error.responseJSON.title);
-		},
-	  });
+		$.ajax({
+			url: `${SETTINGS.backendUrl}/Ecom/AddToCart`,
+			type: "POST",
+			headers: {
+				Authorization: "Bearer " + token,
+				"Content-Type": "application/json",
+				// Add other headers as needed
+			},
+			dataType: "json",
+			contentType: "application/json",
+			data: JSON.stringify(obj),
+			success: function (response) {
+				console.log("Sign In Success:", response);
+				toastr.success("Item Added to Cart");
+			},
+			error: function (error) {
+				console.log("Sign in Error:", error);
+				toastr.error(error.responseJSON.title);
+			},
+		});
 	}
-  }
-  
-  // Optionally, you can also add an event listener programmatically
-  document.getElementById("addToCartButton").addEventListener("click", function (e) {
+}
+
+// Optionally, you can also add an event listener programmatically
+document.getElementById("addToCartButton").addEventListener("click", function (e) {
 	e.preventDefault();
 	addToCart();
-  });
-  
+});
+

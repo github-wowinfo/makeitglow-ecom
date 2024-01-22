@@ -40,8 +40,8 @@ $.ajax({
 
 // add to cart api . . . . 
 
-$(document).ready(function () {
-  // Fetch cart data from the API
+
+function getCart() {
   $.ajax({
     url: `${SETTINGS.backendUrl}/Ecom/GetCartByCustId`,
     method: 'GET',
@@ -99,7 +99,7 @@ $(document).ready(function () {
       console.error('Error fetching cart data:', error);
     }
   });
-});
+}
 
 // Function to calculate subtotal based on cart data
 function calculateSubtotal(cartData) {
@@ -112,76 +112,82 @@ function calculateSubtotal(cartData) {
 
 // Whish list api . . . . 
 
-$(document).ready(function () {
-    // Fetch cart data from the API
-    $.ajax({
-      url: `${SETTINGS.backendUrl}/Ecom/GetWishlistByCustId`,
-      method: 'GET',
-      headers: {
-        Authorization: "Bearer " + token,
-        "Content-Type": "application/json",
-        // Add other headers as needed
-      },
-      dataType: 'json',
-      success: function (cartData) {
-        // Assuming cartData is an array of items in the cart
-  
-        // Clear existing content
-        // $('#shopping-cart-pane .sidebar-cart-list').empty();
-        console.log('cartData', cartData.length);
+// $(document).ready(function () {
+// Fetch cart data from the API
+function getWhishlist() {
+  $.ajax({
+    url: `${SETTINGS.backendUrl}/Ecom/GetWishlistByCustId`,
+    method: 'GET',
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-Type": "application/json",
+      // Add other headers as needed
+    },
+    dataType: 'json',
+    success: function (cartData) {
+      // Assuming cartData is an array of items in the cart
+
+      // Clear existing content
+      // $('#shopping-cart-pane .sidebar-cart-list').empty();
+      console.log('cartData', cartData.length);
       $('#whislistCount').append(cartData.length)
-  
-        // Update cart items
-        cartData.forEach(function (whishlistItem) {
-            console.log(whishlistItem);
-          var cartItemHTML = `
-                 <li>
-                        <div class="cart-widget">
-                          <div class="dz-media me-3">
-                            <img src="${whishlistItem.mainImage1}" alt="${whishlistItem.itemName}">
+
+      // Update cart items
+      cartData.forEach(function (whishlistItem) {
+        console.log(whishlistItem);
+        var cartItemHTML = `
+                   <li>
+                          <div class="cart-widget">
+                            <div class="dz-media me-3">
+                              <img src="${whishlistItem.mainImage1}" alt="${whishlistItem.itemName}">
+                            </div>
+                            <div class="cart-content">
+                              <h6 class="title"><a href="product-thumbnail.html">${whishlistItem.itemName}</a></h6>
+                              <div class="d-flex align-items-center">
+                                <div class="btn-quantity light quantity-sm me-3">
+                                   
+                                </div>
+                                <h6 class="dz-price text-primary mb-0">${whishlistItem.mrp}</h6>
+                                
+                                </div>
+                                <a href="shop-cart.html" id="cart" class="btn btn-secondary p-0">ADD TO CART</a>
+                            </div>
+                            <a href="javascript:void(0);" onclick="deleteWishlistItem(${whishlistItem.wshLstEntryId})" class="dz-close">
+                              <i class="ti-close"></i>
+                            </a>
                           </div>
-                          <div class="cart-content">
-                            <h6 class="title"><a href="product-thumbnail.html">${whishlistItem.itemName}</a></h6>
-                            <div class="d-flex align-items-center">
-                              <div class="btn-quantity light quantity-sm me-3">
-                                 
-                              </div>
-                              <h6 class="dz-price text-primary mb-0">${whishlistItem.mrp}</h6>
-                              
-                              </div>
-                              <a href="shop-cart.html" id="cart" class="btn btn-secondary p-0">ADD TO CART</a>
-                          </div>
-                          <a href="javascript:void(0);" onclick="deleteWishlistItem(${whishlistItem.wshLstEntryId})" class="dz-close">
-                            <i class="ti-close"></i>
-                          </a>
-                        </div>
-                      </li>`;
-  
-          // Append the item to the cart list
-          $('#whishlistItem').append(cartItemHTML);
-        });
-  
-        // Calculate and update subtotal
-        var subtotal = calculateSubtotal(cartData);
-        $('#shopping-cart-pane .cart-total h5:last-child').text('$' + subtotal.toFixed(2));
-      },
-      error: function (error) {
-        console.error('Error fetching cart data:', error);
-      }
-    });
+                        </li>`;
+
+        // Append the item to the cart list
+        $('#whishlistItem').append(cartItemHTML);
+      });
+
+      // Calculate and update subtotal
+      var subtotal = calculateSubtotal(cartData);
+      $('#shopping-cart-pane .cart-total h5:last-child').text('$' + subtotal.toFixed(2));
+    },
+    error: function (error) {
+      console.error('Error fetching cart data:', error);
+    }
   });
-  
-  // Function to calculate subtotal based on cart data
-  function calculateSubtotal(cartData) {
-    var subtotal = 0;
-    cartData.forEach(function (whishlistItem) {
-      subtotal += whishlistItem.price;
-    });
-    return subtotal;
-  }
+}
+// });
 
+// Function to calculate subtotal based on cart data
+function calculateSubtotal(cartData) {
+  var subtotal = 0;
+  cartData.forEach(function (whishlistItem) {
+    subtotal += whishlistItem.price;
+  });
+  return subtotal;
+}
+$(document).ready(function () {
+  // Fetch cart data from the API
+  getCart()
+  getWhishlist()
+});
 
-  //   delete item api . . . 
+//   delete item api . . . 
 // Assuming you have the cart item ID (replace '2' with the actual cart item ID)
 // var cartItemId = 4;
 
@@ -203,6 +209,8 @@ function deleteCartItem(cartEntryId) {
       success: function (response) {
         console.log("Item Deleted from Cart:", response);
         toastr.success("Item Deleted from Cart");
+        // toastr.success("Item Added to Cart");
+        getCart()
         // Optionally, you can update the UI or perform other actions after deletion
       },
       error: function (error) {
@@ -214,7 +222,7 @@ function deleteCartItem(cartEntryId) {
 }
 
 // Example of using the deleteCartItem function with the cart item ID
-deleteCartItem(cartEntryId);
+// deleteCartItem(cartEntryId);
 
 
 function deleteWishlistItem(wshLstEntryId) {
@@ -234,6 +242,7 @@ function deleteWishlistItem(wshLstEntryId) {
       success: function (response) {
         console.log("Item Deleted from Wishlist:", response);
         toastr.success("Item Deleted from Wishlist");
+        getWhishlist()
         // Optionally, you can update the UI or perform other actions after deletion
       },
       error: function (error) {
@@ -245,7 +254,7 @@ function deleteWishlistItem(wshLstEntryId) {
 }
 
 // Example of using the deleteCartItem function with the cart item ID
-deleteWishlistItem(wshLstEntryId);
+// deleteWishlistItem(wshLstEntryId);
 
 
 

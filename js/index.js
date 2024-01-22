@@ -34,6 +34,7 @@ function createSwiperSlide(product) {
   if (product === null) {
     return null; // Skip null values
   }
+
   var swiperSlide = document.createElement('div');
   swiperSlide.className = 'swiper-slide bg-light';
   //  console.log(`${SETTINGS.backendUrl}${product.image2}`);
@@ -53,7 +54,7 @@ function createSwiperSlide(product) {
                 </div>
               </div>
               <div class="content-btn" data-swiper-parallax="-60">
-                <a class="btn btn-secondary me-xl-3 me-2 btnhover20" href="#" id="addToCartButton" onclick="addToCart()">ADD TO CART</a>
+                <a class="btn btn-secondary me-xl-3 me-2 btnhover20" href="#" id="addToCartButton" onclick="addToCart(${product.vrntEntryId})">ADD TO CART</a>
                 <a class="btn btn-outline-secondary btnhover20" href="./productDetails.html?Id=${product.itemId}">VIEW DETAILS</a>
               </div>
             </div>
@@ -105,6 +106,7 @@ $(document).ready(function () {
       $.each(data, function (index, product) {
         // console.log('producttrending', product);
         // Generate HTML for the product card with actual data
+        console.log('product', product);
         if (product !== null) {
           var productCardHtml = `
               <li class="card-container col-6 col-xl-3 col-lg-3 col-md-4 col-sm-6 Begs wow fadeInUp" data-wow-delay="0.1s">
@@ -136,7 +138,7 @@ $(document).ready(function () {
 															</path>
 														</svg>
 													</div>
-													<div class="btn btn-primary meta-icon dz-carticon" id="addToCartButton" onclick="addToCart()">
+													<div class="btn btn-primary meta-icon dz-carticon" id="addToCartButton" onclick="addToCart(${product.vrntEntryId})">
 														<svg class="dz-cart-check" width="15" height="15"
 															viewBox="0 0 15 15" fill="none"
 															xmlns="http://www.w3.org/2000/svg">
@@ -201,7 +203,7 @@ $(document).ready(function () {
 
 function quckview(id) {
   // console.log(id);
-
+  // e.preventDefault();
   $('#modalBody').empty();
   // Make an AJAX request to fetch product data
   $.ajax({
@@ -212,7 +214,7 @@ function quckview(id) {
       // Build the HTML for the product details using the API response
       //  console.log('response',product);
 
-      console.log('product', product);
+      console.log('productjjjg', product);
 
       var modalData = `<div class="row g-xl-4 g-3">
   <div class="col-xl-6 col-md-6">
@@ -253,7 +255,7 @@ function quckview(id) {
          
         </div>
         <div class="btn-group cart-btn">
-          <a href="/" class="btn btn-md btn-secondary text-uppercase" id="addToCartButton" onclick="addToCart()">Add
+          <a href="/" class="btn btn-md btn-secondary text-uppercase" id="addToCartButton" onclick="addToCart(${product.vrnts[0].vrntEntryId})">Add
             To Cart</a>
           <a href="/" class="btn btn-md btn-light btn-icon">
             <svg width="19" height="17" viewBox="0 0 19 17" fill="none"
@@ -305,13 +307,13 @@ function quckview(id) {
 
 
 // Define the function to handle adding an item to the cart
-function addToCart() {
+function addToCart(id) {
   // Assuming variantId and quantity are defined somewhere in your code
-  var variantId = '';
+  // var variantId = '';
   var quantity = '1';
 
   var obj = {
-    "itmVrntId": variantId,
+    "itmVrntId": id,
     "qty": quantity
   };
 
@@ -342,7 +344,7 @@ function addToCart() {
 }
 
 // Optionally, you can also add an event listener programmatically
-document.getElementById("addToCartButton").addEventListener("click", function (e) {
-  e.preventDefault();
-  addToCart();
-});
+// document.getElementById("addToCartButton").addEventListener("click", function (e) {
+//   e.preventDefault();
+//   addToCart();
+// });
