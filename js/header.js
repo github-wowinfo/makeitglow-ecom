@@ -70,15 +70,22 @@ function getCart() {
                           <div class="cart-content">
                             <h6 class="title"><a href="product-thumbnail.html">${cartItem.itemName}</a></h6>
                             <div class="d-flex align-items-center">
-                            <h6 class="dz-price text-primary mb-0">${cartItem.mrp}</h6>
+                            <h6 class="dz-price text-primary mb-0">${cartItem.mrp}AED</h6>
                              
-                           </div>
-                           <div class="btn-quantity light quantity-sm me-5 ">
-                           <div class="input-group">
-                           <button class="btn btn-primary btn-sm quantity-up" type="button">+</button>
-                           <input type="text" class="form-control quantity-input" m-10 value="1">
-                           <button class="btn btn-primary btn-sm quantity-down" type="button">-</button>
-                           </div>
+                            <div class="btn-quantity light quantity-sm me-5 ">
+                             
+                             <div class="input-group bootstrap-touchspin ms-5">
+                             <span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span>
+                             <input type="text" value="1" name="demo_vertical2" class="form-control" style="display: block;">
+                             <span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span>
+                             <span class="input-group-btn-vertical">
+                             <button class="btn btn-default bootstrap-touchspin-up" type="button">
+                             <i class="fa-solid fa-plus"></i></button>
+                             <button class="btn btn-default bootstrap-touchspin-down" type="button">
+                             <i class="fa-solid fa-minus"></i></button></span>
+                             </div>
+                            
+                            </div>
                             </div>
                           </div>
                           <a href="javascript:void(0);"  onclick="deleteCartItem(${cartItem.cartEntryId})" class="dz-close">
@@ -94,6 +101,7 @@ function getCart() {
       // Calculate and update subtotal
       var subtotal = calculateSubtotal(cartData);
       $('#shopping-cart-pane .cart-total h5:last-child').text('$' + subtotal.toFixed(2));
+      // handleBootstrapTouchSpin();
     },
     error: function (error) {
       console.error('Error fetching cart data:', error);
@@ -134,7 +142,7 @@ function getWhishlist() {
 
       // Update cart items
       cartData.forEach(function (whishlistItem) {
-        console.log(whishlistItem);
+        console.log("my whishes " ,whishlistItem);
         var cartItemHTML = `
                    <li>
                           <div class="cart-widget">
@@ -144,13 +152,11 @@ function getWhishlist() {
                             <div class="cart-content">
                               <h6 class="title"><a href="product-thumbnail.html">${whishlistItem.itemName}</a></h6>
                               <div class="d-flex align-items-center">
-                                <div class="btn-quantity light quantity-sm me-3">
-                                   
-                                </div>
-                                <h6 class="dz-price text-primary mb-0">${whishlistItem.mrp}</h6>
+                         
+                                <h6 class="dz-price text-primary mb-0">${whishlistItem.mrp}AED</h6>
                                 
+                                <a href="/" id="cart" class="btn btn-secondary p-1 ms-4" id="addToCartButton" onclick="addToCart(${whishlistItem.vrntEntryId})">ADD TO CART</a>
                                 </div>
-                                <a href="shop-cart.html" id="cart" class="btn btn-secondary p-0">ADD TO CART</a>
                             </div>
                             <a href="javascript:void(0);" onclick="deleteWishlistItem(${whishlistItem.wshLstEntryId})" class="dz-close">
                               <i class="ti-close"></i>
@@ -257,12 +263,82 @@ function deleteWishlistItem(wshLstEntryId) {
 // deleteWishlistItem(wshLstEntryId);
 
 
+function addToCart(id) {
+  // Assuming variantId and quantity are defined somewhere in your code
+  // var variantId = '';
+  var quantity = '1';
+
+  var obj = {
+    "itmVrntId": id,
+    "qty": quantity
+  };
+
+  if (token === null) {
+    window.location.href = "./login.html";
+  } else {
+    $.ajax({
+      url: `${SETTINGS.backendUrl}/Ecom/AddToCart`,
+      type: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+        // Add other headers as needed
+      },
+      dataType: "json",
+      contentType: "application/json",
+      data: JSON.stringify(obj),
+      success: function (response) {
+        console.log("Sign In Success:", response);
+        toastr.success("Item Added to Cart");
+      },
+      error: function (error) {
+        console.log("Sign in Error:", error);
+        toastr.error(error.responseJSON.title);
+      },
+    });
+  }
+}
+
+var handleBootstrapTouchSpin = function () {
+  if ($("input[name='demo_vertical2']").length > 0) {
+    jQuery("input[name='demo_vertical2']").TouchSpin({
+      verticalbuttons: true,
+      verticalupclass: 'fa-solid fa-plus',
+      verticaldownclass: 'fa-solid fa-minus'
+    });
+  }
+  if ($(".quantity-input").length > 0) {
+    jQuery(".quantity-input").TouchSpin({
+      verticalbuttons: true,
+      verticalupclass: 'fa-solid fa-plus',
+      verticaldownclass: 'fa-solid fa-minus'
+    });
+  }
+}
+// Assuming you have already initialized the TouchSpin library
+
+$(document).ready(function () {
+  // Initialize TouchSpin
+  handleBootstrapTouchSpin();
+  // Add event listener for quantity input change
+});
+
+// Function to update the displayed price on the page
+function updateDisplayedPrice(price) {
+  console.log("Total Price: $", + price)
+  // Assuming you have an element to display the price with id="displayedPrice"
+  $("#total").text("Total Price: $" + price);
+  handleBootstrapTouchSpin()
+}
 
 
 
 
-
-
+/* <div class="input-group">
+<button class="btn btn-primary btn-sm quantity-up" type="button">+</button>
+<input type="text" class="form-control quantity-input" m-10 value="1">
+<button class="btn btn-primary btn-sm quantity-down" type="button">-</button>
+</div> */
 // Assuming you have the wishlist item ID (replace '2' with the actual wishlist item ID)
 // var wishlistItemId = 2;
 
