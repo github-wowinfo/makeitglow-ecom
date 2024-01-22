@@ -53,56 +53,53 @@ function getCart() {
     },
     dataType: 'json',
     success: function (cartData) {
-      // Assuming cartData is an array of items in the cart
-
       // Clear existing content
-      // $('#shopping-cart-pane .sidebar-cart-list').empty();
-      $('#cartCount').append(cartData.length)
-      $('#cartCount1').append(cartData.length)
+      $('#cartItem').empty();
+      $('#cartCount').text(cartData.length);
+      $('#cartCount1').text(cartData.length);
+
       // Update cart items
       cartData.forEach(function (cartItem) {
-        console.log(cartItem);
         var cartItemHTML = `
           <li>
-                        <div class="cart-widget">
-                          <div class="dz-media me-3">
-                            <img src="${cartItem.thumbnail}" alt="">
-                          </div>
-                          <div class="cart-content">
-                            <h6 class="title"><a href="product-thumbnail.html">${cartItem.itemName}</a></h6>
-                            <div class="d-flex align-items-center">
-                            <h6 class="dz-price text-primary mb-0">${cartItem.mrp}AED</h6>
-                             
-                            <div class="btn-quantity light quantity-sm me-5 ">
-                             
-                             <div class="input-group bootstrap-touchspin ms-5">
-                             <span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span>
-                             <input type="text" value="1" name="demo_vertical2" class="form-control" style="display: block;">
-                             <span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span>
-                             <span class="input-group-btn-vertical">
-                             <button class="btn btn-default bootstrap-touchspin-up" type="button">
-                             <i class="fa-solid fa-plus"></i></button>
-                             <button class="btn btn-default bootstrap-touchspin-down" type="button">
-                             <i class="fa-solid fa-minus"></i></button></span>
-                             </div>
-                            
-                            </div>
-                            </div>
-                          </div>
-                          <a href="javascript:void(0);"  onclick="deleteCartItem(${cartItem.cartEntryId})" class="dz-close">
-                            <i class="ti-close"></i>
-                          </a>
-                        </div>
-                      </li>`;
+            <div class="cart-widget">
+              <div class="dz-media me-3">
+                <img src="${cartItem.thumbnail}" alt="">
+              </div>
+              <div class="cart-content">
+                <h6 class="title"><a href="product-thumbnail.html">${cartItem.itemName}</a></h6>
+                <div class="d-flex align-items-center">
+                  <h6 class="dz-price text-primary mb-0">${cartItem.mrp}AED</h6>
+                  <div class="btn-quantity light quantity-sm ms-5">
+                    <div class="input-group bootstrap-touchspin">
+                      <span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span>
+                      <input type="text" value="${cartItem.quantity}" name="demo_vertical2" class="form-control" style="display: block;">
+                      <span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span>
+                      <span class="input-group-btn-vertical">
+                        <button class="btn btn-default bootstrap-touchspin-up" type="button" onclick="increaseQuantity(${cartItem.cartEntryId})">
+                          <i class="fa-solid fa-plus"></i>
+                        </button>
+                        <button class="btn btn-default bootstrap-touchspin-down" type="button" onclick="decreaseQuantity(${cartItem.cartEntryId})">
+                          <i class="fa-solid fa-minus"></i>
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <a href="javascript:void(0);" onclick="deleteCartItem(${cartItem.cartEntryId})" class="dz-close">
+                <i class="ti-close"></i>
+              </a>
+            </div>
+          </li>`;
 
         // Append the item to the cart list
         $('#cartItem').append(cartItemHTML);
       });
 
-      // Calculate and update subtotal
-      var subtotal = calculateSubtotal(cartData);
-      $('#shopping-cart-pane .cart-total h5:last-child').text('$' + subtotal.toFixed(2));
-      // handleBootstrapTouchSpin();
+      // Calculate and update total amount
+      var totalAmount = calculateTotalAmount(cartItem);
+      $('.totalamount').text('$' + totalAmount.toFixed(2));
     },
     error: function (error) {
       console.error('Error fetching cart data:', error);
@@ -110,13 +107,40 @@ function getCart() {
   });
 }
 
-// Function to calculate subtotal based on cart data
-function calculateSubtotal(cartData) {
-  var subtotal = 0;
-  cartData.forEach(function (cartItem) {
-    subtotal += cartItem.price;
+// Function to calculate total amount based on cart data
+function calculateTotalAmount(cartItem) {
+  var totalAmount = 0;
+  cartItem.forEach(function (cartItem) {
+    // totalAmount += cartItem.vrnts[0].sellingPrice.mrp* cartItem.quantity;
+    totalAmount += cartItem.mrp* cartItem.quantity;
+
   });
-  return subtotal;
+  return totalAmount;
+}
+
+// Function to increase quantity
+function increaseQuantity(cartEntryId) {
+  var quantityInput = $(`input[name='demo_vertical2'][data-cart-entry-id='${cartEntryId}']`);
+  var currentQuantity = parseInt(quantityInput.val());
+  quantityInput.val(currentQuantity + 1);
+  updateTotalAmount();
+}
+
+// Function to decrease quantity
+function decreaseQuantity(cartEntryId) {
+  var quantityInput = $(`input[name='demo_vertical2'][data-cart-entry-id='${cartEntryId}']`);
+  var currentQuantity = parseInt(quantityInput.val());
+  if (currentQuantity > 1) {
+    quantityInput.val(currentQuantity - 1);
+    updateTotalAmount();
+  }
+}
+
+// Function to update total amount based on quantity changes
+function updateTotalAmount() {
+  var cartData = getCartDataFromDOM(); // Implement this function to retrieve cart data from the DOM
+  var totalAmount = calculateTotalAmount(cartData);
+  $('.totalamount').text('$' + totalAmount.toFixed(2));
 }
 
 // Whish list api . . . . 
@@ -156,7 +180,7 @@ function getWhishlist() {
                          
                                 <h6 class="dz-price text-primary mb-0">${whishlistItem.mrp}AED</h6>
                                 
-                                <a href="/" id="cart" class="btn btn-secondary p-1 ms-4" id="addToCartButton" onclick="addToCart(${whishlistItem.vrntEntryId})">ADD TO CART</a>
+                                <a href="/" id="cart" class="btn btn-secondary p-1 ms-4" id="addToCartButton" onclick="addToCart(${whishlistItem.vrntEntryId}, ${whishlistItem.wshLstEntryId})">ADD TO CART</a>
                                 </div>
                             </div>
                             <a href="javascript:void(0);" onclick="deleteWishlistItem(${whishlistItem.wshLstEntryId})" class="dz-close">
@@ -264,7 +288,7 @@ function deleteWishlistItem(wshLstEntryId) {
 // deleteWishlistItem(wshLstEntryId);
 
 
-function addToCart(id) {
+function addToCart(id, wishlistItemId) {
   // Assuming variantId and quantity are defined somewhere in your code
   // var variantId = '';
   var quantity = '1';
@@ -273,6 +297,7 @@ function addToCart(id) {
     "itmVrntId": id,
     "qty": quantity
   };
+  console.log(obj)
 
   if (token === null) {
     window.location.href = "./login.html";
@@ -291,6 +316,8 @@ function addToCart(id) {
       success: function (response) {
         console.log("Sign In Success:", response);
         toastr.success("Item Added to Cart");
+        deleteWishlistItem(wishlistItemId);
+
       },
       error: function (error) {
         console.log("Sign in Error:", error);
@@ -299,6 +326,32 @@ function addToCart(id) {
     });
   }
 }
+function deleteWishlistItem(wishlistItemId) {
+  // Implement the logic to delete the wishlist item using its ID
+  // You can use another AJAX call to the backend to delete the item
+  $.ajax({
+    url: `${SETTINGS.backendUrl}/Ecom/DeleteWishlistItem/${wishlistItemId}`,
+    method: 'DELETE',
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-Type": "application/json",
+      // Add other headers as needed
+    },
+    success: function (response) {
+      console.log("Delete Wishlist Item Success:", response);
+      toastr.success("Item Removed from Wishlist");
+
+      // Refresh the wishlist after removing an item
+      getWhishlist();
+    },
+    error: function (error) {
+      console.error('Error deleting wishlist item:', error);
+      toastr.error(error.responseJSON.title);
+    }
+  });
+}
+
+
 
 var handleBootstrapTouchSpin = function () {
   if ($("input[name='demo_vertical2']").length > 0) {
