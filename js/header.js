@@ -41,6 +41,7 @@ $.ajax({
 
 // add to cart api . . . . 
 
+let quantity =1
 
 function getCart() {
   $.ajax({
