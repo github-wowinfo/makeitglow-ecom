@@ -152,15 +152,22 @@ function getshippingInfo() {
             profileData.forEach(function (shipping) {
                 console.log('shipping', shipping);
 
-                var profile = `<h4>Shipping Info</h4>
-                  <p>Customer ID: ${shipping.custId}</p>
-                  <p>Customer Name: ${shipping.name}</p>
-                  <p>Contact No: ${shipping.contactNo}</p>
-                  <p>Alt Contact No: ${shipping.altContactNo}</p>
-                  <p>Address Line 1: ${shipping.addressLine1}</p>
-                  <p>Address Line 2: ${shipping.addressLine2}</p>
-                  <p>Remark: ${shipping.remark}</p>
-                  <a href="" class="">Edit Billing Info</a>`;
+                var profile = `  
+                <div class="col-md-6">
+							<div class="card">
+								<div class="card-body" >
+                                <h4>Shipping Info</h4>
+                                <p>Customer ID: ${shipping.custId}</p>
+                                <p>Customer Name: ${shipping.name}</p>
+                                <p>Contact No: ${shipping.contactNo}</p>
+                                <p>Alt Contact No: ${shipping.altContactNo}</p>
+                                <p>Address Line 1: ${shipping.addressLine1}</p>
+                                <p>Address Line 2: ${shipping.addressLine2}</p>
+                                <p>Remark: ${shipping.remark}</p>
+                                <a href="" class="">Edit shipping Info</a>
+								</div>
+							</div>
+						</div>`;
                 $('#shippinginfo').append(profile);
             })
 
