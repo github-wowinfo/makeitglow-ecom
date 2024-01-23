@@ -86,7 +86,7 @@ function getshippingInfo() {
                   <p>Address Line 1: ${shipping.addressLine1}</p>
                   <p>Address Line 2: ${shipping.addressLine2}</p>
                   <p>Remark: ${shipping.remark}</p>
-                  <a href="">Edit Billing Info</a>`;
+                  <a href="" class="">Edit Billing Info</a>`;
                 $('#shippinginfo').append(profile);
             })
 
