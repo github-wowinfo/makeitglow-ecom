@@ -60,6 +60,7 @@ function getCart() {
 
       // Update cart items
       cartData.forEach(function (cartItem) {
+        console.log('cartitem', cartItem);
         var cartItemHTML = `
           <li>
             <div class="cart-widget">
@@ -71,24 +72,25 @@ function getCart() {
                 <div class="d-flex align-items-center">
                   <h6 class="dz-price text-primary mb-0">${cartItem.mrp}AED</h6>
                   <div class="btn-quantity light quantity-sm ms-5">
-                    <div class="input-group bootstrap-touchspin">
-                      <span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span>
-                      <input type="text" value="${cartItem.quantity}" name="demo_vertical2" class="form-control" style="display: block;">
-                      <span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span>
-                      <span class="input-group-btn-vertical">
-                        <button class="btn btn-default bootstrap-touchspin-up" type="button" onclick="increaseQuantity(${cartItem.cartEntryId})">
-                          <i class="fa-solid fa-plus"></i>
-                        </button>
-                        <button class="btn btn-default bootstrap-touchspin-down" type="button" onclick="decreaseQuantity(${cartItem.cartEntryId})">
-                          <i class="fa-solid fa-minus"></i>
-                        </button>
-                      </span>
-                    </div>
-                  </div>
+    <div class="input-group bootstrap-touchspin">
+        <span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span>
+        <input type="text" value="${cartItem.qty}" name="demo_vertical2" class="form-control" style="display: block;">
+        <span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span>
+        <span class="input-group-btn-vertical">
+            <button class="btn btn-default bootstrap-touchspin-up" type="button" onclick="updateQuantity(${cartItem.itmVrntId}, 'increase',${cartItem.qty})">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+            <button class="btn btn-default bootstrap-touchspin-down" type="button" onclick="updateQuantity(${cartItem.itmVrntId}, 'decrease',${cartItem.qty})">
+                <i class="fa-solid fa-minus"></i>
+            </button>
+        </span>
+    </div>
+</div>
+
                 </div>
               </div>
               <a href="javascript:void(0);" onclick="deleteCartItem(${cartItem.cartEntryId})" class="dz-close">
-                <i class="ti-close"></i>
+                <i class="ti-trash"></i>
               </a>
             </div>
           </li>`;
@@ -184,7 +186,7 @@ function getWhishlist() {
                                 </div>
                             </div>
                             <a href="javascript:void(0);" onclick="deleteWishlistItem(${whishlistItem.wshLstEntryId})" class="dz-close">
-                              <i class="ti-close"></i>
+                            <i class="ti-trash"></i>
                             </a>
                           </div>
                         </li>`;
@@ -207,11 +209,16 @@ function getWhishlist() {
 // Function to calculate subtotal based on cart data
 function calculateSubtotal(cartData) {
   var subtotal = 0;
+
   cartData.forEach(function (whishlistItem) {
-    subtotal += whishlistItem.price;
+    // Assuming "mrp" is the key for the Manufacturer's Recommended Price
+    var mrp = parseFloat(whishlistItem.mrp);
+    subtotal += mrp;
   });
+
   return subtotal;
 }
+
 $(document).ready(function () {
   // Fetch cart data from the API
   getCart()
@@ -297,6 +304,61 @@ function addToCart(id) {
     "itmVrntId": id,
     "qty": quantity
   };
+  console.log(obj)
+
+  if (token === null) {
+    window.location.href = "./login.html";
+  } else {
+    $.ajax({
+      url: `${SETTINGS.backendUrl}/Ecom/AddToCart`,
+      type: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+        // Add other headers as needed
+      },
+      dataType: "json",
+      contentType: "application/json",
+      data: JSON.stringify(obj),
+      success: function (response) {
+        console.log("Sign In Success:", response);
+        toastr.success("Item Added to Cart");
+        // deleteWishlistItem(wishlistItemId);
+
+      },
+      error: function (error) {
+        console.log("Sign in Error:", error);
+        toastr.error(error.responseJSON.title);
+      },
+    });
+  }
+}
+
+function updateQuantity(id, action, quantity) {
+  // Assuming variantId and quantity are defined somewhere in your code
+  // var variantId = '';
+
+  // var currentQuantity = parseInt($(`input[name='demo_vertical2'][value='${quantity}']`).val());
+  var inputField = $(`input[name='demo_vertical2'][value='${quantity}']`);
+  var currentQuantity = parseInt(inputField.val());
+
+  if (action === 'increase') {
+    currentQuantity += 1;
+  } else if (action === 'decrease' && currentQuantity > 1) {
+    currentQuantity -= 1;
+  }
+
+  var obj = {
+    "itmVrntId": id,
+    "qty": currentQuantity.toString()
+  };
+  inputField.val(currentQuantity);
+  // var quantity = '1';
+
+  // var obj = {
+  //   "itmVrntId": id,
+  //   "qty": quantity
+  // };
   console.log(obj)
 
   if (token === null) {
