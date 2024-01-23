@@ -170,9 +170,9 @@ function quckview(id) {
 		   
 		  </div>
 		  <div class="btn-group cart-btn">
-			<a href="/" class="btn btn-md btn-secondary text-uppercase"  id="addToCartButton" onclick="addToCart(${product.vrnts[0].vrntEntryId})">Add
+			<a class="btn btn-md btn-secondary text-uppercase"  id="addToCartButton" onclick="addToCart(${product.vrnts[0].vrntEntryId})">Add
 			  To Cart</a>
-			<a href="/" class="btn btn-md btn-light btn-icon" id="whislist" onclick="addToWishlist(${product.vrnts[0].vrntEntryId})">
+			<a  class="btn btn-md btn-light btn-icon" id="whislist" onclick="addToWishlist(${product.vrnts[0].vrntEntryId})">
 			  <svg width="19" height="17" viewBox="0 0 19 17" fill="none"
 				xmlns="http://www.w3.org/2000/svg">
 				<path
@@ -226,7 +226,7 @@ function quckview(id) {
 // Define the function to handle adding an item to the cart
 function addToCart(id) {
 	// Assuming variantId and quantity are defined somewhere in your code
-	var variantId = '';
+	// var variantId = '';
 	var quantity = '1';
 
 	var obj = {
@@ -251,6 +251,7 @@ function addToCart(id) {
 			success: function (response) {
 				console.log("Sign In Success:", response);
 				toastr.success("Item Added to Cart");
+				
 			},
 			error: function (error) {
 				console.log("Sign in Error:", error);
