@@ -69,73 +69,73 @@ function getBillingInfo() {
         type: "GET",
         // url: '${SETTINGS.backendUrl}Masters/GetAllLocations',
         url: `${SETTINGS.backendUrl}/Masters/GetAllLocations`,
-      
+
         dataType: "json",
         success: function (response) {
-          // console.log(response);
-          let li = `<option value="">Select</option>`
-          $.each(response, function (index, value) {
-            li += `<option value="${value.lEntryId}">${value.locationName}</option>`
-          });
-          $('#countrySelect').append(li);
-          $('#countrySelect').selectric('refresh');
+            // console.log(response);
+            let li = `<option value="">Select</option>`
+            $.each(response, function (index, value) {
+                li += `<option value="${value.lEntryId}">${value.locationName}</option>`
+            });
+            $('#countrySelect').append(li);
+            $('#countrySelect').selectric('refresh');
         }
-      })
- 
-  // Assuming this is your click event handler for the button with id 'saveinfo'
-var savebilling = document.getElementById('saveinfo');
+    })
 
-savebilling.addEventListener('click', function (e) {
-    e.preventDefault(),
-    addBillingAddress();
-});
+    // Assuming this is your click event handler for the button with id 'saveinfo'
+    var savebilling = document.getElementById('saveinfo');
 
-// Function to handle the API call to AddCustBillingAddress
-function addBillingAddress() {
-    const CompanyName = document.getElementById("companyName").value;
-    const CompanyTaxNo = document.getElementById("companyTaxNo").value;
-    const Address1 = document.getElementById("address1").value;
-    const Address2 = document.getElementById("address2").value;
-    const CountrySelect = document.getElementById("countrySelect").value;
-    const Remark = document.getElementById("remark").value;
-    
-    var userData = {
-        "userType": 2,
-        "custCompany": CompanyName,
-        "custCompTaxNo": CompanyTaxNo,
-        "addressLine1": Address1,
-        "addressLine2": Address2,
-        "lctnId": CountrySelect,
-        "remark": Remark,
-      };
-      console.log('userData :', userData);
-    $.ajax({
-        url: 'https://mig-dev.lifelinemegacorp.com/api/CustomerAccount/AddCustBillingAddress',
-        method: 'POST',  // Assuming this should be a POST request, change it if necessary
-        headers: {
-            Authorization: "Bearer " + token,
-            "Content-Type": "application/json",
-            // Add other headers as needed
-        },
-        data: JSON.stringify(userData), // Convert object to JSON string
-        success: function (response) {
-            // Handle success response
-        //    localStorage.setItem('token', response);
-
-            console.log('Billing address added successfully:', response);
-            // toastr.success("Billing address added successfully ");
-
-            // You may want to update the UI or perform other actions here
-            // $("#saveinfo").modal("hide");
-        },
-        error: function (error) {
-            console.error('Error adding billing address:', error);
-            // Handle error response
-            // toastr.error(error);
-
-        }
+    savebilling.addEventListener('click', function (e) {
+        e.preventDefault(),
+            addBillingAddress();
     });
-}
+
+    // Function to handle the API call to AddCustBillingAddress
+    function addBillingAddress() {
+        const CompanyName = document.getElementById("companyName").value;
+        const CompanyTaxNo = document.getElementById("companyTaxNo").value;
+        const Address1 = document.getElementById("address1").value;
+        const Address2 = document.getElementById("address2").value;
+        const CountrySelect = document.getElementById("countrySelect").value;
+        const Remark = document.getElementById("remark").value;
+
+        var userData = {
+            "userType": 2,
+            "custCompany": CompanyName,
+            "custCompTaxNo": CompanyTaxNo,
+            "addressLine1": Address1,
+            "addressLine2": Address2,
+            "lctnId": CountrySelect,
+            "remark": Remark,
+        };
+        console.log('userData :', userData);
+        $.ajax({
+            url: 'https://mig-dev.lifelinemegacorp.com/api/CustomerAccount/AddCustBillingAddress',
+            method: 'POST',  // Assuming this should be a POST request, change it if necessary
+            headers: {
+                Authorization: "Bearer " + token,
+                "Content-Type": "application/json",
+                // Add other headers as needed
+            },
+            data: JSON.stringify(userData), // Convert object to JSON string
+            success: function (response) {
+                // Handle success response
+                //    localStorage.setItem('token', response);
+
+                console.log('Billing address added successfully:', response);
+                toastr.success("Billing address added successfully ");
+
+                // You may want to update the UI or perform other actions here
+                $("#saveinfo").modal("hide");
+            },
+            error: function (error) {
+                console.error('Error adding billing address:', error);
+                // Handle error response
+                toastr.error(error);
+
+            }
+        });
+    }
 
 }
 function getshippingInfo() {
