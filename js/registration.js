@@ -123,39 +123,6 @@ $.ajax({
   }
 })
 
-// $(document).ready(function() {
-// Data to be sent in the POST request
-// var postData = {
-//     userType: 2,
-//     firstName: "string",
-//     lastName: "string",
-//     phoneNumber: "string",
-//     lctnId: 1,
-//     refID: 1,
-//     email: "string",
-//     password: "string",
-//     addressLine1: "string"
-// };
-
-// Make POST request
-//     $.ajax({
-//         url: 'https://mig-dev.lifelinemegacorp.com/api/Auth/Register',
-//         type: 'POST',
-//         // dataType: 'json', // Change the datatype according to your response type
-//         contentType: 'application/json', // Set the Content-Type
-//         data: JSON.stringify(postData), // Convert object to JSON str
-//         data: postData,
-//         success: function(response) {
-//             console.log('Success:', response);
-//             // Handle the response from the server
-//         },
-//         error: function(error) {
-//             console.log('Error:', error);
-//             // Handle errors, if any
-//         }
-//     });
-// });
-
 
 // $(document).ready(function() {
 // Data to be sent in the POST request
