@@ -112,7 +112,7 @@ function calculateTotalAmount(cartItem) {
   var totalAmount = 0;
   cartItem.forEach(function (cartItem) {
     // totalAmount += cartItem.vrnts[0].sellingPrice.mrp* cartItem.quantity;
-    totalAmount += cartItem.mrp* cartItem.quantity;
+    totalAmount += cartItem.mrp * cartItem.quantity;
 
   });
   return totalAmount;
@@ -162,12 +162,12 @@ function getWhishlist() {
 
       // Clear existing content
       // $('#shopping-cart-pane .sidebar-cart-list').empty();
-      console.log('cartData', cartData.length);
+      // console.log('cartData', cartData.length);
       $('#whislistCount').append(cartData.length)
 
       // Update cart items
       cartData.forEach(function (whishlistItem) {
-        console.log("my whishes " ,whishlistItem);
+        console.log("my whishes ", whishlistItem);
         var cartItemHTML = `
                    <li>
                           <div class="cart-widget">
@@ -180,7 +180,7 @@ function getWhishlist() {
                          
                                 <h6 class="dz-price text-primary mb-0">${whishlistItem.mrp}AED</h6>
                                 
-                                <a href="/" id="cart" class="btn btn-secondary p-1 ms-4" id="addToCartButton" onclick="addToCart(${whishlistItem.vrntEntryId}, ${whishlistItem.wshLstEntryId})">ADD TO CART</a>
+                                <a href="/" id="cart" class="btn btn-secondary p-1 ms-4" id="addToCartButton" onclick="addToCart(${whishlistItem.itmVrntId})">ADD TO CART</a>
                                 </div>
                             </div>
                             <a href="javascript:void(0);" onclick="deleteWishlistItem(${whishlistItem.wshLstEntryId})" class="dz-close">
@@ -238,7 +238,7 @@ function deleteCartItem(cartEntryId) {
         Id: cartEntryId,
       },
       success: function (response) {
-        console.log("Item Deleted from Cart:", response);
+        // console.log("Item Deleted from Cart:", response);
         toastr.success("Item Deleted from Cart");
         // toastr.success("Item Added to Cart");
         getCart()
@@ -267,11 +267,11 @@ function deleteWishlistItem(wshLstEntryId) {
         Authorization: "Bearer " + token,
         // Add other headers as needed
       },
-      data: {
-        Id: wshLstEntryId,
-      },
+      // data: {
+      //   Id: wshLstEntryId,
+      // },
       success: function (response) {
-        console.log("Item Deleted from Wishlist:", response);
+        // console.log("Item Deleted from Wishlist:", response);
         toastr.success("Item Deleted from Wishlist");
         getWhishlist()
         // Optionally, you can update the UI or perform other actions after deletion
@@ -288,7 +288,7 @@ function deleteWishlistItem(wshLstEntryId) {
 // deleteWishlistItem(wshLstEntryId);
 
 
-function addToCart(id, wishlistItemId) {
+function addToCart(id) {
   // Assuming variantId and quantity are defined somewhere in your code
   // var variantId = '';
   var quantity = '1';
@@ -316,7 +316,7 @@ function addToCart(id, wishlistItemId) {
       success: function (response) {
         console.log("Sign In Success:", response);
         toastr.success("Item Added to Cart");
-        deleteWishlistItem(wishlistItemId);
+        // deleteWishlistItem(wishlistItemId);
 
       },
       error: function (error) {
@@ -326,30 +326,30 @@ function addToCart(id, wishlistItemId) {
     });
   }
 }
-function deleteWishlistItem(wishlistItemId) {
-  // Implement the logic to delete the wishlist item using its ID
-  // You can use another AJAX call to the backend to delete the item
-  $.ajax({
-    url: `${SETTINGS.backendUrl}/Ecom/DeleteWishlistItem/${wishlistItemId}`,
-    method: 'DELETE',
-    headers: {
-      Authorization: "Bearer " + token,
-      "Content-Type": "application/json",
-      // Add other headers as needed
-    },
-    success: function (response) {
-      console.log("Delete Wishlist Item Success:", response);
-      toastr.success("Item Removed from Wishlist");
+// function deleteWishlistItem(wishlistItemId) {
+//   // Implement the logic to delete the wishlist item using its ID
+//   // You can use another AJAX call to the backend to delete the item
+//   $.ajax({
+//     url: `${SETTINGS.backendUrl}/Ecom/DeleteWishlistItem/${wishlistItemId}`,
+//     method: 'DELETE',
+//     headers: {
+//       Authorization: "Bearer " + token,
+//       "Content-Type": "application/json",
+//       // Add other headers as needed
+//     },
+//     success: function (response) {
+//       // console.log("Delete Wishlist Item Success:", response);
+//       toastr.success("Item Removed from Wishlist");
 
-      // Refresh the wishlist after removing an item
-      getWhishlist();
-    },
-    error: function (error) {
-      console.error('Error deleting wishlist item:', error);
-      toastr.error(error.responseJSON.title);
-    }
-  });
-}
+//       // Refresh the wishlist after removing an item
+//       getWhishlist();
+//     },
+//     error: function (error) {
+//       console.error('Error deleting wishlist item:', error);
+//       toastr.error(error.responseJSON.title);
+//     }
+//   });
+// }
 
 
 
@@ -379,7 +379,7 @@ $(document).ready(function () {
 
 // Function to update the displayed price on the page
 function updateDisplayedPrice(price) {
-  console.log("Total Price: $", + price)
+  // console.log("Total Price: $", + price)
   // Assuming you have an element to display the price with id="displayedPrice"
   $("#total").text("Total Price: $" + price);
   handleBootstrapTouchSpin()

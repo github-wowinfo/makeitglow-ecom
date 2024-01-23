@@ -106,7 +106,7 @@ $(document).ready(function () {
       $.each(data, function (index, product) {
         // console.log('producttrending', product);
         // Generate HTML for the product card with actual data
-        console.log('product', product);
+        // console.log('product', product);
         if (product !== null) {
           var productCardHtml = `
               <li class="card-container col-6 col-xl-3 col-lg-3 col-md-4 col-sm-6 Begs wow fadeInUp" data-wow-delay="0.1s">
@@ -214,7 +214,7 @@ function quckview(id) {
       // Build the HTML for the product details using the API response
       //  console.log('response',product);
 
-      console.log('productjjjg', product);
+      // console.log('productjjjg', product);
 
       var modalData = `<div class="row g-xl-4 g-3">
   <div class="col-xl-6 col-md-6">
@@ -255,9 +255,9 @@ function quckview(id) {
          
         </div>
         <div class="btn-group cart-btn">
-          <a href="/" class="btn btn-md btn-secondary text-uppercase" id="addToCartButton" onclick="addToCart(${product.vrntEntryId})">Add
+          <a href="/" class="btn btn-md btn-secondary text-uppercase" id="addToCartButton" onclick="addToCart(${product.vrnts[0].vrntEntryId})">Add
             To Cart</a>
-          <a href="/" class="btn btn-md btn-light btn-icon" id="whislist" onclick="addToWishlist(${product.vrntEntryId})">
+          <a href="/" class="btn btn-md btn-light btn-icon" id="whislist" onclick="addToWishlist(${product.vrnts[0].vrntEntryId})">
             <svg width="19" height="17" viewBox="0 0 19 17" fill="none"
               xmlns="http://www.w3.org/2000/svg">
               <path
@@ -332,7 +332,7 @@ function addToCart(id) {
       contentType: "application/json",
       data: JSON.stringify(obj),
       success: function (response) {
-        console.log("Sign In Success:", response);
+        // console.log("Sign In Success:", response);
         toastr.success("Item Added to Cart");
       },
       error: function (error) {
@@ -351,32 +351,32 @@ function addToWishlist(id) {
     "itmVrntId": id,
     "qty": quantity
   };
-  console.log(obj);
+  // console.log(obj);
 
   if (token === null) {
-      window.location.href = "./login.html";
+    window.location.href = "./login.html";
   } else {
-      $.ajax({
-          url: `${SETTINGS.backendUrl}/Ecom/AddToWishlist`,
-          type: "POST",
-          headers: {
-              Authorization: "Bearer " + token,
-              "Content-Type": "application/json",
-              // Add other headers as needed
-          },
-          dataType: "json", // Change the datatype according to your response type
-          contentType: "application/json", // Set the Content-Type
-          data: JSON.stringify(obj),
+    $.ajax({
+      url: `${SETTINGS.backendUrl}/Ecom/AddToWishlist`,
+      type: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+        // Add other headers as needed
+      },
+      dataType: "json", // Change the datatype according to your response type
+      contentType: "application/json", // Set the Content-Type
+      data: JSON.stringify(obj),
 
-          success: function (response) {
-              console.log("Sign In Success:", response);
-              toastr.success("Item Added to Wishlist");
-          },
-          error: function (error) {
-              console.log("Sign in Error:", error);
-              toastr.error(error.responseJSON.title);
-          },
-      });
+      success: function (response) {
+        // console.log("Sign In Success:", response);
+        toastr.success("Item Added to Wishlist");
+      },
+      error: function (error) {
+        console.log("Sign in Error:", error);
+        toastr.error(error.responseJSON.title);
+      },
+    });
   }
 }
 

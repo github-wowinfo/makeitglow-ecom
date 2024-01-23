@@ -61,7 +61,7 @@ $(document).ready(function () {
 												</svg>
 
 											</div>
-											<div class="btn btn-primary meta-icon dz-carticon" id="addToCartButton" onclick="addToCart(${product.vrntEntryId})">
+											<div class="btn btn-primary meta-icon dz-carticon" id="addToCartButton" onclick="addToCart(${product.vrnts[0].vrntEntryId})">
 												<svg class="dz-cart-check" width="15" height="15" viewBox="0 0 15 15"
 													fill="none" xmlns="http://www.w3.org/2000/svg">
 													<path d="M11.9144 3.73438L5.49772 10.151L2.58105 7.23438"
@@ -170,7 +170,7 @@ function quckview(id) {
 		   
 		  </div>
 		  <div class="btn-group cart-btn">
-			<a href="/" class="btn btn-md btn-secondary text-uppercase"  id="addToCartButton" onclick="addToCart(${product.vrntEntryId})">Add
+			<a href="/" class="btn btn-md btn-secondary text-uppercase"  id="addToCartButton" onclick="addToCart(${product.vrnts[0].vrntEntryId})">Add
 			  To Cart</a>
 			<a href="/" class="btn btn-md btn-light btn-icon" id="whislist" onclick="addToWishlist(${product.vrnts[0].vrntEntryId})">
 			  <svg width="19" height="17" viewBox="0 0 19 17" fill="none"
@@ -262,13 +262,13 @@ function addToCart(id) {
 
 function addToWishlist(id) {
 	var quantity = '1';
-  
+
 	var obj = {
-	  "itmVrntId": id,
-	  "qty": quantity
+		"itmVrntId": id,
+		"qty": quantity
 	};
 	console.log(obj);
-  
+
 	if (token === null) {
 		window.location.href = "./login.html";
 	} else {
@@ -283,7 +283,7 @@ function addToWishlist(id) {
 			dataType: "json", // Change the datatype according to your response type
 			contentType: "application/json", // Set the Content-Type
 			data: JSON.stringify(obj),
-  
+
 			success: function (response) {
 				console.log("Sign In Success:", response);
 				toastr.success("Item Added to Wishlist");
@@ -294,6 +294,6 @@ function addToWishlist(id) {
 			},
 		});
 	}
-  }
-  
+}
+
 
