@@ -93,14 +93,14 @@
 $.ajax({
   type: "GET",
   // url: '${SETTINGS.backendUrl}Masters/GetAllLocations',
-  url: `${SETTINGS.backendUrl}/Masters/GetAllLocations`,
+  url: `${SETTINGS.backendUrl}/Masters/GetAllCountries`,
 
   dataType: "json",
   success: function (response) {
     // console.log(response);
     let li = `<option value="">Select</option>`
     $.each(response, function (index, value) {
-      li += `<option value="${value.lEntryId}">${value.locationName}</option>`
+      li += `<option value="${value.countryId}">${value.countryName}</option>`
     });
     $('#countrySelect').append(li);
     $('#countrySelect').selectric('refresh');
@@ -204,6 +204,7 @@ document.getElementById("postButton").addEventListener("click", function (e) {
     // "addressLine2": "",
     "lctnId": Countries,
     "refId": RefId
+
     // Add any other required fields for user registration
   };
   console.log('userData :', userData);

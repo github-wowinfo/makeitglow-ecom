@@ -41,7 +41,7 @@ $.ajax({
 
 // add to cart api . . . . 
 
-let quantity =1
+let quantity = 1
 
 function getCart() {
   $.ajax({
@@ -54,6 +54,9 @@ function getCart() {
     },
     dataType: 'json',
     success: function (cartData) {
+      var subtotal = calculateSubtotal(cartData);
+      $('#shopping-cart-pane .cart-total h5:last-child').text('$' + subtotal.toFixed(2));
+
       // Clear existing content
       $('#cartItem').empty();
       $('#cartCount').text(cartData.length);
@@ -197,8 +200,7 @@ function getWhishlist() {
       });
 
       // Calculate and update subtotal
-      var subtotal = calculateSubtotal(cartData);
-      $('#shopping-cart-pane .cart-total h5:last-child').text('$' + subtotal.toFixed(2));
+
     },
     error: function (error) {
       console.error('Error fetching cart data:', error);
@@ -211,9 +213,9 @@ function getWhishlist() {
 function calculateSubtotal(cartData) {
   var subtotal = 0;
 
-  cartData.forEach(function (whishlistItem) {
+  cartData.forEach(function (amount) {
     // Assuming "mrp" is the key for the Manufacturer's Recommended Price
-    var mrp = parseFloat(whishlistItem.mrp);
+    var mrp = parseFloat(amount.mrp * amount.qty);
     subtotal += mrp;
   });
 
