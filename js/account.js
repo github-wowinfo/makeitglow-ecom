@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 // .................get profile function start .................. 
-=======
 function populateDropdown(url, dropdownSelector, selectedValue) {
     $.ajax({
         type: "GET",
@@ -9,7 +7,7 @@ function populateDropdown(url, dropdownSelector, selectedValue) {
         success: function (response) {
             let options = `<option value="">Select</option>`;
             $.each(response, function (index, value) {
-                options += `<option value="${value.lEntryId}">${value.locationName}</option>`;
+                options +=` <option value="${value.lEntryId}">${value.locationName}</option>`;
             });
             $(dropdownSelector).html(options); // Use html() to replace existing options
             $(dropdownSelector).val(selectedValue); // Set the selected value
@@ -42,12 +40,11 @@ function populateReferenceDropdown(url, dropdownSelector, selectedValue) {
 }
 
 // // Call the function to populate the first dropdown
-// populateDropdown(`${SETTINGS.backendUrl}/Masters/GetAllLocations`, '#countrySelect');
+// populateDropdown(${SETTINGS.backendUrl}/Masters/GetAllLocations, '#countrySelect');
 
 // // Call the function to populate the second dropdown
-// populateDropdown(`${SETTINGS.backendUrl}/Masters/GetAllLocations`, '#locationSelect');
+// populateDropdown(${SETTINGS.backendUrl}/Masters/GetAllLocations, '#locationSelect');
 
->>>>>>> fce1aaa308fc2d35137a5195ee0bc5adcebca30a
 function getProfile() {
     $.ajax({
         url: `${SETTINGS.backendUrl}/Auth/GetProfile`,
@@ -92,11 +89,6 @@ function getProfile() {
     });
 
 }
-<<<<<<< HEAD
-// .................get profile function end .................. 
-
-// .................get BillingInfo function start .................. 
-=======
 
 $("#updateProfile").on('click', function (e) {
     $.ajax({
@@ -134,14 +126,9 @@ $("#updateProfile").on('click', function (e) {
         }
     });
 })
+// .................get profile function end .................. 
 
-
-
-
-
-
-
->>>>>>> fce1aaa308fc2d35137a5195ee0bc5adcebca30a
+// .................get BillingInfo function start .................. 
 
 function getBillingInfo() {
     $.ajax({
@@ -163,9 +150,13 @@ function getBillingInfo() {
       <p>Address Line 1: ${profileData[0].addressLine1}</p>
       <p>Address Line 2: ${profileData[0].addressLine2}</p>
       <p>Remark: ${profileData[0].remark}</p>
-      <a href="">Edit Billing Info</a>`;
+      <a href="javascript:void(0);" 
+      data-bs-toggle="modal" class="open-quick-view" data-bs-target="#EditBilling" >
+      Edit Billing Info</a>`;
 
                 $('#billingAddress').append(profile);
+
+
             } else {
                 var profile = `<button class="btn btn-secondary btnhover text-uppercase me-2"
                 id="postButton">Add Billing Info</button>`;
@@ -180,31 +171,21 @@ function getBillingInfo() {
         }
     });
 
-<<<<<<< HEAD
     $.ajax({
         type: "GET",
         url: `${SETTINGS.backendUrl}/Masters/GetAllLocations`,
-=======
-    // $.ajax({
-    //     type: "GET",
-    //     // url: '${SETTINGS.backendUrl}Masters/GetAllLocations',
-    //     url: `${SETTINGS.backendUrl}/Masters/GetAllReferences`,
 
-    //     dataType: "json",
-    //     success: function (response) {
-    //         // console.log(response);
-    //         let li = `<option value="">Select</option>`
-    //         $.each(response, function (index, value) {
-    //             li += `<option value="${value.refEntryId}">${value.referenceName}</option>`
-    //         });
-    //         $('#refernceSelect').append(li);
-    //         $('#refernceSelect').selectric('refresh');
-    //     }
-    // })
-
-
->>>>>>> fce1aaa308fc2d35137a5195ee0bc5adcebca30a
-
+        dataType: "json",
+        success: function (response) {
+            // console.log(response);
+            let li = `<option value="">Select</option>`
+            $.each(response, function (index, value) {
+                li += `<option value="${value.lEntryId}">${value.locationName}</option>`
+            });
+            $('#countrySelect').append(li);
+            $('#countrySelect').selectric('refresh');
+        }
+    })
 
     var savebilling = document.getElementById('saveinfo');
 
@@ -310,7 +291,6 @@ function addshippingInfo() {
     });
     $.ajax({
         type: "GET",
-        // url: '${SETTINGS.backendUrl}Masters/GetAllLocations',
         url: `${SETTINGS.backendUrl}/Masters/GetAllLocations`,
 
         dataType: "json",
@@ -324,8 +304,6 @@ function addshippingInfo() {
             $('#countrySelection').selectric('refresh');
         }
     })
-
-    // Assuming this is your click event handler for the button with id 'saveinfo'
     var saveshipping = document.getElementById('saveshippinginfo');
 
     saveshipping.addEventListener('click', function (e) {
@@ -333,7 +311,6 @@ function addshippingInfo() {
             addshippingAddress();
     });
 
-    // Function to handle the API call to AddCustBillingAddress
     function addshippingAddress() {
         const Name = document.getElementById("name").value;
         const ContactNo = document.getElementById("contactNum").value;
@@ -364,17 +341,12 @@ function addshippingInfo() {
             },
             data: JSON.stringify(userData), // Convert object to JSON string
             success: function (response) {
-                // Handle success response
-                //    localStorage.setItem('token', response);
-
+     
                 console.log('Billing address added successfully:', response);
                 toastr.success("Billing address added successfully ");
-
                 // You may want to update the UI or perform other actions here
                 $("#saveshippinginfo").modal("hide");
                 location.reload()
-                //  addshippingInfo()
-
 
             },
             error: function (error) {
