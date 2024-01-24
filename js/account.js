@@ -1,4 +1,53 @@
+<<<<<<< HEAD
 // .................get profile function start .................. 
+=======
+function populateDropdown(url, dropdownSelector, selectedValue) {
+    $.ajax({
+        type: "GET",
+        url: url,
+        dataType: "json",
+        success: function (response) {
+            let options = `<option value="">Select</option>`;
+            $.each(response, function (index, value) {
+                options += `<option value="${value.lEntryId}">${value.locationName}</option>`;
+            });
+            $(dropdownSelector).html(options); // Use html() to replace existing options
+            $(dropdownSelector).val(selectedValue); // Set the selected value
+            $(dropdownSelector).selectric('refresh');
+        },
+        error: function (error) {
+            console.error("Error fetching data:", error);
+        }
+    });
+}
+
+function populateReferenceDropdown(url, dropdownSelector, selectedValue) {
+    $.ajax({
+        type: "GET",
+        url: url,
+        dataType: "json",
+        success: function (response) {
+            let options = `<option value="">Select</option>`;
+            $.each(response, function (index, value) {
+                options += `<option value="${value.refEntryId}">${value.referenceName}</option>`;
+            });
+            $(dropdownSelector).html(options); // Use html() to replace existing options
+            $(dropdownSelector).val(selectedValue); // Set the selected value
+            $(dropdownSelector).selectric('refresh');
+        },
+        error: function (error) {
+            console.error("Error fetching data:", error);
+        }
+    });
+}
+
+// // Call the function to populate the first dropdown
+// populateDropdown(`${SETTINGS.backendUrl}/Masters/GetAllLocations`, '#countrySelect');
+
+// // Call the function to populate the second dropdown
+// populateDropdown(`${SETTINGS.backendUrl}/Masters/GetAllLocations`, '#locationSelect');
+
+>>>>>>> fce1aaa308fc2d35137a5195ee0bc5adcebca30a
 function getProfile() {
     $.ajax({
         url: `${SETTINGS.backendUrl}/Auth/GetProfile`,
@@ -12,16 +61,30 @@ function getProfile() {
         success: function (profileData) {
             console.log('profileData', profileData);
             var profile = `<h4>Personal Info</h4>
-              <p>Full Name: ${profileData.firstName}${profileData.lastName}</p>
-              <p>Mobile No.: ${profileData.phoneNumber}</p>
-              <p>Email: ${profileData.email}</p>
-              <p>Customer ID: ${profileData.userId}</p>
-              <p>Location: ${profileData.location}</p>
-              <a href="">Edit Account Info</a>`;
+            <p>Full Name: ${profileData.firstName}${profileData.lastName}</p>
+            <p>Mobile No.: ${profileData.phoneNumber}</p>
+            <p>Email: ${profileData.email}</p>
+            <p>Customer ID: ${profileData.userId}</p>
+            <p>Location: ${profileData.location}</p>
+            <p>Address Line 1: ${profileData.addressLine1}</p>
+            <p>Address Line 2: ${profileData.addressLine2}</p>
+            <a href="javascript:void(0);" 
+            data-bs-toggle="modal" class="open-quick-view" data-bs-target="#profileEdit">
+            Edit Profile Info
+            </a>`;
 
             // Append the item to the cart list
             $('#personalinfo').append(profile);
 
+            $('#firstName').val(profileData.firstName)
+            $('#lastName').val(profileData.lastName)
+            $('#phoneNumber').val(profileData.phoneNumber)
+            $('#profileaddress1').val(profileData.addressLine1)
+            $('#profileaddress2').val(profileData.addressLine2)
+
+            populateDropdown(`${SETTINGS.backendUrl}/Masters/GetAllLocations`, '#countrySelect', profileData.lctnId);
+            populateDropdown(`${SETTINGS.backendUrl}/Masters/GetAllLocations`, '#locationSelect', profileData.lctnId);
+            populateReferenceDropdown(`${SETTINGS.backendUrl}/Masters/GetAllReferences`, '#refernceSelect', profileData.refID);
         },
         error: function (error) {
             console.error('Error fetching cart data:', error);
@@ -29,9 +92,56 @@ function getProfile() {
     });
 
 }
+<<<<<<< HEAD
 // .................get profile function end .................. 
 
 // .................get BillingInfo function start .................. 
+=======
+
+$("#updateProfile").on('click', function (e) {
+    $.ajax({
+        url: `${SETTINGS.backendUrl}/Auth/UpdateProfile`,
+        method: 'POST',  // Assuming this should be a POST request, change it if necessary
+        headers: {
+            Authorization: "Bearer " + token,
+            "Content-Type": "application/json",
+            // Add other headers as needed
+        },
+        data: JSON.stringify({
+            firstName: $('#firstName').val(),
+            lastName: $('#lastName').val(),
+            phoneNumber: $('#phoneNumber').val(),
+            lctnId: $('#locationSelect').val(),
+            refID: $('#refernceSelect').val(),
+            addressLine1: $('#profileaddress1').val(),
+            addressLine2: $('#profileaddress2').val(),
+        }),
+        success: function (response) {
+            // Handle success response
+            //    localStorage.setItem('token', response);
+
+            console.log('Billing address added successfully:', response);
+            toastr.success("Account Info Updated successfully ");
+
+            // You may want to update the UI or perform other actions here
+            $("#profileEdit").modal("hide");
+        },
+        error: function (error) {
+            console.error('Error adding billing address:', error);
+            // Handle error response
+            toastr.error(error);
+
+        }
+    });
+})
+
+
+
+
+
+
+
+>>>>>>> fce1aaa308fc2d35137a5195ee0bc5adcebca30a
 
 function getBillingInfo() {
     $.ajax({
@@ -70,21 +180,31 @@ function getBillingInfo() {
         }
     });
 
+<<<<<<< HEAD
     $.ajax({
         type: "GET",
         url: `${SETTINGS.backendUrl}/Masters/GetAllLocations`,
+=======
+    // $.ajax({
+    //     type: "GET",
+    //     // url: '${SETTINGS.backendUrl}Masters/GetAllLocations',
+    //     url: `${SETTINGS.backendUrl}/Masters/GetAllReferences`,
 
-        dataType: "json",
-        success: function (response) {
-            // console.log(response);
-            let li = `<option value="">Select</option>`
-            $.each(response, function (index, value) {
-                li += `<option value="${value.lEntryId}">${value.locationName}</option>`
-            });
-            $('#countrySelect').append(li);
-            $('#countrySelect').selectric('refresh');
-        }
-    })
+    //     dataType: "json",
+    //     success: function (response) {
+    //         // console.log(response);
+    //         let li = `<option value="">Select</option>`
+    //         $.each(response, function (index, value) {
+    //             li += `<option value="${value.refEntryId}">${value.referenceName}</option>`
+    //         });
+    //         $('#refernceSelect').append(li);
+    //         $('#refernceSelect').selectric('refresh');
+    //     }
+    // })
+
+
+>>>>>>> fce1aaa308fc2d35137a5195ee0bc5adcebca30a
+
 
     var savebilling = document.getElementById('saveinfo');
 
