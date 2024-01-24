@@ -970,31 +970,38 @@
 								<div class="col-md-6 mt-3">
 									<div class="form-group">
 										<label for="companyName">Company Name</label>
-										<input type="text" class="form-control" id="firstName" placeholder="Company Name">
+										<input type="text" class="form-control" id="cmpnyname" placeholder="Company Name">
 									</div>
 								</div>
 								<div class="col-md-6 mt-3">
 									<div class="form-group">
 										<label for="companyName">Company Tax No</label>
-										<input type="text" class="form-control" id="lastName" placeholder="Company Tax No">
+										<input type="text" class="form-control" id="cmpnytx" placeholder="Company Tax No">
 									</div>
 								</div>
 							
 								<div class="col-md-12 mt-3">
 									<div class="form-group">
 										<label for="companyName">Address Line 1</label>
-										<input type="textarea" class="form-control" id="profileaddress1"
+										<input type="textarea" class="form-control" id="billingaddress1"
 											placeholder="Address Line 1">
 									</div>
 								</div>
 								<div class="col-md-12 mt-3">
 									<div class="form-group">
 										<label for="companyName">Address Line 2</label>
-										<input type="textarea" class="form-control" id="profileaddress2"
+										<input type="textarea" class="form-control" id="billingaddress2"
 											placeholder="Address Line 2">
 									</div>
 								</div>
-								<div class="col-md-12 mt-3">
+								<div class="col-md-6 mt-3">
+									<div class="form-group" id="fetchCountriesBtn">
+										<label for="companyName">Location Id</label>
+										<select class="default-select w-100 country" id="countrySelection">
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6 mt-3">
 									<div class="form-group">
 										<label for="companyName">Remark</label>
 										<input type="textarea" class="form-control" id="profileaddress2"
@@ -1006,7 +1013,7 @@
 							<!-- Add more fields as needed -->
 
 
-							<button type="submit" class="btn btn-primary mt-5" id="updateProfile">Update
+							<button type="submit" class="btn btn-primary mt-5" id="updateBilling">Update
 								Billing Address</button>
 						</form>
 					</div>
