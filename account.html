@@ -814,6 +814,75 @@
 				</div>
 			</div>
 		</div>
+		<div class="modal quick-view-modal fade" id="profileEdit" tabindex="-1" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+						<i class="icon feather icon-x"></i>
+					</button>
+					<div class="modal-body" id="modalBody">
+						<form id="billingForm">
+							<!-- Your form fields go here -->
+							<div class="row">
+								<div class="col-md-6 mt-3">
+									<div class="form-group">
+										<label for="companyName">First Name</label>
+										<input type="text" class="form-control" id="firstName" placeholder="First Name">
+									</div>
+								</div>
+								<div class="col-md-6 mt-3">
+									<div class="form-group">
+										<label for="companyName">Last Name</label>
+										<input type="text" class="form-control" id="lastName" placeholder="Last Name">
+									</div>
+								</div>
+								<div class="col-md-4 mt-3">
+									<div class="form-group">
+										<label for="companyName">Location</label>
+										<select class="default-select w-100 country" id="locationSelect">
+										</select>
+									</div>
+								</div>
+								<div class="col-md-4 mt-3">
+									<div class="form-group">
+										<label for="companyName">Reference</label>
+										<select class="default-select w-100 country" id="refernceSelect">
+										</select>
+									</div>
+								</div>
+								<div class="col-md-4 mt-3">
+									<div class="form-group">
+										<label for="companyName">Phone Number</label>
+										<input type="text" class="form-control" id="phoneNumber"
+											placeholder="Phone Number">
+									</div>
+								</div>
+								<div class="col-md-12 mt-3">
+									<div class="form-group">
+										<label for="companyName">Address Line 1</label>
+										<input type="textarea" class="form-control" id="profileaddress1"
+											placeholder="Address Line 1">
+									</div>
+								</div>
+								<div class="col-md-12 mt-3">
+									<div class="form-group">
+										<label for="companyName">Address Line 2</label>
+										<input type="textarea" class="form-control" id="profileaddress2"
+											placeholder="Address Line 2">
+									</div>
+								</div>
+
+							</div>
+							<!-- Add more fields as needed -->
+
+
+							<button type="submit" class="btn btn-primary mt-5" id="updateProfile">Update
+								Profile</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 
 	</div>
 
