@@ -141,27 +141,23 @@ function getBillingInfo() {
         },
         dataType: 'json',
         success: function (profileData) {
-            // console.log('profileData', profileData);
+            // profileData.forEach(function (Billing) {
+            console.log('profileDatabiili', profileData.length);
             if (profileData.length > 0) {
-                var profile = `<h4>Billing Info</h4>
-      <p>Customer ID: ${profileData[0].custId}</p>
-      <p>Company Name: ${profileData[0].custCompany}</p>
-      <p>Company Tax No: ${profileData[0].custCompTaxNo}</p>
-      <p>Address Line 1: ${profileData[0].addressLine1}</p>
-      <p>Address Line 2: ${profileData[0].addressLine2}</p>
-      <p>Remark: ${profileData[0].remark}</p>
-      <a href="javascript:void(0);" 
-      data-bs-toggle="modal" class="open-quick-view" data-bs-target="#EditBilling" >
-      Edit Billing Info</a>`;
 
-                $('#billingAddress').append(profile);
-                $('#cmpnyname').val(profileData.custCompany)
-                $('#cmpnytx').val(profileData.custCompTaxNo)
-                $('#billingaddress1').val(profileData.addressLine1)
-                $('#billingaddress2').val(profileData.addressLine2)
-    
-                populateDropdown(`${SETTINGS.backendUrl}/Masters/GetAllLocations`, '#locationSelect', profileData.lctnId);
-          
+                var profile = `<h4>Billing Info</h4>
+                    <p>Customer ID: ${profileData[0].custId}</p>
+                    <p>Company Name: ${profileData[0].custCompany}</p>
+                    <p>Company Tax No: ${profileData[0].custCompTaxNo}</p>
+                    <p>Address Line 1: ${profileData[0].addressLine1}</p>
+                    <p>Address Line 2: ${profileData[0].addressLine2}</p>
+                    <p>Remark: ${profileData[0].remark}</p>
+                    <a href="javascript:void(0);" 
+                    data-bs-toggle="modal" class="open-quick-view" data-bs-target="#EditBilling" onclick="getbillingbyId(${profileData[0].cbaEntryId})">
+                    Edit Billing Info</a>`;
+
+                    $('#billingAddress').append(profile);
+       
 
             } else {
                 var profile = `<button class="btn btn-secondary btnhover text-uppercase me-2"
@@ -171,6 +167,8 @@ function getBillingInfo() {
                     $('#billingModal').modal('show'); // Adjust 'yourModalId' accordingly
                 });
             }
+        // })
+
         },
         error: function (error) {
             console.error('Error fetching cart data:', error);
@@ -242,41 +240,33 @@ function getBillingInfo() {
         });
     }
 
-    $("#updateBilling").on('click', function (e) {
-        $.ajax({
-            url: `${SETTINGS.backendUrl}/CustomerAccount/GetCustShippingAddressById/${profileData[0].custId}`,
-            method: 'POST',  // Assuming this should be a POST request, change it if necessary
-            headers: {
-                Authorization: "Bearer " + token,
-                "Content-Type": "application/json",
-                // Add other headers as needed
-            },
-            data: JSON.stringify({
-                custCompany: $('#firstName').val(),
-                custCompTaxNo: $('#lastName').val(),
-                addressLine1: $('#phoneNumber').val(),
-                addressLine2: $('#profileaddress2').val(),
-                lctnId: $('#locationSelect').val(),
-            }),
-            success: function (response) {
-                // Handle success response
-                //    localStorage.setItem('token', response);
-    
-                console.log('Billing address added successfully:', response);
-                toastr.success("Account Info Updated successfully ");
-    
-                // You may want to update the UI or perform other actions here
-                $("#profileEdit").modal("hide");
-            },
-            error: function (error) {
-                console.error('Error adding billing address:', error);
-                // Handle error response
-                toastr.error(error);
-    
-            }
-        });
-    })
+  
 
+}
+
+function getbillingbyId(id) {
+    $.ajax({
+        url: `${SETTINGS.backendUrl}/CustomerAccount/GetCustBillingAddressById/${id}`,
+        method: 'GET',
+        headers: {
+            Authorization: "Bearer " + token,
+            "Content-Type": "application/json",
+            // Add other headers as needed
+        },
+        dataType: 'json',
+        success: function (profileData) {
+            console.log('profileDataddd', profileData);
+            $('#cmpnyname').val(profileData.custCompany)
+            $('#cmpnytx').val(profileData.custCompTaxNo)
+            $('#billingaddress1').val(profileData.addressLine1)
+            $('#billingaddress2').val(profileData.addressLine2)
+            $('#billingremark').val(profileData.remark)
+            populateDropdown(`${SETTINGS.backendUrl}/Masters/GetAllLocations`, '#billinglocation', profileData.lctnId);
+        },
+        error: function (error) {
+            console.error('Error fetching cart data:', error);
+        }
+    });
 }
 // .................get BillingInfo function end .................. 
 
