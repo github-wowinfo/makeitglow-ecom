@@ -640,7 +640,8 @@
 						</div>
 					</div>
 
-					<button class="btn btn-secondary btnhover text-uppercase me-2 mt-5 mb-2" id="postButton">Add Shipping
+					<button class="btn btn-secondary btnhover text-uppercase me-2 mt-5 mb-2" id="postButton">Add
+						Shipping
 						Info</button>
 					<div class="row gx-xl-4 g-3 mb-xl-0 mb-md-0 mb-3" id="shippinginfo">
 
@@ -813,7 +814,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="modal quick-view-modal fade" id="shippingModal" tabindex="-1" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
@@ -831,8 +832,7 @@
 								<div class="col-md-6 mt-3">
 									<div class="form-group">
 										<label for="companyName"> Name</label>
-										<input type="text" class="form-control" id="name"
-											placeholder="  Name">
+										<input type="text" class="form-control" id="name" placeholder="  Name">
 									</div>
 								</div>
 								<div class="col-md-6 mt-3">
@@ -880,7 +880,8 @@
 							<!-- Add more fields as needed -->
 
 
-							<button type="submit" class="btn btn-primary mt-5" id="saveshippinginfo">Save Shipping Info</button>
+							<button type="submit" class="btn btn-primary mt-5" id="saveshippinginfo">Save Shipping
+								Info</button>
 						</form>
 					</div>
 				</div>
@@ -979,7 +980,7 @@
 										<input type="text" class="form-control" id="cmpnytx" placeholder="Company Tax No">
 									</div>
 								</div>
-							
+
 								<div class="col-md-12 mt-3">
 									<div class="form-group">
 										<label for="companyName">Address Line 1</label>
@@ -1014,6 +1015,78 @@
 
 
 							<button type="submit" class="btn btn-primary mt-5" id="updateBilling">Update
+								Billing Address</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal quick-view-modal fade" id="EditShipping" tabindex="-1" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+						<i class="icon feather icon-x"></i>
+					</button>
+					<div class="modal-body" id="modalBody">
+						<form id="editbilling">
+							<!-- Your form fields go here -->
+							<div class="row">
+								<div class="col-md-6 mt-3">
+									<div class="form-group">
+										<label for="companyName">Name</label>
+										<input type="text" class="form-control" id="shippingname"
+											placeholder="Company Name">
+									</div>
+								</div>
+								<div class="col-md-6 mt-3">
+									<div class="form-group">
+										<label for="companyName">Contact No</label>
+										<input type="text" class="form-control" id="contactno"
+											placeholder="Company Tax No">
+									</div>
+								</div>
+								<div class="col-md-6 mt-3">
+									<div class="form-group">
+										<label for="companyName">Alt Contact No</label>
+										<input type="text" class="form-control" id="altcontactno"
+											placeholder="Company Tax No">
+									</div>
+								</div>
+								<div class="col-md-6 mt-3">
+									<div class="form-group">
+										<label for="companyName">Location</label>
+										<select class="default-select w-100 country" id="shippingLocation">
+										</select>
+									</div>
+								</div>
+
+								<div class="col-md-12 mt-3">
+									<div class="form-group">
+										<label for="companyName">Address Line 1</label>
+										<input type="textarea" class="form-control" id="shippingaddress1"
+											placeholder="Address Line 1">
+									</div>
+								</div>
+								<div class="col-md-12 mt-3">
+									<div class="form-group">
+										<label for="companyName">Address Line 2</label>
+										<input type="textarea" class="form-control" id="shippingaddress2"
+											placeholder="Address Line 2">
+									</div>
+								</div>
+								<div class="col-md-12 mt-3">
+									<div class="form-group">
+										<label for="companyName">Remark</label>
+										<input type="textarea" class="form-control" id="shippingremark"
+											placeholder="Remark">
+									</div>
+								</div>
+
+							</div>
+							<!-- Add more fields as needed -->
+
+
+							<button type="submit" class="btn btn-primary mt-5" id="updateProfile">Update
 								Billing Address</button>
 						</form>
 					</div>
