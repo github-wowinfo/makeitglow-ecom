@@ -11,7 +11,7 @@ function populateDropdown(url, dropdownSelector, selectedValue) {
             });
             $(dropdownSelector).html(options); // Use html() to replace existing options
             $(dropdownSelector).val(selectedValue); // Set the selected value
-            $(dropdownSelector).selectric('refresh');
+            // $(dropdownSelector).selectric('refresh');
         },
         error: function (error) {
             console.error("Error fetching data:", error);
@@ -31,7 +31,7 @@ function populateReferenceDropdown(url, dropdownSelector, selectedValue) {
             });
             $(dropdownSelector).html(options); // Use html() to replace existing options
             $(dropdownSelector).val(selectedValue); // Set the selected value
-            $(dropdownSelector).selectric('refresh');
+            // $(dropdownSelector).selectric('refresh');
         },
         error: function (error) {
             console.error("Error fetching data:", error);
@@ -56,7 +56,7 @@ function getProfile() {
         },
         dataType: 'json',
         success: function (profileData) {
-            console.log('profileData', profileData);
+            // console.log('profileData', profileData);
             var profile = `<h4>Personal Info</h4>
             <p>Full Name: ${profileData.firstName}${profileData.lastName}</p>
             <p>Mobile No.: ${profileData.phoneNumber}</p>
@@ -112,7 +112,7 @@ $("#updateProfile").on('click', function (e) {
             // Handle success response
             //    localStorage.setItem('token', response);
 
-            console.log('Billing address added successfully:', response);
+            // console.log('Billing address added successfully:', response);
             toastr.success("Account Info Updated successfully ");
 
             // You may want to update the UI or perform other actions here
@@ -141,7 +141,7 @@ function getBillingInfo() {
         },
         dataType: 'json',
         success: function (profileData) {
-            console.log('profileData', profileData);
+            // console.log('profileData', profileData);
             if (profileData.length > 0) {
                 var profile = `<h4>Billing Info</h4>
       <p>Customer ID: ${profileData[0].custId}</p>
@@ -183,7 +183,7 @@ function getBillingInfo() {
                 li += `<option value="${value.lEntryId}">${value.locationName}</option>`
             });
             $('#countrySelect').append(li);
-            $('#countrySelect').selectric('refresh');
+            // $('#countrySelect').selectric('refresh');
         }
     })
 
@@ -211,7 +211,7 @@ function getBillingInfo() {
             "lctnId": CountrySelect,
             "remark": Remark,
         };
-        console.log('userData :', userData);
+        // console.log('userData :', userData);
         $.ajax({
             url: `${SETTINGS.backendUrl}/CustomerAccount/AddCustBillingAddress`,
             method: 'POST',  // Assuming this should be a POST request, change it if necessary
@@ -223,7 +223,7 @@ function getBillingInfo() {
             data: JSON.stringify(userData), // Convert object to JSON string
             success: function (response) {
 
-                console.log('Billing address added successfully:', response);
+                // console.log('Billing address added successfully:', response);
                 toastr.success("Billing address added successfully ");
 
                 $("#saveinfo").modal("hide");
@@ -253,7 +253,7 @@ function getshippingInfo() {
         dataType: 'json',
         success: function (profileData) {
             profileData.forEach(function (shipping) {
-                console.log('shipping', shipping);
+                // console.log('shipping', shipping);
 
                 var profile = `  
                 <div class="col-md-6">
@@ -292,7 +292,7 @@ function getshippingbyId(id) {
         },
         dataType: 'json',
         success: function (profileData) {
-            console.log('profileDataddd', profileData);
+            // console.log('profileDataddd', profileData);
             $('#shippingname').val(profileData.name)
             $('#contactno').val(profileData.contactNo)
             $('#altcontactno').val(profileData.altContactNo)
@@ -305,7 +305,50 @@ function getshippingbyId(id) {
             console.error('Error fetching cart data:', error);
         }
     });
+    $("#updateshipping").on('click', function (e) {
+        e.preventDefault()
+        console.log('clicked');
+        $.ajax({
+            url: `${SETTINGS.backendUrl}/CustomerAccount/UpdateCustShippingAddress`,
+            method: 'POST',  // Assuming this should be a POST request, change it if necessary
+            headers: {
+                Authorization: "Bearer " + token,
+                "Content-Type": "application/json",
+                // Add other headers as needed
+            },
+            data: JSON.stringify({
+                csaEntryId: id,
+                name: $('#shippingname').val(),
+                contactNo: $('#contactno').val(),
+                altContactNo: $('#altcontactno').val(),
+                addressLine1: $('#shippingaddress1').val(),
+                addressLine2: $('#shippingaddress2').val(),
+                remark: $('#shippingremark').val(),
+                lctnId: $('#shippingLocation').val(),
+            }),
+            success: function (response) {
+                // Handle success response
+                //    localStorage.setItem('token', response);
+
+                // console.log('Billing address added successfully:', response);
+                toastr.success("Shipping Info Updated successfully ");
+
+                // You may want to update the UI or perform other actions here
+                $("#EditShipping").modal("hide");
+            },
+            error: function (error) {
+                console.error('Error adding billing address:', error);
+                // Handle error response
+                toastr.error(error);
+
+            }
+        });
+    })
+
 }
+
+
+
 // .................get shippingInfo function end .................. 
 
 // ................. addshippingInfo function start .................. 
@@ -327,7 +370,7 @@ function addshippingInfo() {
                 li += `<option value="${value.lEntryId}">${value.locationName}</option>`
             });
             $('#countrySelection').append(li);
-            $('#countrySelection').selectric('refresh');
+            // $('#countrySelection').selectric('refresh');
         }
     })
     var saveshipping = document.getElementById('saveshippinginfo');
@@ -356,7 +399,7 @@ function addshippingInfo() {
             "lctnId": CountrySelect,
             "remark": Remark,
         };
-        console.log('userData :', userData);
+        // console.log('userData :', userData);
         $.ajax({
             url: 'https://mig-dev.lifelinemegacorp.com/api/CustomerAccount/AddCustShippingAddress',
             method: 'POST',  // Assuming this should be a POST request, change it if necessary
@@ -368,7 +411,7 @@ function addshippingInfo() {
             data: JSON.stringify(userData), // Convert object to JSON string
             success: function (response) {
 
-                console.log('Billing address added successfully:', response);
+                // console.log('Billing address added successfully:', response);
                 toastr.success("Billing address added successfully ");
                 // You may want to update the UI or perform other actions here
                 $("#saveshippinginfo").modal("hide");
