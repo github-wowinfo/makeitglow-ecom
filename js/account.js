@@ -155,7 +155,13 @@ function getBillingInfo() {
       Edit Billing Info</a>`;
 
                 $('#billingAddress').append(profile);
-
+                $('#cmpnyname').val(profileData.custCompany)
+                $('#cmpnytx').val(profileData.custCompTaxNo)
+                $('#billingaddress1').val(profileData.addressLine1)
+                $('#billingaddress2').val(profileData.addressLine2)
+    
+                populateDropdown(`${SETTINGS.backendUrl}/Masters/GetAllLocations`, '#locationSelect', profileData.lctnId);
+          
 
             } else {
                 var profile = `<button class="btn btn-secondary btnhover text-uppercase me-2"
@@ -235,6 +241,41 @@ function getBillingInfo() {
             }
         });
     }
+
+    $("#updateBilling").on('click', function (e) {
+        $.ajax({
+            url: `${SETTINGS.backendUrl}/CustomerAccount/GetCustShippingAddressById/${profileData[0].custId}`,
+            method: 'POST',  // Assuming this should be a POST request, change it if necessary
+            headers: {
+                Authorization: "Bearer " + token,
+                "Content-Type": "application/json",
+                // Add other headers as needed
+            },
+            data: JSON.stringify({
+                custCompany: $('#firstName').val(),
+                custCompTaxNo: $('#lastName').val(),
+                addressLine1: $('#phoneNumber').val(),
+                addressLine2: $('#profileaddress2').val(),
+                lctnId: $('#locationSelect').val(),
+            }),
+            success: function (response) {
+                // Handle success response
+                //    localStorage.setItem('token', response);
+    
+                console.log('Billing address added successfully:', response);
+                toastr.success("Account Info Updated successfully ");
+    
+                // You may want to update the UI or perform other actions here
+                $("#profileEdit").modal("hide");
+            },
+            error: function (error) {
+                console.error('Error adding billing address:', error);
+                // Handle error response
+                toastr.error(error);
+    
+            }
+        });
+    })
 
 }
 // .................get BillingInfo function end .................. 
