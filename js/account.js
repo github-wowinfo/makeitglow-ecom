@@ -7,7 +7,7 @@ function populateDropdown(url, dropdownSelector, selectedValue) {
         success: function (response) {
             let options = `<option value="">Select</option>`;
             $.each(response, function (index, value) {
-                options +=` <option value="${value.lEntryId}">${value.locationName}</option>`;
+                options += ` <option value="${value.lEntryId}">${value.locationName}</option>`;
             });
             $(dropdownSelector).html(options); // Use html() to replace existing options
             $(dropdownSelector).val(selectedValue); // Set the selected value
@@ -222,7 +222,7 @@ function getBillingInfo() {
             },
             data: JSON.stringify(userData), // Convert object to JSON string
             success: function (response) {
-           
+
                 console.log('Billing address added successfully:', response);
                 toastr.success("Billing address added successfully ");
 
@@ -238,7 +238,7 @@ function getBillingInfo() {
 
 }
 // .................get BillingInfo function end .................. 
-   
+
 // .................get shippingInfo function start .................. 
 
 function getshippingInfo() {
@@ -267,7 +267,8 @@ function getshippingInfo() {
                                 <p>Address Line 1: ${shipping.addressLine1}</p>
                                 <p>Address Line 2: ${shipping.addressLine2}</p>
                                 <p>Remark: ${shipping.remark}</p>
-                                <a href="" class="">Edit shipping Info</a>
+                                <a href="javascript:void(0);" 
+                                data-bs-toggle="modal" class="open-quick-view" data-bs-target="#EditShipping" onclick="getshippingbyId(${shipping.csaEntryId})">Edit shipping Info</a>
 								</div>
 							</div>
 						</div>`;
@@ -280,12 +281,37 @@ function getshippingInfo() {
         }
     });
 }
+function getshippingbyId(id) {
+    $.ajax({
+        url: `${SETTINGS.backendUrl}/CustomerAccount/GetCustShippingAddressById/${id}`,
+        method: 'GET',
+        headers: {
+            Authorization: "Bearer " + token,
+            "Content-Type": "application/json",
+            // Add other headers as needed
+        },
+        dataType: 'json',
+        success: function (profileData) {
+            console.log('profileDataddd', profileData);
+            $('#shippingname').val(profileData.name)
+            $('#contactno').val(profileData.contactNo)
+            $('#altcontactno').val(profileData.altContactNo)
+            $('#shippingaddress1').val(profileData.addressLine1)
+            $('#shippingaddress2').val(profileData.addressLine2)
+            $('#shippingremark').val(profileData.remark)
+            populateDropdown(`${SETTINGS.backendUrl}/Masters/GetAllLocations`, '#shippingLocation', profileData.lctnId);
+        },
+        error: function (error) {
+            console.error('Error fetching cart data:', error);
+        }
+    });
+}
 // .................get shippingInfo function end .................. 
 
 // ................. addshippingInfo function start .................. 
 
 function addshippingInfo() {
-   
+
     $('#postButton').on('click', function () {
         $('#shippingModal').modal('show'); // Adjust 'yourModalId' accordingly
     });
@@ -341,7 +367,7 @@ function addshippingInfo() {
             },
             data: JSON.stringify(userData), // Convert object to JSON string
             success: function (response) {
-     
+
                 console.log('Billing address added successfully:', response);
                 toastr.success("Billing address added successfully ");
                 // You may want to update the UI or perform other actions here
