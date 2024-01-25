@@ -57,18 +57,25 @@ function getProfile() {
         dataType: 'json',
         success: function (profileData) {
             // console.log('profileData', profileData);
-            var profile = `<h4>Personal Info</h4>
-            <p>Full Name: ${profileData.firstName}${profileData.lastName}</p>
-            <p>Mobile No.: ${profileData.phoneNumber}</p>
-            <p>Email: ${profileData.email}</p>
-            <p>Customer ID: ${profileData.userId}</p>
-            <p>Location: ${profileData.location}</p>
-            <p>Address Line 1: ${profileData.addressLine1}</p>
-            <p>Address Line 2: ${profileData.addressLine2}</p>
-            <a href="javascript:void(0);" 
-            data-bs-toggle="modal" class="open-quick-view" data-bs-target="#profileEdit">
-            Edit Profile Info
-            </a>`;
+            var profile = `
+            <div class="col-md-12">
+							<div class="card">
+								<div class="card-body" >
+                                <div class="mb-3"> <h2>Personal Info</h2></div>
+                               <p>CUSTOMER ID : <span class="text-black"> ${profileData.userId}</span></p>
+                               <p>FULL NAME :<span class="text-black"> ${profileData.firstName} ${profileData.lastName}</span></p>
+                               <p>MOBILE NO : <span class="text-black"> ${profileData.phoneNumber}</span></p>
+                               <p>EMAIL-ID : <span class="text-black"> ${profileData.email}</span></p>
+                               <p>LOCATION : <span class="text-black"> ${profileData.location}</span></p>
+                               <p>ADDRESS LINE 1 : <span class="text-black"> ${profileData.addressLine1}</span></p>
+                               <p>ADDRESS LINE 2 : <span class="text-black"> ${profileData.addressLine2}</span></p>
+                               <a href="javascript:void(0);" 
+                               data-bs-toggle="modal" class="open-quick-view text-uppercase text-green strong" data-bs-target="#profileEdit">
+                               Edit
+                               </a>
+                                </div>
+				              	  </div>
+				                  	 </div>`;
 
             // Append the item to the cart list
             $('#personalinfo').append(profile);
@@ -145,16 +152,23 @@ function getBillingInfo() {
             console.log('profileDatabiili', profileData.length);
             if (profileData.length > 0) {
 
-                var profile = `<h4>Billing Info</h4>
-                    <p>Customer ID: ${profileData[0].custId}</p>
-                    <p>Company Name: ${profileData[0].custCompany}</p>
-                    <p>Company Tax No: ${profileData[0].custCompTaxNo}</p>
-                    <p>Address Line 1: ${profileData[0].addressLine1}</p>
-                    <p>Address Line 2: ${profileData[0].addressLine2}</p>
-                    <p>Remark: ${profileData[0].remark}</p>
+                var profile = `
+                <div class="col-md-12">
+							<div class="card">
+								<div class="card-body" >
+                    <div class="mb-3"><h2>Billing Info</h2></div>  
+                    <p>CUSTOMER ID : <span class="text-black"> ${profileData[0].custId} </span></p>
+                    <p>COMPANY NAME : <span class="text-black"> ${profileData[0].custCompany} </span></p>
+                    <p>COMPANY TAX No : <span class="text-black"> ${profileData[0].custCompTaxNo} </span></p>
+                    <p>ADDRESS LINE 1 : <span class="text-black"> ${profileData[0].addressLine1} </span></p>
+                    <p>ADDRESS LINE 2 : <span class="text-black"> ${profileData[0].addressLine2} </span></p>
+                    <p>REMARK : <span class="text-black"> ${profileData[0].remark} </span></p>
                     <a href="javascript:void(0);" 
-                    data-bs-toggle="modal" class="open-quick-view" data-bs-target="#EditBilling" onclick="getbillingbyId(${profileData[0].cbaEntryId})">
-                    Edit Billing Info</a>`;
+                    data-bs-toggle="modal" class="open-quick-view text-uppercase text-green strong" data-bs-target="#EditBilling" onclick="getbillingbyId(${profileData[0].cbaEntryId})">
+                    Edit</a>
+                    </div>
+					  </div>
+				    	 </div>`;
 
                     $('#billingAddress').append(profile);
        
@@ -267,6 +281,47 @@ function getbillingbyId(id) {
             console.error('Error fetching cart data:', error);
         }
     });
+
+    $("#updateBilling").on('click', function (e) {
+        e.preventDefault()
+        console.log('clicked');
+        $.ajax({
+            url: `${SETTINGS.backendUrl}/CustomerAccount/UpdateCustBillingAddress`,
+            method: 'POST',  // Assuming this should be a POST request, change it if necessary
+            headers: {
+                Authorization: "Bearer " + token,
+                "Content-Type": "application/json",
+                // Add other headers as needed
+            },
+            data: JSON.stringify({
+                cbaEntryId: id,
+                custCompany: $('#cmpnyname').val(),
+                custCompTaxNo: $('#cmpnytx').val(),
+                addressLine1: $('#billingaddress1').val(),
+                addressLine2: $('#billingaddress2').val(),
+                lctnId: $('#billinglocation').val(),
+                remark: $('#billingremark').val(),
+            }),
+            success: function (response) {
+                // Handle success response
+                //    localStorage.setItem('token', response);
+
+                console.log('Billing address added successfully:', response);
+                toastr.success("Shipping Info Updated successfully ");
+ 
+                location.reload();
+                // You may want to update the UI or perform other actions here
+                $("#EditShipping").modal("hide");
+            },
+            error: function (error) {
+                console.error('Error adding billing address:', error);
+                // Handle error response
+                toastr.error(error);
+
+            }
+        });
+    })
+
 }
 // .................get BillingInfo function end .................. 
 
@@ -290,27 +345,98 @@ function getshippingInfo() {
                 <div class="col-md-6">
 							<div class="card">
 								<div class="card-body" >
-                                <h4>Shipping Info</h4>
-                                <p>Customer ID: ${shipping.custId}</p>
-                                <p>Customer Name: ${shipping.name}</p>
-                                <p>Contact No: ${shipping.contactNo}</p>
-                                <p>Alt Contact No: ${shipping.altContactNo}</p>
-                                <p>Address Line 1: ${shipping.addressLine1}</p>
-                                <p>Address Line 2: ${shipping.addressLine2}</p>
-                                <p>Remark: ${shipping.remark}</p>
+                                <h2 class="mb-3">Shipping Info</h2>
+                                <p>CUSTOMER ID : <span class="text-black"> ${shipping.custId} </span></p>
+                                <p>CUSTOMER NAME : <span class="text-black"> ${shipping.name} </span></p>
+                                <p>CONTACT NO : <span class="text-black"> ${shipping.contactNo} </span></p>
+                                <p>Alt ONTACT No: <span class="text-black"> ${shipping.altContactNo} </span></p>
+                                <p>ADDRESS LINE 1: <span class="text-black"> ${shipping.addressLine1} </span></p>
+                                <p>ADDRESS LINE 2: <span class="text-black"> ${shipping.addressLine2} </span></p>
+                                <p>REMARK: <span class="text-black"> ${shipping.remark} </span></p>
                                 <a href="javascript:void(0);" 
-                                data-bs-toggle="modal" class="open-quick-view" data-bs-target="#EditShipping" onclick="getshippingbyId(${shipping.csaEntryId})">Edit shipping Info</a>
+                                data-bs-toggle="modal" class="open-quick-viewc text-uppercase text-green strong" data-bs-target="#EditShipping" onclick="getshippingbyId(${shipping.csaEntryId})">Edit</a>
+                                <a class=" text-uppercase ms-5 text-red  delete-button strong" data-csa-entry-id="${shipping.csaEntryId}">Delete</a>
 								</div>
 							</div>
 						</div>`;
                 $('#shippinginfo').append(profile);
             })
+            // Add event listener for the Delete button
+        $('.delete-button').on('click', function () {
+            var csaEntryId = $(this).data('csa-entry-id');
+           openDeleteConfirmationModal(csaEntryId);
+
+        });
 
         },
         error: function (error) {
             console.error('Error fetching cart data:', error);
         }
     });
+   
+ 
+    function openDeleteConfirmationModal(csaEntryId) {
+        // Create a confirmation modal dynamically
+        var confirmationModalHtml = `
+            <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteConfirmationModalLabel">Confirmation</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+						</button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete this shipping address?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary rounded-1" id="confirmationdone" onclick="deleteShippingAddress(${csaEntryId})">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+    
+        // Append the confirmation modal HTML to the body
+        $('body').append(confirmationModalHtml);
+    
+        // Show the confirmation modal
+        $('#deleteConfirmationModal').modal('show');
+    
+        // Remove the modal from the DOM after it's closed
+        // $('#deleteConfirmationModal').on('hidden.bs.modal', function () {
+        //     $(this).remove();
+        //     // deleteShippingAddress(csaEntryId);
+
+        // });
+        $('#confirmationdone').on('click', function () {
+            // var csaEntryId = $(this).data('csa-entry-id');
+                      deleteShippingAddress(csaEntryId);
+                      location.reload()
+
+
+        });
+    }
+    function deleteShippingAddress(csaEntryId) {
+        $.ajax({
+            url: `${SETTINGS.backendUrl}/CustomerAccount/DeleteCustShippingAddress/${csaEntryId}`,
+            method: 'POST',
+            headers: {
+                Authorization: "Bearer " + token,
+                "Content-Type": "application/json",
+                // Add other headers as needed
+            },
+            success: function (response) {
+                console.log('Shipping address deleted successfully:', response);
+                toastr.success("Shipping address deleted successfully");
+                // Remove the corresponding card from the UI
+                $(`.delete-button[data-csa-entry-id="${csaEntryId}"]`).closest('.card').remove();
+            },
+            error: function (error) {
+                console.error('Error deleting shipping address:', error);
+                toastr.error(error);
+            }
+        });
+    }
 }
 function getshippingbyId(id) {
     $.ajax({
