@@ -333,7 +333,9 @@ function addToCart(id) {
       data: JSON.stringify(obj),
       success: function (response) {
         console.log("Sign In Success:", response);
-        toastr.success("Item Added to Cart");
+        toastr.success("Item Added to Cart", {
+          timeOut: 60000
+        });
       },
       error: function (error) {
         console.log("Sign in Error:", error);
@@ -354,29 +356,29 @@ function addToWishlist(id) {
   console.log(obj);
 
   if (token === null) {
-      window.location.href = "./login.html";
+    window.location.href = "./login.html";
   } else {
-      $.ajax({
-          url: `${SETTINGS.backendUrl}/Ecom/AddToWishlist`,
-          type: "POST",
-          headers: {
-              Authorization: "Bearer " + token,
-              "Content-Type": "application/json",
-              // Add other headers as needed
-          },
-          dataType: "json", // Change the datatype according to your response type
-          contentType: "application/json", // Set the Content-Type
-          data: JSON.stringify(obj),
+    $.ajax({
+      url: `${SETTINGS.backendUrl}/Ecom/AddToWishlist`,
+      type: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+        // Add other headers as needed
+      },
+      dataType: "json", // Change the datatype according to your response type
+      contentType: "application/json", // Set the Content-Type
+      data: JSON.stringify(obj),
 
-          success: function (response) {
-              console.log("Sign In Success:", response);
-              toastr.success("Item Added to Wishlist");
-          },
-          error: function (error) {
-              console.log("Sign in Error:", error);
-              toastr.error(error.responseJSON.title);
-          },
-      });
+      success: function (response) {
+        console.log("Sign In Success:", response);
+        toastr.success("Item Added to Wishlist");
+      },
+      error: function (error) {
+        console.log("Sign in Error:", error);
+        toastr.error(error.responseJSON.title);
+      },
+    });
   }
 }
 
