@@ -345,6 +345,7 @@ function updateQuantity(id, action, quantity) {
   var inputField = $(`input[name='demo_vertical2'][value='${quantity}']`);
   var currentQuantity = parseInt(inputField.val());
 
+
   if (action === 'increase') {
     currentQuantity += 1;
   } else if (action === 'decrease' && currentQuantity > 1) {
