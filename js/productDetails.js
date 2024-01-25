@@ -10,7 +10,7 @@ function getQueryParam(name) {
 // Get category ID from the URL
 const itemId = getQueryParam('Id');
 let variantId = ''; // Declare variantId globally
-let quantity = '1';
+let productquantity = '1';
 console.log('var', variantId);
 // console.log('var', Quantity);
 
@@ -127,7 +127,7 @@ $(document).ready(function () {
         </span>`;
           $("input[name='demo_vertical2']").on('change', function () {
             // Get the selected quantity
-            quantity = $(this).val();
+            productquantity = $(this).val();
 
             // Get the variant information from the API response
             var variantInfo = {
@@ -141,7 +141,7 @@ $(document).ready(function () {
               return variant.vrntEntryId === variantId;
             });
             if (selectedVariant) {
-              var totalPrice = quantity * variant.mrp;
+              var totalPrice = productquantity * variant.mrp;
 
               // Update the displayed price on the page
               updateDisplayedPrice(totalPrice);
@@ -167,8 +167,8 @@ $(document).ready(function () {
     variantId = newVariantId;
     console.log('Updated variantId', variantId);
 
-    var quantity = $("input[name='demo_vertical2']").val();
-    var totalPrice = quantity * /* Get the price for the new variantId */
+    var quantity1 = $("input[name='demo_vertical2']").val();
+    var totalPrice = quantity1 * /* Get the price for the new variantId */
       updateDisplayedPrice(totalPrice);
   };
 });
@@ -177,9 +177,9 @@ window.handleButtonClick = function (event, tabId, newVariantId) {
   openTab(event, tabId);
   updateVariantId(event, newVariantId);
   // Reset the quantity to its initial value when changing tabs
-  quantity = 1;
+  quantity2 = 1;
   // You can perform additional actions here if needed
-  $("input[name='demo_vertical2']").val(quantity);
+  $("input[name='demo_vertical2']").val(quantity2);
   // ...
 };
 // });
@@ -231,37 +231,37 @@ document.getElementById("cart").addEventListener("click", function (e) {
 
   var obj = {
     "itmVrntId": variantId,
-    "qty": quantity
+    "qty": productquantity
   }
   console.log(obj)
   if (token === null) {
     window.location.href = "./login.html";
-    
-} else {
-  $.ajax({
-    url: `${SETTINGS.backendUrl}/Ecom/AddToCart`,
-    type: "POST",
-    headers: {
-      Authorization: "Bearer " + token,
-      "Content-Type": "application/json",
-      // Add other headers as needed
-    },
-    dataType: "json", // Change the datatype according to your response type
-    contentType: "application/json", // Set the Content-Type
-    data: JSON.stringify(obj),
 
-    success: function (response) {
-      console.log("Sign In Success:", response);
-      toastr.success("Item Added to Cart");
-    },
+  } else {
+    $.ajax({
+      url: `${SETTINGS.backendUrl}/Ecom/AddToCart`,
+      type: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+        // Add other headers as needed
+      },
+      dataType: "json", // Change the datatype according to your response type
+      contentType: "application/json", // Set the Content-Type
+      data: JSON.stringify(obj),
 
-    error: function (error) {
-      console.log("Sign in Error:", error);
-      toastr.error(error.responseJSON.title);
+      success: function (response) {
+        console.log("Sign In Success:", response);
+        toastr.success("Item Added to Cart");
+      },
 
-    },
-  });
-}
+      error: function (error) {
+        console.log("Sign in Error:", error);
+        toastr.error(error.responseJSON.title);
+
+      },
+    });
+  }
 
 });
 
@@ -274,33 +274,33 @@ document.getElementById("whislist").addEventListener("click", function (e) {
   }
   console.log(obj)
   if (token === null) {
- 
+
     window.location.href = "./login.html";
-    
-} else {
-  $.ajax({
-    url: `${SETTINGS.backendUrl}/Ecom/AddToWishlist`,
-    type: "POST",
-    headers: {
-      Authorization: "Bearer " + token,
-      "Content-Type": "application/json",
-      // Add other headers as needed
-    },
-    dataType: "json", // Change the datatype according to your response type
-    contentType: "application/json", // Set the Content-Type
-    data: JSON.stringify(obj),
 
-    success: function (response) {
-      console.log("Sign In Success:", response);
-      toastr.success("Item Added to Whish list");
-    },
-    error: function (error) {
-      console.log("Sign in Error:", error);
-      toastr.error(error.responseJSON.title);
+  } else {
+    $.ajax({
+      url: `${SETTINGS.backendUrl}/Ecom/AddToWishlist`,
+      type: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+        // Add other headers as needed
+      },
+      dataType: "json", // Change the datatype according to your response type
+      contentType: "application/json", // Set the Content-Type
+      data: JSON.stringify(obj),
 
-    },
-  });
-}
+      success: function (response) {
+        console.log("Sign In Success:", response);
+        toastr.success("Item Added to Whish list");
+      },
+      error: function (error) {
+        console.log("Sign in Error:", error);
+        toastr.error(error.responseJSON.title);
+
+      },
+    });
+  }
 
 });
 
