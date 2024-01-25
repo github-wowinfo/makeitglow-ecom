@@ -61,21 +61,21 @@ function getProfile() {
             <div class="col-md-12">
 							<div class="card">
 								<div class="card-body" >
-            <div class="mb-2"> <h2>Personal Info</h2></div>
-             <p>Full Name : ${profileData.firstName}${profileData.lastName}</p>
-            <p>Mobile No : ${profileData.phoneNumber}</p>
-            <p>Email: ${profileData.email}</p>
-            <p>Customer ID: ${profileData.userId}</p>
-            <p>Location: ${profileData.location}</p>
-            <p>Address Line 1: ${profileData.addressLine1}</p>
-            <p>Address Line 2: ${profileData.addressLine2}</p>
-            <a href="javascript:void(0);" 
-            data-bs-toggle="modal" class="open-quick-view text-uppercase text-green strong" data-bs-target="#profileEdit">
-            Edit
-            </a>
-                  </div>
-					  </div>
-				    	 </div>`;
+                                <div class="mb-3"> <h2>Personal Info</h2></div>
+                               <p>CUSTOMER ID : <span class="text-black"> ${profileData.userId}</span></p>
+                               <p>FULL NAME :<span class="text-black"> ${profileData.firstName} ${profileData.lastName}</span></p>
+                               <p>MOBILE NO : <span class="text-black"> ${profileData.phoneNumber}</span></p>
+                               <p>EMAIL-ID : <span class="text-black"> ${profileData.email}</span></p>
+                               <p>LOCATION : <span class="text-black"> ${profileData.location}</span></p>
+                               <p>ADDRESS LINE 1 : <span class="text-black"> ${profileData.addressLine1}</span></p>
+                               <p>ADDRESS LINE 2 : <span class="text-black"> ${profileData.addressLine2}</span></p>
+                               <a href="javascript:void(0);" 
+                               data-bs-toggle="modal" class="open-quick-view text-uppercase text-green strong" data-bs-target="#profileEdit">
+                               Edit
+                               </a>
+                                </div>
+				              	  </div>
+				                  	 </div>`;
 
             // Append the item to the cart list
             $('#personalinfo').append(profile);
@@ -156,13 +156,13 @@ function getBillingInfo() {
                 <div class="col-md-12">
 							<div class="card">
 								<div class="card-body" >
-                    <div class="mb-2"><h2 >Billing Info</h2></div>  
-                    <p>Customer ID: ${profileData[0].custId}</p>
-                    <p>Company Name: ${profileData[0].custCompany}</p>
-                    <p>Company Tax No: ${profileData[0].custCompTaxNo}</p>
-                    <p>Address Line 1: ${profileData[0].addressLine1}</p>
-                    <p>Address Line 2: ${profileData[0].addressLine2}</p>
-                    <p>Remark: ${profileData[0].remark}</p>
+                    <div class="mb-3"><h2>Billing Info</h2></div>  
+                    <p>CUSTOMER ID : <span class="text-black"> ${profileData[0].custId} </span></p>
+                    <p>COMPANY NAME : <span class="text-black"> ${profileData[0].custCompany} </span></p>
+                    <p>COMPANY TAX No : <span class="text-black"> ${profileData[0].custCompTaxNo} </span></p>
+                    <p>ADDRESS LINE 1 : <span class="text-black"> ${profileData[0].addressLine1} </span></p>
+                    <p>ADDRESS LINE 2 : <span class="text-black"> ${profileData[0].addressLine2} </span></p>
+                    <p>REMARK : <span class="text-black"> ${profileData[0].remark} </span></p>
                     <a href="javascript:void(0);" 
                     data-bs-toggle="modal" class="open-quick-view text-uppercase text-green strong" data-bs-target="#EditBilling" onclick="getbillingbyId(${profileData[0].cbaEntryId})">
                     Edit</a>
@@ -345,14 +345,14 @@ function getshippingInfo() {
                 <div class="col-md-6">
 							<div class="card">
 								<div class="card-body" >
-                                <h2 class="mb-2">Shipping Info</h2>
-                                <p>Customer ID: ${shipping.custId}</p>
-                                <p>Customer Name: ${shipping.name}</p>
-                                <p>Contact No: ${shipping.contactNo}</p>
-                                <p>Alt Contact No: ${shipping.altContactNo}</p>
-                                <p>Address Line 1: ${shipping.addressLine1}</p>
-                                <p>Address Line 2: ${shipping.addressLine2}</p>
-                                <p>Remark: ${shipping.remark}</p>
+                                <h2 class="mb-3">Shipping Info</h2>
+                                <p>CUSTOMER ID : <span class="text-black"> ${shipping.custId} </span></p>
+                                <p>CUSTOMER NAME : <span class="text-black"> ${shipping.name} </span></p>
+                                <p>CONTACT NO : <span class="text-black"> ${shipping.contactNo} </span></p>
+                                <p>Alt ONTACT No: <span class="text-black"> ${shipping.altContactNo} </span></p>
+                                <p>ADDRESS LINE 1: <span class="text-black"> ${shipping.addressLine1} </span></p>
+                                <p>ADDRESS LINE 2: <span class="text-black"> ${shipping.addressLine2} </span></p>
+                                <p>REMARK: <span class="text-black"> ${shipping.remark} </span></p>
                                 <a href="javascript:void(0);" 
                                 data-bs-toggle="modal" class="open-quick-viewc text-uppercase text-green strong" data-bs-target="#EditShipping" onclick="getshippingbyId(${shipping.csaEntryId})">Edit</a>
                                 <a class=" text-uppercase ms-5 text-red  delete-button strong" data-csa-entry-id="${shipping.csaEntryId}">Delete</a>
