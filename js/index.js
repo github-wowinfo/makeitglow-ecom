@@ -335,9 +335,7 @@ function addToCart(id) {
       data: JSON.stringify(obj),
       success: function (response) {
         console.log("Sign In Success:", response);
-        toastr.success("Item Added to Cart", {
-          timeOut: 60000
-        });
+        toastr.success("Item Added to Cart");
       },
       error: function (error) {
         console.log("Sign in Error:", error);
