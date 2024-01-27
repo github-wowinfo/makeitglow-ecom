@@ -1,5 +1,6 @@
 // Function to fetch data from the API and populate the swiper-wrapper
 function fetchDataAndPopulateSwiper() {
+
   var swiperWrapper = document.getElementById('swiper-wrapper');
 
   fetch(`${SETTINGS.backendUrl}/Ecom/GetAllFeaturedProducts`)
@@ -104,6 +105,7 @@ $(document).ready(function () {
       // Iterate over the products in the response and append them to the masonry layout
       // console.log('product', data);
       $.each(data, function (index, product) {
+        // toastr.success("Item Added to Cart");
         // console.log('producttrending', product);
         // Generate HTML for the product card with actual data
         console.log('product', product);
@@ -333,9 +335,7 @@ function addToCart(id) {
       data: JSON.stringify(obj),
       success: function (response) {
         console.log("Sign In Success:", response);
-        toastr.success("Item Added to Cart", {
-          timeOut: 60000
-        });
+        toastr.success("Item Added to Cart");
       },
       error: function (error) {
         console.log("Sign in Error:", error);
