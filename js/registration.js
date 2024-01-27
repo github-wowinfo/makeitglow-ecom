@@ -92,7 +92,6 @@
 
 $.ajax({
   type: "GET",
-  // url: '${SETTINGS.backendUrl}Masters/GetAllLocations',
   url: `${SETTINGS.backendUrl}/Masters/GetAllCountries`,
 
   dataType: "json",
@@ -103,9 +102,33 @@ $.ajax({
       li += `<option value="${value.countryId}">${value.countryName}</option>`
     });
     $('#countrySelect').append(li);
-    $('#countrySelect').selectric('refresh');
+    // $('#countrySelect').selectric('refresh');
   }
 })
+
+$('#countrySelect').on('change', function () {
+  // Get the selected countryId
+  let selectedCountryId = $(this).val();
+console.log('hitted', selectedCountryId);
+ // Clear existing options in locationSelect
+ $('#locationSelected').empty();
+$.ajax({
+  type: "GET",
+  url: `${SETTINGS.backendUrl}/Masters/GetAllLocationsByCountryId/${selectedCountryId}`,
+
+  dataType: "json",
+  success: function (response) {
+    // console.log(response);
+    let li = `<option value="">Select</option>`
+    $.each(response, function (index, value) {
+      console.log(value.locationName);
+      li += `<option value="${value.lEntryId}">${value.locationName}</option>`
+    });
+    $('#locationSelected').append(li);
+    // $('#locationSelected').selectric('refresh');
+  }
+})
+});
 
 $.ajax({
   type: "GET",
@@ -119,7 +142,7 @@ $.ajax({
       li += `<option value="${value.refEntryId}">${value.referenceName}</option>`
     });
     $('#refrenceSelect').append(li);
-    $('#refrenceSelect').selectric('refresh');
+    // $('#refrenceSelect').selectric('refresh');
   }
 })
 
@@ -134,7 +157,7 @@ document.getElementById("postButton").addEventListener("click", function (e) {
   const Passwords = document.getElementById("password").value;
   const PhoneNum = document.getElementById("phone").value;
   const Addresses = document.getElementById("address").value;
-  const Countries = document.getElementById("countrySelect").value;
+  const Countries = document.getElementById("locationSelected").value;
   const RefId = document.getElementById("refrenceSelect").value;
   // Validate first name  (not empty)
   document.querySelectorAll('.error').forEach(element => {
