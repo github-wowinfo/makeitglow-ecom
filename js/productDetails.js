@@ -83,11 +83,11 @@ $(document).ready(function () {
       $('#howtouse').append(data.vrnts[0].howToUse);
 
 
-      function generateOnClickFunction(index) {
-        return function (event) {
-          openTab(event, 'tab' + (index + 1));
-        };
-      }
+      // function generateOnClickFunction(index) {
+      //   return function (event) {
+      //     openTab(event, 'tab' + (index + 1));
+      //   };
+      // }
 
       // Generate pricing HTML dynamically based on API response
       var pricingHTML = '';
@@ -136,15 +136,17 @@ $(document).ready(function () {
               "sellingPrice": 30 // Example Selling Price
               // Add other variant details if needed
             };
+            // console.log('sel',variantInfo);
 
             var selectedVariant = data.vrnts.find(function (variant) {
               return variant.vrntEntryId === variantId;
             });
             if (selectedVariant) {
-              var totalPrice = productquantity * variant.mrp;
-
+              var totalPrice = productquantity * selectedVariant.mrp;
+              $("#displayedPrice").text(' $ ' + totalPrice);
+              // updateDisplayedPrice(totalPrice);
+               console.log('mera', totalPrice);
               // Update the displayed price on the page
-              updateDisplayedPrice(totalPrice);
             }
             // Calculate the new price based on quantity
 
@@ -166,10 +168,13 @@ $(document).ready(function () {
   window.updateVariantId = function (event, newVariantId) {
     variantId = newVariantId;
     console.log('Updated variantId', variantId);
+    // $("#displayedPrice").text( variantId);
+
+
 
     var quantity1 = $("input[name='demo_vertical2']").val();
-    var totalPrice = quantity1 * /* Get the price for the new variantId */
-      updateDisplayedPrice(totalPrice);
+    var totalPrices = quantity1 * /* Get the price for the new variantId */
+      updateDisplayedPrice(totalPrices);
   };
 });
 
@@ -211,12 +216,14 @@ $(document).ready(function () {
 });
 
 // Function to update the displayed price on the page
-function updateDisplayedPrice(price) {
-  console.log("increase price of : $",  price)
-  // Assuming you have an element to display the price with id="displayedPrice"
-  $("#total").text("Total Price: $", price);
-  handleBootstrapTouchSpin()
-}
+// function updateDisplayedPrice(Price) {
+//   console.log("increase price of : $", Price)
+//   // $("#displayedPrice").textContent( totalPrice);
+//   var displayedPriceElement = document.getElementById("displayedPrice");
+//   displayedPriceElement.textContent = " Price: $" + Price;
+//   // handleBootstrapTouchSpin()
+  
+// }
 
 // const Price= document.getElementById("price").value;
 // console.log("Total Price: $" + Price");
