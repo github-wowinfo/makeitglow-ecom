@@ -212,9 +212,9 @@ $(document).ready(function () {
 
 // Function to update the displayed price on the page
 function updateDisplayedPrice(price) {
-  console.log("Total Price: $", + price)
+  console.log("increase price of : $",  price)
   // Assuming you have an element to display the price with id="displayedPrice"
-  $("#total").text("Total Price: $" + price);
+  $("#total").text("Total Price: $", price);
   handleBootstrapTouchSpin()
 }
 
