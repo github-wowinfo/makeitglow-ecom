@@ -11,6 +11,7 @@ if (token === null) {
   var dropdown = `
     <ul>
     <li><a href="./account.html">Account</a></li> 
+    <li><a href="./OrderTracking.html">Order Tracking</a></li> 
     <li><a href="./changepass.html">Change Password</a></li> 
     <li><a href="#/" onClick="logout()">Logout</a></li> 
 </ul>`
@@ -107,11 +108,12 @@ function getCart() {
 
       // Calculate and update total amount
       var totalAmount = calculateTotalAmount(cartItem);
-      $('.totalamount').text('$' + totalAmount.toFixed(2));
+      $('.totalamount').text('AED', + totalAmount.toFixed(2));
     },
+
     error: function (error) {
       console.error('Error fetching cart data:', error);
-    }
+    },
   });
 }
 
@@ -148,7 +150,7 @@ function decreaseQuantity(cartEntryId) {
 function updateTotalAmount() {
   var cartData = getCartDataFromDOM(); // Implement this function to retrieve cart data from the DOM
   var totalAmount = calculateTotalAmount(cartData);
-  $('.totalamount').text('$' + totalAmount.toFixed(2));
+  $('.totalamount').text('AED', + totalAmount.toFixed(2));
 }
 
 // Whish list api . . . . 
