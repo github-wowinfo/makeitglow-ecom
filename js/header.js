@@ -17,6 +17,8 @@ if (token === null) {
   $('#user-dropdown').append(dropdown)
 }
 
+// console.log('header');
+
 function logout() {
   window.location.href = "./login.html";
   localStorage.removeItem('token')
@@ -54,9 +56,9 @@ function getCart() {
     },
     dataType: 'json',
     success: function (cartData) {
-      var subtotal = calculateSubtotal(cartData);
-      $('#shopping-cart-pane .cart-total h5:last-child').text('$' + subtotal.toFixed(2));
-
+      var subtotal1 = calculateSubtotal1(cartData);
+      $('#shopping-cart-pane .cart-total h5:last-child').text(subtotal1.toFixed(2) + 'AED');
+      console.log('cartData.length', cartData.length);
       // Clear existing content
       $('#cartItem').empty();
       $('#cartCount').text(cartData.length);
@@ -210,16 +212,16 @@ function getWhishlist() {
 // });
 
 // Function to calculate subtotal based on cart data
-function calculateSubtotal(cartData) {
-  var subtotal = 0;
+function calculateSubtotal1(cartData) {
+  var subtotal1 = 0;
 
   cartData.forEach(function (amount) {
     // Assuming "mrp" is the key for the Manufacturer's Recommended Price
     var mrp = parseFloat(amount.mrp * amount.qty);
-    subtotal += mrp;
+    subtotal1 += mrp;
   });
 
-  return subtotal;
+  return subtotal1;
 }
 
 $(document).ready(function () {

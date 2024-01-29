@@ -124,7 +124,7 @@ let productCount = ''
 let subtotal = 0
 let shipping = 10
 
-function getCart() {
+function getCartCheckout() {
   $.ajax({
     url: `${SETTINGS.backendUrl}/Ecom/GetCartByCustId`,
     method: 'GET',
@@ -156,7 +156,10 @@ function getCart() {
         <img src="${cartItem.thumbnail}" alt="">
       </div>
       <div class="dz-content">
+        <div>
         <h6 class="title mb-0">${cartItem.itemName}</h6>
+        <p>Qty: ${cartItem.qty}</p>
+        </div>
         <span class="price">${cartItem.mrp}</span>
       </div>
 									</div>
@@ -308,7 +311,7 @@ document.getElementById("placeorder").addEventListener("click", function (e) {
     toastr.error('Please Select Shipping Address')
   } else {
     var userData = {
-      "shippingId": $('#shippingAddress').val(),
+      "shippingId": Number($('#shippingAddress').val()),
       "productsQty": productCount,
       "subTotal": subtotal,
       "shippingCharges": shipping,
@@ -320,39 +323,40 @@ document.getElementById("placeorder").addEventListener("click", function (e) {
         "type": 1
       }
     };
+
     console.log('userData :', userData);
-    // $.ajax({
-    //   url: `${SETTINGS.backendUrl}/Order/PlaceOrder`,
-    //   method: 'POST',  // Assuming this should be a POST request, change it if necessary
-    //   headers: {
-    //     Authorization: "Bearer " + token,
-    //     "Content-Type": "application/json",
-    //     // Add other headers as needed
-    //   },
-    //   data: JSON.stringify(userData), // Convert object to JSON string
-    //   success: function (response) {
+    $.ajax({
+      url: `${SETTINGS.backendUrl}/Order/PlaceOrder`,
+      method: 'POST',  // Assuming this should be a POST request, change it if necessary
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+        // Add other headers as needed
+      },
+      data: JSON.stringify(userData), // Convert object to JSON string
+      success: function (response) {
+        console.log('response', response);
+        // console.log('Billing address added successfully:', response);
+        toastr.success("Order Placed ");
+        // getshippinginfo()
+        // You may want to update the UI or perform other actions here
+        // $("#saveshippinginfo").modal("hide");
+        // location.reload()
 
-    //     // console.log('Billing address added successfully:', response);
-    //     toastr.success("Order Placed ");
-    //     // getshippinginfo()
-    //     // You may want to update the UI or perform other actions here
-    //     // $("#saveshippinginfo").modal("hide");
-    //     // location.reload()
+      },
+      error: function (error) {
+        console.error('Error adding shipping address:', error);
+        // Handle error response
+        toastr.error(error);
 
-    //   },
-    //   error: function (error) {
-    //     console.error('Error adding shipping address:', error);
-    //     // Handle error response
-    //     toastr.error(error);
-
-    //   }
-    // });
+      }
+    });
   }
 
 })
 
 $(document).ready(function () {
-  getCart()
+  getCartCheckout()
   getshippinginfo()
   getLocation()
 });
