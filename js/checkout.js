@@ -304,6 +304,30 @@ document.getElementById("saveshippinginfo").addEventListener("click", function (
 })
 
 
+$(document).ready(function () {
+  // Check the checkbox state on page load
+  if ($('#basic_checkbox_3').is(':checked')) {
+    // Checkbox is checked, enable the button
+    $('#placeorder').prop('disabled', false);
+  } else {
+    // Checkbox is not checked, disable the button
+    $('#placeorder').prop('disabled', true);
+  }
+
+  // Attach an event listener to the checkbox for future changes
+  $('#basic_checkbox_3').on('change', function () {
+    // Check if the checkbox is checked
+    if ($(this).is(':checked')) {
+      // Checkbox is checked, enable the button
+      $('#placeorder').prop('disabled', false);
+    } else {
+      // Checkbox is not checked, disable the button
+      $('#placeorder').prop('disabled', true);
+    }
+  });
+});
+
+
 
 document.getElementById("placeorder").addEventListener("click", function (e) {
   e.preventDefault()
