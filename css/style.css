@@ -51872,8 +51872,9 @@ footer.footer-dark .icon-bx-wraper {
   background-position: left !important; */
   /* padding-left: 20px; */
 }
-#toast-container>.toast-error{
-  background-color:#d33f3f !important;
+
+#toast-container>.toast-error {
+  background-color: #d33f3f !important;
 }
 
 #toast-container>div {
@@ -51897,4 +51898,9 @@ footer.footer-dark .icon-bx-wraper {
 
 .toast-close-button {
   color: #000 !important;
+}
+
+.new-address-option {
+  color: black !important;
+  /* Replace 'red' with the desired color */
 }
