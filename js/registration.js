@@ -111,21 +111,27 @@ $('#countrySelect').on('change', function () {
   let selectedCountryId = $(this).val();
 console.log('hitted', selectedCountryId);
  // Clear existing options in locationSelect
- $('#locationSelected').empty();
+//  $('#locationSelected').empty();
 $.ajax({
   type: "GET",
   url: `${SETTINGS.backendUrl}/Masters/GetAllLocationsByCountryId/${selectedCountryId}`,
-
   dataType: "json",
   success: function (response) {
+    console.log('location:' ,response);
     // console.log(response);
     let li = `<option value="">Select</option>`
     $.each(response, function (index, value) {
       console.log(value.locationName);
       li += `<option value="${value.lEntryId}">${value.locationName}</option>`
     });
+
     $('#locationSelected').append(li);
     // $('#locationSelected').selectric('refresh');
+    
+  },
+  error: function (xhr, status, error) {
+    // Handle errors if needed
+    console.error('Error:', error);
   }
 })
 });

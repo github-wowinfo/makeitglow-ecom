@@ -38,8 +38,9 @@
 	<link rel="stylesheet" type="text/css" href="vendor/lightgallery/dist/css/lightgallery.css">
 	<link rel="stylesheet" type="text/css" href="vendor/lightgallery/dist/css/lg-thumbnail.css">
 	<link rel="stylesheet" type="text/css" href="vendor/lightgallery/dist/css/lg-zoom.css">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-
+	<link rel="stylesheet" type="text/css" href="css/style.css"> 
+    <!-- toastr msg. ... -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 	<!-- GOOGLE FONTS-->
 	<link rel="preconnect" href="https://fonts.googleapis.com/">
 	<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
@@ -651,24 +652,29 @@
 									<div class="dzFormMsg"></div>
 									<label class="form-label">Your Name</label>
 									<div class="input-group">
-										<input required type="text" class="form-control" name="dzName">
+										<input required type="text" class="form-control" name="dzName" id="name">
 									</div>
 									<label class="form-label">Email Address</label>
 									<div class="input-group">
-										<input required type="text" class="form-control" name="dzEmail">
+										<input required type="text" class="form-control" name="dzEmail" id="email">
 									</div>
 									<label class="form-label">Phone Number</label>
 									<div class="input-group">
-										<input required type="text" class="form-control" name="dzPhoneNumber">
+										<input required type="text" class="form-control" name="dzPhoneNumber" id="number">
+									</div>
+									<label class="form-label">Subject</label>
+									<div class="input-group m-b30">
+										<input name="subject"  required
+											class="form-control " id="subject"></input>
 									</div>
 									<label class="form-label">Massage</label>
-									<div class="input-group m-b30">
+									<div class="input-group">
 										<textarea name="dzMessage" rows="4" required
-											class="form-control m-b10"></textarea>
+											class="form-control m-b10" id="message"></textarea>
 									</div>
 									<div>
 										<button name="submit" type="submit" value="submit"
-											class="btn w-100 btn-secondary btnhover">SUBMIT</button>
+											class="btn w-100 btn-secondary btnhover" id="submit">SUBMIT</button>
 									</div>
 								</form>
 							</div>
@@ -777,6 +783,8 @@
 	<script src="js/jquery.min.js"></script><!-- JQUERY MIN JS -->
 	<script src="js/core/app-setting.js"></script><!-- JQUERY MIN JS -->
 	<script src="js/header.js"></script><!-- JQUERY MIN JS -->
+	<script src="js/contact.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script><!-- toaster JS -->
 	<script src="vendor/wow/wow.min.js"></script><!-- WOW JS -->
 	<script src="vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script><!-- BOOTSTRAP MIN JS -->
 	<script src="vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script><!-- BOOTSTRAP SELECT MIN JS -->
