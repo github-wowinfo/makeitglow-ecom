@@ -64,7 +64,7 @@ function getCart() {
 
       // Update cart items
       cartData.forEach(function (cartItem) {
-        console.log('cartitem', cartItem);
+        // console.log('cartitem', cartItem);
         var cartItemHTML = `
           <li>
             <div class="cart-widget">
@@ -173,7 +173,7 @@ function getWhishlist() {
 
       // Update cart items
       cartData.forEach(function (whishlistItem) {
-        console.log("my whishes ", whishlistItem);
+        // console.log("my whishes ", whishlistItem);
         var cartItemHTML = `
                    <li>
                           <div class="cart-widget">
@@ -307,7 +307,7 @@ function addToCart(id) {
     "itmVrntId": id,
     "qty": quantity
   };
-  console.log(obj)
+  // console.log(obj)
 
   if (token === null) {
     window.location.href = "./login.html";
@@ -324,7 +324,7 @@ function addToCart(id) {
       contentType: "application/json",
       data: JSON.stringify(obj),
       success: function (response) {
-        console.log("Sign In Success:", response);
+        // console.log("Sign In Success:", response);
         toastr.success("Item Added to Cart");
         // deleteWishlistItem(wishlistItemId);
 
@@ -363,7 +363,7 @@ function updateQuantity(id, action, quantity) {
   //   "itmVrntId": id,
   //   "qty": quantity
   // };
-  console.log(obj)
+  // console.log(obj)
 
   if (token === null) {
     window.location.href = "./login.html";
@@ -380,7 +380,7 @@ function updateQuantity(id, action, quantity) {
       contentType: "application/json",
       data: JSON.stringify(obj),
       success: function (response) {
-        console.log("Sign In Success:", response);
+        // console.log("Sign In Success:", response);
         toastr.success("Item Added to Cart");
         // deleteWishlistItem(wishlistItemId);
 

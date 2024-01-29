@@ -170,8 +170,8 @@ function getBillingInfo() {
 					  </div>
 				    	 </div>`;
 
-                    $('#billingAddress').append(profile);
-       
+                $('#billingAddress').append(profile);
+
 
             } else {
                 var profile = `<button class="btn btn-secondary btnhover text-uppercase me-2"
@@ -181,7 +181,7 @@ function getBillingInfo() {
                     $('#billingModal').modal('show'); // Adjust 'yourModalId' accordingly
                 });
             }
-        // })
+            // })
 
         },
         error: function (error) {
@@ -254,7 +254,7 @@ function getBillingInfo() {
         });
     }
 
-  
+
 
 }
 
@@ -308,7 +308,7 @@ function getbillingbyId(id) {
 
                 console.log('Billing address added successfully:', response);
                 toastr.success("Shipping Info Updated successfully ");
- 
+
                 location.reload();
                 // You may want to update the UI or perform other actions here
                 $("#EditShipping").modal("hide");
@@ -362,19 +362,19 @@ function getshippingInfo() {
                 $('#shippinginfo').append(profile);
             })
             // Add event listener for the Delete button
-        $('.delete-button').on('click', function () {
-            var csaEntryId = $(this).data('csa-entry-id');
-           openDeleteConfirmationModal(csaEntryId);
+            $('.delete-button').on('click', function () {
+                var csaEntryId = $(this).data('csa-entry-id');
+                openDeleteConfirmationModal(csaEntryId);
 
-        });
+            });
 
         },
         error: function (error) {
             console.error('Error fetching cart data:', error);
         }
     });
-   
- 
+
+
     function openDeleteConfirmationModal(csaEntryId) {
         // Create a confirmation modal dynamically
         var confirmationModalHtml = `
@@ -395,13 +395,13 @@ function getshippingInfo() {
                     </div>
                 </div>
             </div>`;
-    
+
         // Append the confirmation modal HTML to the body
         $('body').append(confirmationModalHtml);
-    
+
         // Show the confirmation modal
         $('#deleteConfirmationModal').modal('show');
-    
+
         // Remove the modal from the DOM after it's closed
         // $('#deleteConfirmationModal').on('hidden.bs.modal', function () {
         //     $(this).remove();
@@ -410,8 +410,8 @@ function getshippingInfo() {
         // });
         $('#confirmationdone').on('click', function () {
             // var csaEntryId = $(this).data('csa-entry-id');
-                      deleteShippingAddress(csaEntryId);
-                      location.reload()
+            deleteShippingAddress(csaEntryId);
+            location.reload()
 
 
         });

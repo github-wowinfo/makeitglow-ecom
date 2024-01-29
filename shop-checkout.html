@@ -42,7 +42,7 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<!-- toastr msg. ... -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-	
+
 	<!-- GOOGLE FONTS-->
 	<link rel="preconnect" href="https://fonts.googleapis.com/">
 	<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
@@ -678,42 +678,23 @@
 							<form class="row">
 								<div class="col-md-12">
 									<div class="form-group m-b25">
-										<label class="label-title">Email address *</label>
-										<input name="dzName" required="" class="form-control" id="email">
-									</div>
-									<div class="_1ip0g651 _1fragemfi _1frageme0 _1fragemg9 _1fragemgq">
-										<div>
-											<div class="_1frageme0 _1fragemfe" style="display: flex;">
-												<div class="_1mmswk95 _1frageme0"><input type="checkbox"
-														id="marketing_opt_in" name="marketing_opt_in"
-														class="_1mmswk97 _1fragemhr _1fragemhp _1fragemht _1fragemhn _1fragemil _1fragemii _1fragemio _1fragemif _1fragem4g _1fragem3w _1fragem50 _1fragem3c _1fragemfa _1fragemfc _1fragemhd _1fragem1w _1fragemlt _1fragemln _1fragemlz _1fragemf1 _1fragemma">
-													<div
-														class="_1mmswk9l _1fragemf1 _1fragemlf _1fragemky _1fragemds _1fragemln _1fragemm2 _1fragemlt">
-														<span
-															class="_1fragemhd _1fragem1w _1fragemd8 _1fragemd4 a8x1wua _1fragemfc a8x1wug a8x1wum"></span>
-													</div>
-												</div><label for="marketing_opt_in"
-													class="_1mmswk9h _1fragemfc _1fragemd8 _1fragemfa _1fragembs"
-													style="padding-left: 10px;">Email
-													me with news and offers</label>
-											</div>
-										</div>
+										<label class="label-title">Delivery Info</label>
+										<select class="default-select w-100 country" id="shippingAddress">
+										</select>
 									</div>
 								</div>
-								<h4 class="title m-b15">Delivery</h4>
-								<div class="col-md-12">
+								<h4 class="title m-b15">Or Add New Shipping Address</h4>
+								<!-- <div class="col-md-12">
 									<div class="m-b25">
 										<label class="label-title">Country / Region *</label>
-										<!-- <div class="form-select"> -->
-											<select class="default-select w-100" id="country">
-												<option selected>United Arab Erimates</option>
-												<option value="1">Bahrain</option>
-												<option value="2">Kuwait</option>
-												<option value="3">Oman</option>
-												<option value="3">Qatar</option>
-												<option value="3">Saudi Arabia</option>
-											</select>
-										<!-- </div> -->
+										<select class="default-select w-100" id="country">
+											<option selected>United Arab Erimates</option>
+											<option value="1">Bahrain</option>
+											<option value="2">Kuwait</option>
+											<option value="3">Oman</option>
+											<option value="3">Qatar</option>
+											<option value="3">Saudi Arabia</option>
+										</select>
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -748,7 +729,7 @@
 									<div class="m-b25">
 										<select class="default-select w-100" id="state">
 											<option selected>State</option>
-											<option >Emirate</option>
+											<option>Emirate</option>
 											<option value="1">Abu Dhabi</option>
 											<option value="2">Ajman</option>
 											<option value="3">Dubai</option>
@@ -758,36 +739,30 @@
 											<option value="3">Umm al-Quwain</option>
 
 										</select>
-
-										<!-- <div class="form-select col-md-6"> -->
-										<!-- <input name="dzName" required="" class="form-control m-b15" placeholder="State"> -->
-										<!-- </div> -->
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="m-b25">
-										<!-- <label class="label-title">Town / City *</label> -->
-										<!-- <div class="form-select col-md-6"> -->
-											<select class="default-select w-100" id="city">
-												<option selected>City</option>
-												<option >Emirate</option>
-												<option value="1">Abu Dhabi</option>
-												<option value="2">Ajman</option>
-												<option value="3">Dubai</option>
-												<option value="3">Fujairah</option>
-												<option value="3">Ras Al-Khaimah</option>
-												<option value="3">Sharjah</option>
-												<option value="3">Umm al-Quwain</option>
+										<select class="default-select w-100" id="city">
+											<option selected>City</option>
+											<option>Emirate</option>
+											<option value="1">Abu Dhabi</option>
+											<option value="2">Ajman</option>
+											<option value="3">Dubai</option>
+											<option value="3">Fujairah</option>
+											<option value="3">Ras Al-Khaimah</option>
+											<option value="3">Sharjah</option>
+											<option value="3">Umm al-Quwain</option>
 
-											</select>
-										<!-- </div> -->
+										</select>
 									</div>
 								</div>
 
 								<div class="col-md-12">
 									<div class="form-group m-b25">
 										<label class="label-title">Phone *</label>
-										<input name="dzName" required="" class="form-control" type="tel" maxlength="10" id="phone">
+										<input name="dzName" required="" class="form-control" type="tel" maxlength="10"
+											id="phone">
 									</div>
 								</div>
 
@@ -808,14 +783,84 @@
 											</label>
 										</div>
 									</div>
-								</div>
+								</div> -->
+
+
+								<form id="shippingForm">
+									<!-- Your form fields go here -->
+									<div class="row">
+										<div class="col-md-6 mt-3">
+											<div class="form-group">
+												<label for="companyName"> Name</label>
+												<input type="text" class="form-control" id="name" placeholder="  Name">
+											</div>
+										</div>
+										<div class="col-md-6 mt-3">
+											<div class="form-group">
+												<label for="companyName">Contact No</label>
+												<input type="text" class="form-control" id="contactNum"
+													placeholder="Contact No">
+											</div>
+										</div>
+										<div class="col-md-6 mt-3">
+											<div class="form-group">
+												<label for="companyName">Alternate Contact No</label>
+												<input type="text" class="form-control" id="altcontactNum"
+													placeholder="Alternate Contact No">
+											</div>
+										</div>
+
+										<!-- <div class="col-md-6 mt-3">
+											<div class="form-group" id="fetchCountriesBtn">
+												<label for="companyName">Country Id</label>
+												<select class="default-select w-100 country" id="countrySelection">
+												</select>
+											</div>
+										</div> -->
+										<div class="col-md-6 mt-3">
+											<div class="form-group" id="fetchCountriesBtn">
+												<label for="companyName">Location</label>
+												<select class="default-select w-100 country" id="locationSelection">
+												</select>
+											</div>
+										</div>
+
+										<div class="col-md-12 mt-3">
+											<div class="form-group">
+												<label for="companyName">Address Line 1</label>
+												<input type="textarea" class="form-control" id="addresses1"
+													placeholder="Address Line 1">
+											</div>
+										</div>
+										<div class="col-md-12 mt-3">
+											<div class="form-group">
+												<label for="companyName">Address Line 2</label>
+												<input type="textarea" class="form-control" id="addresses2"
+													placeholder="Address Line 2">
+											</div>
+										</div>
+										<div class="col-md-12 mt-3">
+											<div class="form-group">
+												<label for="companyName">Remark</label>
+												<input type="text" class="form-control" id="remark"
+													placeholder="Remark">
+											</div>
+										</div>
+									</div>
+									<!-- Add more fields as needed -->
+
+
+									<button type="submit" class="btn btn-secondary m-3 w-25" id="saveshippinginfo">Save
+										Shipping
+										Info</button>
+								</form>
 								<div class="col-md-12 m-b25">
 									<div class="form-group">
 										<label class="label-title">Shipping Method</label>
-										<textarea id="comments"
+										<!-- <textarea id="comments"
 											placeholder="Notes about your order, e.g. special notes for delivery."
 											class="form-control" name="comment" cols="90" rows="3"
-											required="required"></textarea>
+											required="required"></textarea> -->
 									</div>
 								</div>
 								<div class="card" style="background-color: #f6f6f6;">
@@ -831,15 +876,15 @@
 													<input class="form-check-input radio" type="radio"
 														name="flexRadioDefault" id="flexRadioDefault4">
 													<label class="form-check-label" for="flexRadioDefault4">
-														Credit Card
+														Online
 													</label>
-													<img src="images/shop/payment.jpg" alt="/">
+													<!-- <img src="images/shop/payment.jpg" alt="/"> -->
 													<!-- <a href="javascript:void(0);">What is PayPal?</a> -->
 												</div>
 											</div>
 
 
-											<div id="collapse3" class="accordion-collapse collapse"
+											<!-- <div id="collapse3" class="accordion-collapse collapse"
 												aria-labelledby="heading3" data-bs-parent="#accordionFaq1">
 												<div class="accordion-body">
 
@@ -880,7 +925,7 @@
 
 
 												</div>
-											</div>
+											</div> -->
 										</div>
 									</div>
 
@@ -895,15 +940,15 @@
 													<input class="form-check-input radio" type="radio"
 														name="flexRadioDefault" id="flexRadioDefault4">
 													<label class="form-check-label" for="flexRadioDefault4">
-														PayPal
+														COD
 													</label>
-													<img src="images/shop/payment.jpg" alt="/">
-													<a href="javascript:void(0);">What is PayPal?</a>
+													<!-- <img src="images/shop/payment.jpg" alt="/">
+													<a href="javascript:void(0);">What is PayPal?</a> -->
 												</div>
 											</div>
 
 
-											<div id="collapse4" class="accordion-collapse collapse"
+											<!-- <div id="collapse4" class="accordion-collapse collapse"
 												aria-labelledby="heading3" data-bs-parent="#accordionFaq1">
 												<div class="accordion-body">
 
@@ -915,11 +960,11 @@
 
 
 												</div>
-											</div>
+											</div> -->
 										</div>
 									</div>
 
-							
+
 									<div class="form-group">
 										<div class="custom-control custom-checkbox d-flex m-b15">
 											<input type="checkbox" class="form-check-input" id="basic_checkbox_3">
@@ -935,16 +980,10 @@
 						<div class="col-xl-4 side-bar">
 							<h4 class="title m-b15">Your Order</h4>
 							<div class="order-detail sticky-top">
-								<div class="cart-item style-1">
-									<div class="dz-media">
-										<img src="images/shop/shop-cart/pic1.jpg" alt="/">
-									</div>
-									<div class="dz-content">
-										<h6 class="title mb-0">Wooden Water<br> Bottles</h6>
-										<span class="price">$40.00</span>
-									</div>
+								<div id="cartData">
+
 								</div>
-								<div class="cart-item style-1 mb-0">
+								<!-- <div class="cart-item style-1 mb-0">
 									<div class="dz-media">
 										<img src="images/shop/shop-cart/pic2.jpg" alt="/">
 									</div>
@@ -952,20 +991,24 @@
 										<h6 class="title mb-0">Wooden Cup</h6>
 										<span class="price">$36.00</span>
 									</div>
-								</div>
+								</div> -->
 								<table>
 									<tbody>
 										<tr class="subtotal">
 											<td>Subtotal</td>
-											<td class="price">$100</td>
+											<td class="price" id="total"></td>
 										</tr>
-										<tr class="title">
+										<tr class="subtotal">
+											<td>Shipping Charge</td>
+											<td class="price"> 10 AED </td>
+										</tr>
+										<!-- <tr class="title">
 											<td>
 												<h6 class="title font-weight-500">Shipping</h6>
 											</td>
 											<td></td>
-										</tr>
-										<tr class="shipping">
+										</tr> -->
+										<!-- <tr class="shipping">
 											<td>
 												<div class="custom-control custom-checkbox">
 													<input class="form-check-input radio" type="radio"
@@ -983,17 +1026,17 @@
 												</div>
 											</td>
 											<td class="price">25.75</td>
-										</tr>
+										</tr> -->
 										<tr class="total">
 											<td>Total</td>
-											<td class="price">$125.75</td>
+											<td class="price" id="finalTotal"></td>
 
 										</tr>
 									</tbody>
 								</table>
 
 
-								<p class="text">Your personal data will be used to process your order, support your
+								<!-- <p class="text">Your personal data will be used to process your order, support your
 									experience throughout this website, and for other purposes described in our <a
 										href="javascript:void(0);">privacy policy.</a></p>
 								<div class="form-group">
@@ -1002,14 +1045,14 @@
 										<label class="form-check-label" for="basic_checkbox_3">I have read and agree to
 											the website terms and conditions </label>
 									</div>
-								</div>
+								</div> -->
 								<!-- <a href="shop-checkout.html" class="btn btn-secondary w-100">PLACE ORDER</a> -->
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-	
+
 		</div>
 
 		<!-- Footer -->
