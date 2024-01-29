@@ -11093,6 +11093,9 @@ fieldset:disabled .woocommerce #place_order,
 .p-20 {
   padding: 0 100px;
 }
+.p-10 {
+  padding: 50px;
+}
 
 .pt-1 {
   padding-top: 0.25rem !important;
@@ -23301,7 +23304,7 @@ btn:focus {
 }
 
 .check-tbl .product-item-close {
-  text-align: right;
+  text-align: center;
 }
 
 .check-tbl .product-item-close a {
@@ -51897,4 +51900,16 @@ footer.footer-dark .icon-bx-wraper {
 
 .toast-close-button {
   color: #000 !important;
+}
+
+.confirm{
+  display: flex;
+  justify-content: center;
+}
+.confirm1{
+  /* width: max-content; */
+  display: flex;
+  justify-content: center;
+  border: 1px solid gainsboro !important;
+  border-radius: 1rem;
 }
