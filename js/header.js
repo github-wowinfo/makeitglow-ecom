@@ -18,8 +18,6 @@ if (token === null) {
   $('#user-dropdown').append(dropdown)
 }
 
-// console.log('header');
-
 function logout() {
   window.location.href = "./login.html";
   localStorage.removeItem('token')
@@ -57,7 +55,6 @@ function getCart() {
     },
     dataType: 'json',
     success: function (cartData) {
-<<<<<<< HEAD
       if (cartData.length === 0) {
         // Cart is empty, set count and total amount to 0
         $('#cartCount').text('0');
@@ -67,11 +64,6 @@ function getCart() {
       var subtotal = calculateSubtotal(cartData);
       $('#shopping-cart-pane .cart-total h5:last-child').text(' AED ' + subtotal.toFixed(2));
 
-=======
-      var subtotal1 = calculateSubtotal1(cartData);
-      $('#shopping-cart-pane .cart-total h5:last-child').text(subtotal1.toFixed(2) + 'AED');
-      console.log('cartData.length', cartData.length);
->>>>>>> 08c84d8697b4c36beee08663338afb533565d43f
       // Clear existing content
       $('#cartItem').empty();
       $('#cartCount').text(cartData.length);
@@ -202,7 +194,7 @@ function getWhishlist() {
                          
                                 <h6 class="dz-price text-primary mb-0">${whishlistItem.mrp}AED</h6>
                                 
-                                <a href="/" id="cart" class="btn btn-secondary p-1 ms-4" id="addToCartButton" onclick="addToCart(${whishlistItem.itmVrntId})">ADD TO CART</a>
+                                <a href="/" id="cart" class="btn btn-secondary p-1 ms-4 rounded" id="addToCartButton" onclick="addToCart(${whishlistItem.itmVrntId})">ADD TO CART</a>
                                 </div>
                             </div>
                             <a href="javascript:void(0);" onclick="deleteWishlistItem(${whishlistItem.wshLstEntryId})" class="dz-close">
@@ -226,16 +218,16 @@ function getWhishlist() {
 // });
 
 // Function to calculate subtotal based on cart data
-function calculateSubtotal1(cartData) {
-  var subtotal1 = 0;
+function calculateSubtotal(cartData) {
+  var subtotal = 0;
 
   cartData.forEach(function (amount) {
     // Assuming "mrp" is the key for the Manufacturer's Recommended Price
     var mrp = parseFloat(amount.mrp * amount.qty);
-    subtotal1 += mrp;
+    subtotal += mrp;
   });
 
-  return subtotal1;
+  return subtotal;
 }
 
 $(document).ready(function () {

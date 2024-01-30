@@ -18,7 +18,7 @@
 	<link rel="icon" type="image/x-icon" href="images/logo1.png">
 	
 	<!-- PAGE TITLE HERE -->
-	<title>Order Tracking</title>
+	<title>Order Details</title>
 	
 	<!-- MOBILE SPECIFIC -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -612,67 +612,110 @@
 		<div class="dz-bnr-inr" style="background-image:url(images/background/bg-shape.jpg);">
 			<div class="container">
 				<div class="dz-bnr-inr-entry">
-					<h1>Order Tracking</h1>
+					<h1>Order Details </h1>
 					<nav aria-label="breadcrumb" class="breadcrumb-row">
 						<ul class="breadcrumb">
 							<li class="breadcrumb-item"><a href="index.html"> Home</a></li>
-							<li class="breadcrumb-item">Order Tracking</li>
+							<li class="breadcrumb-item">Order Details </li>
 						</ul>
 					</nav>
 				</div>
 			</div>
 		</div>
 		<!-- inner page banner End-->
-		<div class="content-inner-1">
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-lg-9">
+        <div class="container ">
+            <div class="card p-10 order-head">
+              <div class="modal-content my-auto ">
+                  <h2 class="mb-2">Order Details: #2737</h2>
+                  <p class="mb-3">April 21, 2019, 5:33 PM</p>
+                <div class="d-flex">
+                  <h6 class="me-3">Status :</h6>
+                  <p class="text-green">Completed </p>
+                </div>
+              </div>
+            </div>
+        </div>
+		<div class="container ">
+            <div class="card p-5 order-head ">
+				<div class="d-flex">
+				<div class="col-4 " id="billingAddress">
+				</div>
+				
+				<!-- <div class="col-4" id="shippinginfo">
+				</div> -->
+
+				<div class="col-4 p-5" id="payment">
+					<h4 class="mb-2">Payment Method</h4>
+                  <p class="mb-3">April 21, 2019, 5:33 PM</p>
+                <div>
+                  <h6 class="me-3">Antony Hopkins</h6>
+                </div>
+				</div>
+				<div class="col-4 p-5" id="payment">
+					<h4 class="mb-2">Payment Method</h4>
+                  <p class="mb-3">April 21, 2019, 5:33 PM</p>
+                <div>
+                  <h6 class="me-3">Antony Hopkins</h6>
+                </div>
+				</div>
+			</div>
+            </div>
+        </div>
+
+		<div class="container ">
+            <div class="card p-10 order-head">
+              <div class="row  ">
+					<div class="col-lg-12">
 						<div class="table-responsive">
 							<table class="table check-tbl style-1">
 								<thead>
 									<tr>
-										<th>Product Id</th>
-										<!-- <th></th> -->
 										<th>Product Name</th>
-										<th>Price</th>
-										<th>Status</th>
-										<th></th>
+										<th class="text-end">Quantity</th>
+										<!-- <th class="text-end"></th> -->
+										<th class="text-end">Rate</th>
+										<th class="text-end">Amount</th>
+										<!-- <th></th> -->
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<td class="product-item-close"><a href="javascript:void(0);">1</a></td>
-										<td class="product-item-name">Blueberry Muffin Whipped Soap </td>
-										<td class="product-item-price"><span>$45.00</span><strong>$28.00</strong></td>
-										<td class="product-item-stock text-primary">In Stock</td>
-										<td class="product-item-totle"><a href="./orderDetails.html" class="btn btn-gray btnhover text-nowrap">View Details</a></td>
+										<td class="product-item-name p-2 text-start">Blueberry Muffin Whipped Soap </td>
+										<td class="product-item p-2 text-end "><a href="javascript:void(0);">1</a></td>
+										<td class="product-item p-2 text-end"><span>$45.00</span><strong>$28.00</strong></td>
+										<td class="product-item p-2 text-end"><span>$45.00</span><strong>$38.00</strong></td>
 									</tr>
 									<tr>
-										<td class="product-item-close"><a href="javascript:void(0);">2</a></td>
-										<td class="product-item-name">Marshmallow Cream Whipped Soap</td>
-										<td class="product-item-price"><span>$95.00</span><strong>$56.00</strong></td>
-										<td class="product-item-stock text-primary">In Stock</td>
-										<td class="product-item-totle"><a href="./orderDetails.html" class="btn btn-gray btnhover text-nowrap">View Details</a></td>
+										<td class="product-item-name p-2 text-start">Marshmallow Cream Whipped Soap </td>
+										<td class="product-item p-2 text-end "><a href="javascript:void(0);">2</a></td>
+										<td class="product-item p-2 text-end"><span>$45.00</span><strong>$28.00</strong></td>
+										<td class="product-item p-2 text-end"><span>$45.00</span><strong>$38.00</strong></td>
 									</tr>
 									<tr>
-										<td class="product-item-close"><a href="javascript:void(0);">3</a></td>
-										<!-- <td class="product-item-img"><img src="images/shop/shop-cart/pic3.jpg" alt="/"></td> -->
-										<td class="product-item-name">Lemon Shots Whipped Soap</td>
-										<td class="product-item-price"><span>$56.00</span><strong>$20.00</strong></td>
-										<td class="product-item-stock text-primary">In Stock</td>
-										<td class="product-item-totle"><a href="./orderDetails.html" class="btn btn-gray btnhover text-nowrap">View Details</a></td>
+										<td class="product-item-name p-2 text-start">Lemon Shots Whipped Soap </td>
+										<td class="product-item p-2 text-end "><a href="javascript:void(0);">3</a></td>
+										<td class="product-item p-2 text-end"><span>$45.00</span><strong>$28.00</strong></td>
+										<td class="product-item p-2 text-end"><span>$45.00</span><strong>$38.00</strong></td>
 									</tr>
+								 
 								</tbody>
-							</table>
-						</div>
+							 </table>
+							   <div class=" p-5 text-end" id="payment">
+								<p class="mb-2">Subtotal:	$6,230.00</p>
+								<p class="mb-2">Tax 5%:	$311.50</p>
+								<p class="mb-2">Total:	$6541.50</p>
+							  
+							  <div>
+							</div>
 					</div>
 				</div>
-			</div>
+            </div>
+          </div>
 		</div>
-
+		
 	
 
-	</div>
+	    </div>
 
 	<!-- Footer -->
 	<footer class="site-footer style-1">
@@ -759,12 +802,15 @@
 	<button class="scroltop" type="button"><i class="fas fa-arrow-up"></i></button>
 
 
+
+
 </div>
 
 <!-- JAVASCRIPT FILES ========================================= -->
 <script src="js/jquery.min.js"></script><!-- JQUERY MIN JS -->
 <script src="js/core/app-setting.js"></script><!-- JQUERY MIN JS -->
 	<script src="js/header.js"></script><!-- JQUERY MIN JS -->
+	<script src="js/orderDetails.js"></script>
 <script src="vendor/wow/wow.min.js"></script><!-- WOW JS -->
 <script src="vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script><!-- BOOTSTRAP MIN JS -->
 <script src="vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script><!-- BOOTSTRAP SELECT MIN JS -->
