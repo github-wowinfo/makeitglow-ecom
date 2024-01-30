@@ -57,7 +57,7 @@ function getCart() {
     success: function (cartData) {
       var subtotal1 = calculateSubtotal1(cartData);
       $('#shopping-cart-pane .cart-total h5:last-child').text(subtotal1.toFixed(2) + 'AED');
-      console.log('cartData.length', cartData.length);
+      console.log('cartData.length', cartData);
       // Clear existing content
       $('#cartItem').empty();
       $('#cartCount').text(cartData.length);
@@ -70,7 +70,7 @@ function getCart() {
           <li>
             <div class="cart-widget">
               <div class="dz-media me-3">
-                <img src="${cartItem.thumbnail}" alt="">
+                <img src="${SETTINGS.ImageUrl}${cartItem.thumbnail}" alt="">
               </div>
               <div class="cart-content">
                 <h6 class="title"><a href="product-thumbnail.html">${cartItem.itemName}</a></h6>
