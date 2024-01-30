@@ -143,7 +143,7 @@ $(document).ready(function () {
             });
             if (selectedVariant) {
               var totalPrice = productquantity * selectedVariant.mrp;
-              $("#displayedPrice").text(' $ ' + totalPrice);
+              $("#displayedPrice").text(' AED ' + totalPrice);
               // updateDisplayedPrice(totalPrice);
                console.log('mera', totalPrice);
               // Update the displayed price on the page
