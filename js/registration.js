@@ -90,51 +90,103 @@
 
 // var token = localStorage.getItem("token");
 
+// $.ajax({
+//   type: "GET",
+//   url: `${SETTINGS.backendUrl}/Masters/GetAllCountries`,
+
+//   dataType: "json",
+//   success: function (response) {
+//     // console.log(response);
+//     let li = `<option value="">Select</option>`
+//     $.each(response, function (index, value) {
+//       li += `<option value="${value.countryId}">${value.countryName}</option>`
+//     });
+//     $('#countrySelect').append(li);
+//     // $('#countrySelect').selectric('refresh');
+//   }
+// })
+
+// $('#countrySelect').on('change', function () {
+//   // Get the selected countryId
+//   let selectedCountryId = $(this).val();
+// console.log('hitted', selectedCountryId);
+//  // Clear existing options in locationSelect
+// //  $('#locationSelected').empty();
+// $.ajax({
+//   type: "GET",
+//   url: `${SETTINGS.backendUrl}/Masters/GetAllLocationsByCountryId/${selectedCountryId}`,
+//   dataType: "json",
+//   success: function (response) {
+//     console.log('location:' ,response);
+//     // console.log(response);
+//     let li = `<option value="">Select</option>`
+//     $.each(response, function (index, value) {
+//       console.log(value.locationName);
+//       li += `<option value="${value.lEntryId}">${value.locationName}</option>`
+//     });
+
+//     $('#locationSelected').append(li);
+//     // $('#locationSelected').selectric('refresh');
+
+//   },
+//   error: function (xhr, status, error) {
+//     // Handle errors if needed
+//     console.error('Error:', error);
+//   }
+// })
+// });
+
+
+/// Country AJAX request
 $.ajax({
   type: "GET",
   url: `${SETTINGS.backendUrl}/Masters/GetAllCountries`,
-
   dataType: "json",
   success: function (response) {
-    // console.log(response);
-    let li = `<option value="">Select</option>`
+    let options = '<option value="">Select</option>';
     $.each(response, function (index, value) {
-      li += `<option value="${value.countryId}">${value.countryName}</option>`
+      console.log(value);
+      options += `<option value="${value.countryId}">${value.countryName}</option>`;
     });
-    $('#countrySelect').append(li);
-    // $('#countrySelect').selectric('refresh');
-  }
-})
+    $('#countrySelect').html(options);
 
+    // Refresh Bootstrap Select after updating options
+    $('#countrySelect').selectpicker('refresh');
+  }
+});
+
+// Location selection change event
 $('#countrySelect').on('change', function () {
   // Get the selected countryId
   let selectedCountryId = $(this).val();
-console.log('hitted', selectedCountryId);
- // Clear existing options in locationSelect
-//  $('#locationSelected').empty();
-$.ajax({
-  type: "GET",
-  url: `${SETTINGS.backendUrl}/Masters/GetAllLocationsByCountryId/${selectedCountryId}`,
-  dataType: "json",
-  success: function (response) {
-    console.log('location:' ,response);
-    // console.log(response);
-    let li = `<option value="">Select</option>`
-    $.each(response, function (index, value) {
-      console.log(value.locationName);
-      li += `<option value="${value.lEntryId}">${value.locationName}</option>`
-    });
+  console.log('Selected Country ID:', selectedCountryId);
 
-    $('#locationSelected').append(li);
-    // $('#locationSelected').selectric('refresh');
-    
-  },
-  error: function (xhr, status, error) {
-    // Handle errors if needed
-    console.error('Error:', error);
-  }
-})
+  // Clear existing options in locationSelected
+  $('#locationSelected').empty();
+
+  // Location AJAX request
+  $.ajax({
+    type: "GET",
+    url: `${SETTINGS.backendUrl}/Masters/GetAllLocationsByCountryId/${selectedCountryId}`,
+    dataType: "json",
+    success: function (response) {
+      let options = '<option value="">Select</option>';
+      $.each(response, function (index, value) {
+        console.log(value);
+        options += `<option value="${value.lEntryId}">${value.locationName}</option>`;
+      });
+      $('#locationSelected').html(options);
+      // $.each(response, function (index, value) {
+      //   $('#locationSelected').append(`<option value="${value.lEntryId}">${value.locationName}</option>`);
+      // });
+
+      // Refresh Bootstrap Select after updating options
+      $('#locationSelected').selectpicker('refresh');
+    }
+  });
 });
+
+
 
 $.ajax({
   type: "GET",
@@ -162,7 +214,7 @@ document.getElementById("postButton").addEventListener("click", function (e) {
   const EmailId = document.getElementById("email").value;
   const Passwords = document.getElementById("password").value;
   const PhoneNum = document.getElementById("phone").value;
-  const Addresses = document.getElementById("address").value;
+  // const Addresses = document.getElementById("address").value;
   const Countries = document.getElementById("locationSelected").value;
   const RefId = document.getElementById("refrenceSelect").value;
   // Validate first name  (not empty)
