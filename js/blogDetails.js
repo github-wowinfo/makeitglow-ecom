@@ -56,9 +56,13 @@ $(document).ready(function () {
                            
                         </ul>
                     </div>
-                    <div class="dz-media">
-                        <img src="${SETTINGS.ImageUrl}${data.thumbnail}" alt="${data.title}">
-                        <img src="${SETTINGS.ImageUrl}${data.image}" alt="${data.title}">
+                    <div class="dz-media row">
+                    <div class="col-6" style="height:30rem;   ">
+                    <img src="${SETTINGS.ImageUrl}${data.thumbnail}" alt="${data.title}" >
+                    </div>
+                    <div class="col-6" style="height:30rem;  ">
+                    <img src="${SETTINGS.ImageUrl}${data.image}" alt="${data.title}">
+                    </div>
                     </div>
                     <div class="dz-info">
                         <div class="dz-post-text">
