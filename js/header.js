@@ -55,21 +55,9 @@ function getCart() {
     },
     dataType: 'json',
     success: function (cartData) {
-<<<<<<< HEAD
-      if (cartData.length === 0) {
-        // Cart is empty, set count and total amount to 0
-        $('#cartCount').text('0');
-        $('#cartCount1').text('0');
-        $('.totalamount').text('AED 0.00');
-      } else {
-      var subtotal = calculateSubtotal(cartData);
-      $('#shopping-cart-pane .cart-total h5:last-child').text(' AED ' + subtotal.toFixed(2));
-
-=======
       var subtotal1 = calculateSubtotal1(cartData);
       $('#shopping-cart-pane .cart-total h5:last-child').text(subtotal1.toFixed(2) + 'AED');
       console.log('cartData.length', cartData.length);
->>>>>>> d0a4b27d25ff9ead852dded9591e03cf485ad07d
       // Clear existing content
       $('#cartItem').empty();
       $('#cartCount').text(cartData.length);
@@ -224,7 +212,7 @@ function getWhishlist() {
 // });
 
 // Function to calculate subtotal based on cart data
-function calculateSubtotal(cartData) {
+function calculateSubtotal1(cartData) {
   var subtotal = 0;
 
   cartData.forEach(function (amount) {
