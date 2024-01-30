@@ -55,6 +55,7 @@ function getCart() {
     },
     dataType: 'json',
     success: function (cartData) {
+<<<<<<< HEAD
       if (cartData.length === 0) {
         // Cart is empty, set count and total amount to 0
         $('#cartCount').text('0');
@@ -64,6 +65,11 @@ function getCart() {
       var subtotal = calculateSubtotal(cartData);
       $('#shopping-cart-pane .cart-total h5:last-child').text(' AED ' + subtotal.toFixed(2));
 
+=======
+      var subtotal1 = calculateSubtotal1(cartData);
+      $('#shopping-cart-pane .cart-total h5:last-child').text(subtotal1.toFixed(2) + 'AED');
+      console.log('cartData.length', cartData.length);
+>>>>>>> d0a4b27d25ff9ead852dded9591e03cf485ad07d
       // Clear existing content
       $('#cartItem').empty();
       $('#cartCount').text(cartData.length);
@@ -113,11 +119,11 @@ function getCart() {
       // Calculate and update total amount
       var totalAmount = calculateTotalAmount(cartItem);
       $('.totalamount').text('AED', + totalAmount.toFixed(2));
-      }
     },
+
     error: function (error) {
       console.error('Error fetching cart data:', error);
-    }
+    },
   });
 }
 

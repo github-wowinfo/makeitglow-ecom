@@ -208,10 +208,14 @@ function getshippinginfo() {
       $.each(profileData, function (index, value) {
         li += `<option value="${value.csaEntryId}">${value.name} (${value.addressLine1})</option>`
       });
+      li += `<option value="newAddress" style='color: black !important;'>Add New Address</option>`;
       $('#shippingAddress').append(li);
 
       // })
-
+      $('#shippingAddress').on('change', function () {
+        // Update the shippingId variable with the selected value
+        shippingId = $(this).val();
+      });
 
     },
     error: function (error) {
@@ -250,6 +254,9 @@ function getLocation() {
     }
   });
 }
+let shippingId = 0;
+shippingId = document.getElementById("shippingAddress").value;
+
 
 document.getElementById("saveshippinginfo").addEventListener("click", function (e) {
   e.preventDefault()
@@ -283,7 +290,8 @@ document.getElementById("saveshippinginfo").addEventListener("click", function (
     },
     data: JSON.stringify(userData), // Convert object to JSON string
     success: function (response) {
-
+      console.log('response', response.data);
+      shippingId = response.data
       // console.log('Billing address added successfully:', response);
       toastr.success("Shipping address added successfully ");
       getshippinginfo()
@@ -304,9 +312,10 @@ document.getElementById("saveshippinginfo").addEventListener("click", function (
 })
 
 
+console.log('shippingId', shippingId);
 $(document).ready(function () {
   // Check the checkbox state on page load
-  if ($('#basic_checkbox_3').is(':checked')) {
+  if ($('#basic_checkbox_3').is(':checked') && shippingId !== 0) {
     // Checkbox is checked, enable the button
     $('#placeorder').prop('disabled', false);
   } else {
@@ -317,7 +326,7 @@ $(document).ready(function () {
   // Attach an event listener to the checkbox for future changes
   $('#basic_checkbox_3').on('change', function () {
     // Check if the checkbox is checked
-    if ($(this).is(':checked')) {
+    if ($(this).is(':checked') && shippingId !== 0) {
       // Checkbox is checked, enable the button
       $('#placeorder').prop('disabled', false);
     } else {
@@ -327,15 +336,50 @@ $(document).ready(function () {
   });
 });
 
+$(document).ready(function () {
+  // Event listener for changes in the shippingAddress select element
+  $('#shippingAddress').on('change', function () {
+    // Check if the selected value is "newAddress"
+    if ($(this).val() === 'newAddress') {
+      // Enable the form fields
+      enableShippingFormFields();
+    } else {
+      // Disable the form fields
+      disableShippingFormFields();
+    }
+  });
+
+
+
+  // Function to enable form fields
+  function enableShippingFormFields() {
+    $('#name,#contactNum,#altcontactNum,#addresses1, #addresses2,#locationSelection,#remark,#saveshippinginfo').prop('disabled', false);
+  }
+
+  // Function to disable form fields
+  function disableShippingFormFields() {
+    $('#name,#contactNum,#altcontactNum,#addresses1, #addresses2,#locationSelection,#remark,#saveshippinginfo').prop('disabled', true);
+  }
+
+  // Initial check on page load
+  if ($('#shippingAddress').val() === 'newAddress') {
+    enableShippingFormFields();
+  } else {
+    disableShippingFormFields();
+  }
+
+});
 
 
 document.getElementById("placeorder").addEventListener("click", function (e) {
+  console.log();
+  console.log('response', shippingId);
   e.preventDefault()
-  if ($('#shippingAddress').val() === '') {
-    toastr.error('Please Select Shipping Address')
+  if (shippingId === '') {
+    toastr.error('Please Select Shipping Address or Add new Address')
   } else {
     var userData = {
-      "shippingId": Number($('#shippingAddress').val()),
+      "shippingId": shippingId,
       "productsQty": productCount,
       "subTotal": subtotal,
       "shippingCharges": shipping,
@@ -362,6 +406,12 @@ document.getElementById("placeorder").addEventListener("click", function (e) {
         console.log('response', response);
         // console.log('Billing address added successfully:', response);
         toastr.success("Order Placed ");
+        if (response.paymentLink) {
+          // Redirect to the payment link
+          window.open(response.paymentLink, '_blank');
+        } else {
+          toastr.error("Error: Payment link not found in the response.");
+        }
         // getshippinginfo()
         // You may want to update the UI or perform other actions here
         // $("#saveshippinginfo").modal("hide");

@@ -11093,6 +11093,7 @@ fieldset:disabled .woocommerce #place_order,
 .p-20 {
   padding: 0 100px;
 }
+
 .p-10 {
   padding: 50px !important;
 }
@@ -51878,8 +51879,9 @@ footer.footer-dark .icon-bx-wraper {
   background-position: left !important; */
   /* padding-left: 20px; */
 }
-#toast-container>.toast-error{
-  background-color:#d33f3f !important;
+
+#toast-container>.toast-error {
+  background-color: #d33f3f !important;
 }
 
 #toast-container>div {
@@ -51905,11 +51907,17 @@ footer.footer-dark .icon-bx-wraper {
   color: #000 !important;
 }
 
-.confirm{
+.new-address-option {
+  color: black !important;
+}
+
+/* Replace 'red' with the desired color */
+.confirm {
   display: flex;
   justify-content: center;
 }
-.confirm1{
+
+.confirm1 {
   /* width: max-content; */
   display: flex;
   justify-content: center;
