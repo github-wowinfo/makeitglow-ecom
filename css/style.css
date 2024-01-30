@@ -11097,6 +11097,7 @@ fieldset:disabled .woocommerce #place_order,
 .p-10 {
   padding: 50px !important;
 }
+
 .p-5 {
   padding: 20px !important;
 }
@@ -19308,7 +19309,7 @@ section {
   top: 0;
   right: 0;
   background-color: var(--secondary);
-  width: 420px;
+  width: 340px;
   height: 100%;
 }
 
@@ -51924,7 +51925,8 @@ footer.footer-dark .icon-bx-wraper {
   border: 1px solid gainsboro !important;
   border-radius: 1rem;
 }
-.order-head{
+
+.order-head {
   /* width: max-content; */
   /* display: flex; */
   /* justify-content: center; */
