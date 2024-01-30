@@ -122,7 +122,7 @@
 
 let productCount = ''
 let subtotal = 0
-let shipping = 10
+let shipping = 0
 
 function getCartCheckout() {
   $.ajax({
@@ -153,7 +153,7 @@ function getCartCheckout() {
         var cartItemHTML = `
         <div class="cart-item style-1" >
         <div class="dz-media">
-        <img src="${cartItem.thumbnail}" alt="">
+        <img src="${SETTINGS.ImageUrl}${cartItem.thumbnail}" alt="">
       </div>
       <div class="dz-content">
         <div>
