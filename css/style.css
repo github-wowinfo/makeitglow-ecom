@@ -19309,7 +19309,7 @@ section {
   top: 0;
   right: 0;
   background-color: var(--secondary);
-  width: 340px;
+  width: 370px;
   height: 100%;
 }
 
@@ -48138,7 +48138,7 @@ a {
 .header-nav .nav>li>a {
   color: var(--white);
   font-size: 15px;
-  padding: 28px 15px;
+  padding: 28px 13px;
   font-family: var(--font-family-base);
   cursor: pointer;
   font-weight: 400;
