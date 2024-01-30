@@ -1,3 +1,75 @@
+$.ajax({
+    url: 'https://mig-dev.lifelinemegacorp.com/api/Order/GetOrderDetailsByOrderId?OrderId=ORD1706612145',
+    method: 'GET',
+    dataType: 'json',
+    success: function(data) {
+      // Update Order Details
+      updateOrderDetails(data);
+    },
+    error: function(error) {
+      console.error('Error fetching data:', error);
+    }
+  });
+  
+  function updateOrderDetails(data) {
+    // Update Order Details section
+    var orderDetailsHtml = `
+      <h2 class="mb-2">Order Details: #${data.oid}</h2>
+      <p class="mb-3">${data.paymentCreationTime}</p>
+      <div class="d-flex">
+        <h6 class="me-3">Status :</h6>
+        <p class="text-green">${data.paymentStatusMsg}</p>
+      </div>
+
+       <div class="card p-5 order-head ">
+          <div class="d-flex">
+              <div class="col-4 " id="billingAddress">
+              </div> 
+          
+              <div class="col-4 p-5" id="payment">
+                  <h4 class="mb-2">Payment Method</h4>
+                 <p class="mb-3">${data.paymentCreationTime}</p>
+                 <div>
+                   <h6 class="me-3">${order.paymentType}</h6>
+                 </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="card p-5 order-head ">
+      <td class="product-item-close"><a href="javascript:void(0);">${order.ordrItms[0].itmname}</a></td>
+      <td class="product-item-name">${order.ordrItms[0].qty}</td>
+      <td class="product-item-price"><span>${order.ordrItms[0].price}</span> </td>
+      <td class="product-item-stock text-primary">${order.ordrItms[0].total}</td>
+      <td class="product-item-totle"><a href="./orderDetails.html" class="btn btn-gray btnhover text-nowrap">View Details</a></td>
+      </div>
+   
+
+  
+  
+      <!-- Add other relevant data here -->
+    `;
+    $('#orderDetails').html(orderDetailsHtml);
+  
+    // Add logic to update other sections as needed (billing address, payment, product details, etc.)
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function getBillingInfo() {
     $.ajax({
         url: `${SETTINGS.backendUrl}/CustomerAccount/GetAllCustBillingAddresses`,
@@ -109,8 +181,6 @@ function getBillingInfo() {
             }
         });
     }
-
-
 
 }
 
