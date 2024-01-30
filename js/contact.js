@@ -3,6 +3,7 @@ document.getElementById("submit").addEventListener("click", function (e) {
     const FirstName = document.getElementById("name").value;
     const EmailId = document.getElementById("email").value;
     const PhoneNum = document.getElementById("number").value;
+    const Location = document.getElementById("locationSelection").value;
     const Subject = document.getElementById("subject").value;
     const Message = document.getElementById("message").value;
     // Validate first name  (not empty)
@@ -55,8 +56,9 @@ document.getElementById("submit").addEventListener("click", function (e) {
     var userData = {
     //   "userType": 2,
       "email": EmailId,
-      "firstName": FirstName,
-      "phoneNumber": PhoneNum,
+      "name": FirstName,
+      "phone": PhoneNum,
+      "locationId": Location,
       "subject": Subject,
       "message": Message,
       // Add any other required fields for user registration
@@ -90,3 +92,19 @@ document.getElementById("submit").addEventListener("click", function (e) {
       }
     });
   });
+
+  $.ajax({
+    type: "GET",
+    url: `${SETTINGS.backendUrl}/Masters/GetAllLocations`,
+  
+    dataType: "json",
+    success: function (response) {
+      // console.log(response);
+      let li = `<option value="">Select</option>`
+      $.each(response, function (index, value) {
+        li += `<option value="${value.lEntryId}">${value.locationName}</option>`
+      });
+      $('#locationSelection').append(li);
+      // $('#countrySelect').selectric('refresh');
+    }
+  })
