@@ -1,7 +1,14 @@
+// Function to get query parameter by name
+function getQueryParam(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+}
+const blogId = getQueryParam('Id');
+console.log(blogId, 'blogId');
 $(document).ready(function () {
     // Make an AJAX request to fetch blog details by ID
     $.ajax({
-        url: 'https://mig-dev.lifelinemegacorp.com/api/Blogs/GetBlogById?id=9',
+        url: `${SETTINGS.backendUrl}/Blogs/GetBlogById?id=${blogId}`,
         method: 'GET',
         dataType: 'json',
         success: function (data) {
@@ -50,7 +57,8 @@ $(document).ready(function () {
                         </ul>
                     </div>
                     <div class="dz-media">
-                        <img src="${data.thumbnail}" alt="${data.title}">
+                        <img src="${SETTINGS.ImageUrl}${data.thumbnail}" alt="${data.title}">
+                        <img src="${SETTINGS.ImageUrl}${data.image}" alt="${data.title}">
                     </div>
                     <div class="dz-info">
                         <div class="dz-post-text">

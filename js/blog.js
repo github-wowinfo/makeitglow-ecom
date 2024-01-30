@@ -39,7 +39,7 @@ $.ajax({
             <div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
 							<div class="dz-card style-1">
 								<div class="dz-media">
-									<img src="images/blog/blogpost-3/pic1.jpg" alt="/">
+									<img src="${SETTINGS.ImageUrl}${blogItem.thumbnail}" alt="/">
 								</div>
 								<div class="dz-info">
 									<div class="dz-meta">

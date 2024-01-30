@@ -1,12 +1,13 @@
 const SETTINGS = {
 
-    backendUrl: 'https://mig-dev.lifelinemegacorp.com/api',
-   
-    ajaxError: function (jQxhr, textStatus, errorThrown) {
-      console.log(jQxhr, textStatus, errorThrown);
-      swal(`${jQxhr.status}!`, jQxhr.responseText || textStatus, 'error');
-    }
+  backendUrl: 'https://mig-dev.lifelinemegacorp.com/api',
+  ImageUrl: 'https://mig-dev.lifelinemegacorp.com',
+
+  ajaxError: function (jQxhr, textStatus, errorThrown) {
+    console.log(jQxhr, textStatus, errorThrown);
+    swal(`${jQxhr.status}!`, jQxhr.responseText || textStatus, 'error');
   }
+}
 
 // var config ={
 //   cUrl :' https://api.countrystatecity.in/v1/countries',
