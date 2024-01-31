@@ -38,6 +38,7 @@
 	<link rel="stylesheet" type="text/css" href="vendor/lightgallery/dist/css/lightgallery.css">
 	<link rel="stylesheet" type="text/css" href="vendor/lightgallery/dist/css/lg-thumbnail.css">
 	<link rel="stylesheet" type="text/css" href="vendor/lightgallery/dist/css/lg-zoom.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 
 	<!-- GOOGLE FONTS-->
@@ -651,8 +652,8 @@
 
 									<div class="tab-pane fade active show" id="tab-list-grid" role="tabpanel"
 										aria-labelledby="tab-list-grid-btn">
-										<div class="row gx-xl-4 g-3 mb-xl-0 mb-md-0 mb-3">
-											<div
+										<div class="row gx-xl-4 g-3 mb-xl-0 mb-md-0 mb-3" id="productList">
+											<!-- <div
 												class="col-6 col-xl-4 col-lg-4 col-md-4 col-sm-6 m-md-b15 m-b30 grid-5">
 												<div class="shop-card card">
 													<div class="dz-media">
@@ -988,7 +989,7 @@
 													</div>
 
 												</div>
-											</div>
+											</div> -->
 
 
 
@@ -1090,7 +1091,19 @@
 		<!-- Footer End -->
 
 		<button class="scroltop" type="button"><i class="fas fa-arrow-up"></i></button>
+		<!-- Quick Modal Start -->
+		<div class="modal quick-view-modal fade" id="quickViewModal" tabindex="-1" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+						<i class="icon feather icon-x"></i>
+					</button>
+					<div class="modal-body" id="modalBody">
 
+					</div>
+				</div>
+			</div>
+		</div>
 
 	</div>
 
@@ -1098,6 +1111,8 @@
 	<script src="js/jquery.min.js"></script><!-- JQUERY MIN JS -->
 	<script src="js/core/app-setting.js"></script><!-- JQUERY MIN JS -->
 	<script src="js/header.js"></script><!-- JQUERY MIN JS -->
+	<script src="js/gifting.js"></script><!-- JQUERY MIN JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script><!-- toaster JS -->
 	<script src="vendor/wow/wow.min.js"></script><!-- WOW JS -->
 	<script src="vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script><!-- BOOTSTRAP MIN JS -->
 	<script src="vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script><!-- BOOTSTRAP SELECT MIN JS -->

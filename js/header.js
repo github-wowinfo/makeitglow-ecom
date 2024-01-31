@@ -217,7 +217,7 @@ function getWhishlist() {
     }
   });
 }
- 
+
 function calculateSubtotal1(cartData) {
   var subtotal = 0;
 
@@ -237,7 +237,7 @@ $(document).ready(function () {
 });
 
 //   delete item api . . . 
- 
+
 function deleteCartItem(cartEntryId) {
   if (token === null) {
     window.location.href = "./login.html";
@@ -267,7 +267,7 @@ function deleteCartItem(cartEntryId) {
   }
 }
 
- 
+
 
 function deleteWishlistItem(wshLstEntryId) {
   if (token === null) {
@@ -298,7 +298,7 @@ function deleteWishlistItem(wshLstEntryId) {
 }
 
 function addToCart(id) {
- 
+
   var quantity = '1';
 
   var obj = {
@@ -332,14 +332,8 @@ function addToCart(id) {
   }
 }
 
-<<<<<<< HEAD
 function updateQuantity(id, action, quantity) {
   var inputField = $(`input[name='demo_vertical2'][value='${quantity}']`);
-=======
-function updateQuantity(id, action, quantity, encodedCartData) {
-  var cartData = JSON.parse(decodeURIComponent(encodedCartData));
-  var inputField = $(`#quantity_${id}`);
->>>>>>> 89b7ba0f893044623c40c24b6f505cd35da08f0f
   var currentQuantity = parseInt(inputField.val());
 
   if (action === 'increase') {
@@ -353,15 +347,11 @@ function updateQuantity(id, action, quantity, encodedCartData) {
     "qty": currentQuantity.toString()
   };
   inputField.val(currentQuantity);
-<<<<<<< HEAD
- 
-=======
   // Update subtotal
   var subtotal1 = calculateSubtotal1(cartData);
   $('#shopping-cart-pane .cart-total h5:last-child').text(subtotal1.toFixed(2) + 'AED');
 
 
->>>>>>> 89b7ba0f893044623c40c24b6f505cd35da08f0f
   if (token === null) {
     window.location.href = "./login.html";
   } else {
@@ -388,12 +378,9 @@ function updateQuantity(id, action, quantity, encodedCartData) {
     });
   }
 }
-<<<<<<< HEAD
-=======
 
 
 
->>>>>>> 89b7ba0f893044623c40c24b6f505cd35da08f0f
 
 var handleBootstrapTouchSpin = function () {
   if ($("input[name='demo_vertical2']").length > 0) {
@@ -424,7 +411,3 @@ function updateDisplayedPrice(price) {
 
 
 
-<<<<<<< HEAD
- 
-=======
->>>>>>> 89b7ba0f893044623c40c24b6f505cd35da08f0f
