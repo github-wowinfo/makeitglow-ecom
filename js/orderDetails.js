@@ -1,5 +1,15 @@
+function getQueryParam(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+  }
+  
+  // Get category ID from the URL
+  const orderId = getQueryParam('orderId');
+
 $.ajax({
-    url: 'https://mig-dev.lifelinemegacorp.com/api/Order/GetOrderDetailsByOrderId?OrderId=ORD1706612145',
+    // url: `${SETTINGS.backendUrl}/Order/GetOrderDetailsByOrderId?OrderId=${order.ordrID}`,
+
+    url:    `${SETTINGS.backendUrl}/Order/GetOrderDetailsByOrderId?OrderId=${orderId}`,
     method: 'GET',
     dataType: 'json',
     headers: {
@@ -19,40 +29,56 @@ $.ajax({
 
 function updateOrderDetails(data) {
     // Update Order Details section
+    var timestampStr = data.ordrPymnt.paymentCreationTime;
+    var timestamp = new Date(timestampStr);
+    var formattedDate = formatDate(timestamp);
+
+    function formatDate(date) {
+        // Array of month names
+        var monthNames = [
+            "January", "February", "March",
+            "April", "May", "June", "July",
+            "August", "September", "October",
+            "November", "December"
+        ];
+
+        // Extract day, month, and year
+        var day = date.getDate();
+        var monthIndex = date.getMonth();
+        var year = date.getFullYear();
+
+        // Format the date string
+        var formattedDate = day + " " + monthNames[monthIndex] + " " + year;
+
+        return formattedDate;
+    }
     var orderDetailsHtml = `
     <div class="card p-10 order-head">
-      <h2 class="mb-2">Order Details: #${data.oid}</h2>
-      <p class="mb-3">${data.paymentCreationTime}</p>
+      <h2 class="mb-2">Order Details: #${orderId}</h2>
+      <p class="mb-3">${formattedDate}</p>
       <div class="d-flex">
         <h6 class="me-3">Status :</h6>
-        <p class="text-green">${data.paymentStatusMsg}</p>
+        <p class="text-green"><strong>${data.ordrPymnt.paymentStatusMsg}</strong></p>
       </div>
     </div>
 
+    <div class="card p-5 order-head ">
+    <div class="d-flex">
+    <div class="col-6 " id="billingAddress" >
+    </div>
+    
 
-       <div class="card p-5 order-head ">
-          <div class="d-flex">
-              <div class="col-4 " id="billingAddress">
-              </div> 
-          
-              <div class="col-4 p-5" id="payment">
-                  <h4 class="mb-2">Payment Method</h4>
-                 <p class="mb-3">${data.paymentCreationTime}</p>
-                 <div>
-                   <h6 class="me-3">${order.paymentType}</h6>
-                 </div>
-              </div>
-          </div>
+    <div class="col-6 p-5" id="payment">
+        <h4 class="mb-2">Payment Method</h4>
+      <p class="mb-3">${formattedDate}</p>
+      <div>
+      <h6 class="me-3">${data.ordrPymnt.paymentType}</h6>
       </div>
+    </div>
 
-      <div class="card p-5 order-head ">
-      <td class="product-item-close"><a href="javascript:void(0);">${order.ordrItms[0].itmname}</a></td>
-      <td class="product-item-name">${order.ordrItms[0].qty}</td>
-      <td class="product-item-price"><span>${order.ordrItms[0].price}</span> </td>
-      <td class="product-item-stock text-primary">${order.ordrItms[0].total}</td>
-      <td class="product-item-totle"><a href="./orderDetails.html" class="btn btn-gray btnhover text-nowrap">View Details</a></td>
-      </div>
    
+</div>
+      
 
   
   
@@ -60,18 +86,48 @@ function updateOrderDetails(data) {
     `;
     $('#orderDetails').html(orderDetailsHtml);
 
+    // card2 ... 
+    console.log(data.ordrItms);
+    if (data.ordrItms && data.ordrItms.length > 0) {
+        // Build the table headers outside the loop
+        const tableHeaders = `
+        
+            <thead>
+                <tr>
+                    <th> Product Name </th>
+                    <th> Quantity </th>
+                    <th> Rate </th>
+                    <th> Amount </th>
+                </tr>
+            </thead>
+        `;
+        // Append the table headers
+        $('#orderDetails1').append(tableHeaders);
+
+        data.ordrItms.forEach(order => {
+            console.log('order',order);
+            var amount = order.paidAmount/100
+            const row = `
+                <tr>
+                    <td class="product-item"><a href="javascript:void(0);">${order.itmname}</a></td>
+                    <td class="product-item-name">${order.qty}</td>
+                    <td class="product-item-price"><span>${order.price} AED</span></td>
+                    <td class="product-item-stock text-primary">${order.total} AED</td>
+                </tr>
+            `;
+            // Append each row inside the loop
+            $('#orderDetails1').append(row);
+        }) 
+
+        // Close the tbody after the loop
+        $('#orderDetails1').html(tableHeaders + rows + '</tbody>');
+    } else {
+        // Handle the case when no FAQs are available
+        $('#orderDetails1').append('<p>No FAQs available</p>');
+    }
+    getBillingInfo();
     // Add logic to update other sections as needed (billing address, payment, product details, etc.)
 }
-
-
-
-
-
-
-
-
-
-
 
 
 

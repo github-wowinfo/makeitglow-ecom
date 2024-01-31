@@ -15,22 +15,44 @@ $(document).ready(function () {
         success: function (data) {
             console.log('data', data);
             // Handle the response data and append FAQs to the container
-            // if (data && data.length > 0) {
-            //     data.forEach(order => {
-            //         const row = document.createElement('tr');
-            //         row.innerHTML = `
-            //           <td class="product-item-close"><a href="javascript:void(0);">${order.paymentRemark}</a></td>
-            //           <td class="product-item-name">${order.productsQty}</td>
-            //           <td class="product-item-price"><span>${order.paidAmount}</span> </td>
-            //           <td class="product-item-stock text-primary">${order.paymentStatusMsg}</td>
-            //           <td class="product-item-totle"><a href="./orderDetails.html" class="btn btn-gray btnhover text-nowrap">View Details</a></td>
-            //         `;
-            //         $('#tbody').appendChild(row);
-            //     });
-            // } else {
-            //     // Handle the case when no FAQs are available
-            //     $('#tbody').append('<p>No FAQs available</p>');
-            // }
+            if (data && data.length > 0) {
+                // Build the table headers outside the loop
+                const tableHeaders = `
+                    <thead>
+                        <tr>
+                            <th>Product Id</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                `;
+                // Append the table headers
+                $('#tbody').append(tableHeaders);
+
+                data.forEach(order => {
+                    var amount = order.paidAmount/100
+                    const row = `
+                        <tr>
+                            <td class="product-item"><a href="javascript:void(0);">${order.ordrID}</a></td>
+                            <td class="product-item-name">${order.productsQty}</td>
+                            <td class="product-item-price"><span>${amount} AED</span></td>
+                            <td class="product-item-stock text-primary">${order.ordrPymnt.paymentStatusMsg}</td>
+                            <td class="product-item-totle"><a href="./orderDetails.html?orderId=${order.ordrID}" class="btn btn-gray btnhover text-nowrap rounded">View Details</a></td>
+                        </tr>
+                    `;
+                    // Append each row inside the loop
+                    $('#tbody').append(row);
+                });
+
+                // Close the tbody after the loop
+                $('#tbody').append('</tbody>');
+            } else {
+                // Handle the case when no FAQs are available
+                $('#tbody').append('<p>No FAQs available</p>');
+            }
         },
         error: function (xhr, status, error) {
             // Handle the AJAX request error
