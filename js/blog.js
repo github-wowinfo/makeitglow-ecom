@@ -6,14 +6,8 @@ $.ajax({
         response.forEach(function (blogItem) {
             console.log('resp', blogItem);
             var timestampStr = blogItem.creationTime;
-
-            // Parse the timestamp string into a Date object
             var timestamp = new Date(timestampStr);
-
-            // Format the Date object into the desired format
             var formattedDate = formatDate(timestamp);
-
-            // Display the formatted date
             console.log(formattedDate);
 
             function formatDate(date) {

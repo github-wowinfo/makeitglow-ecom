@@ -62,12 +62,8 @@ document.getElementById("submit").addEventListener("click", function (e) {
     }, // Convert object to JSON string
     success: function (response) {
 
-<<<<<<< HEAD
-      localStorage.setItem('token', response.token);
-=======
       // Save the token in localStorage
       // localStorage.setItem('token', response.token);
->>>>>>> 89b7ba0f893044623c40c24b6f505cd35da08f0f
       console.log('Submitted:', response);
       toastr.success(" Submitted ");
 
