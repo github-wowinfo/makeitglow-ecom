@@ -163,8 +163,6 @@ function updateTotalAmount() {
 
 // Whish list api . . . . 
 
-// $(document).ready(function () {
-// Fetch cart data from the API
 function getWhishlist() {
   $.ajax({
     url: `${SETTINGS.backendUrl}/Ecom/GetWishlistByCustId`,
@@ -219,9 +217,7 @@ function getWhishlist() {
     }
   });
 }
-// });
-
-// Function to calculate subtotal based on cart data
+ 
 function calculateSubtotal1(cartData) {
   var subtotal = 0;
 
@@ -241,10 +237,7 @@ $(document).ready(function () {
 });
 
 //   delete item api . . . 
-// Assuming you have the cart item ID (replace '2' with the actual cart item ID)
-// var cartItemId = 4;
-
-// Use the deleteCartItem function to delete the item from the cart
+ 
 function deleteCartItem(cartEntryId) {
   if (token === null) {
     window.location.href = "./login.html";
@@ -274,9 +267,7 @@ function deleteCartItem(cartEntryId) {
   }
 }
 
-// Example of using the deleteCartItem function with the cart item ID
-// deleteCartItem(cartEntryId);
-
+ 
 
 function deleteWishlistItem(wshLstEntryId) {
   if (token === null) {
@@ -306,20 +297,14 @@ function deleteWishlistItem(wshLstEntryId) {
   }
 }
 
-// Example of using the deleteCartItem function with the cart item ID
-// deleteWishlistItem(wshLstEntryId);
-
-
 function addToCart(id) {
-  // Assuming variantId and quantity are defined somewhere in your code
-  // var variantId = '';
+ 
   var quantity = '1';
 
   var obj = {
     "itmVrntId": id,
     "qty": quantity
   };
-  // console.log(obj)
 
   if (token === null) {
     window.location.href = "./login.html";
@@ -330,15 +315,13 @@ function addToCart(id) {
       headers: {
         Authorization: "Bearer " + token,
         "Content-Type": "application/json",
-        // Add other headers as needed
       },
       dataType: "json",
       contentType: "application/json",
       data: JSON.stringify(obj),
       success: function (response) {
-        // console.log("Sign In Success:", response);
+        console.log("Sign In Success:", response);
         toastr.success("Item Added to Cart");
-        // deleteWishlistItem(wishlistItemId);
 
       },
       error: function (error) {
@@ -349,11 +332,15 @@ function addToCart(id) {
   }
 }
 
+<<<<<<< HEAD
+function updateQuantity(id, action, quantity) {
+  var inputField = $(`input[name='demo_vertical2'][value='${quantity}']`);
+=======
 function updateQuantity(id, action, quantity, encodedCartData) {
   var cartData = JSON.parse(decodeURIComponent(encodedCartData));
   var inputField = $(`#quantity_${id}`);
+>>>>>>> 89b7ba0f893044623c40c24b6f505cd35da08f0f
   var currentQuantity = parseInt(inputField.val());
-
 
   if (action === 'increase') {
     currentQuantity += 1;
@@ -366,11 +353,15 @@ function updateQuantity(id, action, quantity, encodedCartData) {
     "qty": currentQuantity.toString()
   };
   inputField.val(currentQuantity);
+<<<<<<< HEAD
+ 
+=======
   // Update subtotal
   var subtotal1 = calculateSubtotal1(cartData);
   $('#shopping-cart-pane .cart-total h5:last-child').text(subtotal1.toFixed(2) + 'AED');
 
 
+>>>>>>> 89b7ba0f893044623c40c24b6f505cd35da08f0f
   if (token === null) {
     window.location.href = "./login.html";
   } else {
@@ -380,7 +371,6 @@ function updateQuantity(id, action, quantity, encodedCartData) {
       headers: {
         Authorization: "Bearer " + token,
         "Content-Type": "application/json",
-        // Add other headers as needed
       },
       dataType: "json",
       contentType: "application/json",
@@ -398,9 +388,12 @@ function updateQuantity(id, action, quantity, encodedCartData) {
     });
   }
 }
+<<<<<<< HEAD
+=======
 
 
 
+>>>>>>> 89b7ba0f893044623c40c24b6f505cd35da08f0f
 
 var handleBootstrapTouchSpin = function () {
   if ($("input[name='demo_vertical2']").length > 0) {
@@ -423,10 +416,7 @@ $(document).ready(function () {
   handleBootstrapTouchSpin();
 });
 
-// Function to update the displayed price on the page
 function updateDisplayedPrice(price) {
-  // console.log("Total Price: $", + price)
-  // Assuming you have an element to display the price with id="displayedPrice"
   $("#total").text("Total Price: AED" + price);
   handleBootstrapTouchSpin()
 }
@@ -434,3 +424,7 @@ function updateDisplayedPrice(price) {
 
 
 
+<<<<<<< HEAD
+ 
+=======
+>>>>>>> 89b7ba0f893044623c40c24b6f505cd35da08f0f

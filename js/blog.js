@@ -38,7 +38,7 @@ $.ajax({
             var blogList = `
             <div class="col-lg-6 col-md-6 col-6 wow fadeInUp" data-wow-delay="0.1s">
 							<div class="dz-card style-1 ">
-								<div class="dz-media "   style="height:30rem;  width: 35rem;">
+								<div class="dz-media "  >
 									<img src="${SETTINGS.ImageUrl}${blogItem.thumbnail}" alt="/" >
 								</div>
 								<div class="dz-info">
