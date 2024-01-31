@@ -2,16 +2,22 @@ $.ajax({
     url: 'https://mig-dev.lifelinemegacorp.com/api/Order/GetOrderDetailsByOrderId?OrderId=ORD1706612145',
     method: 'GET',
     dataType: 'json',
-    success: function(data) {
-      // Update Order Details
-      updateOrderDetails(data);
+    headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+        // Add other headers as needed
     },
-    error: function(error) {
-      console.error('Error fetching data:', error);
+    success: function (data) {
+        // Update Order Details
+        console.log(data);
+        updateOrderDetails(data);
+    },
+    error: function (error) {
+        console.error('Error fetching data:', error);
     }
-  });
-  
-  function updateOrderDetails(data) {
+});
+
+function updateOrderDetails(data) {
     // Update Order Details section
     var orderDetailsHtml = `
       <h2 class="mb-2">Order Details: #${data.oid}</h2>
@@ -50,9 +56,9 @@ $.ajax({
       <!-- Add other relevant data here -->
     `;
     $('#orderDetails').html(orderDetailsHtml);
-  
+
     // Add logic to update other sections as needed (billing address, payment, product details, etc.)
-  }
+}
 
 
 
@@ -184,7 +190,7 @@ function getBillingInfo() {
 
 }
 
- 
+
 
 function getshippingInfo() {
     $.ajax({
@@ -201,8 +207,8 @@ function getshippingInfo() {
                 // console.log('shipping', shipping);
                 console.log('profileDatabiili', profileData.length);
                 if (profileData.length > 0) {
-    
-                var profile = `  
+
+                    var profile = `  
                 <div class="col-md-6">
 							<div class="card">
 								<div class="card-body" >
@@ -220,18 +226,18 @@ function getshippingInfo() {
 								</div>
 							</div>
 						</div>`;
-                $('#shippinginfo').append(profile);
-            } else {
-                var profile = `<button class="btn btn-secondary btnhover text-uppercase me-2"
+                    $('#shippinginfo').append(profile);
+                } else {
+                    var profile = `<button class="btn btn-secondary btnhover text-uppercase me-2"
                 id="saveshippinginfo">Add Shipping Info</button>`;
-                $('#shippinginfo').append(profile);
-                $('#saveshippinginfo').on('click', function () {
-                    $('#billingModal').modal('show'); // Adjust 'yourModalId' accordingly
-                });
-            }
+                    $('#shippinginfo').append(profile);
+                    $('#saveshippinginfo').on('click', function () {
+                        $('#billingModal').modal('show'); // Adjust 'yourModalId' accordingly
+                    });
+                }
             })
             // Add event listener for the Delete button
-            
+
 
         },
         error: function (error) {
@@ -310,9 +316,9 @@ function getshippingInfo() {
     }
 
 
-    
+
 }
- 
+
 
 $(document).ready(function () {
     getBillingInfo()

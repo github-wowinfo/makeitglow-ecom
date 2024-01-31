@@ -12,6 +12,11 @@ $.ajax({
     url: `${SETTINGS.backendUrl}/Order/GetOrderPaymentDetailsByPaymentRefId?PaymentRefId=${refId}`,
     method: 'GET',
     dataType: 'json',
+    headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+        // Add other headers as needed
+    },
     success: function (data) {
         console.log('data', data);
 

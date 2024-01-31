@@ -408,7 +408,7 @@ document.getElementById("placeorder").addEventListener("click", function (e) {
         toastr.success("Order Placed ");
         if (response.paymentLink) {
           // Redirect to the payment link
-          window.open(response.paymentLink, '_blank');
+          window.location.href = response.paymentLink;
         } else {
           toastr.error("Error: Payment link not found in the response.");
         }

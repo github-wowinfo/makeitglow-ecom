@@ -79,13 +79,14 @@ function getCart() {
                   <div class="btn-quantity light quantity-sm ms-5">
     <div class="input-group bootstrap-touchspin">
         <span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span>
-        <input type="text" value="${cartItem.qty}" name="demo_vertical2" class="form-control" style="display: block;">
+        <input type="text" value="${cartItem.qty}" id="quantity_${cartItem.itmVrntId}" name="demo_vertical2" class="form-control" style="display: block;">
+
         <span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span>
         <span class="input-group-btn-vertical">
-            <button class="btn btn-default bootstrap-touchspin-up" type="button" onclick="updateQuantity(${cartItem.itmVrntId}, 'increase',${cartItem.qty})">
+            <button class="btn btn-default bootstrap-touchspin-up" type="button" onclick="updateQuantity(${cartItem.itmVrntId}, 'increase',${cartItem.qty},'${encodeURIComponent(JSON.stringify(cartData))}')">
                 <i class="fa-solid fa-plus"></i>
             </button>
-            <button class="btn btn-default bootstrap-touchspin-down" type="button" onclick="updateQuantity(${cartItem.itmVrntId}, 'decrease',${cartItem.qty})">
+            <button class="btn btn-default bootstrap-touchspin-down" type="button" onclick="updateQuantity(${cartItem.itmVrntId}, 'decrease',${cartItem.qty},'${encodeURIComponent(JSON.stringify(cartData))}')">
                 <i class="fa-solid fa-minus"></i>
             </button>
         </span>
@@ -339,12 +340,9 @@ function addToCart(id) {
   }
 }
 
-function updateQuantity(id, action, quantity) {
-  // Assuming variantId and quantity are defined somewhere in your code
-  // var variantId = '';
-
-  // var currentQuantity = parseInt($(`input[name='demo_vertical2'][value='${quantity}']`).val());
-  var inputField = $(`input[name='demo_vertical2'][value='${quantity}']`);
+function updateQuantity(id, action, quantity, encodedCartData) {
+  var cartData = JSON.parse(decodeURIComponent(encodedCartData));
+  var inputField = $(`#quantity_${id}`);
   var currentQuantity = parseInt(inputField.val());
 
 
@@ -359,13 +357,10 @@ function updateQuantity(id, action, quantity) {
     "qty": currentQuantity.toString()
   };
   inputField.val(currentQuantity);
-  // var quantity = '1';
+  // Update subtotal
+  var subtotal1 = calculateSubtotal1(cartData);
+  $('#shopping-cart-pane .cart-total h5:last-child').text(subtotal1.toFixed(2) + 'AED');
 
-  // var obj = {
-  //   "itmVrntId": id,
-  //   "qty": quantity
-  // };
-  // console.log(obj)
 
   if (token === null) {
     window.location.href = "./login.html";
@@ -394,30 +389,7 @@ function updateQuantity(id, action, quantity) {
     });
   }
 }
-// function deleteWishlistItem(wishlistItemId) {
-//   // Implement the logic to delete the wishlist item using its ID
-//   // You can use another AJAX call to the backend to delete the item
-//   $.ajax({
-//     url: `${SETTINGS.backendUrl}/Ecom/DeleteWishlistItem/${wishlistItemId}`,
-//     method: 'DELETE',
-//     headers: {
-//       Authorization: "Bearer " + token,
-//       "Content-Type": "application/json",
-//       // Add other headers as needed
-//     },
-//     success: function (response) {
-//       // console.log("Delete Wishlist Item Success:", response);
-//       toastr.success("Item Removed from Wishlist");
 
-//       // Refresh the wishlist after removing an item
-//       getWhishlist();
-//     },
-//     error: function (error) {
-//       console.error('Error deleting wishlist item:', error);
-//       toastr.error(error.responseJSON.title);
-//     }
-//   });
-// }
 
 
 
@@ -437,18 +409,13 @@ var handleBootstrapTouchSpin = function () {
     });
   }
 }
-// Assuming you have already initialized the TouchSpin library
 
 $(document).ready(function () {
-  // Initialize TouchSpin
   handleBootstrapTouchSpin();
-  // Add event listener for quantity input change
 });
 
 // Function to update the displayed price on the page
 function updateDisplayedPrice(price) {
-  // console.log("Total Price: $", + price)
-  // Assuming you have an element to display the price with id="displayedPrice"
   $("#total").text("Total Price: $" + price);
   handleBootstrapTouchSpin()
 }
@@ -456,41 +423,3 @@ function updateDisplayedPrice(price) {
 
 
 
-/* <div class="input-group">
-<button class="btn btn-primary btn-sm quantity-up" type="button">+</button>
-<input type="text" class="form-control quantity-input" m-10 value="1">
-<button class="btn btn-primary btn-sm quantity-down" type="button">-</button>
-</div> */
-// Assuming you have the wishlist item ID (replace '2' with the actual wishlist item ID)
-// var wishlistItemId = 2;
-
-// // Use the deleteWishlistItem function to delete the item from the wishlist
-// function deleteWishlistItem(wshLstEntryId) {
-//   if (token === null) {
-//     window.location.href = "./login.html";
-//   } else {
-//     $.ajax({
-//       url: `${SETTINGS.backendUrl}/Ecom/DeleteWishlistItem?Id=${wshLstEntryId}`,
-//       type: "DELETE",
-//       headers: {
-//         Authorization: "Bearer " + token,
-//         // Add other headers as needed
-//       },
-//       data: {
-//         Id: wshLstEntryId,
-//       },
-//       success: function (response) {
-//         console.log("Item Deleted from Wishlist:", response);
-//         toastr.success("Item Deleted from Wishlist");
-//         // Optionally, you can update the UI or perform other actions after deletion
-//       },
-//       error: function (error) {
-//         console.log("Delete from Wishlist Error:", error);
-//         toastr.error(error.responseJSON.title);
-//       },
-//     });
-//   }
-// }
-
-// // Example of using the deleteWishlistItem function with the wishlist item ID
-// deleteWishlistItem(wshLstEntryId);
