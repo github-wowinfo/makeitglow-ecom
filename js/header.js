@@ -332,8 +332,9 @@ function addToCart(id) {
   }
 }
 
-function updateQuantity(id, action, quantity) {
-  var inputField = $(`input[name='demo_vertical2'][value='${quantity}']`);
+function updateQuantity(id, action, quantity, encodedCartData) {
+  var cartData = JSON.parse(decodeURIComponent(encodedCartData));
+  var inputField = $(`#quantity_${id}`);
   var currentQuantity = parseInt(inputField.val());
 
   if (action === 'increase') {
@@ -407,6 +408,7 @@ function updateDisplayedPrice(price) {
   $("#total").text("Total Price: AED" + price);
   handleBootstrapTouchSpin()
 }
+
 
 
 
