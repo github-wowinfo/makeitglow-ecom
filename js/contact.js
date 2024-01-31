@@ -54,10 +54,20 @@ document.getElementById("submit").addEventListener("click", function (e) {
     type: 'POST',
     dataType: 'json', // Change the datatype according to your response type
     contentType: 'application/json', // Set the Content-Type
-    data: JSON.stringify(userData), // Convert object to JSON string
+    data: JSON.stringify(userData),
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-Type": "application/json",
+      // Add other headers as needed
+    }, // Convert object to JSON string
     success: function (response) {
 
+<<<<<<< HEAD
       localStorage.setItem('token', response.token);
+=======
+      // Save the token in localStorage
+      // localStorage.setItem('token', response.token);
+>>>>>>> 89b7ba0f893044623c40c24b6f505cd35da08f0f
       console.log('Submitted:', response);
       toastr.success(" Submitted ");
 

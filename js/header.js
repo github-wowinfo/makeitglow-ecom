@@ -88,13 +88,14 @@ function getCart() {
                   <div class="btn-quantity light quantity-sm ms-5">
     <div class="input-group bootstrap-touchspin">
         <span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span>
-        <input type="text" value="${cartItem.qty}" name="demo_vertical2" class="form-control" style="display: block;">
+        <input type="text" value="${cartItem.qty}" id="quantity_${cartItem.itmVrntId}" name="demo_vertical2" class="form-control" style="display: block;">
+
         <span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span>
         <span class="input-group-btn-vertical">
-            <button class="btn btn-default bootstrap-touchspin-up" type="button" onclick="updateQuantity(${cartItem.itmVrntId}, 'increase',${cartItem.qty})">
+            <button class="btn btn-default bootstrap-touchspin-up" type="button" onclick="updateQuantity(${cartItem.itmVrntId}, 'increase',${cartItem.qty},'${encodeURIComponent(JSON.stringify(cartData))}')">
                 <i class="fa-solid fa-plus"></i>
             </button>
-            <button class="btn btn-default bootstrap-touchspin-down" type="button" onclick="updateQuantity(${cartItem.itmVrntId}, 'decrease',${cartItem.qty})">
+            <button class="btn btn-default bootstrap-touchspin-down" type="button" onclick="updateQuantity(${cartItem.itmVrntId}, 'decrease',${cartItem.qty},'${encodeURIComponent(JSON.stringify(cartData))}')">
                 <i class="fa-solid fa-minus"></i>
             </button>
         </span>
@@ -331,8 +332,14 @@ function addToCart(id) {
   }
 }
 
+<<<<<<< HEAD
 function updateQuantity(id, action, quantity) {
   var inputField = $(`input[name='demo_vertical2'][value='${quantity}']`);
+=======
+function updateQuantity(id, action, quantity, encodedCartData) {
+  var cartData = JSON.parse(decodeURIComponent(encodedCartData));
+  var inputField = $(`#quantity_${id}`);
+>>>>>>> 89b7ba0f893044623c40c24b6f505cd35da08f0f
   var currentQuantity = parseInt(inputField.val());
 
   if (action === 'increase') {
@@ -346,7 +353,15 @@ function updateQuantity(id, action, quantity) {
     "qty": currentQuantity.toString()
   };
   inputField.val(currentQuantity);
+<<<<<<< HEAD
  
+=======
+  // Update subtotal
+  var subtotal1 = calculateSubtotal1(cartData);
+  $('#shopping-cart-pane .cart-total h5:last-child').text(subtotal1.toFixed(2) + 'AED');
+
+
+>>>>>>> 89b7ba0f893044623c40c24b6f505cd35da08f0f
   if (token === null) {
     window.location.href = "./login.html";
   } else {
@@ -373,6 +388,12 @@ function updateQuantity(id, action, quantity) {
     });
   }
 }
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 89b7ba0f893044623c40c24b6f505cd35da08f0f
 
 var handleBootstrapTouchSpin = function () {
   if ($("input[name='demo_vertical2']").length > 0) {
@@ -403,4 +424,7 @@ function updateDisplayedPrice(price) {
 
 
 
+<<<<<<< HEAD
  
+=======
+>>>>>>> 89b7ba0f893044623c40c24b6f505cd35da08f0f
