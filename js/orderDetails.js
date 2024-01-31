@@ -14,12 +14,15 @@ $.ajax({
   function updateOrderDetails(data) {
     // Update Order Details section
     var orderDetailsHtml = `
+    <div class="card p-10 order-head">
       <h2 class="mb-2">Order Details: #${data.oid}</h2>
       <p class="mb-3">${data.paymentCreationTime}</p>
       <div class="d-flex">
         <h6 class="me-3">Status :</h6>
         <p class="text-green">${data.paymentStatusMsg}</p>
       </div>
+    </div>
+
 
        <div class="card p-5 order-head ">
           <div class="d-flex">

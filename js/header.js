@@ -40,11 +40,20 @@ $.ajax({
 });
 
 
+
 // add to cart api . . . . 
 
 let quantity = 1
 
 function getCart() {
+
+  if (token === null) {
+    // If not logged in, set cart count to 0 and return
+    $('#cartCount').text(0);
+    $('#cartCount1').text(0);
+    return;
+  }
+
   $.ajax({
     url: `${SETTINGS.backendUrl}/Ecom/GetCartByCustId`,
     method: 'GET',
@@ -449,7 +458,7 @@ $(document).ready(function () {
 function updateDisplayedPrice(price) {
   // console.log("Total Price: $", + price)
   // Assuming you have an element to display the price with id="displayedPrice"
-  $("#total").text("Total Price: $" + price);
+  $("#total").text("Total Price: AED" + price);
   handleBootstrapTouchSpin()
 }
 

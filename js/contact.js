@@ -5,7 +5,7 @@ document.getElementById("submit").addEventListener("click", function (e) {
   const PhoneNum = document.getElementById("number").value;
   const Location = document.getElementById("locationSelection").value;
   const Subject = document.getElementById("subject").value;
-  const Message = document.getElementById("message").value;
+  const Message = document.getElementById("messages").value;
   // Validate first name  (not empty)
   document.querySelectorAll('.error').forEach(element => {
     element.textContent = '';
@@ -14,7 +14,7 @@ document.getElementById("submit").addEventListener("click", function (e) {
 
   // Validate first name and last name (not empty)
   if (FirstName === '') {
-    toastr.error("First name is required.");
+    toastr.error(" Name is required.");
     // document.getElementById("firstNameError").textContent = "First name is required.";
     // hasError = true;
     return
@@ -40,13 +40,13 @@ document.getElementById("submit").addEventListener("click", function (e) {
     return;
   }
   if (Subject === '') {
-    toastr.error("subject is required.");
+    toastr.error("Subject is required.");
     // document.getElementById("firstNameError").textContent = "First name is required.";
     // hasError = true;
     return
   }
   if (Message === '') {
-    toastr.error("subject is required.");
+    toastr.error("Message is required.");
     // document.getElementById("firstNameError").textContent = "First name is required.";
     // hasError = true;
     return
