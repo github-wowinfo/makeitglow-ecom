@@ -349,8 +349,7 @@ function updateQuantity(id, action, quantity, encodedCartData) {
   };
   inputField.val(currentQuantity);
   // Update subtotal
-  var subtotal1 = calculateSubtotal1(cartData);
-  $('#shopping-cart-pane .cart-total h5:last-child').text(subtotal1.toFixed(2) + 'AED');
+
 
 
   if (token === null) {
@@ -369,6 +368,9 @@ function updateQuantity(id, action, quantity, encodedCartData) {
       success: function (response) {
         // console.log("Sign In Success:", response);
         toastr.success("Item Added to Cart");
+        getCart()
+        var subtotal1 = calculateSubtotal1(cartData);
+        $('#shopping-cart-pane .cart-total h5:last-child').text(subtotal1.toFixed(2) + 'AED');
         // deleteWishlistItem(wishlistItemId);
 
       },
