@@ -81,7 +81,7 @@ $(document).ready(function () {
   `
       $('#imageContent').append(productImage);
       $('#howtouse').append(data.vrnts[0].howToUse);
- 
+
       // Generate pricing HTML dynamically based on API response
       var pricingHTML = '';
       var initialTab = 1; // You can set this to the index of the initially selected tab
@@ -138,7 +138,7 @@ $(document).ready(function () {
               var totalPrice = productquantity * selectedVariant.mrp;
               $("#displayedPrice").text(' AED ' + totalPrice);
               // updateDisplayedPrice(totalPrice);
-               console.log('mera', totalPrice);
+              console.log('mera', totalPrice);
               // Update the displayed price on the page
             }
             // Calculate the new price based on quantity
@@ -178,7 +178,7 @@ window.handleButtonClick = function (event, tabId, newVariantId) {
   quantity2 = 1;
   // You can perform additional actions here if needed
   $("input[name='demo_vertical2']").val(quantity2);
-  
+
   // ...
 };
 // });
@@ -216,7 +216,7 @@ $(document).ready(function () {
 //   var displayedPriceElement = document.getElementById("displayedPrice");
 //   displayedPriceElement.textContent = " Price: $" + Price;
 //   // handleBootstrapTouchSpin()
-  
+
 // }
 
 // const Price= document.getElementById("price").value;
@@ -254,6 +254,7 @@ document.getElementById("cart").addEventListener("click", function (e) {
       success: function (response) {
         console.log("Sign In Success:", response);
         toastr.success("Item Added to Cart");
+        getCart()
       },
 
       error: function (error) {

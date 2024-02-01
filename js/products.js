@@ -251,6 +251,7 @@ function addToCart(id) {
 			success: function (response) {
 				console.log("Sign In Success:", response);
 				toastr.success("Item Added to Cart");
+				getCart()
 
 			},
 			error: function (error) {
