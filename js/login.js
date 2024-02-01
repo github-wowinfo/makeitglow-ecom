@@ -5,6 +5,9 @@ document.getElementById("login").addEventListener("click", function (e) {
 
   const EmailId = document.getElementById("email").value;
   const Passwords = document.getElementById("password").value;
+  const togglePassword = document.querySelector('#togglePassword');
+
+  
 
   // Validate first name  (not empty)
   document.querySelectorAll(".error").forEach((element) => {
@@ -80,6 +83,12 @@ document.getElementById("login").addEventListener("click", function (e) {
       }
     },
   });
+});
+
+document.getElementById('togglePassword').addEventListener('click', function () {
+  var passwordInput = document.getElementById('password');
+  var type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+  passwordInput.setAttribute('type', type);
 });
 
 document.getElementById("handleConfirmation").addEventListener("click", function (e) {

@@ -255,7 +255,7 @@ function addToCart(id) {
 			},
 			error: function (error) {
 				console.log("Sign in Error:", error);
-				toastr.error(error.responseJSON.title);
+				toastr.error(error.responseJSON.message);
 			},
 		});
 	}

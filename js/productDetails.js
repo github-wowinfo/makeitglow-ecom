@@ -257,8 +257,8 @@ document.getElementById("cart").addEventListener("click", function (e) {
       },
 
       error: function (error) {
-        console.log("Sign in Error:", error);
-        toastr.error(error.responseJSON.title);
+        console.log("Sign in Error:", error.responseJSON.message);
+        toastr.error(error.responseJSON.message);
 
       },
     });
