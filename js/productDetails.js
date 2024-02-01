@@ -81,14 +81,7 @@ $(document).ready(function () {
   `
       $('#imageContent').append(productImage);
       $('#howtouse').append(data.vrnts[0].howToUse);
-
-
-      // function generateOnClickFunction(index) {
-      //   return function (event) {
-      //     openTab(event, 'tab' + (index + 1));
-      //   };
-      // }
-
+ 
       // Generate pricing HTML dynamically based on API response
       var pricingHTML = '';
       var initialTab = 1; // You can set this to the index of the initially selected tab
@@ -185,6 +178,7 @@ window.handleButtonClick = function (event, tabId, newVariantId) {
   quantity2 = 1;
   // You can perform additional actions here if needed
   $("input[name='demo_vertical2']").val(quantity2);
+  
   // ...
 };
 // });
