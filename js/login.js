@@ -1,5 +1,7 @@
 var token = localStorage.getItem("token");
 console.log(token);
+var username = localStorage.getItem("userName");
+console.log(username);
 document.getElementById("login").addEventListener("click", function (e) {
   e.preventDefault();
 
@@ -55,23 +57,28 @@ document.getElementById("login").addEventListener("click", function (e) {
     data: JSON.stringify(userData), // Convert object to JSON string
 
     success: function (response) {
+      var fullName = response.profile.firstName + ' ' + response.profile.lastName;
 
+console.log(response);
       localStorage.setItem('token', response.token);
       localStorage.setItem('userId', response.profile.userId)
-      localStorage.setItem('uid', response.profile.uid)
+      localStorage.setItem('uid', response.profile.uid)      
+      localStorage.setItem('userName', fullName)      
+      localStorage.setItem('uid', response.profile.firstName)      
       console.log("Sign In Success:", response.profile);
+
       toastr.success("Login In successful! ");
       // window.location.href = "./index.html";
 
        // Check for the stored redirect URL
     var redirectUrl = sessionStorage.getItem('redirectUrl');
-    if (redirectUrl) {
-      sessionStorage.removeItem('redirectUrl'); // Clear the stored URL
-      window.location.href = redirectUrl;
-    } else {
-      // Redirect to the default URL if there is no stored URL
-      window.location.href = "./index.html";
-    }
+    // if (redirectUrl) {
+    //   sessionStorage.removeItem('redirectUrl'); // Clear the stored URL
+    //   window.location.href = redirectUrl;
+    // } else {
+    //   // Redirect to the default URL if there is no stored URL
+    //   window.location.href = "./index.html";
+    // }
     },
     error: function (error) {
       console.log("Sign in Error:", error);

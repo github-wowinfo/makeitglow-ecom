@@ -188,12 +188,7 @@ $(document).ready(function () {
         // Append the product card HTML to the masonry layout
         $('#masonry').append(productCardHtml);
       });
-
-      // Initialize or update your Masonry layout here (if needed)
-      // ...
-
-      // Optionally, apply any other logic or styles needed after appending the cards
-      // ...
+ 
     },
     error: function (error) {
       console.error('Error fetching data:', error);
@@ -295,7 +290,7 @@ function quckview(id) {
       </div>
     </div>
   </div>
-</div>`
+   </div>`
       $('#modalBody').append(modalData)
 
     },
@@ -345,7 +340,6 @@ function addToCart(id) {
     });
   }
 }
-
 
 function addToWishlist(id) {
   var quantity = '1';

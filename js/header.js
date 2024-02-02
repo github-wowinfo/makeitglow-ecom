@@ -1,28 +1,38 @@
 
 var token = localStorage.getItem("token");
-// console.log('token', token);
+var userName = localStorage.getItem("userName");
+
+console.log('token', token);
+console.log('userName', userName);
 if (token === null) {
   var dropdown = `
     <ul>
     <li><a href="./login.html">Login / Registration</a></li>
 </ul>`
   $('#user-dropdown').append(dropdown)
+  $('#userName').text(""); 
+
 } else {
   var dropdown = `
-    <ul>
+  <ul>
     <li><a href="./account.html">Account</a></li> 
     <li><a href="./OrderTracking.html">Order Tracking</a></li> 
     <li><a href="./changepass.html">Change Password</a></li> 
     <li><a href="#/" onClick="logout()">Logout</a></li> 
-</ul>`
+ </ul>
+ `
   $('#user-dropdown').append(dropdown)
+  $('#userName').text(userName); // Display user name
 }
+
+ 
 
 function logout() {
   window.location.href = "./login.html";
   localStorage.removeItem('token')
   localStorage.removeItem('userId')
   localStorage.removeItem('uid')
+  localStorage.removeItem('userName'); // Remove user name on logout
 }
 
 $.ajax({
@@ -58,7 +68,7 @@ function getCart() {
     url: `${SETTINGS.backendUrl}/Ecom/GetCartByCustId`,
     method: 'GET',
     headers: {
-      Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token ,
       "Content-Type": "application/json",
       // Add other headers as needed
     },
