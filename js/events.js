@@ -7,6 +7,7 @@
                     // Assuming data is an array of events
                     // You can process the data and update the HTML accordingly
                     updateAccordion(data);
+                    $("#lightgallery").lightGallery(); // Initialize LightGallery
                 },
                 error: function(error){
                     console.error('Error fetching data:', error);
@@ -22,13 +23,13 @@
                         <div class="accordion-item mt-5 active">
                             <h2 class="accordion-header" id="heading${event.id}">
                                 <a href="#" class="accordion-button collapsed"
-                                    data-bs-toggle="collapse" data-bs-target="#collapse${event.id}"
+                                    data-bs-toggle="collapse" data-bs-target="#collapse${event.eventEntryId}"
                                     aria-expanded="true" aria-controls="collapse${event.id}">
-                                    ${event.title}--${event.eventDate}
+                                    ${event.title} - ${event.eventDate}
                                     <span class="toggle-close"></span>
                                 </a>
                             </h2>
-                            <div id="collapse${event.id}" class="accordion-collapse collapse"
+                            <div id="collapse${event.eventEntryId}" class="accordion-collapse collapse"
                                 aria-labelledby="heading${event.id}" data-bs-parent="#accordionFaq">
                                 <div class="accordion-body">
                                     <p>${event.description}</p>
@@ -36,9 +37,9 @@
                                     <div class="dz-post-text demo-gallery">
 
                                     <div class="dz-post-text demo-gallery">
-                                    <div class="demo-gallery">
+                                    <div class="demo-gallery lg-gallery">
                                         <ul id="lightgallery"
-                                            class="list-unstyled wp-container-5 wp-block-gallery-3 wp-block-gallery has-nested-images columns-4 is-cropped"
+                                            class=" list-unstyled wp-container-5 wp-block-gallery-3 wp-block-gallery has-nested-images columns-4 is-cropped"
                                             style="border: none;">
                                             ${getImagesHTML(event.eventMediaFiles)}
                                         </ul>
@@ -54,8 +55,8 @@
 
                 // Assuming #accordionFaq is the ID of your accordion container
                 $('#accordionFaq').html(accordionHTML);
-            }
-            function getImagesHTML(images) {
+              }
+             function getImagesHTML(images) {
                 var imagesHTML = '';
             
                 images.forEach(function(image, index) {
@@ -74,5 +75,9 @@
                 });
             
                 return imagesHTML;
-            }
-        });
+                
+              }
+
+            
+});
+        

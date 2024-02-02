@@ -357,7 +357,7 @@ function updateQuantity(id, action, quantity, encodedCartData) {
     window.location.href = "./login.html";
   } else {
     $.ajax({
-      url: `${SETTINGS.backendUrl}/Ecom/AddToCart`,
+      url: `${SETTINGS.backendUrl}/Ecom/UpdateCartItemQty`,
       type: "POST",
       headers: {
         Authorization: "Bearer " + token,
@@ -367,8 +367,8 @@ function updateQuantity(id, action, quantity, encodedCartData) {
       contentType: "application/json",
       data: JSON.stringify(obj),
       success: function (response) {
-        // console.log("Sign In Success:", response);
-        toastr.success("Item Added to Cart");
+        console.log("Sign In Success:", response);
+        toastr.success(response.message);
         getCart()
         var subtotal1 = calculateSubtotal1(cartData);
         $('#shopping-cart-pane .cart-total h5:last-child').text(subtotal1.toFixed(2) + 'AED');
@@ -377,7 +377,7 @@ function updateQuantity(id, action, quantity, encodedCartData) {
       },
       error: function (error) {
         console.log("Sign in Error:", error);
-        toastr.error(error.responseJSON.title);
+        toastr.error(error.responseJSON.message);
       },
     });
   }
