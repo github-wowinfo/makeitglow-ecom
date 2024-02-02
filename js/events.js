@@ -7,7 +7,7 @@
                     // Assuming data is an array of events
                     // You can process the data and update the HTML accordingly
                     updateAccordion(data);
-                    $("#lightgallery").lightGallery(); // Initialize LightGallery
+                  
                 },
                 error: function(error){
                     console.error('Error fetching data:', error);
@@ -51,10 +51,11 @@
                             </div>
                         </div>`;
                 });
-                
-
-                // Assuming #accordionFaq is the ID of your accordion container
                 $('#accordionFaq').html(accordionHTML);
+                
+                $("#lightgallery").lightGallery({
+                    selector: '.demo-gallery .lg-item',
+                }); // Initialize LightGallery
               }
              function getImagesHTML(images) {
                 var imagesHTML = '';
