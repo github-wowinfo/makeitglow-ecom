@@ -14,7 +14,8 @@
 	<meta property="og:title" content="MoonCart Shop & eCommerce HTML Template">
 	<meta property="og:description" content="MoonCart Shop & eCommerce HTML Template">
 	<meta name="format-detection" content="telephone=no">
-
+	<meta name="google-signin-client_id"
+		content="523878807076-urpdvcvkbenjk7f2r04oled2959jgjs0.apps.googleusercontent.com">
 	<!-- FAVICONS ICON -->
 	<link rel="icon" type="image/x-icon" href="images/logo1.png">
 
@@ -111,10 +112,12 @@
 										<label class="label-title">Password</label>
 										<!-- <input name="dzName" required class="form-control" id="password" maxlength="8"
 											placeholder="Password" type="password"> -->
-											<div class="form-control d-flex " style="  align-items: center;">
-												<input name="dzName" required class=""  placeholder="Password" maxlength="8" type="password" id="password" style="border: none; background-color: transparent; width: 160px; ">
-												<i class="far fa-eye" id="togglePassword" style=" cursor: pointer;" ></i> 
-											</div>
+										<div class="form-control d-flex " style="  align-items: center;">
+											<input name="dzName" required class="" placeholder="Password" maxlength="8"
+												type="password" id="password"
+												style="border: none; background-color: transparent; width: 160px; ">
+											<i class="far fa-eye" id="togglePassword" style=" cursor: pointer;"></i>
+										</div>
 										<!-- <span id="passwordError" class="error" style="color: red;"></span>  -->
 									</div>
 									<div class="col-6">
@@ -124,7 +127,7 @@
 										<!-- <span id="phoneNumberError" class="error" style="color: red;"></span>  -->
 									</div>
 								</div>
-							
+
 								<div class="m-b25 row">
 									<div class="col-6">
 										<!-- <div class="m-b25"> -->
@@ -150,7 +153,7 @@
 										</div>
 										<!-- </div> -->
 									</div>
-									
+
 								</div>
 								<div class="m-b25">
 									<div class="col-12">
@@ -174,16 +177,17 @@
 										class="btn btn-outline-secondary btnhover text-uppercase rounded">Login</a>
 								</div>
 							</form>
+							<div class="g-signin2" data-onsuccess="onSignIn"></div>
 						</div>
 					</div>
 				</div>
 
 			</section>
 
-	
+
 		</div>
 
-	
+
 
 		<button class="scroltop" type="button"><i class="fas fa-arrow-up"></i></button>
 
@@ -221,7 +225,7 @@
 	<script src="vendor/lightgallery/dist/plugins/zoom/lg-zoom.min.js"></script>
 	<script src="js/dz.ajax.js"></script><!-- AJAX -->
 	<script src="js/custom.js"></script><!-- CUSTOM JS -->
-
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
 </body>
 
 <!-- Mirrored from mooncart.dexignzone.com/xhtml/shop-registration.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Dec 2023 12:28:03 GMT -->
