@@ -1,125 +1,4 @@
 
-// document.getElementById("placeorder").addEventListener("click", function (e) {
-//   e.preventDefault()
-//   const EmailId = document.getElementById("email").value;
-//   const Countries = document.getElementById("country").value;
-//   const FirstName = document.getElementById("firstname").value;
-//   const LastName = document.getElementById("lastname").value;
-//   const Company = document.getElementById("company").value;
-//   const Addresses = document.getElementById("address").value;
-//   const State = document.getElementById("state").value;
-//   const City = document.getElementById("city").value;
-//   const PhoneNum = document.getElementById("phone").value;
-
-//   // Validate first name  (not empty)
-//   document.querySelectorAll('.error').forEach(element => {
-//     element.textContent = '';
-//   });
-
-//   // let hasError = false;
-
-//   // Validate email format using a simple regex
-//   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//   if (!emailRegex.test(EmailId)) {
-//     // alert("Please enter a valid email address.");
-//     toastr.error("Please enter a valid email address.");
-
-//     return;
-//   }
-//   // Validate first name and last name (not empty)
-//   if (FirstName === '') {
-//     toastr.error("First name is required.");
-//     // document.getElementById("firstNameError").textContent = "First name is required.";
-//     // hasError = true;
-//     return
-//   }
-
-//   if (LastName === '') {
-//     toastr.error("Last name is required.");
-//     // document.getElementById("lastNameError").textContent = "Last name is required.";
-//     // hasError = true;
-//     return
-
-//   }
-
-//   // Validate phone number (only digits, optional country code)
-//   const phoneRegex = /^\+?[0-9]*$/;
-//   if (!phoneRegex.test(PhoneNum)) {
-//     // alert("Please enter a valid phone number.");
-//     toastr.error("Please enter a valid phone number.");
-
-//     return;
-//   }
-
-//   // Validate address (not empty)
-//   if (Addresses === '') {
-//     // alert("Address is a required field.");
-//     toastr.error("Please enter a valid address.");
-
-//     return;
-//   }
-
-//   if (State === '') {
-//     // alert("Address is a required field.");
-//     toastr.error("Please enter a valid state.");
-
-//     return;
-//   } if (City === '') {
-//     // alert("Address is a required field.");
-//     toastr.error("Please enter a valid city.");
-
-//     return;
-//   }
-
-//   // console.log(FirstName);
-
-//   var userData = {
-//     //   "userType": 2,
-//     "email": EmailId,
-//     "lctnId": Countries,
-//     "firstName": FirstName,
-//     "lastName": LastName,
-//     "company": Company,
-//     "addressLine1": Addresses,
-//     "state": State,
-//     "city": City,
-//     "phoneNumber": PhoneNum,
-
-//     // Add any other required fields for user registration
-//   };
-//   console.log('userData :', userData);
-
-//   $.ajax({
-//     url: `${SETTINGS.backendUrl}/Auth/Register`,
-//     type: 'POST',
-//     dataType: 'json', // Change the datatype according to your response type
-//     contentType: 'application/json', // Set the Content-Type
-//     data: JSON.stringify(userData), // Convert object to JSON string
-//     success: function (response) {
-//       // var token = 'your_generated_token';
-
-//       // Save the token in localStorage
-//       localStorage.setItem('token', response.token);
-//       console.log('Registration Success:', response);
-
-//       // Handle the response from the server after successful registration
-//       // Show success toast
-//       toastr.success("Registered successful! ");
-//       window.location.href = "./login.html";
-//       },
-//     error: function (error) {
-//       // console.log('Registration Error:', error);
-//       console.log("Registration Error::", error.responseJSON.message);
-//       toastr.error(error.responseJSON.message);
-//       // toastr.error("error occured");
-
-
-//     }
-//   });
-// });
-
-
-
 let productCount = ''
 let subtotal = 0
 let shipping = 0
@@ -191,6 +70,156 @@ function calculateSubtotal(cartData) {
 }
 
 
+
+// function getshippinginfo() {
+//   $.ajax({
+//     url: `${SETTINGS.backendUrl}/CustomerAccount/GetAllCustShippingAddresses`,
+//     method: 'GET',
+//     headers: {
+//       Authorization: "Bearer " + token,
+//       "Content-Type": "application/json",
+//       // Add other headers as needed
+//     },
+//     dataType: 'json',
+//     success: function (profileData) {
+//       // profileData.forEach(function (shipping) {
+//       //   console.log('shipping', shipping);
+//       let li = `<option value="">Select Shipping Address</option>`
+//       $.each(profileData, function (index, value) {
+//         li += `<option value="${value.csaEntryId}">${value.name} (${value.addressLine1})</option>`
+//       });
+//       li += `<option value="newAddress" style='color: black !important;'>Add New Address</option>`;
+//       $('#shippingAddress').append(li);
+
+//       // })
+//       $('#shippingAddress').on('change', function () {
+//         // Update the shippingId variable with the selected value
+//         shippingId = $(this).val();
+//       });
+
+//     },
+//     error: function (error) {
+//       console.error('Error fetching cart data:', error);
+//     }
+//   });
+// }
+
+// function getshippinginfo() {
+//   $.ajax({
+//     url: `${SETTINGS.backendUrl}/CustomerAccount/GetAllCustShippingAddresses`,
+//     method: 'GET',
+//     headers: {
+//       Authorization: "Bearer " + token,
+//       "Content-Type": "application/json",
+//       // Add other headers as needed
+//     },
+//     dataType: 'json',
+//     success: function (profileData) {
+//       let li = `<option value="">Select Shipping Address</option>`;
+//       $.each(profileData, function (index, value) {
+//         li += `<option value="${value.csaEntryId}">${value.name} (${value.addressLine1})</option>`;
+//       });
+//       li += `<option value="newAddress" style='color: black !important;'>Add New Address</option>`;
+//       $('#shippingAddress').append(li);
+
+//       // Append the form dynamically
+//       let shippingForm = `
+//         <form id="shippingForm">
+//         <div class="row">
+//         <div class="col-md-6 mt-3">
+//           <div class="form-group">
+//             <label for="companyName"> Name</label>
+//             <input type="text" class="form-control" id="name" placeholder="  Name">
+//           </div>
+//         </div>
+//         <div class="col-md-6 mt-3">
+//           <div class="form-group">
+//             <label for="companyName">Contact No</label>
+//             <input type="text" class="form-control" id="contactNum"
+//               placeholder="Contact No">
+//           </div>
+//         </div>
+//         <div class="col-md-6 mt-3">
+//           <div class="form-group">
+//             <label for="companyName">Alternate Contact No</label>
+//             <input type="text" class="form-control" id="altcontactNum"
+//               placeholder="Alternate Contact No">
+//           </div>
+//         </div>
+
+//         <div class="col-md-6 mt-3">
+//           <div class="form-group" id="fetchCountriesBtn">
+//             <label for="companyName">Location</label>
+//             <select class="default-select w-100 country" id="locationSelection">
+//             </select>
+//           </div>
+//         </div>
+
+//         <div class="col-md-12 mt-3">
+//           <div class="form-group">
+//             <label for="companyName">Address Line 1</label>
+//             <input type="textarea" class="form-control" id="addresses1"
+//               placeholder="Address Line 1">
+//           </div>
+//         </div>
+//         <div class="col-md-12 mt-3">
+//           <div class="form-group">
+//             <label for="companyName">Address Line 2</label>
+//             <input type="textarea" class="form-control" id="addresses2"
+//               placeholder="Address Line 2">
+//           </div>
+//         </div>
+//         <div class="col-md-12 mt-3">
+//           <div class="form-group">
+//             <label for="companyName">Remark</label>
+//             <input type="text" class="form-control" id="remark"
+//               placeholder="Remark">
+//           </div>
+//         </div>
+//       </div>
+//         </form>
+//       `;
+
+//       // Append the form to a container (you might need to adjust the container selector)
+//       $('#shippingForm').append(shippingForm);
+
+//       $('#shippingForm').hide(); // Hide the form initially
+
+//       $('#shippingAddress').on('change', function () {
+//         var shippingId = $(this).val();
+
+//         if (shippingId !== "newAddress" && shippingId !== "") {
+//           var selectedShipping = profileData.find(function (item) {
+//             return item.csaEntryId == shippingId;
+//           });
+
+//           // Populate the form fields with the selected shipping address data
+//           $('#name').val(selectedShipping.name);
+//           $('#contactNum').val(selectedShipping.contactNum);
+//           $('#altcontactNum').val(selectedShipping.altcontactNum);
+//           $('#locationSelection').val(selectedShipping.location);
+//           $('#addresses1').val(selectedShipping.addresses1);
+//           $('#addresses2').val(selectedShipping.addresses2);
+//           $('#remark').val(selectedShipping.remark);
+
+//           // Show the form
+//           $('#shippingForm').show();
+//         } else {
+//           // Clear the form fields when "Add New Address" is selected or no address is selected
+//           $('#name, #contactNum, #altcontactNum, #locationSelection, #addresses1, #addresses2, #remark').val("");
+
+//           // Hide the form when "Add New Address" is selected
+//           $('#shippingForm').hide();
+//         }
+//       });
+
+//     },
+//     error: function (error) {
+//       console.error('Error fetching cart data:', error);
+//     }
+//   });
+// }
+
 function getshippinginfo() {
   $.ajax({
     url: `${SETTINGS.backendUrl}/CustomerAccount/GetAllCustShippingAddresses`,
@@ -202,19 +231,103 @@ function getshippinginfo() {
     },
     dataType: 'json',
     success: function (profileData) {
-      // profileData.forEach(function (shipping) {
-      //   console.log('shipping', shipping);
-      let li = `<option value="">Select Shipping Address</option>`
+      let li = `<option value="">Select Shipping Address</option>`;
       $.each(profileData, function (index, value) {
-        li += `<option value="${value.csaEntryId}">${value.name} (${value.addressLine1})</option>`
+        li += `<option value="${value.csaEntryId}">${value.name} (${value.addressLine1})</option>`;
       });
       li += `<option value="newAddress" style='color: black !important;'>Add New Address</option>`;
-      $('#shippingAddress').append(li);
+      $('#shippingAddress').html(li); // Use html() instead of append() to replace existing options
 
-      // })
+      // Append the form dynamically
+      let shippingForm = `
+              <form id="shippingForm">
+              <div class="row">
+              <div class="col-md-6 mt-3">
+                <div class="form-group">
+                  <label for="companyName"> Name</label>
+                  <input type="text" class="form-control" id="name" placeholder="  Name">
+                </div>
+              </div>
+              <div class="col-md-6 mt-3">
+                <div class="form-group">
+                  <label for="companyName">Contact No</label>
+                  <input type="text" class="form-control" id="contactNum"
+                    placeholder="Contact No">
+                </div>
+              </div>
+              <div class="col-md-6 mt-3">
+                <div class="form-group">
+                  <label for="companyName">Alternate Contact No</label>
+                  <input type="text" class="form-control" id="altcontactNum"
+                    placeholder="Alternate Contact No">
+                </div>
+              </div>
+      
+              <div class="col-md-6 mt-3">
+                <div class="form-group" id="fetchCountriesBtn">
+                  <label for="companyName">Location</label>
+                  <select class="default-select w-100 country" id="locationSelection">
+                  </select>
+                </div>
+              </div>
+      
+              <div class="col-md-12 mt-3">
+                <div class="form-group">
+                  <label for="companyName">Address Line 1</label>
+                  <input type="textarea" class="form-control" id="addresses1"
+                    placeholder="Address Line 1">
+                </div>
+              </div>
+              <div class="col-md-12 mt-3">
+                <div class="form-group">
+                  <label for="companyName">Address Line 2</label>
+                  <input type="textarea" class="form-control" id="addresses2"
+                    placeholder="Address Line 2">
+                </div>
+              </div>
+              <div class="col-md-12 mt-3">
+                <div class="form-group">
+                  <label for="companyName">Remark</label>
+                  <input type="text" class="form-control" id="remark"
+                    placeholder="Remark">
+                </div>
+              </div>
+            </div>
+              </form>
+            `;
+
+      // Replace the content of #shippingForm instead of appending
+      $('#shippingForm').html(shippingForm);
+
+      // Hide the form initially
+      $('#shippingForm').hide();
+
       $('#shippingAddress').on('change', function () {
-        // Update the shippingId variable with the selected value
-        shippingId = $(this).val();
+        var shippingId = $(this).val();
+
+        if (shippingId !== "newAddress" && shippingId !== "") {
+          var selectedShipping = profileData.find(function (item) {
+            return item.csaEntryId == shippingId;
+          });
+
+          // Populate the form fields with the selected shipping address data
+          $('#name').val(selectedShipping.name);
+          $('#contactNum').val(selectedShipping.contactNum);
+          $('#altcontactNum').val(selectedShipping.altcontactNum);
+          $('#locationSelection').val(selectedShipping.location);
+          $('#addresses1').val(selectedShipping.addresses1);
+          $('#addresses2').val(selectedShipping.addresses2);
+          $('#remark').val(selectedShipping.remark);
+
+          // Show the form
+          $('#shippingForm').show();
+        } else {
+          // Clear the form fields when "Add New Address" is selected or no address is selected
+          $('#name, #contactNum, #altcontactNum, #locationSelection, #addresses1, #addresses2, #remark').val("");
+
+          // Hide the form when "Add New Address" is selected
+          $('#shippingForm').hide();
+        }
       });
 
     },
@@ -223,6 +336,9 @@ function getshippinginfo() {
     }
   });
 }
+
+
+
 
 
 function getLocation() {
@@ -336,39 +452,39 @@ $(document).ready(function () {
   });
 });
 
-$(document).ready(function () {
-  // Event listener for changes in the shippingAddress select element
-  $('#shippingAddress').on('change', function () {
-    // Check if the selected value is "newAddress"
-    if ($(this).val() === 'newAddress') {
-      // Enable the form fields
-      enableShippingFormFields();
-    } else {
-      // Disable the form fields
-      disableShippingFormFields();
-    }
-  });
+                    $(document).ready(function () {
+                      // Event listener for changes in the shippingAddress select element
+                      $('#shippingAddress').on('change', function () {
+                        // Check if the selected value is "newAddress"
+                        if ($(this).val() === 'newAddress') {
+                          // Enable the form fields
+                          enableShippingFormFields();
+                        } else {
+                          // Disable the form fields
+                          disableShippingFormFields();
+                        }
+                      });
 
 
 
-  // Function to enable form fields
-  function enableShippingFormFields() {
-    $('#name,#contactNum,#altcontactNum,#addresses1, #addresses2,#locationSelection,#remark,#saveshippinginfo').prop('disabled', false);
-  }
+                      // Function to enable form fields
+                      function enableShippingFormFields() {
+                        $('#name,#contactNum,#altcontactNum,#addresses1, #addresses2,#locationSelection,#remark,#saveshippinginfo').prop('disabled', false);
+                      }
 
-  // Function to disable form fields
-  function disableShippingFormFields() {
-    $('#name,#contactNum,#altcontactNum,#addresses1, #addresses2,#locationSelection,#remark,#saveshippinginfo').prop('disabled', true);
-  }
+                      // Function to disable form fields
+                      function disableShippingFormFields() {
+                        $('#name,#contactNum,#altcontactNum,#addresses1, #addresses2,#locationSelection,#remark,#saveshippinginfo').prop('disabled', true);
+                      }
 
-  // Initial check on page load
-  if ($('#shippingAddress').val() === 'newAddress') {
-    enableShippingFormFields();
-  } else {
-    disableShippingFormFields();
-  }
+                      // Initial check on page load
+                      if ($('#shippingAddress').val() === 'newAddress') {
+                        enableShippingFormFields();
+                      } else {
+                        disableShippingFormFields();
+                      }
 
-});
+                    });
 
 
 document.getElementById("placeorder").addEventListener("click", function (e) {
