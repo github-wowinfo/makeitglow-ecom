@@ -438,6 +438,7 @@ function getshippingInfo() {
         });
     }
 }
+
 function getshippingbyId(id) {
     $.ajax({
         url: `${SETTINGS.backendUrl}/CustomerAccount/GetCustShippingAddressById/${id}`,
@@ -462,6 +463,7 @@ function getshippingbyId(id) {
             console.error('Error fetching cart data:', error);
         }
     });
+    
     $("#updateshipping").on('click', function (e) {
         e.preventDefault()
         console.log('clicked');

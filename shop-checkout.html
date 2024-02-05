@@ -779,17 +779,79 @@
 									</div>
 								</div> -->
 
+								<div class="row gx-xl-4 g-3 mb-xl-0 mb-md-0 " id="shippinginfo">
 
-								<form id="shippingForm">
+									
+								</div>
+
+								<form id="shippingForm" >
 									<!-- Your form fields go here -->
-								
+                                    <div class="row" style="display: none;" id="showForm">
+										<div class="d-flex">
+											<div class="col-md-6 mt-3 me-3">
+												<div class="form-group">
+													<label for="name">Name</label>
+													<input type="text" class="form-control" id="name" placeholder="Name">
+												</div>
+											</div>
+											<div class="col-md-6 mt-3">
+												<div class="form-group">
+													<label for="contactNum">Contact No</label>
+													<input type="text" class="form-control" id="contactNum" placeholder="Contact No">
+												</div>
+											</div>
+										</div>
+									
+										<div class="d-flex">
+											<div class="col-md-6 mt-3 me-3">
+												<div class="form-group">
+													<label for="altcontactNum">Alternate Contact No</label>
+													<input type="text" class="form-control" id="altcontactNum" placeholder="Alternate Contact No">
+												</div>
+											</div>
+											<div class="col-md-6 mt-3">
+												<div class="form-group" id="fetchCountriesBtn">
+													<label for="locationSelection">Location</label>
+													<select class="default-select w-100 country" id="locationSelection"></select>
+												</div>
+											</div>
+										</div>
+
+										<div class="d-flex">
+										<div class="col-md-6 mt-3 me-3">
+											<div class="form-group">
+												<label for="addresses1">Address Line 1</label>
+												<input type="text" class="form-control" id="addresses1" placeholder="Address Line 1">
+											</div>
+										</div>
+										<div class="col-md-6 mt-3">
+											<div class="form-group">
+												<label for="addresses2">Address Line 2</label>
+												<input type="text" class="form-control" id="addresses2" placeholder="Address Line 2">
+											</div>
+										</div>
+										</div>
+										<div class="col-md-12 mt-3">
+											<div class="form-group">
+												<label for="remark">Remark</label>
+												<input type="text" class="form-control" id="remark" placeholder="Remark">
+											</div>
+										</div>
+									
+										<div class="col-md-12 mt-3">
+											<button type="submit" class="btn btn-secondary m-3 w-50" id="saveshippinginfo">Save Shipping Info</button>
+										</div>
+									</div>
+									
+                                      
 									<!-- Add more fields as needed -->
 
+									
 
-									<button type="submit" class="btn btn-secondary m-3 w-25" id="saveshippinginfo">Save
-										Shipping
-										Info</button>
+
+									
 								</form>
+								
 								
 								<div class="col-md-12 m-b25">
 									<div class="form-group">
@@ -823,14 +885,12 @@
 									</div>
 
 									<div class="accordion dz-accordion accordion-sm" id="accordionFaq2">
-
-
 										<div class="accordion-item">
 											<div class="accordion-header" id="heading3">
 												<div class="accordion-button collapsed custom-control custom-checkbox"
 													data-bs-toggle="collapse" data-bs-target="#collapse4"
 													role="navigation" aria-expanded="true" aria-controls="collapse3">
-													<input class="form-check-input radio" disabled type="radio"
+													<input class="form-check-input radio"  type="radio"
 														name="flexRadioDefault" id="flexRadioDefault4">
 													<label class="form-check-label" for="flexRadioDefault4">
 														COD
