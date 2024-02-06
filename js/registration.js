@@ -366,3 +366,27 @@ document.getElementById('togglePassword').addEventListener('click', function () 
 //   console.log("Image URL: " + responsePayload.picture);
 //   console.log("Email: " + responsePayload.email);
 // }
+async function loginWithGoogle(tokenResponse) {
+  try {
+    const resp = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${tokenResponse.access_token}`,
+      },
+    });
+    const responseData = {
+      name: resp.data.name,
+      email: resp.data.email,
+      loginType: "Google",
+      firstName: resp.data.given_name,
+      lastName: resp.data.family_name,
+      phone: "", // Assuming phone is not provided in the response
+      externalLoginId: resp.data.sub,
+    };
+    externalLogin(responseData);
+    setIsLoading(false);
+  } catch (error) {
+    console.log(error);
+    setIsLoading(false);
+  }
+}
