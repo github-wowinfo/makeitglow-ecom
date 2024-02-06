@@ -345,11 +345,26 @@ document.getElementById('togglePassword').addEventListener('click', function () 
   passwordInput.setAttribute('type', type);
 });
 
-// function onSignIn(googleUser) {
-//   var profile = googleUser.getBasicProfile();
-//   console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-//   console.log('Name: ' + profile.getName());
-//   console.log('Image URL: ' + profile.getImageUrl());
-//   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-// }
+// Function to log details when the sign-in button is clicked
+function logSignInDetails(event) {
+  // Prevent the default action of the button
+  event.preventDefault();
+
+  // Log the details
+  console.log("Sign-in button clicked.");
+  console.log("Client ID:", document.getElementById("g_id_onload").getAttribute("data-client_id"));
+  console.log("Login URI:", document.getElementById("g_id_onload").getAttribute("data-login_uri"));
+  console.log("Auto Prompt:", document.getElementById("g_id_onload").getAttribute("data-auto_prompt"));
+  console.log("Type:", document.querySelector(".g_id_signin").getAttribute("data-type"));
+  console.log("Size:", document.querySelector(".g_id_signin").getAttribute("data-size"));
+  console.log("Theme:", document.querySelector(".g_id_signin").getAttribute("data-theme"));
+  console.log("Text:", document.querySelector(".g_id_signin").getAttribute("data-text"));
+  console.log("Shape:", document.querySelector(".g_id_signin").getAttribute("data-shape"));
+  console.log("Logo Alignment:", document.querySelector(".g_id_signin").getAttribute("data-logo_alignment"));
+
+  // Here you can add more details if needed or perform other actions
+}
+
+// Attach event listener to the sign-in button
+document.querySelector(".g_id_signin").addEventListener("click", logSignInDetails);
 
