@@ -2,7 +2,7 @@
 let productCount = ''
 let subtotal = 0
 let shipping = 0
-
+let shippingId = 0;
 function getCartCheckout() {
   $.ajax({
     url: `${SETTINGS.backendUrl}/Ecom/GetCartByCustId`,
@@ -389,6 +389,7 @@ function getshippinginfo() {
           // Hide the form and show other elements if needed
           $('#showForm').hide();
           console.log('Form hidden');
+          shippingId= $(this).val()
         }
       });
 
@@ -429,8 +430,7 @@ function getshippinginfo() {
           var selectedShipping = profileData.find(function (item) {
             return item.csaEntryId == shippingId;
           });
-           var selectedData = selectedShipping.custId + selectedShipping.name + selectedShipping.contactNo ;
-          // Populate the shipping info with the selected shipping address data
+    
           $('#customerId').text(selectedShipping.custId);
           $('#customerName').text(selectedShipping.name);
           $('#contactNo').text(selectedShipping.contactNo);
@@ -438,6 +438,17 @@ function getshippinginfo() {
           $('#addressLine1').text(selectedShipping.addressLine1);
           $('#addressLine2').text(selectedShipping.addressLine2);
           $('#remark').text(selectedShipping.remark);
+
+          var selectedData = {
+            // Populate the shipping info with the selected shipping address data
+            'customerId': selectedShipping.custId,
+            'customerName': selectedShipping.name,
+            'contactNo': selectedShipping.contactNo,
+            'altContactNo': selectedShipping.altContactNo,
+            'addressLine1': selectedShipping.addressLine1,
+            'addressLine2': selectedShipping.addressLine2,
+            'remark': selectedShipping.remark
+        };
 
           // Show the shipping info
           $('#shippinginfo').show();
@@ -494,7 +505,7 @@ function getLocation() {
     }
   });
 }
-let shippingId = 0;
+
 shippingId = document.getElementById("shippingAddress").value;
 
 
@@ -519,6 +530,7 @@ document.getElementById("saveshippinginfo").addEventListener("click", function (
     "lctnId": CountrySelect,
     "remark": Remark,
   };
+
   console.log('userData :', userData);
   $.ajax({
     url: `${SETTINGS.backendUrl}/CustomerAccount/AddCustShippingAddress`,
@@ -608,17 +620,15 @@ $(document).ready(function () {
                         disableShippingFormFields();
                       }
 
-                    });
+  });
 
 
 document.getElementById("placeorder").addEventListener("click", function (e) {
   console.log();
   console.log('response', shippingId);
   e.preventDefault()
-  if (shippingId === '') {
-    
-    toastr.error('Please Select Shipping Address or Add new Address')
-  } else {
+  var selectedAccordion = document.querySelector('input[name="flexRadioDefault"]:checked');
+  if(selectedAccordion.id === 'flexRadioDefault4'){
     var userData = {
       "shippingId": shippingId,
       "productsQty": productCount,
@@ -628,14 +638,12 @@ document.getElementById("placeorder").addEventListener("click", function (e) {
       "paidAmount": (subtotal + shipping) * 100,
       "remark": "",
       "isGiftOrder": false,
-      "orderItemsVM": {
         "type": 1
-      }
     };
 
-    console.log('userData :', userData);
+    console.log('userdata',userData);
     $.ajax({
-      url: `${SETTINGS.backendUrl}/Order/PlaceOrderWithOnline`,
+      url:  `${SETTINGS.backendUrl}/Order/PlaceOrderWithOnline`,
       method: 'POST',  // Assuming this should be a POST request, change it if necessary
       headers: {
         Authorization: "Bearer " + token,
@@ -666,9 +674,65 @@ document.getElementById("placeorder").addEventListener("click", function (e) {
 
       }
     });
+
+  
+  }else{
+    var userData = {
+      "shippingId": shippingId,
+      "productsQty": productCount,
+      "subTotal": subtotal,
+      "shippingCharges": shipping,
+      "totalAmount": (subtotal + shipping) * 100,
+      "paidAmount": 0,
+      "remark": "",
+      "isGiftOrder": false,
+        "type": 1
+      
+    };
+  
+    $.ajax({
+      url:  `${SETTINGS.backendUrl}/Order/PlaceOrderWithCOD`,
+      method: 'POST',  // Assuming this should be a POST request, change it if necessary
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+        // Add other headers as needed
+      },
+      data: JSON.stringify(userData), // Convert object to JSON string
+      success: function (response) {
+        console.log('response', response);
+        // console.log('Billing address added successfully:', response);
+        toastr.success("Order Placed COD ");
+          window.location.href = `orderpaymentCOD.html?orderID:${response.orderId}`;
+        // if (response.paymentLink) {
+        //   // Redirect to the payment link
+        // } else {
+        //   toastr.error("Error: Payment link not found in the response.");
+        // }
+        // getshippinginfo()
+        // You may want to update the UI or perform other actions here
+        // $("#saveshippinginfo").modal("hide");
+        // location.reload()
+  
+      },
+      error: function (error) {
+        console.error('Error adding shipping address:', error);
+        // Handle error response
+        toastr.error('not found',error);
+  
+      }
+    });
   }
 
-})
+ 
+
+ 
+
+
+  }
+
+// }
+)
 
 $(document).ready(function () {
   getCartCheckout()
