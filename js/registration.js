@@ -383,10 +383,11 @@ async function loginWithGoogle(tokenResponse) {
       phone: "", // Assuming phone is not provided in the response
       externalLoginId: resp.data.sub,
     };
-    externalLogin(responseData);
-    setIsLoading(false);
+    console.log('responseData', responseData);
+    // externalLogin(responseData);
+    // setIsLoading(false);
   } catch (error) {
     console.log(error);
-    setIsLoading(false);
+    // setIsLoading(false);
   }
 }
