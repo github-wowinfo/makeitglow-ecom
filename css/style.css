@@ -51933,3 +51933,44 @@ footer.footer-dark .icon-bx-wraper {
   border: 1px solid gainsboro !important;
   border-radius: 1rem;
 }
+
+.divider {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.divider .divider-text {
+  padding: 0 1rem;
+}
+
+.divider .divider-text {
+  position: relative;
+  display: inline-block;
+  font-size: .9375rem;
+}
+
+.divider .divider-text:before {
+  right: 100%;
+}
+
+
+
+.divider .divider-text:after {
+  left: 100%;
+}
+
+.divider .divider-text:after,
+.divider .divider-text:before {
+  border-top: 1px solid #ebe9f1;
+}
+
+.divider .divider-text:after,
+.divider .divider-text:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 9999px;
+}
