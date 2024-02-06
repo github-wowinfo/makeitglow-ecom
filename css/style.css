@@ -51974,3 +51974,7 @@ footer.footer-dark .icon-bx-wraper {
   top: 50%;
   width: 9999px;
 }
+
+.g_id_signin iframe {
+  margin: auto !important;
+}
