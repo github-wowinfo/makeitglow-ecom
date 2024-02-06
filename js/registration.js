@@ -350,21 +350,26 @@ function logSignInDetails(event) {
   // Prevent the default action of the button
   event.preventDefault();
 
+  // Get references to the elements by their IDs
+  var gIdOnload = document.getElementById("g_id_onload");
+  var gIdSignIn = document.getElementById("g_id_signin");
+
   // Log the details
   console.log("Sign-in button clicked.");
-  console.log("Client ID:", document.getElementById("g_id_onload").getAttribute("data-client_id"));
-  console.log("Login URI:", document.getElementById("g_id_onload").getAttribute("data-login_uri"));
-  console.log("Auto Prompt:", document.getElementById("g_id_onload").getAttribute("data-auto_prompt"));
-  console.log("Type:", document.querySelector(".g_id_signin").getAttribute("data-type"));
-  console.log("Size:", document.querySelector(".g_id_signin").getAttribute("data-size"));
-  console.log("Theme:", document.querySelector(".g_id_signin").getAttribute("data-theme"));
-  console.log("Text:", document.querySelector(".g_id_signin").getAttribute("data-text"));
-  console.log("Shape:", document.querySelector(".g_id_signin").getAttribute("data-shape"));
-  console.log("Logo Alignment:", document.querySelector(".g_id_signin").getAttribute("data-logo_alignment"));
+  console.log("Client ID:", gIdOnload.getAttribute("data-client_id"));
+  console.log("Login URI:", gIdOnload.getAttribute("data-login_uri"));
+  console.log("Auto Prompt:", gIdOnload.getAttribute("data-auto_prompt"));
+  console.log("Type:", gIdSignIn.getAttribute("data-type"));
+  console.log("Size:", gIdSignIn.getAttribute("data-size"));
+  console.log("Theme:", gIdSignIn.getAttribute("data-theme"));
+  console.log("Text:", gIdSignIn.getAttribute("data-text"));
+  console.log("Shape:", gIdSignIn.getAttribute("data-shape"));
+  console.log("Logo Alignment:", gIdSignIn.getAttribute("data-logo_alignment"));
 
   // Here you can add more details if needed or perform other actions
 }
 
 // Attach event listener to the sign-in button
-document.querySelector(".g_id_signin").addEventListener("click", logSignInDetails);
+document.getElementById("g_id_signin").addEventListener("click", logSignInDetails);
+
 
