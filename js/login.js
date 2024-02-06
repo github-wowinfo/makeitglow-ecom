@@ -72,13 +72,13 @@ console.log(response);
 
        // Check for the stored redirect URL
     var redirectUrl = sessionStorage.getItem('redirectUrl');
-    // if (redirectUrl) {
-    //   sessionStorage.removeItem('redirectUrl'); // Clear the stored URL
-    //   window.location.href = redirectUrl;
-    // } else {
-    //   // Redirect to the default URL if there is no stored URL
-    //   window.location.href = "./index.html";
-    // }
+    if (redirectUrl) {
+      sessionStorage.removeItem('redirectUrl'); // Clear the stored URL
+      window.location.href = redirectUrl;
+    } else {
+      // Redirect to the default URL if there is no stored URL
+      window.location.href = "./index.html";
+    }
     },
     error: function (error) {
       console.log("Sign in Error:", error);
