@@ -19,7 +19,7 @@ $.ajax({
     },
     success: function (data) {
         console.log('data', data);
-        if (data.data.paymentState === "CAPTURED") {
+        if (data.data.paymentState === "CAPTURED"||data.data.paymentState==="AUTHORISED") {
             var confirm = `
             <div class="" style="margin-left: 100px; margin-top: 60px;">
 					<div class="d-flex">
