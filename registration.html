@@ -14,8 +14,8 @@
 	<meta property="og:title" content="MoonCart Shop & eCommerce HTML Template">
 	<meta property="og:description" content="MoonCart Shop & eCommerce HTML Template">
 	<meta name="format-detection" content="telephone=no">
-	<meta name="google-signin-client_id"
-		content="523878807076-urpdvcvkbenjk7f2r04oled2959jgjs0.apps.googleusercontent.com">
+	<!-- <meta name="google-signin-client_id"
+		content="523878807076-urpdvcvkbenjk7f2r04oled2959jgjs0.apps.googleusercontent.com"> -->
 	<!-- FAVICONS ICON -->
 	<link rel="icon" type="image/x-icon" href="images/logo1.png">
 
@@ -177,7 +177,16 @@
 										class="btn btn-outline-secondary btnhover text-uppercase rounded">Login</a>
 								</div>
 							</form>
-							<div class="g-signin2" data-onsuccess="onSignIn"></div>
+							<div class="divider my-1">
+								<div class="divider-text">or</div>
+							</div>
+							<div id="g_id_onload"
+								data-client_id="523878807076-urpdvcvkbenjk7f2r04oled2959jgjs0.apps.googleusercontent.com"
+								data-callback="loginWithGoogle" data-auto_prompt="false">
+							</div>
+							<div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline"
+								data-text="sign_in_with" data-shape="rectangular" data-logo_alignment="left">
+							</div>
 						</div>
 					</div>
 				</div>
@@ -193,6 +202,8 @@
 
 
 	</div>
+	<script src="https://accounts.google.com/gsi/client" async defer></script>
+
 
 	<!-- JAVASCRIPT FILES ========================================= -->
 	<script src="js/jquery.min.js"></script><!-- JQUERY MIN JS -->
@@ -225,7 +236,31 @@
 	<script src="vendor/lightgallery/dist/plugins/zoom/lg-zoom.min.js"></script>
 	<script src="js/dz.ajax.js"></script><!-- AJAX -->
 	<script src="js/custom.js"></script><!-- CUSTOM JS -->
-	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
+	<!-- <script>
+		// Function to handle sign-in
+		function handleCredentialResponse(response) {
+			// Log the sign-in event
+			console.log('User signed in:', response);
+
+			// Extract user information
+			const profile = response.getBasicProfile();
+			const name = profile.getName();
+			const email = profile.getEmail();
+			const firstName = profile.getGivenName();
+			const lastName = profile.getFamilyName();
+			const externalLoginId = profile.getId();
+
+			// Log extracted information
+			console.log('Name:', name);
+			console.log('Email:', email);
+			console.log('First Name:', firstName);
+			console.log('Last Name:', lastName);
+			console.log('External Login ID:', externalLoginId);
+
+			// You can add more logging details or send this information to your server
+		}
+	</script> -->
 </body>
 
 <!-- Mirrored from mooncart.dexignzone.com/xhtml/shop-registration.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Dec 2023 12:28:03 GMT -->

@@ -145,7 +145,7 @@ $.ajax({
   success: function (response) {
     let options = '<option value="">Select</option>';
     $.each(response, function (index, value) {
-      console.log(value);
+      // console.log(value);
       options += `<option value="${value.countryId}">${value.countryName}</option>`;
     });
     $('#countrySelect').html(options);
@@ -159,7 +159,7 @@ $.ajax({
 $('#countrySelect').on('change', function () {
   // Get the selected countryId
   let selectedCountryId = $(this).val();
-  console.log('Selected Country ID:', selectedCountryId);
+  // console.log('Selected Country ID:', selectedCountryId);
 
   // Clear existing options in locationSelected
   $('#locationSelected').empty();
@@ -172,7 +172,7 @@ $('#countrySelect').on('change', function () {
     success: function (response) {
       let options = '<option value="">Select</option>';
       $.each(response, function (index, value) {
-        console.log(value);
+        // console.log(value);
         options += `<option value="${value.lEntryId}">${value.locationName}</option>`;
       });
       $('#locationSelected').html(options);
@@ -288,7 +288,7 @@ document.getElementById("postButton").addEventListener("click", function (e) {
 
     // Add any other required fields for user registration
   };
-  console.log('userData :', userData);
+  // console.log('userData :', userData);
 
   $.ajax({
     url: `${SETTINGS.backendUrl}/Auth/Register`,
@@ -345,11 +345,49 @@ document.getElementById('togglePassword').addEventListener('click', function () 
   passwordInput.setAttribute('type', type);
 });
 
-function onSignIn(googleUser) {
-  var profile = googleUser.getBasicProfile();
-  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-  console.log('Name: ' + profile.getName());
-  console.log('Image URL: ' + profile.getImageUrl());
-  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-}
+// function onSignIn(googleUser) {
+//   var profile = googleUser.getBasicProfile();
+//   console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+//   console.log('Name: ' + profile.getName());
+//   console.log('Image URL: ' + profile.getImageUrl());
+//   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+// }
 
+
+// function handleCredentialResponse(response) {
+//   // decodeJwtResponse() is a custom function defined by you
+//   // to decode the credential response.
+//   const responsePayload = decodeJwtResponse(response.credential);
+
+//   console.log("ID: " + responsePayload.sub);
+//   console.log('Full Name: ' + responsePayload.name);
+//   console.log('Given Name: ' + responsePayload.given_name);
+//   console.log('Family Name: ' + responsePayload.family_name);
+//   console.log("Image URL: " + responsePayload.picture);
+//   console.log("Email: " + responsePayload.email);
+// }
+async function loginWithGoogle(tokenResponse) {
+  try {
+    const resp = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${tokenResponse.access_token}`,
+      },
+    });
+    const responseData = {
+      name: resp.data.name,
+      email: resp.data.email,
+      loginType: "Google",
+      firstName: resp.data.given_name,
+      lastName: resp.data.family_name,
+      phone: "", // Assuming phone is not provided in the response
+      externalLoginId: resp.data.sub,
+    };
+    console.log('responseData', responseData);
+    // externalLogin(responseData);
+    // setIsLoading(false);
+  } catch (error) {
+    console.log(error);
+    // setIsLoading(false);
+  }
+}
