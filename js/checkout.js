@@ -1,7 +1,7 @@
 
 let productCount = ''
 let subtotal = 0
-let shipping = 0
+var shipping = 12;
 let shippingId = 0;
 function getCartCheckout() {
   $.ajax({
@@ -17,9 +17,41 @@ function getCartCheckout() {
       // console.log(cartData);
       productCount = cartData.length
       subtotal = calculateSubtotal(cartData);
+
+      if (subtotal >= 100) {
+        // Set shipping to 0 if subtotal is greater than or equal to 100
+        shipping = 0;
+      } else {
+        // Set shipping to 12 if subtotal is less than 100
+        shipping = 12;
+      }
+
+      // Update shipping charge display
+      $('#shippingcharge').text(shipping + 'AED');
+
+      // Calculate total amount including shipping
+      var totalAmount = subtotal + shipping;
+
+      // Update total and final total display
       $('#total').text(subtotal.toFixed(2) + 'AED');
-      var totalAmount = subtotal + shipping
       $('#finalTotal').text(totalAmount.toFixed(2) + 'AED');
+
+
+      // if (subtotal >= 100) {
+      //   console.log('sdjhjs', subtotal === 0);
+      //   $('#shippingcharge').text(0 + 'AED')
+      //   $('#total').text(subtotal.toFixed(2) + 'AED');
+      //   var totalAmount = subtotal + 0
+      //   $('#finalTotal').text(totalAmount.toFixed(2) + 'AED');
+      // } else {
+      //   // shipping === 12
+      //   $('#shippingcharge').text(12 + 'AED')
+      //   console.log('sdjhjs', subtotal >= 100);
+      //   $('#total').text(subtotal.toFixed(2) + 'AED');
+      //   var totalAmount = subtotal + 12
+      //   $('#finalTotal').text(totalAmount.toFixed(2) + 'AED');
+      // }
+
 
       // Clear existing content
       $('#cartData').empty();
@@ -234,7 +266,7 @@ function calculateSubtotal(cartData) {
 //       let li = `<option value="">Select Shipping Address</option>`;
 //       $.each(profileData, function (index, value) {
 //         li += `<option value="${value.csaEntryId}">${value.name} (${value.addressLine1})</option>`;
-        
+
 //       });
 //       li += `<option value="newAddress" style='color: black !important;'>Add New Address</option>`;
 //       $('#shippingAddress').html(li); // Use html() instead of append() to replace existing options
@@ -252,7 +284,7 @@ function calculateSubtotal(cartData) {
 //                       <p>ADDRESS LINE 1: <span class="text-black"> ${shipping.addressLine1} </span></p>
 //                       <p>ADDRESS LINE 2: <span class="text-black"> ${shipping.addressLine2} </span></p>
 //                       <p>REMARK: <span class="text-black"> ${shipping.remark} </span></p>
-                      
+
 //           </div>
 //         </div>
 //      </div> `;
@@ -279,7 +311,7 @@ function calculateSubtotal(cartData) {
 //                               placeholder="Alternate Contact No">
 //                           </div>
 //                         </div>
-     
+
 //                         <div class="col-md-6 mt-3">
 //                           <div class="form-group" id="fetchCountriesBtn">
 //                             <label for="companyName">Location</label>
@@ -287,7 +319,7 @@ function calculateSubtotal(cartData) {
 //                             </select>
 //                           </div>
 //                         </div>
-     
+
 //                         <div class="col-md-12 mt-3">
 //                           <div class="form-group">
 //                             <label for="companyName">Address Line 1</label>
@@ -360,7 +392,7 @@ function calculateSubtotal(cartData) {
 //     }
 //   });
 // }
- 
+
 
 function getshippinginfo() {
   $.ajax({
@@ -379,7 +411,7 @@ function getshippinginfo() {
       });
       li += `<option value="newAddress" style='color: black !important;  ' >Add New Address</option>`;
       $('#shippingAddress').html(li); // Use html() instead of append() to replace existing options
-      
+
       $('#shippingAddress').on('change', function () {
         var selectedValue = $(this).val();
         if (selectedValue === "newAddress") {
@@ -389,7 +421,7 @@ function getshippinginfo() {
           // Hide the form and show other elements if needed
           $('#showForm').hide();
           console.log('Form hidden');
-          shippingId= $(this).val()
+          shippingId = $(this).val()
         }
       });
 
@@ -430,7 +462,7 @@ function getshippinginfo() {
           var selectedShipping = profileData.find(function (item) {
             return item.csaEntryId == shippingId;
           });
-    
+
           $('#customerId').text(selectedShipping.custId);
           $('#customerName').text(selectedShipping.name);
           $('#contactNo').text(selectedShipping.contactNo);
@@ -448,7 +480,7 @@ function getshippinginfo() {
             'addressLine1': selectedShipping.addressLine1,
             'addressLine2': selectedShipping.addressLine2,
             'remark': selectedShipping.remark
-        };
+          };
 
           // Show the shipping info
           $('#shippinginfo').show();
@@ -472,7 +504,7 @@ function getshippinginfo() {
   });
 }
 
-function addnewaddress(){
+function addnewaddress() {
   $('#showForm').css('display', 'block')
 }
 
@@ -588,39 +620,39 @@ $(document).ready(function () {
   });
 });
 
-    $(document).ready(function () {
-                      // Event listener for changes in the shippingAddress select element
-                      $('#shippingAddress').on('change', function () {
-                        // Check if the selected value is "newAddress"
-                        if ($(this).val() === 'newAddress') {
-                          // Enable the form fields
-                          enableShippingFormFields();
-                        } else {
-                          // Disable the form fields
-                          disableShippingFormFields();
-                        }
-                      });
-
-
-
-                      // Function to enable form fields
-                      function enableShippingFormFields() {
-                        $('#name,#contactNum,#altcontactNum,#addresses1, #addresses2,#locationSelection,#remark,#saveshippinginfo').prop('disabled', false);
-                      }
-
-                      // Function to disable form fields
-                      function disableShippingFormFields() {
-                        $('#name,#contactNum,#altcontactNum,#addresses1, #addresses2,#locationSelection,#remark,#saveshippinginfo').prop('disabled', true);
-                      }
-
-                      // Initial check on page load
-                      if ($('#shippingAddress').val() === 'newAddress') {
-                        enableShippingFormFields();
-                      } else {
-                        disableShippingFormFields();
-                      }
-
+$(document).ready(function () {
+  // Event listener for changes in the shippingAddress select element
+  $('#shippingAddress').on('change', function () {
+    // Check if the selected value is "newAddress"
+    if ($(this).val() === 'newAddress') {
+      // Enable the form fields
+      enableShippingFormFields();
+    } else {
+      // Disable the form fields
+      disableShippingFormFields();
+    }
   });
+
+
+
+  // Function to enable form fields
+  function enableShippingFormFields() {
+    $('#name,#contactNum,#altcontactNum,#addresses1, #addresses2,#locationSelection,#remark,#saveshippinginfo').prop('disabled', false);
+  }
+
+  // Function to disable form fields
+  function disableShippingFormFields() {
+    $('#name,#contactNum,#altcontactNum,#addresses1, #addresses2,#locationSelection,#remark,#saveshippinginfo').prop('disabled', true);
+  }
+
+  // Initial check on page load
+  if ($('#shippingAddress').val() === 'newAddress') {
+    enableShippingFormFields();
+  } else {
+    disableShippingFormFields();
+  }
+
+});
 
 
 document.getElementById("placeorder").addEventListener("click", function (e) {
@@ -628,7 +660,7 @@ document.getElementById("placeorder").addEventListener("click", function (e) {
   console.log('response', shippingId);
   e.preventDefault()
   var selectedAccordion = document.querySelector('input[name="flexRadioDefault"]:checked');
-  if(selectedAccordion.id === 'flexRadioDefault4'){
+  if (selectedAccordion.id === 'flexRadioDefault4') {
     var userData = {
       "shippingId": shippingId,
       "productsQty": productCount,
@@ -638,12 +670,12 @@ document.getElementById("placeorder").addEventListener("click", function (e) {
       "paidAmount": (subtotal + shipping) * 100,
       "remark": "",
       "isGiftOrder": false,
-        "type": 1
+      "type": 1
     };
 
-    console.log('userdata',userData);
+    console.log('userdata', userData);
     $.ajax({
-      url:  `${SETTINGS.backendUrl}/Order/PlaceOrderWithOnline`,
+      url: `${SETTINGS.backendUrl}/Order/PlaceOrderWithOnline`,
       method: 'POST',  // Assuming this should be a POST request, change it if necessary
       headers: {
         Authorization: "Bearer " + token,
@@ -670,13 +702,13 @@ document.getElementById("placeorder").addEventListener("click", function (e) {
       error: function (error) {
         console.error('Error adding shipping address:', error);
         // Handle error response
-        toastr.error('not found',error);
+        toastr.error('not found', error);
 
       }
     });
 
-  
-  }else{
+
+  } else {
     var userData = {
       "shippingId": shippingId,
       "productsQty": productCount,
@@ -686,12 +718,12 @@ document.getElementById("placeorder").addEventListener("click", function (e) {
       "paidAmount": 0,
       "remark": "",
       "isGiftOrder": false,
-        "type": 1
-      
+      "type": 1
+
     };
-  
+
     $.ajax({
-      url:  `${SETTINGS.backendUrl}/Order/PlaceOrderWithCOD`,
+      url: `${SETTINGS.backendUrl}/Order/PlaceOrderWithCOD`,
       method: 'POST',  // Assuming this should be a POST request, change it if necessary
       headers: {
         Authorization: "Bearer " + token,
@@ -703,7 +735,7 @@ document.getElementById("placeorder").addEventListener("click", function (e) {
         console.log('response', response);
         // console.log('Billing address added successfully:', response);
         toastr.success("Order Placed COD ");
-          window.location.href = `orderpaymentCOD.html?orderID:${response.orderId}`;
+        window.location.href = `orderpaymentCOD.html?orderID:${response.orderId}`;
         // if (response.paymentLink) {
         //   // Redirect to the payment link
         // } else {
@@ -713,25 +745,25 @@ document.getElementById("placeorder").addEventListener("click", function (e) {
         // You may want to update the UI or perform other actions here
         // $("#saveshippinginfo").modal("hide");
         // location.reload()
-  
+
       },
       error: function (error) {
         console.error('Error adding shipping address:', error);
         // Handle error response
-        toastr.error('not found',error);
-  
+        toastr.error('not found', error);
+
       }
     });
   }
 
- 
-
- 
 
 
-  }
 
-// }
+
+
+}
+
+  // }
 )
 
 $(document).ready(function () {
