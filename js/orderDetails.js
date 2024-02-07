@@ -34,7 +34,10 @@ function updateOrderDetails(data) {
     var timestampStr = data.ordrPymnt.paymentCreationTime;
     var timestamp = new Date(timestampStr);
     var formattedDate = formatDate(timestamp);
+    
     var Tamount = data.ordrPymnt.txnAmount / 100 ;
+    
+   
 
     function formatDate(date) {
         // Array of month names
@@ -44,18 +47,56 @@ function updateOrderDetails(data) {
             "August", "September", "October",
             "November", "December"
         ];
-
         // Extract day, month, and year
         var day = date.getDate();
         var monthIndex = date.getMonth();
         var year = date.getFullYear();
-
         // Format the date string
         var formattedDate = day + " " + monthNames[monthIndex] + " " + year;
 
         return formattedDate;
     }
 
+    function processOrderStatus(OrderStatus) {
+        if (OrderStatus === 1) {
+            console.log('New order');
+            // Perform actions for a new order
+          } else if (OrderStatus === 2) {
+            console.log('Processing');
+            // Perform actions for processing
+          } else if (OrderStatus === 3) {
+            console.log('Confirmed');
+            // Perform actions for confirmed orders
+          } else if (OrderStatus === 4) {
+            console.log('Shipping');
+            // Perform actions for orders in shipping
+          } else if (OrderStatus === 5) {
+            console.log('Delivered');
+            // Perform actions for delivered orders
+          } else if (OrderStatus === 6) {
+            console.log('Cancelled');
+            // Perform actions for cancelled orders
+          } else if (OrderStatus === 7) {
+            console.log('Refunded');
+            // Perform actions for refunded orders
+          } else if (OrderStatus === 0) {
+            console.log('Deleted');
+            // Perform actions for deleted orders
+          } else {
+            console.log('Invalid order status');
+            // Handle the case of an invalid order status
+          }
+      }
+      
+    //   Example usage:
+    //   let orderStatus = ''; // Replace with the actual order status
+    //   processOrderStatus(processeOstatus);
+    var processeOstatus = data.status;
+    var OrderStatus = processOrderStatus(processeOstatus);
+      console.log('swichcase',OrderStatus);
+      console.log('swichcase',orderId);
+
+      
     var orderDetailsHtml = `
     <div class="card p-10 order-head">
        <div class="col-12 row ">
@@ -64,7 +105,7 @@ function updateOrderDetails(data) {
                <p class="mb-3">${formattedDate}</p>
              <div class="d-flex">
                 <h6 class="me-3">Status :</h6>
-                <p class="text-green"><strong>${data.status}</strong></p>
+                <p class="text-green"><strong>${OrderStatus}</strong></p>
              </div>
            </div>
           
