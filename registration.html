@@ -52,7 +52,7 @@
 		rel="stylesheet">
 	<script>
 		function onSignIn(googleUser) {
-			var credential = googleUser.getAuthResponse();
+			var credential = googleUser.credential();
 			var jwtToken = credential.id_token;
 
 			// Decode the JWT token
