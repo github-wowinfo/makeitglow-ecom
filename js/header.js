@@ -54,7 +54,7 @@ $.ajax({
 // add to cart api . . . . 
 
 let quantity = 1
-
+// let cartCount = ''
 function getCart() {
 
   if (token === null) {
@@ -81,7 +81,7 @@ function getCart() {
       $('#cartItem').empty();
       $('#cartCount').text(cartData.length);
       $('#cartCount1').text(cartData.length);
-
+      cartCount===cartData.length
       // Update cart items
       cartData.forEach(function (cartItem) {
         // console.log('cartitem', cartItem);

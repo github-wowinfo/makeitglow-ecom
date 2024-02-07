@@ -1,8 +1,53 @@
 
+
+// function updateCheckoutView() {
+let cartCount = ''
 let productCount = ''
 let subtotal = 0
 let shipping = 0
 let shippingId = 0;
+
+ 
+$.ajax({
+  url: `${SETTINGS.backendUrl}/Ecom/GetCartByCustId`,
+  method: 'GET',
+  headers: {
+    Authorization: "Bearer " + token ,
+    "Content-Type": "application/json",
+    // Add other headers as needed
+  },
+  dataType: 'json',
+  success: function (cartData) {
+  cartCount===cartData.length
+  console.log(cartData.length===0);
+    // Update cart items
+
+    if (cartData.length === 0) {
+      $('#shop-checkout').css('display', 'none')
+      console.log('cart empty hidden');
+    }
+    else 
+    {
+      $('#empty').hide();
+      // Hide the form and show other elements if needed
+      $('#shop-checkout').css('display', 'flex')
+      console.log('cart empty hidden1');
+    }
+
+  },
+
+  error: function (error) {
+    console.error('Error fetching cart data:', error);
+  },
+});
+
+console.log('cartCount',cartCount);
+
+
+function cartData(){
+ 
+}
+
 function getCartCheckout() {
   $.ajax({
     url: `${SETTINGS.backendUrl}/Ecom/GetCartByCustId`,
@@ -68,299 +113,6 @@ function calculateSubtotal(cartData) {
 
   return subtotal;
 }
-
-
-
-// function getshippinginfo() {
-//   $.ajax({
-//     url: `${SETTINGS.backendUrl}/CustomerAccount/GetAllCustShippingAddresses`,
-//     method: 'GET',
-//     headers: {
-//       Authorization: "Bearer " + token,
-//       "Content-Type": "application/json",
-//       // Add other headers as needed
-//     },
-//     dataType: 'json',
-//     success: function (profileData) {
-//       // profileData.forEach(function (shipping) {
-//       //   console.log('shipping', shipping);
-//       let li = `<option value="">Select Shipping Address</option>`
-//       $.each(profileData, function (index, value) {
-//         li += `<option value="${value.csaEntryId}">${value.name} (${value.addressLine1})</option>`
-//       });
-//       li += `<option value="newAddress" style='color: black !important;'>Add New Address</option>`;
-//       $('#shippingAddress').append(li);
-
-//       // })
-//       $('#shippingAddress').on('change', function () {
-//         // Update the shippingId variable with the selected value
-//         shippingId = $(this).val();
-//       });
-
-//     },
-//     error: function (error) {
-//       console.error('Error fetching cart data:', error);
-//     }
-//   });
-// }
-
-// function getshippinginfo() {
-//   $.ajax({
-//     url: `${SETTINGS.backendUrl}/CustomerAccount/GetAllCustShippingAddresses`,
-//     method: 'GET',
-//     headers: {
-//       Authorization: "Bearer " + token,
-//       "Content-Type": "application/json",
-//       // Add other headers as needed
-//     },
-//     dataType: 'json',
-//     success: function (profileData) {
-//       let li = `<option value="">Select Shipping Address</option>`;
-//       $.each(profileData, function (index, value) {
-//         li += `<option value="${value.csaEntryId}">${value.name} (${value.addressLine1})</option>`;
-//       });
-//       li += `<option value="newAddress" style='color: black !important;'>Add New Address</option>`;
-//       $('#shippingAddress').append(li);
-
-//       // Append the form dynamically
-//       let shippingForm = `
-//         <form id="shippingForm">
-//         <div class="row">
-//         <div class="col-md-6 mt-3">
-//           <div class="form-group">
-//             <label for="companyName"> Name</label>
-//             <input type="text" class="form-control" id="name" placeholder="  Name">
-//           </div>
-//         </div>
-//         <div class="col-md-6 mt-3">
-//           <div class="form-group">
-//             <label for="companyName">Contact No</label>
-//             <input type="text" class="form-control" id="contactNum"
-//               placeholder="Contact No">
-//           </div>
-//         </div>
-//         <div class="col-md-6 mt-3">
-//           <div class="form-group">
-//             <label for="companyName">Alternate Contact No</label>
-//             <input type="text" class="form-control" id="altcontactNum"
-//               placeholder="Alternate Contact No">
-//           </div>
-//         </div>
-
-//         <div class="col-md-6 mt-3">
-//           <div class="form-group" id="fetchCountriesBtn">
-//             <label for="companyName">Location</label>
-//             <select class="default-select w-100 country" id="locationSelection">
-//             </select>
-//           </div>
-//         </div>
-
-//         <div class="col-md-12 mt-3">
-//           <div class="form-group">
-//             <label for="companyName">Address Line 1</label>
-//             <input type="textarea" class="form-control" id="addresses1"
-//               placeholder="Address Line 1">
-//           </div>
-//         </div>
-//         <div class="col-md-12 mt-3">
-//           <div class="form-group">
-//             <label for="companyName">Address Line 2</label>
-//             <input type="textarea" class="form-control" id="addresses2"
-//               placeholder="Address Line 2">
-//           </div>
-//         </div>
-//         <div class="col-md-12 mt-3">
-//           <div class="form-group">
-//             <label for="companyName">Remark</label>
-//             <input type="text" class="form-control" id="remark"
-//               placeholder="Remark">
-//           </div>
-//         </div>
-//       </div>
-//         </form>
-//       `;
-
-//       // Append the form to a container (you might need to adjust the container selector)
-//       $('#shippingForm').append(shippingForm);
-
-//       $('#shippingForm').hide(); // Hide the form initially
-
-//       $('#shippingAddress').on('change', function () {
-//         var shippingId = $(this).val();
-
-//         if (shippingId !== "newAddress" && shippingId !== "") {
-//           var selectedShipping = profileData.find(function (item) {
-//             return item.csaEntryId == shippingId;
-//           });
-
-//           // Populate the form fields with the selected shipping address data
-//           $('#name').val(selectedShipping.name);
-//           $('#contactNum').val(selectedShipping.contactNum);
-//           $('#altcontactNum').val(selectedShipping.altcontactNum);
-//           $('#locationSelection').val(selectedShipping.location);
-//           $('#addresses1').val(selectedShipping.addresses1);
-//           $('#addresses2').val(selectedShipping.addresses2);
-//           $('#remark').val(selectedShipping.remark);
-
-//           // Show the form
-//           $('#shippingForm').show();
-//         } else {
-//           // Clear the form fields when "Add New Address" is selected or no address is selected
-//           $('#name, #contactNum, #altcontactNum, #locationSelection, #addresses1, #addresses2, #remark').val("");
-
-//           // Hide the form when "Add New Address" is selected
-//           $('#shippingForm').hide();
-//         }
-//       });
-
-//     },
-//     error: function (error) {
-//       console.error('Error fetching cart data:', error);
-//     }
-//   });
-// }
-
-// function getshippinginfo() {
-//   $.ajax({
-//     url: `${SETTINGS.backendUrl}/CustomerAccount/GetAllCustShippingAddresses`,
-//     method: 'GET',
-//     headers: {
-//       Authorization: "Bearer " + token,
-//       "Content-Type": "application/json",
-//       // Add other headers as needed
-//     },
-//     dataType: 'json',
-//     success: function (profileData) {
-//       let li = `<option value="">Select Shipping Address</option>`;
-//       $.each(profileData, function (index, value) {
-//         li += `<option value="${value.csaEntryId}">${value.name} (${value.addressLine1})</option>`;
-        
-//       });
-//       li += `<option value="newAddress" style='color: black !important;'>Add New Address</option>`;
-//       $('#shippingAddress').html(li); // Use html() instead of append() to replace existing options
-
-//       // Append the form dynamically
-//       let shippingdata =  ` 
-//       <div class="col-md-12">
-//         <div class="card">
-//           <div class="card-body" >
-//                       <h2 class="mb-3">Shipping Info</h2>
-//                       <p>CUSTOMER ID : <span class="text-black"> ${shipping.custId} </span></p>
-//                       <p>CUSTOMER NAME : <span class="text-black"> ${shipping.name} </span></p>
-//                       <p>CONTACT NO : <span class="text-black"> ${shipping.contactNo} </span></p>
-//                       <p>Alt ONTACT No: <span class="text-black"> ${shipping.altContactNo} </span></p>
-//                       <p>ADDRESS LINE 1: <span class="text-black"> ${shipping.addressLine1} </span></p>
-//                       <p>ADDRESS LINE 2: <span class="text-black"> ${shipping.addressLine2} </span></p>
-//                       <p>REMARK: <span class="text-black"> ${shipping.remark} </span></p>
-                      
-//           </div>
-//         </div>
-//      </div> `;
-//      let shippingForm = `
-//                         <form id="shippingForm">
-//                         <div class="row">
-//                         <div class="col-md-6 mt-3">
-//                           <div class="form-group">
-//                             <label for="companyName"> Name</label>
-//                             <input type="text" class="form-control" id="name" placeholder="  Name">
-//                           </div>
-//                         </div>
-//                         <div class="col-md-6 mt-3">
-//                           <div class="form-group">
-//                             <label for="companyName">Contact No</label>
-//                             <input type="text" class="form-control" id="contactNum"
-//                               placeholder="Contact No">
-//                           </div>
-//                         </div>
-//                         <div class="col-md-6 mt-3">
-//                           <div class="form-group">
-//                             <label for="companyName">Alternate Contact No</label>
-//                             <input type="text" class="form-control" id="altcontactNum"
-//                               placeholder="Alternate Contact No">
-//                           </div>
-//                         </div>
-     
-//                         <div class="col-md-6 mt-3">
-//                           <div class="form-group" id="fetchCountriesBtn">
-//                             <label for="companyName">Location</label>
-//                             <select class="default-select w-100 country" id="locationSelection">
-//                             </select>
-//                           </div>
-//                         </div>
-     
-//                         <div class="col-md-12 mt-3">
-//                           <div class="form-group">
-//                             <label for="companyName">Address Line 1</label>
-//                             <input type="textarea" class="form-control" id="addresses1"
-//                               placeholder="Address Line 1">
-//                           </div>
-//                         </div>
-//                         <div class="col-md-12 mt-3">
-//                           <div class="form-group">
-//                             <label for="companyName">Address Line 2</label>
-//                             <input type="textarea" class="form-control" id="addresses2"
-//                               placeholder="Address Line 2">
-//                           </div>
-//                         </div>
-//                         <div class="col-md-12 mt-3">
-//                           <div class="form-group">
-//                             <label for="companyName">Remark</label>
-//                             <input type="text" class="form-control" id="remark"
-//                               placeholder="Remark">
-//                           </div>
-//                         </div>
-//                       </div>
-//                         </form>
-//                       `;
-
-//       // Replace the content of #shippingdata instead of appending
-//       $('#shippinginfo').html(shippingdata);
-//       $('#shippingForm').html(shippingForm);
-//  console.log(shippingdata);
-//       // Hide the form initially
-//       $('#shippinginfo').hide();
-//       $('#shippingForm').hide();
-
-
-//       $('#shippingAddress').on('change', function () {
-//         var shippingId = $(this).val();
-
-//         if (shippingId !== "newAddress" && shippingId !== "") {
-//           var selectedShipping = profileData.find(function (item) {
-//             return item.csaEntryId == shippingId;
-//           });
-
-//           // Populate the form fields with the selected shipping address data
-//           $('#name').val(selectedShipping.name);
-//           $('#contactNum').val(selectedShipping.contactNo);
-//           $('#altcontactNum').val(selectedShipping.altcontactNo);
-//           $('#locationSelection').val(selectedShipping.location);
-//           $('#addresses1').val(selectedShipping.addressLine1);
-//           $('#addresses2').val(selectedShipping.addressLine1);
-//           $('#remark').val(selectedShipping.remark);
-
-//           // Show the form
-//           $('#shippinginfo').show();
-//           $('#shippingForm').hide();
-
-//         } else {
-//           // Clear the form fields when "Add New Address" is selected or no address is selected
-//           $('#name, #contactNum, #altcontactNum, #locationSelection, #addresses1, #addresses2, #remark').val("");
-
-//           // Hide the form when "Add New Address" is selected
-//           $('#shippinginfo').hide();
-//           $('#shippingForm').show();
-
-//         }
-//       });
-
-//     },
-//     error: function (error) {
-//       console.error('Error fetching cart data:', error);
-//     }
-//   });
-// }
- 
 
 function getshippinginfo() {
   $.ajax({
@@ -563,7 +315,6 @@ document.getElementById("saveshippinginfo").addEventListener("click", function (
   // }
 })
 
-
 console.log('shippingId', shippingId);
 $(document).ready(function () {
   // Check the checkbox state on page load
@@ -587,41 +338,6 @@ $(document).ready(function () {
     }
   });
 });
-
-    $(document).ready(function () {
-                      // Event listener for changes in the shippingAddress select element
-                      $('#shippingAddress').on('change', function () {
-                        // Check if the selected value is "newAddress"
-                        if ($(this).val() === 'newAddress') {
-                          // Enable the form fields
-                          enableShippingFormFields();
-                        } else {
-                          // Disable the form fields
-                          disableShippingFormFields();
-                        }
-                      });
-
-
-
-                      // Function to enable form fields
-                      function enableShippingFormFields() {
-                        $('#name,#contactNum,#altcontactNum,#addresses1, #addresses2,#locationSelection,#remark,#saveshippinginfo').prop('disabled', false);
-                      }
-
-                      // Function to disable form fields
-                      function disableShippingFormFields() {
-                        $('#name,#contactNum,#altcontactNum,#addresses1, #addresses2,#locationSelection,#remark,#saveshippinginfo').prop('disabled', true);
-                      }
-
-                      // Initial check on page load
-                      if ($('#shippingAddress').val() === 'newAddress') {
-                        enableShippingFormFields();
-                      } else {
-                        disableShippingFormFields();
-                      }
-
-  });
-
 
 document.getElementById("placeorder").addEventListener("click", function (e) {
   console.log();
@@ -703,7 +419,7 @@ document.getElementById("placeorder").addEventListener("click", function (e) {
         console.log('response', response);
         // console.log('Billing address added successfully:', response);
         toastr.success("Order Placed COD ");
-          window.location.href = `orderpaymentCOD.html?orderID:${response.orderId}`;
+          window.location.href = `orderpaymentCOD.html?orderID=${response.orderId}`;
         // if (response.paymentLink) {
         //   // Redirect to the payment link
         // } else {
@@ -724,11 +440,6 @@ document.getElementById("placeorder").addEventListener("click", function (e) {
     });
   }
 
- 
-
- 
-
-
   }
 
 // }
@@ -738,6 +449,12 @@ $(document).ready(function () {
   getCartCheckout()
   getshippinginfo()
   getLocation()
+  updateCheckoutView();
 });
 
 
+// }
+// function getCartAndUpdateCheckoutView() {
+//   getCartCheckout();
+//   updateCheckoutView();
+// }
