@@ -53,6 +53,7 @@
 	<script>
 		// Callback function to handle successful sign-in
 		function onSignIn(googleUser) {
+			console.log('googleUser', googleUser);
 			var profile = googleUser.getBasicProfile();
 			var userName = profile.getName();
 			var userEmail = profile.getEmail();
