@@ -140,7 +140,7 @@
 										</a>
 										<div class="user-dropdown" id="user-dropdown">
 										</div>
-											<span id="userName" class="text-black"></span>
+										<span id="userName" class="text-black"></span>
 									</li>
 								</ul>
 							</div>
@@ -631,7 +631,7 @@
 							</ul>
 						</nav>
 					</div>
-				</div>   
+				</div>
 			</div>
 			<!-- inner page banner End-->
 			<div class="content-inner-1">
@@ -783,75 +783,83 @@
 								<div class="row gx-xl-4 g-3 mb-xl-0 mb-md-0 " id="shippinginfo">
 								</div>
 
-								<form id="shippingForm" >
+								<form id="shippingForm">
 									<!-- Your form fields go here -->
-                                    <div class="row" style="display: none;" id="showForm">
+									<div class="row" style="display: none;" id="showForm">
 										<div class="d-flex">
 											<div class="col-md-6 mt-3 me-3">
 												<div class="form-group">
 													<label for="name">Name</label>
-													<input type="text" class="form-control" id="name" placeholder="Name">
+													<input type="text" class="form-control" id="name"
+														placeholder="Name">
 												</div>
 											</div>
 											<div class="col-md-6 mt-3">
 												<div class="form-group">
 													<label for="contactNum">Contact No</label>
-													<input type="text" class="form-control" id="contactNum" placeholder="Contact No" maxlength="10">
+													<input type="text" class="form-control" id="contactNum"
+														placeholder="Contact No" maxlength="10">
 												</div>
 											</div>
 										</div>
-									
+
 										<div class="d-flex">
 											<div class="col-md-6 mt-3 me-3">
 												<div class="form-group">
 													<label for="altcontactNum">Alternate Contact No</label>
-													<input type="text" class="form-control" id="altcontactNum" placeholder="Alternate Contact No" maxlength="10">
+													<input type="text" class="form-control" id="altcontactNum"
+														placeholder="Alternate Contact No" maxlength="10">
 												</div>
 											</div>
 											<div class="col-md-6 mt-3">
 												<div class="form-group" id="fetchCountriesBtn">
 													<label for="locationSelection">Location</label>
-													<select class="default-select w-100 country" id="locationSelection"></select>
+													<select class="default-select w-100 country"
+														id="locationSelection"></select>
 												</div>
 											</div>
 										</div>
 
 										<div class="d-flex">
-										<div class="col-md-6 mt-3 me-3">
-											<div class="form-group">
-												<label for="addresses1">Address Line 1</label>
-												<input type="text" class="form-control" id="addresses1" placeholder="Address Line 1">
+											<div class="col-md-6 mt-3 me-3">
+												<div class="form-group">
+													<label for="addresses1">Address Line 1</label>
+													<input type="text" class="form-control" id="addresses1"
+														placeholder="Address Line 1">
+												</div>
 											</div>
-										</div>
-										<div class="col-md-6 mt-3">
-											<div class="form-group">
-												<label for="addresses2">Address Line 2</label>
-												<input type="text" class="form-control" id="addresses2" placeholder="Address Line 2">
+											<div class="col-md-6 mt-3">
+												<div class="form-group">
+													<label for="addresses2">Address Line 2</label>
+													<input type="text" class="form-control" id="addresses2"
+														placeholder="Address Line 2">
+												</div>
 											</div>
-										</div>
 										</div>
 										<div class="col-md-12 mt-3">
 											<div class="form-group">
 												<label for="remark">Remark</label>
-												<input type="text" class="form-control" id="remark" placeholder="Remark">
+												<input type="text" class="form-control" id="remark"
+													placeholder="Remark">
 											</div>
 										</div>
-									
+
 										<div class="col-md-12 mt-3">
-											<button type="submit" class="btn btn-secondary m-3 w-50" id="saveshippinginfo">Save Shipping Info</button>
+											<button type="submit" class="btn btn-secondary m-3 w-50"
+												id="saveshippinginfo">Save Shipping Info</button>
 										</div>
 									</div>
-									
-                                      
+
+
 									<!-- Add more fields as needed -->
 
-									
 
 
-									
+
+
 								</form>
-								
-								
+
+
 								<div class="col-md-12 m-b25">
 									<div class="form-group">
 										<label class="label-title">Shipping Method</label>
@@ -889,7 +897,7 @@
 												<div class="accordion-button collapsed custom-control custom-checkbox"
 													data-bs-toggle="collapse" data-bs-target="#collapse4"
 													role="navigation" aria-expanded="true" aria-controls="collapse3">
-													<input class="form-check-input radio"  type="radio"
+													<input class="form-check-input radio" type="radio"
 														name="flexRadioDefault" id="flexRadioDefault5">
 													<label class="form-check-label" for="flexRadioDefault5">
 														COD
@@ -953,7 +961,7 @@
 										</tr>
 										<tr class="subtotal">
 											<td>Shipping Charge</td>
-											<td class="price"> 0 AED </td>
+											<td class="price" id="shippingcharge"></td>
 										</tr>
 										<!-- <tr class="title">
 											<td>

@@ -374,20 +374,24 @@ async function loginWithGoogle(tokenResponse) {
         Authorization: `Bearer ${tokenResponse.access_token}`,
       },
     });
-    const responseData = {
-      name: resp.data.name,
-      email: resp.data.email,
+    if (!resp.ok) {
+      throw new Error('Failed to fetch user info from Google.');
+    }
+    const responseData = await resp.json(); // Extract JSON response
+    const userData = {
+      name: responseData.name,
+      email: responseData.email,
       loginType: "Google",
-      firstName: resp.data.given_name,
-      lastName: resp.data.family_name,
+      firstName: responseData.given_name,
+      lastName: responseData.family_name,
       phone: "", // Assuming phone is not provided in the response
-      externalLoginId: resp.data.sub,
+      externalLoginId: responseData.sub,
     };
-    console.log('responseData', responseData);
-    // externalLogin(responseData);
+    console.log('userData', userData);
+    // externalLogin(userData);
     // setIsLoading(false);
   } catch (error) {
-    console.log(error);
+    console.error('Error fetching user info:', error);
     // setIsLoading(false);
   }
 }
