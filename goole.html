@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Sign-In Example</title>
+    <!-- Include the Google Sign-In script -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <!-- Add your Google Client ID -->
+    <meta name="google-signin-client_id"
+        content="523878807076-urpdvcvkbenjk7f2r04oled2959jgjs0.apps.googleusercontent.com">
+    <script>
+        // Callback function to handle successful sign-in
+        function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            var userName = profile.getName();
+            var userEmail = profile.getEmail();
+            // You can store the user's name and email here, for example, by sending it to a server-side script
+            console.log("Name: " + userName);
+            console.log("Email: " + userEmail);
+            // Here you can make an AJAX call to your server to store the user's data
+            // Example:
+            // $.post("/storeUserData", { name: userName, email: userEmail });
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Google Sign-In button -->
+    <div id="g_id_onload" data-client_id="523878807076-urpdvcvkbenjk7f2r04oled2959jgjs0.apps.googleusercontent.com"
+        data-callback="onSignIn" data-auto_prompt="false">
+    </div>
+    <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="sign_in_with"
+        data-shape="rectangular" data-logo_alignment="left">
+    </div>
+</body>
+
+</html>
