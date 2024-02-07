@@ -172,7 +172,7 @@ function updateOrderDetails(data) {
             const row = `
                 <tr>
                     <td class="product-item"><a href="javascript:void(0);"><img src="${order.itmimg}" alt="" width="80px"></a></td>
-                    <td class="product-item"><a href="./productDetails.html?Id=${order.itemId}"">${order.itmname}</a></td>
+                    <td class="product-item"><a href="./productDetails.html?Id=${order.oid}"">${order.itmname}</a></td>
                     <td class="product-item-name">${order.qty}</td>
                     <td class="product-item-price"><span>${order.price} AED</span></td>
                     <td class="product-item-stock text-primary">${order.total} AED</td>
