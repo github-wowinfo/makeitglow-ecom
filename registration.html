@@ -14,8 +14,8 @@
 	<meta property="og:title" content="MoonCart Shop & eCommerce HTML Template">
 	<meta property="og:description" content="MoonCart Shop & eCommerce HTML Template">
 	<meta name="format-detection" content="telephone=no">
-	<meta name="google-signin-client_id"
-		content="523878807076-urpdvcvkbenjk7f2r04oled2959jgjs0.apps.googleusercontent.com">
+	<!-- <meta name="google-signin-client_id"
+		content="523878807076-urpdvcvkbenjk7f2r04oled2959jgjs0.apps.googleusercontent.com"> -->
 	<!-- <meta name="google-signin-client_id"
 		content="523878807076-urpdvcvkbenjk7f2r04oled2959jgjs0.apps.googleusercontent.com"> -->
 	<!-- FAVICONS ICON -->
@@ -53,6 +53,7 @@
 	<script>
 		// Callback function to handle successful sign-in
 		function onSignIn(googleUser) {
+			console.log('googleUser', googleUser);
 			var profile = googleUser.getBasicProfile();
 			var userName = profile.getName();
 			var userEmail = profile.getEmail();
@@ -218,7 +219,7 @@
 
 	</div>
 	<script src="https://accounts.google.com/gsi/client" async defer></script>
-	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
 	<!-- Add your Google Client ID -->
 
 
