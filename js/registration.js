@@ -258,3 +258,25 @@ const externalLogin = async (responseData) => {
     }
   }
 };
+
+function externalLogin(responseData) {
+  $.ajax({
+    url: `${SETTINGS.backendUrl}/Auth/RegisterWithGoogle`,
+    type: "POST",
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-Type": "application/json",
+      // Add other headers as needed
+    },
+    dataType: "json",
+    contentType: "application/json",
+    data: JSON.stringify(responseData),
+    success: function (response) {
+      console.log("Sign In Success:", response);
+    },
+    error: function (error) {
+      console.log("Sign in Error:", error);
+      toastr.error(error.responseJSON.message);
+    },
+  });
+}
