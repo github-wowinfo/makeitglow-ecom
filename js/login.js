@@ -150,7 +150,7 @@ function loginCallBack(resopnse) {
   // localStorage.setItem("currentName", currentName);
   const responseData = {
     email: decodedCredential.email,
-    // externalLoginId: decodedCredential.sub,
+    externalLoginId: decodedCredential.sub,
 
   };
   externalLogin(responseData);
