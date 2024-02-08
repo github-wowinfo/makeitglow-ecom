@@ -243,19 +243,7 @@
 	<script src="https://accounts.google.com/gsi/client" async></script>
 	<script src="https://cdn.jsdelivr.net/npm/jwt-decode@4.0.0/build/cjs/index.min.js"></script>
 	<script>
-		var currentEmail, currentName;
 
-		function loginCallBack(resopnse) {
-			var decodedCredential = jwtDecode(resopnse.credential);
-			console.log(decodedCredential);
-			currentEmail = decodedCredential.email;
-			console.log(currentEmail);
-			currentName = decodedCredential.given_name;
-			localStorage.setItem("currentEmail", currentEmail);
-			localStorage.setItem("currentName", currentName);
-			// window.location.href = "./home.html";
-			// google.accounts.id.revoke("solwanmahmoud9977@gmail.com", () => { window.location.href = "./home.html"; });
-		}
 
 	</script>
 </body>

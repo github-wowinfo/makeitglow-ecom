@@ -206,53 +206,60 @@ document.getElementById('togglePassword').addEventListener('click', function () 
   passwordInput.setAttribute('type', type);
 });
 
-// function onSignIn(googleUser) {
-//   var profile = googleUser.getBasicProfile();
-//   console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-//   console.log('Name: ' + profile.getName());
-//   console.log('Image URL: ' + profile.getImageUrl());
-//   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-// }
+var currentEmail, currentName;
 
-
-// function handleCredentialResponse(response) {
-//   // decodeJwtResponse() is a custom function defined by you
-//   // to decode the credential response.
-//   const responsePayload = decodeJwtResponse(response.credential);
-
-//   console.log("ID: " + responsePayload.sub);
-//   console.log('Full Name: ' + responsePayload.name);
-//   console.log('Given Name: ' + responsePayload.given_name);
-//   console.log('Family Name: ' + responsePayload.family_name);
-//   console.log("Image URL: " + responsePayload.picture);
-//   console.log("Email: " + responsePayload.email);
-// }
-async function loginWithGoogle(tokenResponse) {
-  try {
-    const resp = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${tokenResponse.access_token}`,
-      },
-    });
-    if (!resp.ok) {
-      throw new Error('Failed to fetch user info from Google.');
-    }
-    const responseData = await resp.json(); // Extract JSON response
-    const userData = {
-      name: responseData.name,
-      email: responseData.email,
-      loginType: "Google",
-      firstName: responseData.given_name,
-      lastName: responseData.family_name,
-      phone: "", // Assuming phone is not provided in the response
-      externalLoginId: responseData.sub,
-    };
-    console.log('userData', userData);
-    // externalLogin(userData);
-    // setIsLoading(false);
-  } catch (error) {
-    console.error('Error fetching user info:', error);
-    // setIsLoading(false);
-  }
+function loginCallBack(resopnse) {
+  var decodedCredential = jwtDecode(resopnse.credential);
+  console.log(decodedCredential);
+  currentEmail = decodedCredential.email;
+  console.log(currentEmail);
+  currentName = decodedCredential.given_name;
+  localStorage.setItem("currentEmail", currentEmail);
+  localStorage.setItem("currentName", currentName);
+  const responseData = {
+    name: decodedCredential.name,
+    email: decodedCredential.email,
+    firstName: decodedCredential.given_name,
+    lastName: decodedCredential.family_name,
+    externalLoginId: decodedCredential.sub,
+  };
+  externalLogin(responseData);
+  // window.location.href = "./home.html";
+  // google.accounts.id.revoke("solwanmahmoud9977@gmail.com", () => { window.location.href = "./home.html"; });
 }
+
+const externalLogin = async (responseData) => {
+  if (!responseData) {
+    toast.error("Something went wrong");
+  } else {
+    try {
+      $.ajax({
+        url: `${SETTINGS.backendUrl}/Auth/RegisterWithGoogle`,
+        type: "POST",
+        data: responseData,
+        success: function (response) {
+          console.log('response', response);
+          // localStorage.setItem("user-vip", response.user?.vip);
+          // localStorage.setItem("user-id", response.user?.id);
+          // localStorage.setItem("user-name", response.user?.name);
+          // localStorage.setItem("tag-name", response.user?.nameTag);
+          // localStorage.setItem("profile-pic", response.user?.profilPic);
+          // localStorage.setItem("profile-path", response.profilPicPath);
+          // localStorage.setItem("token", response.token);
+          // localStorage.setItem("guestMode", "false");
+          // if (response.company !== null) {
+          //   localStorage.setItem("company-id", response.company?.id);
+          //   localStorage.setItem("company-bid", response.company?.bid);
+          // }
+          // toast.success("login success");
+          // navigate("/NewsFeeds");
+        },
+        error: function (error) {
+          toast.error(error.responseJSON.message);
+        }
+      });
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  }
+};
