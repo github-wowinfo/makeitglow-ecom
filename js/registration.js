@@ -1,4 +1,4 @@
-
+var token = localStorage.getItem("token");
 $.ajax({
   type: "GET",
   url: `${SETTINGS.backendUrl}/Masters/GetAllCountries`,
@@ -265,7 +265,7 @@ function externalLogin(responseData) {
     url: `${SETTINGS.backendUrl}/Auth/RegisterWithGoogle`,
     type: "POST",
     headers: {
-      Authorization: "Bearer " + token,
+      // Authorization: "Bearer " + token,
       "Content-Type": "application/json",
       // Add other headers as needed
     },
