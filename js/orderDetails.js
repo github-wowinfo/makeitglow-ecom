@@ -7,7 +7,6 @@ function getQueryParam(name) {
   const orderId = getQueryParam('orderId');
   console.log(orderId);
 let shippingId = ''
-let itemId = ''
 $.ajax({
     // url: `${SETTINGS.backendUrl}/Order/GetOrderDetailsByOrderId?OrderId=${order.ordrID}`,
 
@@ -34,7 +33,10 @@ function updateOrderDetails(data) {
     var timestampStr = data.ordrPymnt.paymentCreationTime;
     var timestamp = new Date(timestampStr);
     var formattedDate = formatDate(timestamp);
+    
     var Tamount = data.ordrPymnt.txnAmount / 100 ;
+    
+   console.log(data);
 
     function formatDate(date) {
         // Array of month names
@@ -44,18 +46,17 @@ function updateOrderDetails(data) {
             "August", "September", "October",
             "November", "December"
         ];
-
         // Extract day, month, and year
         var day = date.getDate();
         var monthIndex = date.getMonth();
         var year = date.getFullYear();
-
         // Format the date string
         var formattedDate = day + " " + monthNames[monthIndex] + " " + year;
 
         return formattedDate;
     }
 
+   
     var orderDetailsHtml = `
     <div class="card p-10 order-head">
        <div class="col-12 row ">
@@ -64,15 +65,15 @@ function updateOrderDetails(data) {
                <p class="mb-3">${formattedDate}</p>
              <div class="d-flex">
                 <h6 class="me-3">Status :</h6>
-                <p class="text-green"><strong>${data.status}</strong></p>
+                <p class="text-green"><strong>${getStatusText(data.status)}</strong></p>
              </div>
            </div>
           
            <div class="col-6" id="payment">
-             <h4 class="mb-2">Payment Details</h4>
-              <p class="mb-3">${data.ordrPymnt.pid}</p>
-               <p class="mb-3">${Tamount}</p>
-              <h6 class="me-3">${data.ordrPymnt.paymentStatusMsg}</h6>
+             <h2 class="mb-2">Payment Details</h2>
+              <p class="mb-2"><strong> Order Id :</strong> ${data.ordrPymnt.pid}</p>
+               <p class="mb-2"><strong> Text Amount :</strong> ${Tamount}</p>
+              <h6 class="me-2">${data.ordrPymnt.paymentStatusMsg}</h6>
           </div>
       </div>
     </div>
@@ -91,9 +92,31 @@ function updateOrderDetails(data) {
     `;
     $('#orderDetails').html(orderDetailsHtml);
 
+
     // card2 ... 
-    // console.log(data.shippingId);
-    // shippingId===data.shippingId
+
+    function getStatusText(statusCode) {
+        switch (statusCode) {
+          case 1:
+            return 'New order';
+          case 2:
+            return 'Processing';
+          case 3:
+            return 'Confirmed';
+          case 4:
+            return 'Shipping';
+          case 5:
+            return 'Delivered';
+          case 6:
+            return 'Cancelled';
+          case 7:
+            return 'Refunded';
+          case 0:
+            return 'Deleted';
+          default:
+            return 'Unknown';
+        }
+      }
 
     $.ajax({
         url: `${SETTINGS.backendUrl}/CustomerAccount/GetCustShippingAddressById/${data.shippingId}`,
@@ -191,6 +214,7 @@ function updateOrderDetails(data) {
     getBillingInfo();
     // Add logic to update other sections as needed (billing address, payment, product details, etc.)
 }
+
 
 
 function getBillingInfo() {
