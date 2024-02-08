@@ -159,6 +159,7 @@ function loginCallBack(resopnse) {
 
 
 function externalLogin(responseData) {
+  console.log('responseData', responseData);
   $.ajax({
     url: `${SETTINGS.backendUrl}/Auth/LoginWithGoogle`,
     type: "POST",
