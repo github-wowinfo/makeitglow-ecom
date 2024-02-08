@@ -229,36 +229,36 @@ function loginCallBack(resopnse) {
   // google.accounts.id.revoke("solwanmahmoud9977@gmail.com", () => { window.location.href = "./home.html"; });
 }
 
-const externalLogin = async (responseData) => {
-  if (!responseData) {
-    toast.error("Something went wrong");
-  } else {
-    try {
+// const externalLogin = async (responseData) => {
+//   if (!responseData) {
+//     toast.error("Something went wrong");
+//   } else {
+//     try {
 
-      $.ajax({
-        url: `${SETTINGS.backendUrl}/Auth/RegisterWithGoogle`,
-        type: "POST",
-        headers: {
-          Authorization: "Bearer " + token,
-          "Content-Type": "application/json",
-          // Add other headers as needed
-        },
-        dataType: "json",
-        contentType: "application/json",
-        data: JSON.stringify(responseData),
-        success: function (response) {
-          console.log("Sign In Success:", response);
-        },
-        error: function (error) {
-          console.log("Sign in Error:", error);
-          toastr.error(error.responseJSON.message);
-        },
-      });
-    } catch (error) {
-      toast.error(error.response.data.message);
-    }
-  }
-};
+//       $.ajax({
+//         url: `${SETTINGS.backendUrl}/Auth/RegisterWithGoogle`,
+//         type: "POST",
+//         headers: {
+//           Authorization: "Bearer " + token,
+//           "Content-Type": "application/json",
+//           // Add other headers as needed
+//         },
+//         dataType: "json",
+//         contentType: "application/json",
+//         data: JSON.stringify(responseData),
+//         success: function (response) {
+//           console.log("Sign In Success:", response);
+//         },
+//         error: function (error) {
+//           console.log("Sign in Error:", error);
+//           toastr.error(error.responseJSON.message);
+//         },
+//       });
+//     } catch (error) {
+//       toast.error(error.response.data.message);
+//     }
+//   }
+// };
 
 function externalLogin(responseData) {
   $.ajax({
