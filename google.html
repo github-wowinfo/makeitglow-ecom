@@ -1,33 +1,54 @@
+<!DOCTYPE html>
 <html>
 
 <head>
     <meta name="google-signin-client_id"
         content="523878807076-urpdvcvkbenjk7f2r04oled2959jgjs0.apps.googleusercontent.com">
+    <title>User Registration and Login</title>
+    <link rel="stylesheet" type="text/css" href="./form.css">
 </head>
 
 <body>
-    <div id="my-signin2"></div>
-    <script>
-        function onSuccess(googleUser) {
-            console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-        }
-        function onFailure(error) {
-            console.log(error);
-        }
-        function renderButton() {
-            gapi.signin2.render('my-signin2', {
-                'scope': 'profile email',
-                'width': 240,
-                'height': 50,
-                'longtitle': true,
-                'theme': 'dark',
-                'onsuccess': onSuccess,
-                'onfailure': onFailure
-            });
-        }
-    </script>
+    <!-- REGULAR LOGIN -->
+    <form id="loginForm">
+        <label for="Name">Name:</label>
+        <input type="Name" id="Name" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" required>
+        <button type="submit">Login</button>
+    </form>
 
-    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+    <!-- GOODLE LOGIN -->
+    <div id="g_id_onload" data-client_id="523878807076-urpdvcvkbenjk7f2r04oled2959jgjs0.apps.googleusercontent.com"
+        data-context="signin" data-ux_mode="popup" data-callback="loginCallBack" data-auto_prompt="false">
+    </div>
+    <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="filled_blue"
+        data-text="signin_with" data-size="large" data-logo_alignment="left">
+    </div>
+    <!-- GOODLE LOGIN SCRIPT FILES -->
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@4.0.0/build/cjs/index.min.js"></script>
+    <script>
+        var currentEmail, currentName;
+
+        function loginCallBack(resopnse) {
+            var decodedCredential = jwtDecode(resopnse.credential);
+            console.log(decodedCredential);
+            currentEmail = decodedCredential.email;
+            console.log(currentEmail);
+            currentName = decodedCredential.given_name;
+            localStorage.setItem("currentEmail", currentEmail);
+            localStorage.setItem("currentName", currentName);
+            window.location.href = "./home.html";
+            google.accounts.id.revoke("solwanmahmoud9977@gmail.com", () => { window.location.href = "./home.html"; });
+        }
+
+    </script>
+    <!-- REGULAR LOGIN SCRIPT FILE -->
+    <!-- <script src="./form.js"></script> -->
+
 </body>
 
 </html>
