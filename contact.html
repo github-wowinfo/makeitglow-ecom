@@ -647,23 +647,23 @@
 						</div>
 						<div class="col-lg-6">
 							<div class="contact-area1 style-1 m-r20 m-md-r0 wow fadeInUp" data-wow-delay="0.5s">
-								<form class="dz-form dzForm" method="POST" action="php/contact.php">
+								<form class="dz-form dzForm" id="contactInfo" method="POST" action="php/contact.php">
 									<input type="hidden" class="form-control" name="dzToDo" value="Contact">
 									<input type="hidden" class="form-control" name="reCaptchaEnable" value="0">
 									<div class="dzFormMsg"></div>
 									<label class="form-label">Your Name</label>
 									<div class="input-group">
-										<input required type="text" class="form-control" name="dzName" id="name">
+										<input required type="text" class="form-control" name="dzName" id="name" placeholder="Enter Your Name">
 									</div>
 									<label class="form-label">Email Address</label>
 									<div class="input-group">
-										<input required type="text" class="form-control" name="dzEmail" id="email">
+										<input required type="text" class="form-control" name="dzEmail" id="email" placeholder="Enetr mail Id" >
 									</div>
 									<div class=" row">
 										<div class="col-6">
 									        <label class="form-label" >Phone Number</label>
 									        <div class="input-group">
-										    <input required type="text" class="form-control" name="dzPhoneNumber" id="number" maxlength="10">
+										    <input required type="text" class="form-control" name="dzPhoneNumber" id="number" maxlength="10" placeholder="Enter Phone Number">
 									       </div>
 								       </div>
 									   <div class="col-6">
@@ -675,12 +675,12 @@
 							    	</div>
 									<label class="form-label">Subject</label>
 									<div class="input-group m-b30">
-										<input name="subject"  required
+										<input name="subject"  required placeholder="Enter Subject"
 											class="form-control " id="subject"></input>
 									</div>
 									<label class="form-label">Massage</label>
 									<div class="input-group">
-										<textarea name="dzMessage" rows="2" required
+										<textarea name="dzMessage" rows="2" required placeholder="Type here ..What you want to tell with us.."
 											class="form-control m-b10" id="messages"></textarea>
 									</div>
 									<div>

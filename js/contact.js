@@ -66,6 +66,13 @@ document.getElementById("submit").addEventListener("click", function (e) {
       // localStorage.setItem('token', response.token);
       console.log('Submitted:', response);
       toastr.success(" Submitted ");
+      // location.reload();
+      document.getElementById("name").value = '';
+      document.getElementById("email").value = '';
+      document.getElementById("number").value = '';
+      document.getElementById("locationSelection").value = '';
+      document.getElementById("subject").value = '';
+      document.getElementById("messages").value = '';
 
     },
     error: function (error) {
