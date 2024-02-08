@@ -243,6 +243,9 @@ function externalLogin(responseData) {
     data: JSON.stringify(responseData),
     success: function (response) {
       console.log("Sign In Success:", response);
+      localStorage.setItem('token', response.token);
+      toastr.success("Registered successful! ");
+      window.location.href = "./login.html";
     },
     error: function (error) {
       console.log("Sign in Error:", error);
