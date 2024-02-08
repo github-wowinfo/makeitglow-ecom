@@ -1,25 +1,25 @@
- $(document).ready(function(){
-            $.ajax({
-                url: `${SETTINGS.backendUrl}/Masters/GetAllEvents`,
-                method: 'GET',
-                dataType: 'json',
-                success: function(data){
-                    // Assuming data is an array of events
-                    // You can process the data and update the HTML accordingly
-                    updateAccordion(data);
-                  
-                },
-                error: function(error){
-                    console.error('Error fetching data:', error);
-                }
-            });
+$(document).ready(function () {
+    $.ajax({
+        url: `${SETTINGS.backendUrl}/Masters/GetAllEvents`,
+        method: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            // Assuming data is an array of events
+            // You can process the data and update the HTML accordingly
+            updateAccordion(data);
 
-            function updateAccordion(events) {
-                // Assuming each event has properties like title, description, images
-                var accordionHTML = '';
+        },
+        error: function (error) {
+            console.error('Error fetching data:', error);
+        }
+    });
 
-                events.forEach(function(event){
-                    accordionHTML += `
+    function updateAccordion(events) {
+        // Assuming each event has properties like title, description, images
+        var accordionHTML = '';
+
+        events.forEach(function (event) {
+            accordionHTML += `
                         <div class="accordion-item mt-5 active">
                             <h2 class="accordion-header" id="heading${event.id}">
                                 <a href="#" class="accordion-button collapsed"
@@ -50,18 +50,16 @@
                                 </div>
                             </div>
                         </div>`;
-                });
-                $('#accordionFaq').html(accordionHTML);
-                
-                $("#lightgallery").lightGallery({
-                    selector: '.demo-gallery .lg-item',
-                }); // Initialize LightGallery
-              }
-             function getImagesHTML(images) {
-                var imagesHTML = '';
-            
-                images.forEach(function(image, index) {
-                    imagesHTML += `
+        });
+        $('#accordionFaq').html(accordionHTML);
+
+        lightGallery(document.getElementById('lightgallery'))
+    }
+    function getImagesHTML(images) {
+        var imagesHTML = '';
+
+        images.forEach(function (image, index) {
+            imagesHTML += `
                         <li class="wp-block-image size-large"
                             data-responsive="${image.filePath} 375, ${image.filePath} 480, ${image.filePath} 800"
                             data-src="${SETTINGS.ImageUrl}${image.filePath}"
@@ -73,12 +71,11 @@
                                     alt="img-${index + 1}">
                             </a>
                         </li>`;
-                });
-            
-                return imagesHTML;
-                
-              }
+        });
 
-            
+        return imagesHTML;
+
+    }
+
+
 });
-        
