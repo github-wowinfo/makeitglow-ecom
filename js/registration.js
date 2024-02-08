@@ -218,7 +218,7 @@ function loginCallBack(resopnse) {
   // localStorage.setItem("currentName", currentName);
   const responseData = {
     userType: 2,
-    name: decodedCredential.name,
+    // name: decodedCredential.name,
     email: decodedCredential.email,
     firstName: decodedCredential.given_name,
     lastName: decodedCredential.family_name,
