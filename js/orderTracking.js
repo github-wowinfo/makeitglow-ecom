@@ -51,7 +51,7 @@ $(document).ready(function () {
                 $('#tbody').append('</tbody>');
             } else {
                 // Handle the case when no FAQs are available
-                $('#tbody').append('<p>No FAQs available</p>');
+                $('#tbody').append('<p>Opps ! Sorry there is no Order</p> <img src="./images/empty-cart.webp"> <p>Looks like you have not order anything. Go ahead & explore top categories</p>');
             }
         },
         error: function (xhr, status, error) {

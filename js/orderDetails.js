@@ -72,7 +72,7 @@ function updateOrderDetails(data) {
            <div class="col-6" id="payment">
              <h2 class="mb-2">Payment Details</h2>
               <p class="mb-2"><strong> Order Id :</strong> ${data.ordrPymnt.pid}</p>
-               <p class="mb-2"><strong> Text Amount :</strong> ${Tamount}</p>
+               <p class="mb-2"><strong> Tax Amount :</strong> ${Tamount}</p>
               <h6 class="me-2">${data.ordrPymnt.paymentStatusMsg}</h6>
           </div>
       </div>
