@@ -166,7 +166,7 @@ document.getElementById("postButton").addEventListener("click", function (e) {
 
       // Handle the response from the server after successful registration
       // Show success toast
-      toastr.success("Registered successful! ");
+      toastr.success("Registered successfully! ");
       window.location.href = "./login.html";
 
 
@@ -244,7 +244,7 @@ function externalLogin(responseData) {
     success: function (response) {
       console.log("Sign In Success:", response);
       localStorage.setItem('token', response.token);
-      toastr.success("Registered successful! ");
+      toastr.success("Registered successfully! ");
       window.location.href = "./login.html";
     },
     error: function (error) {
