@@ -233,30 +233,25 @@ const externalLogin = async (responseData) => {
     toast.error("Something went wrong");
   } else {
     try {
+
       $.ajax({
         url: `${SETTINGS.backendUrl}/Auth/RegisterWithGoogle`,
         type: "POST",
-        data: responseData,
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+          // Add other headers as needed
+        },
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify(responseData),
         success: function (response) {
-          console.log('response', response);
-          // localStorage.setItem("user-vip", response.user?.vip);
-          // localStorage.setItem("user-id", response.user?.id);
-          // localStorage.setItem("user-name", response.user?.name);
-          // localStorage.setItem("tag-name", response.user?.nameTag);
-          // localStorage.setItem("profile-pic", response.user?.profilPic);
-          // localStorage.setItem("profile-path", response.profilPicPath);
-          // localStorage.setItem("token", response.token);
-          // localStorage.setItem("guestMode", "false");
-          // if (response.company !== null) {
-          //   localStorage.setItem("company-id", response.company?.id);
-          //   localStorage.setItem("company-bid", response.company?.bid);
-          // }
-          // toast.success("login success");
-          // navigate("/NewsFeeds");
+          console.log("Sign In Success:", response);
         },
         error: function (error) {
-          toast.error(error.responseJSON.message);
-        }
+          console.log("Sign in Error:", error);
+          toastr.error(error.responseJSON.message);
+        },
       });
     } catch (error) {
       toast.error(error.response.data.message);
