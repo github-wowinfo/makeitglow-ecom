@@ -24,42 +24,43 @@ $(document).ready(function () {
         dataType: 'json',
         success: function (data) {
             // Iterate over the products in the response and append them to the masonry layout
-            // console.log('data', data);
-            $('#title').append(data.itemName)
+            console.log('data', data);
+            $('#title').append(data.itemTitle)
             $('#shortDescription').append(data.shortDescription)
             $('#longDescription').append(data.longDescription)
-            $('#title1').append(data.itemName)
+            $('#title1').append(data.itemTitle)
             $('#categoryName').append(data.categoryName)
 
-            var productImage = `<div class="swiper-btn-center-lr">
+            var productImage = `
+            <div class="swiper-btn-center-lr">
   <div class="swiper product-gallery-swiper2">
     <div class="swiper-wrapper" id="lightgallery">
       <div class="swiper-slide">
         <div class="dz-media DZoomImage">
-          <a class="mfp-link lg-item" href="${data.thumbnail}"
-            data-src="images/products/product-detail2/product2.png">
+          <a class="mfp-link lg-item" href="${data.mainImage1}"
+            data-src="${data.mainImage1}">
             <!-- <i  class="feather icon-maximize dz-maximize top-left"></i> -->
           </a>
-          <img src="${data.thumbnail}" alt="image" />
+          <img src="${data.mainImage1}" alt="image" />
         </div>
       </div>
       <div class="swiper-slide">
         <div class="dz-media DZoomImage">
-          <a class="mfp-link lg-item" href="${data.vrnts[0].image2}"
-            data-src="images/products/product-detail2/product1.png">
+          <a class="mfp-link lg-item" href="${data.gftItems[0].giftItemVariants.image2}"
+            data-src="${data.gftItems[0].giftItemVariants.image2}">
             <!-- <i class="feather icon-maximize dz-maximize top-left"></i> -->
           </a>
-          <img src="${data.vrnts[0].image2}" alt="image" />
+          <img src="${data.gftItems[0].giftItemVariants.image2}" alt="image" />
         </div>
       </div>
   
       <div class="swiper-slide">
         <div class="dz-media DZoomImage">
-          <a class="mfp-link lg-item" href="${data.vrnts[0].image3}"
-            data-src="images/products/product-detail2/product3.png">
+          <a class="mfp-link lg-item" href="${data.gftItems[0].giftItemVariants.image3}"
+            data-src="${data.gftItems[0].giftItemVariants.image3}">
             <!-- <i class="feather icon-maximize dz-maximize top-left"></i> -->
           </a>
-          <img src="${data.vrnts[0].image3}" alt="image" />
+          <img src="${data.gftItems[0].giftItemVariants.image3}" alt="image" />
         </div>
       </div>
     </div>
@@ -67,20 +68,20 @@ $(document).ready(function () {
   <div class="swiper product-gallery-swiper thumb-swiper-lg">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
-        <img src="${data.thumbnail}" alt="image" />
+        <img src="${data.mainImage1}" alt="image" />
       </div>
       <div class="swiper-slide">
-        <img src="${data.vrnts[0].image2}" alt="image" />
+        <img src="${data.gftItems[0].giftItemVariants.image2}" alt="image" />
       </div>
       <div class="swiper-slide">
-        <img src="${data.vrnts[0].image3}" alt="image" />
+        <img src="${data.gftItems[0].giftItemVariants.image3}" alt="image" />
       </div>
     </div>
   </div>
   </div>
     `
-            $('#imageContent').append(productImage);
-            $('#howtouse').append(data.vrnts[0].howToUse);
+            $('#imageContentgift').append(productImage);
+            $('#howtouse').append(data.gftItems[0].giftItemVariants.howToUse);
 
 
             // function generateOnClickFunction(index) {
@@ -95,7 +96,7 @@ $(document).ready(function () {
 
             // Generate volume HTML dynamically based on API response
             var volumeHTML = '<label class="form-label">Size</label><div class="btn-group product-size mb-0">';
-            data.vrnts.forEach(function (variant, index) {
+            data.gftItems[0].giftItemVariants.forEach(function (variant, index) {
 
 
                 volumeHTML += `
@@ -113,13 +114,13 @@ $(document).ready(function () {
             // Append volume HTML to the '#volume' element
             $('#volume').append(volumeHTML);
 
-            data.vrnts.forEach(function (variant, index) {
+            data.gftItems[0].giftItemVariants.forEach(function (variant, index) {
                 variantId = variant.vrntEntryId
                 console.log('variantId', variantId);
 
 
-                if (data.vrnts.length > 0) {
-                    variantId = data.vrnts[0].vrntEntryId;
+                if (data.gftItems[0].giftItemVariants.length > 0) {
+                    variantId = data.gftItems[0].itmVrntID;
                     console.log('Initial variantId', variantId);
                     pricingHTML += `
           <span class="price-num Tab-contents" id="tab${index + 1}" ${index + 1 === initialTab ? '' : 'style="display: none;"'}>
