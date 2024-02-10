@@ -188,7 +188,7 @@ $(document).ready(function () {
         // Append the product card HTML to the masonry layout
         $('#masonry').append(productCardHtml);
       });
- 
+
     },
     error: function (error) {
       console.error('Error fetching data:', error);
@@ -272,18 +272,7 @@ function quckview(id) {
             </li>
             <li>
               <strong>Category:</strong>
-              <span>Bottles,</span>
-              <span>Accessories,</span>
-              <span>Mats,</span>
-              <span>Bottles,</span>
-              <span>Trackers</span>
-            </li>
-            <li>
-              <strong>Tags:</strong>
-              <span>Trackers,</span>
-              <span>Bags,</span>
-              <span>Cup,</span>
-              <span>Toothbrushes</span>
+              <span>${product.categoryName}</</span>
             </li>
           </ul>
         </div>

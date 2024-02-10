@@ -9,7 +9,7 @@ document.getElementById("login").addEventListener("click", function (e) {
   const Passwords = document.getElementById("password").value;
   const togglePassword = document.querySelector('#togglePassword');
 
-  
+
 
   // Validate first name  (not empty)
   document.querySelectorAll(".error").forEach((element) => {
@@ -59,26 +59,26 @@ document.getElementById("login").addEventListener("click", function (e) {
     success: function (response) {
       var fullName = response.profile.firstName + ' ' + response.profile.lastName;
 
-console.log(response);
+      console.log(response);
       localStorage.setItem('token', response.token);
       localStorage.setItem('userId', response.profile.userId)
-      localStorage.setItem('uid', response.profile.uid)      
-      localStorage.setItem('userName', fullName)      
-      localStorage.setItem('uid', response.profile.firstName)      
+      localStorage.setItem('uid', response.profile.uid)
+      localStorage.setItem('userName', fullName)
+      // localStorage.setItem('uid', response.profile.firstName)
       console.log("Sign In Success:", response.profile);
 
       toastr.success("Login In successful! ");
       // window.location.href = "./index.html";
 
-       // Check for the stored redirect URL
-    var redirectUrl = sessionStorage.getItem('redirectUrl');
-    if (redirectUrl) {
-      sessionStorage.removeItem('redirectUrl'); // Clear the stored URL
-      window.location.href = redirectUrl;
-    } else {
-      // Redirect to the default URL if there is no stored URL
-      window.location.href = "./index.html";
-    }
+      // Check for the stored redirect URL
+      var redirectUrl = sessionStorage.getItem('redirectUrl');
+      if (redirectUrl) {
+        sessionStorage.removeItem('redirectUrl'); // Clear the stored URL
+        window.location.href = redirectUrl;
+      } else {
+        // Redirect to the default URL if there is no stored URL
+        window.location.href = "./index.html";
+      }
     },
     error: function (error) {
       console.log("Sign in Error:", error);
@@ -138,3 +138,67 @@ document.getElementById("handleConfirmation").addEventListener("click", function
   });
 
 });
+
+
+function loginCallBack(resopnse) {
+  var decodedCredential = jwtDecode(resopnse.credential);
+  console.log(decodedCredential);
+  // currentEmail = decodedCredential.email;
+  // console.log(currentEmail);
+  // currentName = decodedCredential.given_name;
+  // localStorage.setItem("currentEmail", currentEmail);
+  // localStorage.setItem("currentName", currentName);
+  const responseData = {
+    email: decodedCredential.email,
+    externalLoginId: decodedCredential.sub,
+
+  };
+  externalLogin(responseData);
+}
+
+
+
+function externalLogin(responseData) {
+  console.log('responseData', responseData);
+  $.ajax({
+    url: `${SETTINGS.backendUrl}/Auth/LoginWithGoogle`,
+    type: "POST",
+    headers: {
+      // Authorization: "Bearer " + token,
+      "Content-Type": "application/json",
+      // Add other headers as needed
+    },
+    dataType: "json",
+    contentType: "application/json",
+    data: JSON.stringify(responseData),
+    success: function (response) {
+      console.log("Sign In Success:", response);
+      var fullName = response.profile.firstName + ' ' + response.profile.lastName;
+
+      console.log(response);
+      localStorage.setItem('token', response.token);
+      localStorage.setItem('userId', response.profile.userId)
+      localStorage.setItem('uid', response.profile.uid)
+      localStorage.setItem('userName', fullName)
+      // localStorage.setItem('uid', response.profile.firstName)
+      console.log("Sign In Success:", response.profile);
+
+      toastr.success("Login In successful! ");
+      // window.location.href = "./index.html";
+
+      // Check for the stored redirect URL
+      var redirectUrl = sessionStorage.getItem('redirectUrl');
+      if (redirectUrl) {
+        sessionStorage.removeItem('redirectUrl'); // Clear the stored URL
+        window.location.href = redirectUrl;
+      } else {
+        // Redirect to the default URL if there is no stored URL
+        window.location.href = "./index.html";
+      }
+    },
+    error: function (error) {
+      console.log("Sign in Error:", error);
+      toastr.error(error.responseJSON.message);
+    },
+  });
+}

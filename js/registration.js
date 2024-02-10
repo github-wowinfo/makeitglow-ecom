@@ -1,4 +1,4 @@
-
+var token = localStorage.getItem("token");
 $.ajax({
   type: "GET",
   url: `${SETTINGS.backendUrl}/Masters/GetAllCountries`,
@@ -166,7 +166,7 @@ document.getElementById("postButton").addEventListener("click", function (e) {
 
       // Handle the response from the server after successful registration
       // Show success toast
-      toastr.success("Registered successful! ");
+      toastr.success("Registered successfully! ");
       window.location.href = "./login.html";
 
 
@@ -206,53 +206,50 @@ document.getElementById('togglePassword').addEventListener('click', function () 
   passwordInput.setAttribute('type', type);
 });
 
-// function onSignIn(googleUser) {
-//   var profile = googleUser.getBasicProfile();
-//   console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-//   console.log('Name: ' + profile.getName());
-//   console.log('Image URL: ' + profile.getImageUrl());
-//   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-// }
+// var currentEmail, currentName;
+
+function loginCallBack(resopnse) {
+  var decodedCredential = jwtDecode(resopnse.credential);
+  console.log(decodedCredential);
+  // currentEmail = decodedCredential.email;
+  // console.log(currentEmail);
+  // currentName = decodedCredential.given_name;
+  // localStorage.setItem("currentEmail", currentEmail);
+  // localStorage.setItem("currentName", currentName);
+  const responseData = {
+    userType: 2,
+    // name: decodedCredential.name,
+    email: decodedCredential.email,
+    firstName: decodedCredential.given_name,
+    lastName: decodedCredential.family_name,
+    externalLoginId: decodedCredential.sub,
+  };
+  externalLogin(responseData);
+}
 
 
-// function handleCredentialResponse(response) {
-//   // decodeJwtResponse() is a custom function defined by you
-//   // to decode the credential response.
-//   const responsePayload = decodeJwtResponse(response.credential);
 
-//   console.log("ID: " + responsePayload.sub);
-//   console.log('Full Name: ' + responsePayload.name);
-//   console.log('Given Name: ' + responsePayload.given_name);
-//   console.log('Family Name: ' + responsePayload.family_name);
-//   console.log("Image URL: " + responsePayload.picture);
-//   console.log("Email: " + responsePayload.email);
-// }
-async function loginWithGoogle(tokenResponse) {
-  try {
-    const resp = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${tokenResponse.access_token}`,
-      },
-    });
-    if (!resp.ok) {
-      throw new Error('Failed to fetch user info from Google.');
-    }
-    const responseData = await resp.json(); // Extract JSON response
-    const userData = {
-      name: responseData.name,
-      email: responseData.email,
-      loginType: "Google",
-      firstName: responseData.given_name,
-      lastName: responseData.family_name,
-      phone: "", // Assuming phone is not provided in the response
-      externalLoginId: responseData.sub,
-    };
-    console.log('userData', userData);
-    // externalLogin(userData);
-    // setIsLoading(false);
-  } catch (error) {
-    console.error('Error fetching user info:', error);
-    // setIsLoading(false);
-  }
+function externalLogin(responseData) {
+  $.ajax({
+    url: `${SETTINGS.backendUrl}/Auth/RegisterWithGoogle`,
+    type: "POST",
+    headers: {
+      // Authorization: "Bearer " + token,
+      "Content-Type": "application/json",
+      // Add other headers as needed
+    },
+    dataType: "json",
+    contentType: "application/json",
+    data: JSON.stringify(responseData),
+    success: function (response) {
+      console.log("Sign In Success:", response);
+      localStorage.setItem('token', response.token);
+      toastr.success("Registered successfully! ");
+      window.location.href = "./login.html";
+    },
+    error: function (error) {
+      console.log("Sign in Error:", error);
+      toastr.error(error.responseJSON.message);
+    },
+  });
 }

@@ -48,21 +48,7 @@
 	<link
 		href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;family=Roboto:wght@100;300;400;500;700;900&amp;display=swap"
 		rel="stylesheet">
-	<script>
-		// Callback function to handle successful sign-in
-		function onSignIn(googleUser) {
-			console.log('googleUser', googleUser);
-			var profile = googleUser.getBasicProfile();
-			var userName = profile.getName();
-			var userEmail = profile.getEmail();
-			// You can store the user's name and email here, for example, by sending it to a server-side script
-			console.log("Name: " + userName);
-			console.log("Email: " + userEmail);
-			// Here you can make an AJAX call to your server to store the user's data
-			// Example:
-			// $.post("/storeUserData", { name: userName, email: userEmail });
-		}
-	</script>
+
 </head>
 
 <body>
@@ -196,10 +182,12 @@
 							</div>
 							<div id="g_id_onload"
 								data-client_id="523878807076-urpdvcvkbenjk7f2r04oled2959jgjs0.apps.googleusercontent.com"
-								data-callback="onSignIn" data-auto_prompt="false">
+								data-context="signin" data-ux_mode="popup" data-callback="loginCallBack"
+								data-auto_prompt="false">
 							</div>
-							<div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline"
-								data-text="sign_in_with" data-shape="rectangular" data-logo_alignment="left">
+							<div class="g_id_signin" data-type="standard" data-shape="rectangular"
+								data-theme="filled_blue" data-text="signin_with" data-size="large"
+								data-logo_alignment="left">
 							</div>
 						</div>
 					</div>
@@ -252,31 +240,12 @@
 	<script src="vendor/lightgallery/dist/plugins/zoom/lg-zoom.min.js"></script>
 	<script src="js/dz.ajax.js"></script><!-- AJAX -->
 	<script src="js/custom.js"></script><!-- CUSTOM JS -->
-	<script src="https://apis.google.com/js/platform.js" async defer></script>
-	<!-- <script>
-		// Function to handle sign-in
-		function handleCredentialResponse(response) {
-			// Log the sign-in event
-			console.log('User signed in:', response);
+	<script src="https://accounts.google.com/gsi/client" async></script>
+	<script src="https://cdn.jsdelivr.net/npm/jwt-decode@4.0.0/build/cjs/index.min.js"></script>
+	<script>
 
-			// Extract user information
-			const profile = response.getBasicProfile();
-			const name = profile.getName();
-			const email = profile.getEmail();
-			const firstName = profile.getGivenName();
-			const lastName = profile.getFamilyName();
-			const externalLoginId = profile.getId();
 
-			// Log extracted information
-			console.log('Name:', name);
-			console.log('Email:', email);
-			console.log('First Name:', firstName);
-			console.log('Last Name:', lastName);
-			console.log('External Login ID:', externalLoginId);
-
-			// You can add more logging details or send this information to your server
-		}
-	</script> -->
+	</script>
 </body>
 
 <!-- Mirrored from mooncart.dexignzone.com/xhtml/shop-registration.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Dec 2023 12:28:03 GMT -->

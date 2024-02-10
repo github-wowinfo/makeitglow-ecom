@@ -1,88 +1,54 @@
+<!DOCTYPE html>
 <html>
 
 <head>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-    <script src="https://apis.google.com/js/api:client.js"></script>
-    <script>
-        var googleUser = {};
-        var startApp = function () {
-            gapi.load('auth2', function () {
-                // Retrieve the singleton for the GoogleAuth library and set up the client.
-                auth2 = gapi.auth2.init({
-                    client_id: '523878807076-urpdvcvkbenjk7f2r04oled2959jgjs0.apps.googleusercontent.com',
-                    cookiepolicy: 'single_host_origin',
-                    // Request scopes in addition to 'profile' and 'email'
-                    //scope: 'additional_scope'
-                });
-                attachSignin(document.getElementById('customBtn'));
-            });
-        };
-
-        function attachSignin(element) {
-            console.log(element.id);
-            auth2.attachClickHandler(element, {},
-                function (googleUser) {
-                    document.getElementById('name').innerText = "Signed in: " +
-                        googleUser.getBasicProfile().getName();
-                }, function (error) {
-                    alert(JSON.stringify(error, undefined, 2));
-                });
-        }
-    </script>
-    <style type="text/css">
-        #customBtn {
-            display: inline-block;
-            background: white;
-            color: #444;
-            width: 190px;
-            border-radius: 5px;
-            border: thin solid #888;
-            box-shadow: 1px 1px 1px grey;
-            white-space: nowrap;
-        }
-
-        #customBtn:hover {
-            cursor: pointer;
-        }
-
-        span.label {
-            font-family: serif;
-            font-weight: normal;
-        }
-
-        span.icon {
-            background: url('/identity/sign-in/g-normal.png') transparent 5px 50% no-repeat;
-            display: inline-block;
-            vertical-align: middle;
-            width: 42px;
-            height: 42px;
-        }
-
-        span.buttonText {
-            display: inline-block;
-            vertical-align: middle;
-            padding-left: 42px;
-            padding-right: 42px;
-            font-size: 14px;
-            font-weight: bold;
-            /* Use the Roboto font that is loaded in the <head> */
-            font-family: 'Roboto', sans-serif;
-        }
-    </style>
+    <meta name="google-signin-client_id"
+        content="523878807076-urpdvcvkbenjk7f2r04oled2959jgjs0.apps.googleusercontent.com">
+    <title>User Registration and Login</title>
+    <link rel="stylesheet" type="text/css" href="./form.css">
 </head>
 
 <body>
-    <!-- In the callback, you would hide the gSignInWrapper element on a
-  successful sign in -->
-    <div id="gSignInWrapper">
-        <span class="label">Sign in with:</span>
-        <div id="customBtn" class="customGPlusSignIn">
-            <span class="icon"></span>
-            <span class="buttonText">Google</span>
-        </div>
+    <!-- REGULAR LOGIN -->
+    <form id="loginForm">
+        <label for="Name">Name:</label>
+        <input type="Name" id="Name" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" required>
+        <button type="submit">Login</button>
+    </form>
+
+    <!-- GOODLE LOGIN -->
+    <div id="g_id_onload" data-client_id="523878807076-urpdvcvkbenjk7f2r04oled2959jgjs0.apps.googleusercontent.com"
+        data-context="signin" data-ux_mode="popup" data-callback="loginCallBack" data-auto_prompt="false">
     </div>
-    <div id="name"></div>
-    <script>startApp();</script>
+    <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="filled_blue"
+        data-text="signin_with" data-size="large" data-logo_alignment="left">
+    </div>
+    <!-- GOODLE LOGIN SCRIPT FILES -->
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@4.0.0/build/cjs/index.min.js"></script>
+    <script>
+        var currentEmail, currentName;
+
+        function loginCallBack(resopnse) {
+            var decodedCredential = jwtDecode(resopnse.credential);
+            console.log(decodedCredential);
+            currentEmail = decodedCredential.email;
+            console.log(currentEmail);
+            currentName = decodedCredential.given_name;
+            localStorage.setItem("currentEmail", currentEmail);
+            localStorage.setItem("currentName", currentName);
+            // window.location.href = "./home.html";
+            // google.accounts.id.revoke("solwanmahmoud9977@gmail.com", () => { window.location.href = "./home.html"; });
+        }
+
+    </script>
+    <!-- REGULAR LOGIN SCRIPT FILE -->
+    <!-- <script src="./form.js"></script> -->
+
 </body>
 
 </html>

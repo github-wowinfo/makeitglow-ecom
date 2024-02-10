@@ -190,18 +190,7 @@ function quckview(id) {
 			  </li>
 			  <li>
 				<strong>Category:</strong>
-				<span>Bottles,</span>
-				<span>Accessories,</span>
-				<span>Mats,</span>
-				<span>Bottles,</span>
-				<span>Trackers</span>
-			  </li>
-			  <li>
-				<strong>Tags:</strong>
-				<span>Trackers,</span>
-				<span>Bags,</span>
-				<span>Cup,</span>
-				<span>Toothbrushes</span>
+				<span>${product.categoryName}</span>
 			  </li>
 			</ul>
 		  </div>
