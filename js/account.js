@@ -74,7 +74,7 @@ function getProfile() {
                                Edit
                                </a>
                                <a href="./changepass.html" 
-                                data-bs-toggle="modal" class="btn btn-secondary btnhover text-uppercase mt-2 rounded-1 " data-bs-target="#EditBilling"  >
+                                data-bs-toggle="modal" class="btn btn-secondary btnhover text-uppercase mt-2 rounded-1 "    >
                                 Change Password</a>
                                 </div>
 				              	  </div>

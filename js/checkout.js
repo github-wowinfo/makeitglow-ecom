@@ -165,13 +165,13 @@ function getshippinginfo() {
           <div class="card">
             <div class="card-body">
               <h2 class="mb-3">Shipping Info</h2>
-              <p>CUSTOMER ID : <span class="text-black" id="customerId"> </span></p>
-              <p>CUSTOMER NAME : <span class="text-black" id="customerName"> </span></p>
-              <p>CONTACT NO : <span class="text-black" id="contactNo"> </span></p>
-              <p>ALT CONTACT No: <span class="text-black" id="altContactNo"> </span></p>
-              <p>ADDRESS LINE 1: <span class="text-black" id="addressLine1"> </span></p>
-              <p>ADDRESS LINE 2: <span class="text-black" id="addressLine2"> </span></p>
-              <p>REMARK: <span class="text-black" id="remark"> </span></p>
+              <p class="m-1">CUSTOMER ID : <span class="text-black" id="customerId"> </span></p>
+              <p class="m-1"> <span class="text-black" id="customerName"> </span></p>
+              <p class="m-1"> <span class="text-black" id="contactNo"> </span></p>
+              <p class="m-1"> <span class="text-black" id="altContactNo"> </span></p>
+              <p class="m-1"> <span class="text-black" id="addressLine1"> </span></p>
+              <p class="m-1"> <span class="text-black" id="addressLine2"> </span></p>
+              <p class="m-1"> <span class="text-black" id="remark"> </span></p>
             </div>
           </div>
         </div>
