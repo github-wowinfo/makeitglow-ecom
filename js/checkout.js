@@ -22,7 +22,7 @@ $.ajax({
     console.log(cartData.length === 0);
     // Update cart items
 
-    if (cartData.length === 0) {
+    if (cartData.length === 0 ) {
       $('#shop-checkout').css('display', 'none')
       console.log('cart empty hidden');
     }
@@ -41,8 +41,6 @@ $.ajax({
 });
 
 console.log('cartCount', cartCount);
-
-
 function cartData() {
 
 }
@@ -80,23 +78,7 @@ function getCartCheckout() {
       $('#total').text(subtotal.toFixed(2) + 'AED');
       $('#finalTotal').text(totalAmount.toFixed(2) + 'AED');
 
-
-      // if (subtotal >= 100) {
-      //   console.log('sdjhjs', subtotal === 0);
-      //   $('#shippingcharge').text(0 + 'AED')
-      //   $('#total').text(subtotal.toFixed(2) + 'AED');
-      //   var totalAmount = subtotal + 0
-      //   $('#finalTotal').text(totalAmount.toFixed(2) + 'AED');
-      // } else {
-      //   // shipping === 12
-      //   $('#shippingcharge').text(12 + 'AED')
-      //   console.log('sdjhjs', subtotal >= 100);
-      //   $('#total').text(subtotal.toFixed(2) + 'AED');
-      //   var totalAmount = subtotal + 12
-      //   $('#finalTotal').text(totalAmount.toFixed(2) + 'AED');
-      // }
-
-
+ 
       // Clear existing content
       $('#cartData').empty();
       //       $('#cartCount').text(cartData.length);
@@ -133,6 +115,7 @@ function getCartCheckout() {
     }
   });
 }
+
 function calculateSubtotal(cartData) {
   var subtotal = 0;
 

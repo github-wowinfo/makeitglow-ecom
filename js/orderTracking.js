@@ -40,7 +40,7 @@ $(document).ready(function () {
                             <td class="product-item-name">${order.productsQty}</td>
                             <td class="product-item-price"><span>${amount} AED</span></td>
                             <td class="product-item-stock text-primary">${order.ordrPymnt.paymentStatusMsg}</td>
-                            <td class="product-item-totle"><a href="./orderDetails.html?orderId=${order.ordrID}" class="btn btn-gray btnhover text-nowrap rounded">View Details</a></td>
+                            <td class="product-item-totle"><a href="./orderDetails.html?orderId=${order.ordrID}" class="btn btn-gray btnhover text-nowrap rounded">Order Details</a></td>
                         </tr>
                     `;
                     // Append each row inside the loop

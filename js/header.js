@@ -78,15 +78,15 @@ function getCart() {
       // Update cart items
   
       if (cartData.length === 0) {
-        $('#empty').css('display', 'block')
-        $('#shopping-cart-pane1').css('display','none')
+        // $('#empty').css('display', 'block')
+        $('#shopping-cart-pane1').css('display', 'none');
 
         console.log('cart empty hidden');
       }
       else {
         $('#empty').hide();
         // Hide the form and show other elements if needed
-        $('#shopping-cart-pane1').css('display', 'flex')
+        $('#shopping-cart-pane1').css('display', 'block');
         console.log('cart empty hidden1');
       }
   

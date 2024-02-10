@@ -98,7 +98,7 @@ function updateOrderDetails(data) {
     function getStatusText(statusCode) {
         switch (statusCode) {
           case 1:
-            return 'New order';
+            return 'Confirm Order';
           case 2:
             return 'Processing';
           case 3:
@@ -132,18 +132,18 @@ function updateOrderDetails(data) {
         //    if (shipping.length > 0) {
             // var shippingHtml = generateAddressHtml(shipping);
             // $('#shippingAddress').append(shippingHtml);
+            // <p class="m-1">CUSTOMER ID : <span class="text-black"> ${shipping.custId} </span></p>
                 var shippingInfo = `  
                 
 							<div class="">
 								<div class="card-body" >
                                 <h2 class="mb-3">Shipping Info</h2>
-                                <p class="m-1">CUSTOMER ID : <span class="text-black"> ${shipping.custId} </span></p>
-                                <p class="m-1">CUSTOMER NAME : <span class="text-black"> ${shipping.name} </span></p>
-                                <p class="m-1">CONTACT NO : <span class="text-black"> ${shipping.contactNo} </span></p>
-                                <p class="m-1">Alt ONTACT No: <span class="text-black"> ${shipping.altContactNo} </span></p>
-                                <p class="m-1">ADDRESS LINE 1: <span class="text-black"> ${shipping.addressLine1} </span></p>
-                                <p class="m-1">ADDRESS LINE 2: <span class="text-black"> ${shipping.addressLine2} </span></p>
-                                <p class="m-1">REMARK: <span class="text-black"> ${shipping.remark} </span></p>
+                                <p class="m-1"> <span> ${shipping.name} </span></p>
+                                <p class="m-1"> <span> ${shipping.contactNo} </span></p>
+                                <p class="m-1">  <span> ${shipping.altContactNo} </span></p>
+                                <p class="m-1"> <span> ${shipping.addressLine1} </span></p>
+                                <p class="m-1"> <span> ${shipping.addressLine2} </span></p>
+                                <p class="m-1"> <span> ${shipping.remark} </span></p>
                                 </div>
 							</div>
 						 `;
@@ -231,18 +231,18 @@ function getBillingInfo() {
             // profileData.forEach(function (Billing) {
             console.log('profileDatabiili', profileData.length);
             if (profileData.length > 0) {
+                // <p class="m-1">CUSTOMER ID : <span class="text-black"> ${profileData[0].custId} </span></p>
 
                 var profile = `
                 <div class="col-md-12">
 							<div class="">
 								<div class="card-body" >
                     <div class="mb-3"><h2>Billing Address</h2></div>  
-                    <p class="m-1">CUSTOMER ID : <span class="text-black"> ${profileData[0].custId} </span></p>
-                    <p class="m-1">COMPANY NAME : <span class="text-black"> ${profileData[0].custCompany} </span></p>
-                    <p class="m-1">COMPANY TAX No : <span class="text-black"> ${profileData[0].custCompTaxNo} </span></p>
-                    <p class="m-1">ADDRESS LINE 1 : <span class="text-black"> ${profileData[0].addressLine1} </span></p>
-                    <p class="m-1">ADDRESS LINE 2 : <span class="text-black"> ${profileData[0].addressLine2} </span></p>
-                    <p class="m-1">REMARK : <span class="text-black"> ${profileData[0].remark} </span></p>
+                    <p class="m-1"> <span> ${profileData[0].custCompany} </span></p>
+                    <p class="m-1"> <span> ${profileData[0].custCompTaxNo} </span></p>
+                    <p class="m-1"> <span> ${profileData[0].addressLine1} </span></p>
+                    <p class="m-1"> <span> ${profileData[0].addressLine2} </span></p>
+                    <p class="m-1"> <span> ${profileData[0].remark} </span></p>
                    
                     </div>
 					  </div>
@@ -281,55 +281,7 @@ function getBillingInfo() {
         }
     })
 
-    // var savebilling = document.getElementById('saveinfo');
-
-    // savebilling.addEventListener('click', function (e) {
-    //     e.preventDefault(),
-    //         addBillingAddress();
-    // });
-
-    // function addBillingAddress() {
-    //     const CompanyName = document.getElementById("companyName").value;
-    //     const CompanyTaxNo = document.getElementById("companyTaxNo").value;
-    //     const Address1 = document.getElementById("address1").value;
-    //     const Address2 = document.getElementById("address2").value;
-    //     const CountrySelect = document.getElementById("countrySelect").value;
-    //     const Remark = document.getElementById("remark").value;
-
-    //     var userData = {
-    //         "userType": 2,
-    //         "custCompany": CompanyName,
-    //         "custCompTaxNo": CompanyTaxNo,
-    //         "addressLine1": Address1,
-    //         "addressLine2": Address2,
-    //         "lctnId": CountrySelect,
-    //         "remark": Remark,
-    //     };
-    //     // console.log('userData :', userData);
-    //     $.ajax({
-    //         url: `${SETTINGS.backendUrl}/CustomerAccount/AddCustBillingAddress`,
-    //         method: 'POST',  // Assuming this should be a POST request, change it if necessary
-    //         headers: {
-    //             Authorization: "Bearer " + token,
-    //             "Content-Type": "application/json",
-    //             // Add other headers as needed
-    //         },
-    //         data: JSON.stringify(userData), // Convert object to JSON string
-    //         success: function (response) {
-
-    //             // console.log('Billing address added successfully:', response);
-    //             toastr.success("Billing address added successfully ");
-
-    //             $("#saveinfo").modal("hide");
-    //         },
-    //         error: function (error) {
-    //             console.error('Error adding billing address:', error);
-    //             toastr.error(error);
-
-    //         }
-    //     });
-    // }
-
+   
 }
 
 

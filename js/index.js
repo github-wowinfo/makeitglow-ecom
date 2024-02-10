@@ -73,8 +73,6 @@ function createSwiperSlide(product) {
   </div>
   `;
 
-
-
   swiperSlide.innerHTML = contentHTML;
   return swiperSlide;
 }
@@ -90,12 +88,7 @@ function initSwiper() {
 // Call the function to fetch data and populate the swiper-wrapper
 fetchDataAndPopulateSwiper();
 
-
-
-
 $(document).ready(function () {
-
-
   // Fetch data from the API
   $.ajax({
     url: 'https://mig-dev.lifelinemegacorp.com/api/Ecom/GetAllTrendingProducts',
