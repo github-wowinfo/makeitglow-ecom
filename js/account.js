@@ -62,7 +62,7 @@ function getProfile() {
 							<div class="card">
 								<div class="card-body" >
                                 <div class="mb-3"> <h2>Personal Info</h2></div>
-                               <p>CUSTOMER ID : <span class="text-black"> ${profileData.userId}</span></p>
+                               <p>CUSTOMER ID : <span class="text-black"> ${profileData.uid}</span></p>
                                <p>FULL NAME :<span class="text-black"> ${profileData.firstName} ${profileData.lastName}</span></p>
                                <p>MOBILE NO : <span class="text-black"> ${profileData.phoneNumber}</span></p>
                                <p>EMAIL-ID : <span class="text-black"> ${profileData.email}</span></p>
@@ -70,9 +70,12 @@ function getProfile() {
                                <p>ADDRESS LINE 1 : <span class="text-black"> ${profileData.addressLine1}</span></p>
                                <p>ADDRESS LINE 2 : <span class="text-black"> ${profileData.addressLine2}</span></p>
                                <a href="javascript:void(0);" 
-                               data-bs-toggle="modal" class="open-quick-view text-uppercase text-green strong" data-bs-target="#profileEdit">
+                               data-bs-toggle="modal" class="open-quick-view  btn btn-secondary btnhover text-uppercase rounded-1" data-bs-target="#profileEdit">
                                Edit
-                               </a>
+                               </a><br>
+                               <a href="./changepass.html" 
+                                data-bs-toggle="modal" class="btn btn-secondary btnhover text-uppercase mt-2 rounded-1" data-bs-target="#EditBilling"  >
+                                Change Password</a>
                                 </div>
 				              	  </div>
 				                  	 </div>`;
@@ -157,15 +160,16 @@ function getBillingInfo() {
 							<div class="card">
 								<div class="card-body" >
                     <div class="mb-3"><h2>Billing Info</h2></div>  
-                    <p>CUSTOMER ID : <span class="text-black"> ${profileData[0].custId} </span></p>
+                    <p>CUSTOMER ID : <span class="text-black"> ${profileData[0].cbaEntryId} </span></p>
                     <p>COMPANY NAME : <span class="text-black"> ${profileData[0].custCompany} </span></p>
                     <p>COMPANY TAX No : <span class="text-black"> ${profileData[0].custCompTaxNo} </span></p>
                     <p>ADDRESS LINE 1 : <span class="text-black"> ${profileData[0].addressLine1} </span></p>
                     <p>ADDRESS LINE 2 : <span class="text-black"> ${profileData[0].addressLine2} </span></p>
                     <p>REMARK : <span class="text-black"> ${profileData[0].remark} </span></p>
                     <a href="javascript:void(0);" 
-                    data-bs-toggle="modal" class="open-quick-view text-uppercase text-green strong" data-bs-target="#EditBilling" onclick="getbillingbyId(${profileData[0].cbaEntryId})">
+                    data-bs-toggle="modal" class="open-quick-view btn btn-secondary btnhover text-uppercase rounded-1" data-bs-target="#EditBilling" onclick="getbillingbyId(${profileData[0].cbaEntryId})">
                     Edit</a>
+                    
                     </div>
 					  </div>
 				    	 </div>`;
@@ -346,7 +350,7 @@ function getshippingInfo() {
 							<div class="card">
 								<div class="card-body" >
                                 <h2 class="mb-3">Shipping Info</h2>
-                                <p>CUSTOMER ID : <span class="text-black"> ${shipping.custId} </span></p>
+                                <p>CUSTOMER ID : <span class="text-black"> ${shipping.csaEntryId} </span></p>
                                 <p>CUSTOMER NAME : <span class="text-black"> ${shipping.name} </span></p>
                                 <p>CONTACT NO : <span class="text-black"> ${shipping.contactNo} </span></p>
                                 <p>Alt ONTACT No: <span class="text-black"> ${shipping.altContactNo} </span></p>

@@ -15,9 +15,8 @@ if (token === null) {
 } else {
   var dropdown = `
   <ul>
-    <li><a href="./account.html">Account</a></li> 
-    <li><a href="./OrderTracking.html">Order Tracking</a></li> 
-    <li><a href="./changepass.html">Change Password</a></li> 
+    <li><a href="./account.html">My Account</a></li> 
+    <li><a href="./OrderTracking.html">My Orders</a></li> 
     <li><a href="#/" onClick="logout()">Logout</a></li> 
  </ul>
  `
@@ -74,8 +73,26 @@ function getCart() {
     },
     dataType: 'json',
     success: function (cartData) {
+      cartCount === cartData.length
+      console.log(cartData.length === 0);
+      // Update cart items
+  
+      if (cartData.length === 0) {
+        $('#empty').css('display', 'block')
+        $('#shopping-cart-pane1').css('display','none')
+
+        console.log('cart empty hidden');
+      }
+      else {
+        $('#empty').hide();
+        // Hide the form and show other elements if needed
+        $('#shopping-cart-pane1').css('display', 'flex')
+        console.log('cart empty hidden1');
+      }
+  
+  
       var subtotal1 = calculateSubtotal1(cartData);
-      $('#shopping-cart-pane .cart-total h5:last-child').text(subtotal1.toFixed(2) + 'AED');
+      $('#shopping-cart-pane .cart-total h5:last-child').text(subtotal1.toFixed(2) + 'AED ');
       console.log('cartData.length', cartData);
       // Clear existing content
       $('#cartItem').empty();
@@ -96,22 +113,21 @@ function getCart() {
                 <div class="d-flex align-items-center">
                   <h6 class="dz-price text-primary mb-0">${cartItem.mrp}AED</h6>
                   <div class="btn-quantity light quantity-sm ms-5">
-    <div class="input-group bootstrap-touchspin">
-        <span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span>
-        <input type="text" value="${cartItem.qty}" id="quantity_${cartItem.itmVrntId}" name="demo_vertical2" class="form-control" style="display: block;">
-
-        <span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span>
-        <span class="input-group-btn-vertical">
-            <button class="btn btn-default bootstrap-touchspin-up" type="button" onclick="updateQuantity(${cartItem.itmVrntId}, 'increase',${cartItem.qty},'${encodeURIComponent(JSON.stringify(cartData))}')">
-                <i class="fa-solid fa-plus"></i>
-            </button>
-            <button class="btn btn-default bootstrap-touchspin-down" type="button" onclick="updateQuantity(${cartItem.itmVrntId}, 'decrease',${cartItem.qty},'${encodeURIComponent(JSON.stringify(cartData))}')">
-                <i class="fa-solid fa-minus"></i>
-            </button>
-        </span>
-    </div>
-</div>
-
+                     <div class="input-group bootstrap-touchspin">
+                         <span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span>
+                           <input type="text" value="${cartItem.qty}" id="quantity_${cartItem.itmVrntId}" name="demo_vertical2" class="form-control" style="display: block;">
+                 
+                          <span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span>
+                          <span class="input-group-btn-vertical">
+                             <button class="btn btn-default bootstrap-touchspin-up" type="button" onclick="updateQuantity(${cartItem.itmVrntId}, 'increase',${cartItem.qty},'${encodeURIComponent(JSON.stringify(cartData))}')">
+                                 <i class="fa-solid fa-plus"></i>
+                             </button>
+                             <button class="btn btn-default bootstrap-touchspin-down" type="button" onclick="updateQuantity(${cartItem.itmVrntId}, 'decrease',${cartItem.qty},'${encodeURIComponent(JSON.stringify(cartData))}')">
+                                 <i class="fa-solid fa-minus"></i>
+                             </button>
+                         </span>
+                     </div>
+                  </div>
                 </div>
               </div>
               <a href="javascript:void(0);" onclick="deleteCartItem(${cartItem.cartEntryId})" class="dz-close">
@@ -276,8 +292,6 @@ function deleteCartItem(cartEntryId) {
     });
   }
 }
-
-
 
 function deleteWishlistItem(wshLstEntryId) {
   if (token === null) {

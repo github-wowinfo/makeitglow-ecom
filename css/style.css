@@ -10885,7 +10885,9 @@ fieldset:disabled .woocommerce #place_order,
 .m-0 {
   margin: 0% !important;
 }
-
+.m-2 {
+  margin: 30px !important;
+}
 .mt-0 {
   margin-top: 0 !important;
 }
@@ -18976,6 +18978,9 @@ section {
 
 .text-green {
   color: #53C258;
+}
+.text-darkgreen {
+  color: #31a56d;
 }
 
 .text-blue {
@@ -42756,7 +42761,7 @@ body .working-location img {
   display: none;
   position: absolute;
   top: 100%;
-  width: 200px;
+  width: 150px;
   padding: 5px 25px 5px 10px;
   right: 0;
   /* margin-top: 10px; */
@@ -51979,3 +51984,4 @@ footer.footer-dark .icon-bx-wraper {
 .g_id_signin iframe {
   margin: auto !important;
 }
+
