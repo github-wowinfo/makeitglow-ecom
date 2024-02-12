@@ -467,88 +467,106 @@
 							<div class="tab-content pt-4" id="dz-shopcart-sidebar">
 								<div class="tab-pane fade show active" id="shopping-cart-pane" role="tabpanel"
 									aria-labelledby="shopping-cart" tabindex="0">
+
+									<div class="empty text-center mt-5" id="empty">
+								      <h4>Opps ! Sorry Your Cart is Empty</h4>
+								      <img src="./images/empty-cart.webp" alt="">
+								        <p>
+									     Looks like you have not added anything to you cart. Go ahead & explore top categories.</p>
+						    	    </div>
+									
 									<div class="shop-sidebar-cart ">
+										
 										<ul class="sidebar-cart-list" id="cartItem">
 											<!-- <li>
-							<div class="cart-widget">
-							  <div class="dz-media me-3">
-								<img src="images/shop/shop-cart/pic1.jpg" alt="">
-							  </div>
-							  <div class="cart-content">
-								<h6 class="title"><a href="product-thumbnail.html">Wooden Water Bottles</a></h6>
-								<div class="d-flex align-items-center">
-								  <div class="btn-quantity light quantity-sm me-3">
-									<input type="text" value="1" name="demo_vertical2">
+								<div class="cart-widget">
+								  <div class="dz-media me-3">
+									<img src="images/shop/shop-cart/pic1.jpg" alt="">
 								  </div>
-								  <h6 class="dz-price text-primary mb-0">$50.00</h6>
-								</div>
-							  </div>
-							  <a href="javascript:void(0);" class="dz-close">
-								<i class="ti-close"></i>
-							  </a>
-							</div>
-						  </li>
-						  <li>
-							<div class="cart-widget">
-							  <div class="dz-media me-3">
-								<img src="images/shop/shop-cart/pic2.jpg" alt="">
-							  </div>
-							  <div class="cart-content">
-								<h6 class="title"><a href="product-thumbnail.html">Bamboo Cups</a></h6>
-								<div class="d-flex align-items-center">
-								  <div class="btn-quantity light quantity-sm me-3">
-									<input type="text" value="1" name="demo_vertical2">
+								  <div class="cart-content">
+									<h6 class="title"><a href="product-thumbnail.html">Wooden Water Bottles</a></h6>
+									<div class="d-flex align-items-center">
+									  <div class="btn-quantity light quantity-sm me-3">
+										<input type="text" value="1" name="demo_vertical2">
+									  </div>
+									  <h6 class="dz-price text-primary mb-0">$50.00</h6>
+									</div>
 								  </div>
-								  <h6 class="dz-price text-primary mb-0">$40.00</h6>
+								  <a href="javascript:void(0);" class="dz-close">
+									<i class="ti-close"></i>
+								  </a>
 								</div>
-							  </div>
-							  <a href="javascript:void(0);" class="dz-close">
-								<i class="ti-close"></i>
-							  </a>
-							</div>
-						  </li>
-						  <li>
-							<div class="cart-widget">
-							  <div class="dz-media me-3">
-								<img src="images/shop/shop-cart/pic3.jpg" alt="">
-							  </div>
-							  <div class="cart-content">
-								<h6 class="title"><a href="product-thumbnail.html">Wooden Toothbrushes</a></h6>
-								<div class="d-flex align-items-center">
-								  <div class="btn-quantity light quantity-sm me-3">
-									<input type="text" value="1" name="demo_vertical2">
+							  </li>
+							  <li>
+								<div class="cart-widget">
+								  <div class="dz-media me-3">
+									<img src="images/shop/shop-cart/pic2.jpg" alt="">
 								  </div>
-								  <h6 class="dz-price text-primary mb-0">$65.00</h6>
+								  <div class="cart-content">
+									<h6 class="title"><a href="product-thumbnail.html">Bamboo Cups</a></h6>
+									<div class="d-flex align-items-center">
+									  <div class="btn-quantity light quantity-sm me-3">
+										<input type="text" value="1" name="demo_vertical2">
+									  </div>
+									  <h6 class="dz-price text-primary mb-0">$40.00</h6>
+									</div>
+								  </div>
+								  <a href="javascript:void(0);" class="dz-close">
+									<i class="ti-close"></i>
+								  </a>
 								</div>
-							  </div>
-							  <a href="javascript:void(0);" class="dz-close">
-								<i class="ti-close"></i>
-							  </a>
-							</div>
-						  </li> -->
+							  </li>
+							  <li>
+								<div class="cart-widget">
+								  <div class="dz-media me-3">
+									<img src="images/shop/shop-cart/pic3.jpg" alt="">
+								  </div>
+								  <div class="cart-content">
+									<h6 class="title"><a href="product-thumbnail.html">Wooden Toothbrushes</a></h6>
+									<div class="d-flex align-items-center">
+									  <div class="btn-quantity light quantity-sm me-3">
+										<input type="text" value="1" name="demo_vertical2">
+									  </div>
+									  <h6 class="dz-price text-primary mb-0">$65.00</h6>
+									</div>
+								  </div>
+								  <a href="javascript:void(0);" class="dz-close">
+									<i class="ti-close"></i>
+								  </a>
+								</div>
+							  </li> -->
 										</ul>
-										<div class="cart-total">
-											<h5 class="mb-0">Subtotal:</h5>
-											<h5 class="mb-0 totalamount"></h5>
+										
+										<div id="shopping-cart-pane1" style="flex-direction: column;">
+											<div class="cart-total " >
+												<h5 class="mb-0">Subtotal :</h5>
+												<h5 class="mb-0 totalamount"></h5>
+											</div>
+											
+
+											<div class="mt-auto">
+												<!-- <div class="shipping-time">
+									<div class="dz-icon">
+									  <i class="flaticon flaticon-ship"></i>
+									</div>
+									<div class="shipping-content">
+									  <h6 class="title pe-4">Congratulations , you've got free shipping!</h6>
+									  <div class="progress">
+										<div class="progress-bar progress-animated border-0" style="width: 75%;" role="progressbar">
+										  <span class="sr-only">75% Complete</span>
 										</div>
-										<div class="mt-auto">
-											<!-- <div class="shipping-time">
-							<div class="dz-icon">
-							  <i class="flaticon flaticon-ship"></i>
-							</div>
-							<div class="shipping-content">
-							  <h6 class="title pe-4">Congratulations , you've got free shipping!</h6>
-							  <div class="progress">
-								<div class="progress-bar progress-animated border-0" style="width: 75%;" role="progressbar">
-								  <span class="sr-only">75% Complete</span>
-								</div>
-							  </div>
-							</div>
-						  </div> -->
-											<!-- <a href="shop-checkout.html" class="btn btn-light btn-block m-b20">Checkout</a> -->
-											<a href="shop-checkout.html"
-												class="btn btn-secondary btn-block">Checkout</a>
+									  </div>
+									</div>
+								  </div> -->
+												<!-- <a href="shop-checkout.html" class="btn btn-light btn-block m-b20">Checkout</a> -->
+												<a href="shop-checkout.html"
+													class="btn btn-secondary btn-block rounded-1">Checkout</a>
+											</div>
+
 										</div>
+										
+										
+										
 									</div>
 								</div>
 								<div class="tab-pane fade" id="wishlist-pane" role="tabpanel" aria-labelledby="wishlist"
@@ -556,57 +574,57 @@
 									<div class="shop-sidebar-cart">
 										<ul class="sidebar-cart-list" id="whishlistItem">
 											<!-- <li>
-							<div class="cart-widget">
-							  <div class="dz-media me-3">
-								<img src="images/shop/shop-cart/pic1.jpg" alt="">
-							  </div>
-							  <div class="cart-content">
-								<h6 class="title"><a href="product-thumbnail.html">Wooden Water Bottles</a></h6>
-								<div class="d-flex align-items-center">
-								  <h6 class="dz-price text-primary mb-0">$50.00</h6>
+								<div class="cart-widget">
+								  <div class="dz-media me-3">
+									<img src="images/shop/shop-cart/pic1.jpg" alt="">
+								  </div>
+								  <div class="cart-content">
+									<h6 class="title"><a href="product-thumbnail.html">Wooden Water Bottles</a></h6>
+									<div class="d-flex align-items-center">
+									  <h6 class="dz-price text-primary mb-0">$50.00</h6>
+									</div>
+								  </div>
+								  <a href="javascript:void(0);" class="dz-close">
+									<i class="ti-close"></i>
+								  </a>
 								</div>
-							  </div>
-							  <a href="javascript:void(0);" class="dz-close">
-								<i class="ti-close"></i>
-							  </a>
-							</div>
-						  </li>
-						  <li>
-							<div class="cart-widget">
-							  <div class="dz-media me-3">
-								<img src="images/shop/shop-cart/pic2.jpg" alt="">
-							  </div>
-							  <div class="cart-content">
-								<h6 class="title"><a href="product-thumbnail.html">Wooden Cup</a></h6>
-								<div class="d-flex align-items-center">
-								  <h6 class="dz-price text-primary mb-0">$40.00</h6>
+							  </li>
+							  <li>
+								<div class="cart-widget">
+								  <div class="dz-media me-3">
+									<img src="images/shop/shop-cart/pic2.jpg" alt="">
+								  </div>
+								  <div class="cart-content">
+									<h6 class="title"><a href="product-thumbnail.html">Wooden Cup</a></h6>
+									<div class="d-flex align-items-center">
+									  <h6 class="dz-price text-primary mb-0">$40.00</h6>
+									</div>
+								  </div>
+								  <a href="javascript:void(0);" class="dz-close">
+									<i class="ti-close"></i>
+								  </a>
 								</div>
-							  </div>
-							  <a href="javascript:void(0);" class="dz-close">
-								<i class="ti-close"></i>
-							  </a>
-							</div>
-						  </li>
-						  <li>
-							<div class="cart-widget">
-							  <div class="dz-media me-3">
-								<img src="images/shop/shop-cart/pic3.jpg" alt="">
-							  </div>
-							  <div class="cart-content">
-								<h6 class="title"><a href="product-thumbnail.html">Bamboo toothbrushes</a></h6>
-								<div class="d-flex align-items-center">
-								  <h6 class="dz-price text-primary mb-0">$65.00</h6>
+							  </li>
+							  <li>
+								<div class="cart-widget">
+								  <div class="dz-media me-3">
+									<img src="images/shop/shop-cart/pic3.jpg" alt="">
+								  </div>
+								  <div class="cart-content">
+									<h6 class="title"><a href="product-thumbnail.html">Bamboo toothbrushes</a></h6>
+									<div class="d-flex align-items-center">
+									  <h6 class="dz-price text-primary mb-0">$65.00</h6>
+									</div>
+								  </div>
+								  <a href="javascript:void(0);" class="dz-close">
+									<i class="ti-close"></i>
+								  </a>
 								</div>
-							  </div>
-							  <a href="javascript:void(0);" class="dz-close">
-								<i class="ti-close"></i>
-							  </a>
-							</div>
-						  </li> -->
+							  </li> -->
 										</ul>
 										<!-- <div class="mt-auto">
-						  <a href="shop-wishlist.html" class="btn btn-secondary btn-block">Check Your Favourite</a>
-						</div> -->
+							  <a href="shop-wishlist.html" class="btn btn-secondary btn-block">Check Your Favourite</a>
+							</div> -->
 									</div>
 								</div>
 							</div>

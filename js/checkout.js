@@ -6,10 +6,11 @@ let shippingId = 0;
 
 
 if (token === null ) {
-  console.log('cart empty hidden');
   $('#shop-checkout').hide();
+
 }
 else {
+  
   $.ajax({
     url: `${SETTINGS.backendUrl}/Ecom/GetCartByCustId`,
     method: 'GET',
@@ -29,7 +30,7 @@ else {
         console.log('cart empty hidden');
       }
       else {
-        $('#empty').hide();
+        $('#empty').css('display','none');
         // Hide the form and show other elements if needed
         $('#shop-checkout').css('display', 'flex')
         console.log('cart empty hidden1');
