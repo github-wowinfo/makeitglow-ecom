@@ -1,6 +1,3 @@
-
-
-// function updateCheckoutView() {
 let cartCount = ''
 let productCount = ''
 let subtotal = 0
@@ -8,37 +5,46 @@ var shipping = 12;
 let shippingId = 0;
 
 
-$.ajax({
-  url: `${SETTINGS.backendUrl}/Ecom/GetCartByCustId`,
-  method: 'GET',
-  headers: {
-    Authorization: "Bearer " + token,
-    "Content-Type": "application/json",
-    // Add other headers as needed
-  },
-  dataType: 'json',
-  success: function (cartData) {
-    cartCount === cartData.length
-    console.log(cartData.length === 0);
-    // Update cart items
+if (token === null ) {
+  console.log('cart empty hidden');
+  $('#shop-checkout').hide();
+}
+else {
+  $.ajax({
+    url: `${SETTINGS.backendUrl}/Ecom/GetCartByCustId`,
+    method: 'GET',
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-Type": "application/json",
+      // Add other headers as needed
+    },
+    dataType: 'json',
+    success: function (cartData) {
+      cartCount === cartData.length
+      console.log(cartData.length === 0);
+      // Update cart items
+  
+      if (cartData.length === 0 ) {
+        $('#shop-checkout').css('display', 'none')
+        console.log('cart empty hidden');
+      }
+      else {
+        $('#empty').hide();
+        // Hide the form and show other elements if needed
+        $('#shop-checkout').css('display', 'flex')
+        console.log('cart empty hidden1');
+      }
+  
+    },
+  
+    error: function (error) {
+      console.error('Error fetching cart data:', error);
+    },
+  });
+  console.log('cart empty hidden1');
+}
 
-    if (cartData.length === 0 ) {
-      $('#shop-checkout').css('display', 'none')
-      console.log('cart empty hidden');
-    }
-    else {
-      $('#empty').hide();
-      // Hide the form and show other elements if needed
-      $('#shop-checkout').css('display', 'flex')
-      console.log('cart empty hidden1');
-    }
 
-  },
-
-  error: function (error) {
-    console.error('Error fetching cart data:', error);
-  },
-});
 
 console.log('cartCount', cartCount);
 function cartData() {
@@ -457,7 +463,6 @@ document.getElementById("placeorder").addEventListener("click", function (e) {
   }
 }
 
-  // }
 )
 
 $(document).ready(function () {
@@ -466,10 +471,4 @@ $(document).ready(function () {
   getLocation()
   updateCheckoutView();
 });
-
-
-// }
-// function getCartAndUpdateCheckoutView() {
-//   getCartCheckout();
-//   updateCheckoutView();
-// }
+ 

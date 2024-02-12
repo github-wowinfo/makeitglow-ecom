@@ -60,95 +60,100 @@ function getCart() {
     // If not logged in, set cart count to 0 and return
     $('#cartCount').text(0);
     $('#cartCount1').text(0);
+  $('#shopping-cart-pane1').hide();
+
     return;
-  }
-
-  $.ajax({
-    url: `${SETTINGS.backendUrl}/Ecom/GetCartByCustId`,
-    method: 'GET',
-    headers: {
-      Authorization: "Bearer " + token ,
-      "Content-Type": "application/json",
-      // Add other headers as needed
-    },
-    dataType: 'json',
-    success: function (cartData) {
-      cartCount === cartData.length
-      console.log(cartData.length === 0);
-      // Update cart items
+  }else{
+    $.ajax({
+      url: `${SETTINGS.backendUrl}/Ecom/GetCartByCustId`,
+      method: 'GET',
+      headers: {
+        Authorization: "Bearer " + token ,
+        "Content-Type": "application/json",
+        // Add other headers as needed
+      },
+      dataType: 'json',
+      success: function (cartData) {
+        cartCount === cartData.length
+        console.log(cartData.length === 0);
+        // Update cart items
+    
+        if (cartData.length === 0) {
+          // $('#empty').css('display', 'block')
+          $('#shopping-cart-pane1').css('display', 'none');
   
-      if (cartData.length === 0) {
-        // $('#empty').css('display', 'block')
-        $('#shopping-cart-pane1').css('display', 'none');
-
-        console.log('cart empty hidden');
-      }
-      else {
-        $('#empty').hide();
-        // Hide the form and show other elements if needed
-        $('#shopping-cart-pane1').css('display', 'block');
-        console.log('cart empty hidden1');
-      }
-  
-  
-      var subtotal1 = calculateSubtotal1(cartData);
-      $('#shopping-cart-pane .cart-total h5:last-child').text(subtotal1.toFixed(2) + 'AED ');
-      console.log('cartData.length', cartData);
-      // Clear existing content
-      $('#cartItem').empty();
-      $('#cartCount').text(cartData.length);
-      $('#cartCount1').text(cartData.length);
-      cartCount===cartData.length
-      // Update cart items
-      cartData.forEach(function (cartItem) {
-        // console.log('cartitem', cartItem);
-        var cartItemHTML = `
-          <li>
-            <div class="cart-widget">
-              <div class="dz-media me-3">
-                <img src="${SETTINGS.ImageUrl}${cartItem.thumbnail}" alt="">
-              </div>
-              <div class="cart-content">
-                <h6 class="title"><a href="product-thumbnail.html">${cartItem.itemName}</a></h6>
-                <div class="d-flex align-items-center">
-                  <h6 class="dz-price text-primary mb-0">${cartItem.mrp}AED</h6>
-                  <div class="btn-quantity light quantity-sm ms-5">
-                     <div class="input-group bootstrap-touchspin">
-                         <span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span>
-                           <input type="text" value="${cartItem.qty}" id="quantity_${cartItem.itmVrntId}" name="demo_vertical2" class="form-control" style="display: block;">
-                 
-                          <span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span>
-                          <span class="input-group-btn-vertical">
-                             <button class="btn btn-default bootstrap-touchspin-up" type="button" onclick="updateQuantity(${cartItem.itmVrntId}, 'increase',${cartItem.qty},'${encodeURIComponent(JSON.stringify(cartData))}')">
-                                 <i class="fa-solid fa-plus"></i>
-                             </button>
-                             <button class="btn btn-default bootstrap-touchspin-down" type="button" onclick="updateQuantity(${cartItem.itmVrntId}, 'decrease',${cartItem.qty},'${encodeURIComponent(JSON.stringify(cartData))}')">
-                                 <i class="fa-solid fa-minus"></i>
-                             </button>
-                         </span>
-                     </div>
+          console.log('cart empty hidden');
+        }
+        else {
+          $('#empty').hide();
+          // Hide the form and show other elements if needed
+          $('#shopping-cart-pane1').css('display', 'block');
+          console.log('cart empty hidden1');
+        }
+    
+    
+        var subtotal1 = calculateSubtotal1(cartData);
+        $('#shopping-cart-pane .cart-total h5:last-child').text(subtotal1.toFixed(2) + 'AED ');
+        console.log('cartData.length', cartData);
+        // Clear existing content
+        $('#cartItem').empty();
+        $('#cartCount').text(cartData.length);
+        $('#cartCount1').text(cartData.length);
+        cartCount===cartData.length
+        // Update cart items
+        cartData.forEach(function (cartItem) {
+          // console.log('cartitem', cartItem);
+          var cartItemHTML = `
+            <li>
+              <div class="cart-widget">
+                <div class="dz-media me-3">
+                  <img src="${SETTINGS.ImageUrl}${cartItem.thumbnail}" alt="">
+                </div>
+                <div class="cart-content">
+                  <h6 class="title"><a href="product-thumbnail.html">${cartItem.itemName}</a></h6>
+                  <div class="d-flex align-items-center">
+                    <h6 class="dz-price text-primary mb-0">${cartItem.mrp}AED</h6>
+                    <div class="btn-quantity light quantity-sm ms-5">
+                       <div class="input-group bootstrap-touchspin">
+                           <span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span>
+                             <input type="text" value="${cartItem.qty}" id="quantity_${cartItem.itmVrntId}" name="demo_vertical2" class="form-control" style="display: block;">
+                   
+                            <span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span>
+                            <span class="input-group-btn-vertical">
+                               <button class="btn btn-default bootstrap-touchspin-up" type="button" onclick="updateQuantity(${cartItem.itmVrntId}, 'increase',${cartItem.qty},'${encodeURIComponent(JSON.stringify(cartData))}')">
+                                   <i class="fa-solid fa-plus"></i>
+                               </button>
+                               <button class="btn btn-default bootstrap-touchspin-down" type="button" onclick="updateQuantity(${cartItem.itmVrntId}, 'decrease',${cartItem.qty},'${encodeURIComponent(JSON.stringify(cartData))}')">
+                                   <i class="fa-solid fa-minus"></i>
+                               </button>
+                           </span>
+                       </div>
+                    </div>
                   </div>
                 </div>
+                <a href="javascript:void(0);" onclick="deleteCartItem(${cartItem.cartEntryId})" class="dz-close">
+                  <i class="ti-trash"></i>
+                </a>
               </div>
-              <a href="javascript:void(0);" onclick="deleteCartItem(${cartItem.cartEntryId})" class="dz-close">
-                <i class="ti-trash"></i>
-              </a>
-            </div>
-          </li>`;
+            </li>`;
+  
+          // Append the item to the cart list
+          $('#cartItem').append(cartItemHTML);
+        });
+  
+        // Calculate and update total amount
+        var totalAmount = calculateTotalAmount(cartItem);
+        $('.totalamount').text('AED', + totalAmount.toFixed(2));
+      },
+  
+      error: function (error) {
+        console.error('Error fetching cart data:', error);
+      },
+    });
+  }
 
-        // Append the item to the cart list
-        $('#cartItem').append(cartItemHTML);
-      });
 
-      // Calculate and update total amount
-      var totalAmount = calculateTotalAmount(cartItem);
-      $('.totalamount').text('AED', + totalAmount.toFixed(2));
-    },
 
-    error: function (error) {
-      console.error('Error fetching cart data:', error);
-    },
-  });
 }
 
 // Function to calculate total amount based on cart data
