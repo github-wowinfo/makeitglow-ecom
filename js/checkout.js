@@ -5,12 +5,12 @@ var shipping = 12;
 let shippingId = 0;
 
 
-if (token === null ) {
+if (token === null) {
   $('#shop-checkout').hide();
 
 }
 else {
-  
+
   $.ajax({
     url: `${SETTINGS.backendUrl}/Ecom/GetCartByCustId`,
     method: 'GET',
@@ -24,20 +24,20 @@ else {
       cartCount === cartData.length
       console.log(cartData.length === 0);
       // Update cart items
-  
-      if (cartData.length === 0 ) {
+
+      if (cartData.length === 0) {
         $('#shop-checkout').css('display', 'none')
         console.log('cart empty hidden');
-      }
-      else {
-        $('#empty').css('display','none');
+        $('#cartImg').css('display', 'block');
+      } else {
+        $('#cartImg').css('display', 'none');
         // Hide the form and show other elements if needed
         $('#shop-checkout').css('display', 'flex')
         console.log('cart empty hidden1');
       }
-  
+
     },
-  
+
     error: function (error) {
       console.error('Error fetching cart data:', error);
     },
@@ -85,7 +85,7 @@ function getCartCheckout() {
       $('#total').text(subtotal.toFixed(2) + 'AED');
       $('#finalTotal').text(totalAmount.toFixed(2) + 'AED');
 
- 
+
       // Clear existing content
       $('#cartData').empty();
       //       $('#cartCount').text(cartData.length);
@@ -472,4 +472,3 @@ $(document).ready(function () {
   getLocation()
   updateCheckoutView();
 });
- 
