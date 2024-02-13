@@ -25,6 +25,7 @@ $(document).ready(function () {
 		method: 'GET',
 		dataType: 'json',
 		success: function (data) {
+			console.log('my product whishlist', data);
 			// Iterate over the products in the response and append them to the masonry layout
 			$.each(data, function (index, product) {
 				console.log('my product whishlist', product);
