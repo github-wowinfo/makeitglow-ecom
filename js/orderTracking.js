@@ -16,8 +16,9 @@ $(document).ready(function () {
             console.log('data', data);
             // Handle the response data and append FAQs to the container
             // if (data && data.length > 0) {
+                data.forEach(order => {
                 // Build the table headers outside the loop
-                var amount = data.ordrPymnt.paidAmount/100
+                var amount = order.paidAmount/100
                 const orderHtml = `
                 <div class="card m-5 rounded-1" style="border: 1px solid gainsboro;">
                 <div class=" rounded-1    " style="border: 1px solid gainsboro;" >
@@ -28,8 +29,8 @@ $(document).ready(function () {
 						<p class="mb-1">Date : </p>
 					</div>
 					<div class="ms-5">
-						<p class="mb-1 text-darkgreen"><strong> Total : ${amount} AED</strong></p>
-						<p class="mb-1">Amount</p>
+						<p class="mb-1 text-darkgreen"><strong> Total :</strong></p>
+						<p class="mb-1"> ${amount} AED</p>
 					</div>
 					<div class="ms-5">
 						<p class="mb-1 text-darkgreen"><strong>ship to :</strong></p>
@@ -37,8 +38,8 @@ $(document).ready(function () {
 					</div>
 				</div>
 					<div class="ms-5 ">
-						<p class="mb-1 text-darkgreen"><strong>Order id :${data.ordrID}</strong></p>
-						<a href="./orderDetails.html" class="mb-1">Order Details </a>
+						<p class="mb-1 text-darkgreen"><strong>Order id :${order.ordrID}</strong></p>
+						<a href="./orderDetails.html?orderId=${order.ordrID}" class="mb-1">Order Details </a>
 					</div>
 				</div>
 			    </div>
@@ -105,7 +106,7 @@ $(document).ready(function () {
             // } else {
             //     // Handle the case when no FAQs are available
             //     $('#tbody').append('<p>Opps ! Sorry there is no Order</p> ');
-            // }
+            });
         },
         error: function (xhr, status, error) {
             // Handle the AJAX request error
