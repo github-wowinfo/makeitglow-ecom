@@ -56,7 +56,7 @@ function updateOrderDetails(data) {
        <div class="col-12 row ">
            <div class="col-6">
              <h2 class="mb-2">Order Details: ${orderId}</h2>
-               <p class="mb-3">${formattedDate}</p>
+             <p class="mb-2"><strong> Payment Date :</strong> ${formattedDate}</p>
              <div class="d-flex">
                 <h6 class="me-3">Status :</h6>
                 <p class="text-green"><strong>${getStatusText(data.status)}</strong></p>
@@ -65,8 +65,9 @@ function updateOrderDetails(data) {
           
            <div class="col-6" id="payment">
              <h2 class="mb-2">Payment Details</h2>
-              <p class="mb-2"><strong> Order Id :</strong> ${data.ordrPymnt.pid}</p>
-               <p class="mb-2"><strong> Tax Amount :</strong> ${Tamount}</p>
+              <p class="mb-2"><strong> Order Id :</strong> ${data.ordrPymnt.refNo}</p>
+               <p class="mb-2"><strong> Transaction Amount :</strong> ${Tamount}</p>
+               <p class="mb-2"><strong> Transaction Mode :</strong> ${getTransactionMode(data.ordrPymnt.txnMode)}</p>
               <h6 class="me-2">${data.ordrPymnt.paymentStatusMsg}</h6>
           </div>
       </div>
@@ -106,6 +107,15 @@ function updateOrderDetails(data) {
             return 'Deleted';
           default:
             return 'Unknown';
+        }
+      }
+      function getTransactionMode(statusCode) {
+        switch (statusCode) {
+          case 1:
+            return 'ONLINE';
+          case 2:
+            return 'COD';
+       
         }
       }
 
