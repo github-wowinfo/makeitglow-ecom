@@ -70,11 +70,11 @@ function getProfile() {
                                <p class="m-1">  <span class="text-black "> ${profileData.addressLine1}</span></p>
                                <p class="m-1 ">  <span class="text-black "> ${profileData.addressLine2}</span></p>
                                <a href="javascript:void(0);" 
-                               data-bs-toggle="modal" class="open-quick-view  btn btn-secondary btnhover text-uppercase rounded-1 mt-2 me-2 " data-bs-target="#profileEdit">
+                               data-bs-toggle="modal" class="open-quick-view shippingBtn  btn btn-secondary btnhover text-uppercase rounded-1 mt-2 me-2 " data-bs-target="#profileEdit">
                                Edit
                                </a>
                                <a href="./changepass.html" 
-                                data-bs-toggle="modal" class="btn btn-secondary btnhover text-uppercase mt-2 rounded-1 "    >
+                                data-bs-toggle="modal" class="btn btn-secondary shippingBtn btnhover text-uppercase mt-2 rounded-1 "    >
                                 Change Password</a>
                                 </div>
 				              	  </div>
@@ -167,7 +167,7 @@ function getBillingInfo() {
                     <p class=" m-1"> <span class="text-black"> ${profileData[0].addressLine2} </span></p>
                     <p class=" m-1"> <span class="text-black"> ${profileData[0].remark} </span></p>
                     <a href="javascript:void(0);" 
-                    data-bs-toggle="modal" class="open-quick-view btn btn-secondary btnhover mt-2 text-uppercase rounded-1" data-bs-target="#EditBilling" onclick="getbillingbyId(${profileData[0].cbaEntryId})">
+                    data-bs-toggle="modal" class="open-quick-view shippingBtn btn btn-secondary btnhover mt-2 text-uppercase rounded-1" data-bs-target="#EditBilling" onclick="getbillingbyId(${profileData[0].cbaEntryId})">
                     Edit</a>
                     
                     </div>
@@ -358,8 +358,8 @@ function getshippingInfo() {
                                 <p class="m-1"> <span class="text-black"> ${shipping.addressLine2} </span></p>
                                 <p class="m-1"> <span class="text-black"> ${shipping.remark} </span></p>
                                 <a href="javascript:void(0);" 
-                                data-bs-toggle="modal" class="open-quick-viewc text-uppercase btn btn-secondary btnhover rounded strong mt-2" data-bs-target="#EditShipping" onclick="getshippingbyId(${shipping.csaEntryId})">Edit</a>
-                                <a class=" text-uppercase  mt-2 ms-1  delete-button   btn btn-danger btnhover rounded" data-csa-entry-id="${shipping.csaEntryId}">Delete</a>
+                            data-bs-toggle="modal" class="open-quick-viewc shippingBtn text-uppercase btn btn-secondary btnhover rounded strong mt-2" data-bs-target="#EditShipping" onclick="getshippingbyId(${shipping.csaEntryId})">Edit</a>
+                                <a class=" text-uppercase  mt-2 ms-1  delete-button shippingBtn   btn btn-danger btnhover rounded" data-csa-entry-id="${shipping.csaEntryId}">Delete</a>
 								</div>
 							</div>
 						</div>`;
@@ -415,12 +415,13 @@ function getshippingInfo() {
         $('#confirmationdone').on('click', function () {
             // var csaEntryId = $(this).data('csa-entry-id');
             deleteShippingAddress(csaEntryId);
-            location.reload()
+            // location.reload()
 
 
         });
     }
     function deleteShippingAddress(csaEntryId) {
+        console.log('csaEntryId', csaEntryId);
         $.ajax({
             url: `${SETTINGS.backendUrl}/CustomerAccount/DeleteCustShippingAddress/${csaEntryId}`,
             method: 'POST',
@@ -432,6 +433,8 @@ function getshippingInfo() {
             success: function (response) {
                 console.log('Shipping address deleted successfully:', response);
                 toastr.success("Shipping address deleted successfully");
+                getshippingInfo()
+                $('#deleteConfirmationModal').modal('hide');
                 // Remove the corresponding card from the UI
                 $(`.delete-button[data-csa-entry-id="${csaEntryId}"]`).closest('.card').remove();
             },
@@ -467,7 +470,7 @@ function getshippingbyId(id) {
             console.error('Error fetching cart data:', error);
         }
     });
-    
+
     $("#updateshipping").on('click', function (e) {
         e.preventDefault()
         console.log('clicked');

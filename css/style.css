@@ -10885,9 +10885,11 @@ fieldset:disabled .woocommerce #place_order,
 .m-0 {
   margin: 0% !important;
 }
+
 .m-2 {
   margin: 30px !important;
 }
+
 .mt-0 {
   margin-top: 0 !important;
 }
@@ -10915,6 +10917,7 @@ fieldset:disabled .woocommerce #place_order,
 .mt-10 {
   margin-top: 6rem !important;
 }
+
 .mt-15 {
   margin-top: 10rem !important;
 }
@@ -18982,6 +18985,7 @@ section {
 .text-green {
   color: #53C258;
 }
+
 .text-darkgreen {
   color: #31a56d;
 }
@@ -41737,7 +41741,7 @@ pre {
   .contact-wraper1 .contact-info {
     padding: 50px 0px;
   }
-  
+
 }
 
 @media only screen and (max-width: 991px) {
@@ -51988,3 +51992,6 @@ footer.footer-dark .icon-bx-wraper {
   margin: auto !important;
 }
 
+.shippingBtn {
+  padding: 5px 10px;
+}
