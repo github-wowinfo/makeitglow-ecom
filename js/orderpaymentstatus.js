@@ -1,6 +1,6 @@
 function getQueryParam(name) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(name);
+	const urlParams = new URLSearchParams(window.location.search);
+	return urlParams.get(name);
 }
 
 // Get category ID from the URL
@@ -9,18 +9,18 @@ const refId = getQueryParam('ref');
 console.log('refId', refId);
 
 $.ajax({
-    url: `${SETTINGS.backendUrl}/Order/GetOrderPaymentDetailsByPaymentRefId?PaymentRefId=${refId}`,
-    method: 'GET',
-    dataType: 'json',
-    headers: {
-        Authorization: "Bearer " + token,
-        "Content-Type": "application/json",
-        // Add other headers as needed
-    },
-    success: function (data) {
-        console.log('data', data);
-        if (data.data.paymentState === "CAPTURED"||data.data.paymentState==="AUTHORISED") {
-            var confirm = `
+	url: `${SETTINGS.backendUrl}/Order/GetOrderPaymentDetailsByPaymentRefId?PaymentRefId=${refId}`,
+	method: 'GET',
+	dataType: 'json',
+	headers: {
+		Authorization: "Bearer " + token,
+		"Content-Type": "application/json",
+		// Add other headers as needed
+	},
+	success: function (data) {
+		console.log('data', data);
+		if (data.data.paymentState === "CAPTURED" || data.data.paymentState === "AUTHORISED") {
+			var confirm = `
             <div class="" style="margin-left: 100px; margin-top: 60px;">
 					<div class="d-flex">
 						<div class="icon-container text-center mb-3">
@@ -39,9 +39,9 @@ $.ajax({
 					</div>
 				</div>`
 
-            $('#orderConfirmation').append(confirm)
-        } else if (data.data.paymentState === "FAILED") {
-            var confirm = `
+			$('#orderConfirmation').append(confirm)
+		} else if (data.data.paymentState === "FAILED") {
+			var confirm = `
             <div class="" style="margin-left: 100px; margin-top: 60px;">
 					<div class="d-flex">
 						<div class="icon-container text-center mb-3">
@@ -59,11 +59,11 @@ $.ajax({
 					</div>
 				</div>`
 
-            $('#orderfailer').append(confirm)
-        }
+			// $('#orderfailer').append(confirm)
+		}
 
-    },
-    error: function (error) {
-        console.error('Error fetching data:', error);
-    }
+	},
+	error: function (error) {
+		console.error('Error fetching data:', error);
+	}
 });
