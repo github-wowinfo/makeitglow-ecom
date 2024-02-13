@@ -11002,6 +11002,9 @@ fieldset:disabled .woocommerce #place_order,
 .ms-5 {
   margin-left: 3rem !important;
 }
+.ms-6 {
+  margin-left: 5rem !important;
+}
 
 .ms-auto {
   margin-left: auto !important;

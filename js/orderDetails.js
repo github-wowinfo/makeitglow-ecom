@@ -8,8 +8,6 @@ function getQueryParam(name) {
   console.log(orderId);
 let shippingId = ''
 $.ajax({
-    // url: `${SETTINGS.backendUrl}/Order/GetOrderDetailsByOrderId?OrderId=${order.ordrID}`,
-
     url:    `${SETTINGS.backendUrl}/Order/GetOrderDetailsByOrderId?OrderId=${orderId}`,
     method: 'GET',
     dataType: 'json',
@@ -33,10 +31,7 @@ function updateOrderDetails(data) {
     var timestampStr = data.ordrPymnt.paymentCreationTime;
     var timestamp = new Date(timestampStr);
     var formattedDate = formatDate(timestamp);
-    
     var Tamount = data.ordrPymnt.txnAmount / 100 ;
-    
-   console.log(data);
 
     function formatDate(date) {
         // Array of month names
@@ -55,7 +50,6 @@ function updateOrderDetails(data) {
 
         return formattedDate;
     }
-
    
     var orderDetailsHtml = `
     <div class="card p-10 order-head">
@@ -92,9 +86,6 @@ function updateOrderDetails(data) {
     `;
     $('#orderDetails').html(orderDetailsHtml);
 
-
-    // card2 ... 
-
     function getStatusText(statusCode) {
         switch (statusCode) {
           case 1:
@@ -117,6 +108,8 @@ function updateOrderDetails(data) {
             return 'Unknown';
         }
       }
+
+    // card2 ... 
 
     $.ajax({
         url: `${SETTINGS.backendUrl}/CustomerAccount/GetCustShippingAddressById/${data.shippingId}`,
@@ -154,23 +147,7 @@ function updateOrderDetails(data) {
             console.error('Error fetching cart data:', error);
         }
     });
-    // function generateAddressHtml(addressData) {
-    //     return `
-    //         <div class="col-md-6">
-    //             <div class="card">
-    //                 <div class="card-body">
-    //                     <h2 class="mb-3">Shipping Info</h2>
-    //                     <p>CUSTOMER ID : <span class="text-black"> ${addressData.custId} </span></p>
-    //                     <p>CUSTOMER NAME : <span class="text-black"> ${addressData.name} </span></p>
-    //                     <p>CONTACT NO : <span class="text-black"> ${addressData.contactNo} </span></p>
-    //                     <p>Alt CONTACT No: <span class="text-black"> ${addressData.altContactNo} </span></p>
-    //                     <p>ADDRESS LINE 1: <span class="text-black"> ${addressData.addressLine1} </span></p>
-    //                     <p>ADDRESS LINE 2: <span class="text-black"> ${addressData.addressLine2} </span></p>
-    //                     <p>REMARK: <span class="text-black"> ${addressData.remark} </span></p>
-    //                 </div>
-    //             </div>
-    //         </div>`;
-    // }
+   
 
     if (data.ordrItms && data.ordrItms.length > 0) {
         // Build the table headers outside the loop
@@ -208,11 +185,9 @@ function updateOrderDetails(data) {
         // Close the tbody after the loop
         $('#orderDetails1').html(tableHeaders + rows + '</tbody>');
     } else {
-        // Handle the case when no FAQs are available
         $('#orderDetails1').append('<p>No FAQs available</p>');
     }
     getBillingInfo();
-    // Add logic to update other sections as needed (billing address, payment, product details, etc.)
 }
 
 
@@ -284,13 +259,7 @@ function getBillingInfo() {
    
 }
 
-
-
-
-
 $(document).ready(function () {
     getBillingInfo()
-    // getshippingInfo()
-    
-    // addshippingInfo()
+   
 });
