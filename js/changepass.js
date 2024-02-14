@@ -5,15 +5,10 @@ $(document).ready(function () {
     var currentPassword = $("#currentPassword").val();
     var newPassword = $("#newPassword").val();
     var confirmPassword = $("#confirmPassword").val();
-
-
-
-    // Validate passwords
-    //   if (newPassword !== confirmPassword) {
-    //     toastr.error("New password and confirm password do not match.");
-    //     return;
-    //   }
-    // Validate passwords
+    const togglePassword = document.querySelector('#togglePassword');
+    const togglePassword1 = document.querySelector('#togglePassword1');
+    const togglePassword2= document.querySelector('#togglePassword2');
+  
     if (newPassword !== confirmPassword) {
       toastr.error("New password and confirm password do not match.");
       return;
@@ -63,4 +58,19 @@ $(document).ready(function () {
   });
 });
 
+document.getElementById('togglePassword').addEventListener('click', function () {
+  var passwordInput = document.getElementById('password');
+  var type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+  passwordInput.setAttribute('type', type);
+});
+document.getElementById('togglePassword1').addEventListener('click', function () {
+  var passwordInput = document.getElementById('password1');
+  var type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+  passwordInput.setAttribute('type', type);
+});
+document.getElementById('togglePassword2').addEventListener('click', function () {
+  var passwordInput = document.getElementById('password2');
+  var type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+  passwordInput.setAttribute('type', type);
+});
   // Bakhtiy1

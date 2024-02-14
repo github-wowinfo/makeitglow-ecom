@@ -80,18 +80,41 @@
 						<h2 class="text-secondary text-center">Change Password? 🔒</h2>
 						<p class="text-center m-b25">Enter your old password and we'll send you new password</p>
 						<form id="loginForm">
-							<div class="m-b15">
-								<label class="label-title">Current Password</label>
-								<input name="Old Password" required class="form-control" placeholder="Old Password" maxlength="8" type="password"  id="currentPassword" >
+							<label class="label-title">Current Password</label>
+							<div class="form-control d-flex m-b15"
+										style="justify-content: space-between; align-items: center;">
+										<input name="Old Password" required class="" placeholder="Old Password" maxlength="8"
+											type="password" id="password"
+											style="border: none; background-color: transparent;width: 600px; ">
+										<i class="far fa-eye" id="togglePassword" style=" cursor: pointer;"></i>
 							</div>
-                            <div class="m-b15">
-								<label class="label-title">New Password</label>
+							<label class="label-title">New Password</label>
+							<div class="form-control d-flex m-b15"
+										style="justify-content: space-between; align-items: center;">
+										<input name="Old Password" required class="" placeholder="New Password" maxlength="8"
+											type="password" id="password1"
+											style="border: none; background-color: transparent;width: 600px; ">
+										<i class="far fa-eye" id="togglePassword1" style=" cursor: pointer;"></i>
+							</div>
+							<label class="label-title">Confirm Password</label>
+							<div class="form-control d-flex m-b15"
+										style="justify-content: space-between; align-items: center;">
+										<input name="Old Password" required class="" placeholder="Confirm Password" maxlength="8"
+											type="password" id="password2"
+											style="border: none; background-color: transparent;width: 600px; ">
+										<i class="far fa-eye" id="togglePassword2" style=" cursor: pointer;"></i>
+							</div>
+							<!-- <div class="m-b15">
+								<input name="Old Password" required class="form-control" placeholder="Old Password" maxlength="8" type="password"  id="currentPassword" >
+							</div> -->
+
+                            <!-- <div class="m-b15">
 								<input name="New Password" required class="form-control" placeholder="New Password" maxlength="8" type="password"  id="newPassword" >
 							</div>
+
                             <div class="m-b15">
-								<label class="label-title">Confirm Password</label>
 								<input name="Confirm Password" required class="form-control" placeholder="Confirm Password" maxlength="8" type="password" id="confirmPassword" >
-							</div>
+							</div> -->
 
 							<div class="text-center">
 								<button  class="btn btn-secondary btnhover text-uppercase me-2 rounded" id="changePasswordBtn" >Confirm Password</button>

@@ -15,21 +15,13 @@ document.getElementById("login").addEventListener("click", function (e) {
   });
 
   // let hasError = false;
-
-  // Validate email format using a simple regex
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(EmailId)) {
-    // alert("Please enter a valid email address.");
     toastr.error("Please enter a valid email address.");
-
     return;
   }
-
-  // Validate password (at least 8 characters)
   if (Passwords.length < 8) {
-    // alert("Password must be at least 8 characters.");
     toastr.error("Please enter a valid Password. only using");
-
     return;
   }
 
@@ -37,7 +29,6 @@ document.getElementById("login").addEventListener("click", function (e) {
     userType: 2,
     email: EmailId,
     password: Passwords,
-    // Add any other required fields for user registration
   };
 
   $.ajax({

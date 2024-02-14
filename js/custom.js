@@ -812,7 +812,7 @@ var MoonCart = function () {
 		var modalBox = `<div class="modal fade inquiry-modal style-1" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="inquiry-adv">
-					<img src="images/adv-2.png" alt=""/>
+				<img src="./images/product/subscribes.jpg" alt="">
 				</div>
 				<div class="modal-content">
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
@@ -831,9 +831,9 @@ var MoonCart = function () {
 								<div class="dzSubscribeMsg"></div>
 								<div class="form-group">
 									<label class="form-label">Email Address</label>
-									<input type="email" name="dzEmail" class="form-control" required placeholder="Enter Email Address">
+									<input type="email" name="dzEmail" class="form-control" required placeholder="Enter Email Address" id="email">
 								</div>
-								<button name="submit" type="submit" value="Submit" class="btn btn-secondary btn-block m-b15 text-uppercase">Subscribe</button>
+								<button name="submit" type="submit" value="Submit" class="btn btn-secondary btn-block m-b15 text-uppercase rounded-1">Subscribe</button>
 								<div class="custom-checkbox">
 									<input type="checkbox" class="form-check-input" id="basic_checkbox_3">
 									<label class="form-check-label" for="basic_checkbox_3">I agree to receive marketing materials</label>
@@ -849,8 +849,9 @@ var MoonCart = function () {
 			jQuery('body').append(modalBox);
 			setTimeout(function () {
 				jQuery("#myModal").modal('show');
-			}, 5000)
+			}, 3000)
 		}
+		
 	}
 
 	var setCookie = function (cname, cvalue, exhours) {
