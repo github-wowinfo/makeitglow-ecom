@@ -47,7 +47,6 @@ document.getElementById("submit").addEventListener("click", function (e) {
     "subject": Subject,
     "message": Message,
   };
-  console.log('userData :', userData);
 
   $.ajax({
     url: `${SETTINGS.backendUrl}/Ecom/AddContactUs`,
@@ -61,10 +60,6 @@ document.getElementById("submit").addEventListener("click", function (e) {
       // Add other headers as needed
     }, // Convert object to JSON string
     success: function (response) {
-
-      // Save the token in localStorage
-      // localStorage.setItem('token', response.token);
-      console.log('Submitted:', response);
       toastr.success(" Submitted ");
       // location.reload();
       document.getElementById("name").value = '';

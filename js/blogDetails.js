@@ -4,7 +4,6 @@ function getQueryParam(name) {
     return urlParams.get(name);
 }
 const blogId = getQueryParam('Id');
-console.log(blogId, 'blogId');
 $(document).ready(function () {
     // Make an AJAX request to fetch blog details by ID
     $.ajax({
@@ -19,9 +18,6 @@ $(document).ready(function () {
 
             // Format the Date object into the desired format
             var formattedDate = formatDate(timestamp);
-
-            // Display the formatted date
-            console.log(formattedDate);
 
             function formatDate(date) {
                 // Array of month names

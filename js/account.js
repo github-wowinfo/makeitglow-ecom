@@ -56,7 +56,6 @@ function getProfile() {
         },
         dataType: 'json',
         success: function (profileData) {
-            // console.log('profileData', profileData);
             var profile = `
             <div class="col-md-12">
 							<div class="card">
@@ -119,18 +118,11 @@ $("#updateProfile").on('click', function (e) {
             addressLine2: $('#profileaddress2').val(),
         }),
         success: function (response) {
-            // Handle success response
-            //    localStorage.setItem('token', response);
-
-            // console.log('Billing address added successfully:', response);
             toastr.success("Account Info Updated successfully ");
-
-            // You may want to update the UI or perform other actions here
             $("#profileEdit").modal("hide");
         },
         error: function (error) {
             console.error('Error adding billing address:', error);
-            // Handle error response
             toastr.error(error);
 
         }
@@ -151,11 +143,7 @@ function getBillingInfo() {
         },
         dataType: 'json',
         success: function (profileData) {
-            // profileData.forEach(function (Billing) {
-            console.log('profileDatabiili', profileData.length);
             if (profileData.length > 0) {
-
-                // <p class=""m-1>  <span class="text-black"> ${profileData[0].cbaEntryId} </span></p>
                 var profile = `
                 <div class="col-md-12">
 							<div class="card">
@@ -199,13 +187,11 @@ function getBillingInfo() {
 
         dataType: "json",
         success: function (response) {
-            // console.log(response);
             let li = `<option value="">Select</option>`
             $.each(response, function (index, value) {
                 li += `<option value="${value.lEntryId}">${value.locationName}</option>`
             });
             $('#countrySelect').append(li);
-            // $('#countrySelect').selectric('refresh');
         }
     })
 
@@ -233,7 +219,6 @@ function getBillingInfo() {
             "lctnId": CountrySelect,
             "remark": Remark,
         };
-        // console.log('userData :', userData);
         $.ajax({
             url: `${SETTINGS.backendUrl}/CustomerAccount/AddCustBillingAddress`,
             method: 'POST',  // Assuming this should be a POST request, change it if necessary
@@ -244,8 +229,6 @@ function getBillingInfo() {
             },
             data: JSON.stringify(userData), // Convert object to JSON string
             success: function (response) {
-
-                // console.log('Billing address added successfully:', response);
                 toastr.success("Billing address added successfully ");
 
                 $("#saveinfo").modal("hide");
@@ -273,7 +256,6 @@ function getbillingbyId(id) {
         },
         dataType: 'json',
         success: function (profileData) {
-            console.log('profileDataddd', profileData);
             $('#cmpnyname').val(profileData.custCompany)
             $('#cmpnytx').val(profileData.custCompTaxNo)
             $('#billingaddress1').val(profileData.addressLine1)
@@ -288,7 +270,6 @@ function getbillingbyId(id) {
 
     $("#updateBilling").on('click', function (e) {
         e.preventDefault()
-        console.log('clicked');
         $.ajax({
             url: `${SETTINGS.backendUrl}/CustomerAccount/UpdateCustBillingAddress`,
             method: 'POST',  // Assuming this should be a POST request, change it if necessary
@@ -307,10 +288,6 @@ function getbillingbyId(id) {
                 remark: $('#billingremark').val(),
             }),
             success: function (response) {
-                // Handle success response
-                //    localStorage.setItem('token', response);
-
-                console.log('Billing address added successfully:', response);
                 toastr.success("Shipping Info Updated successfully ");
 
                 location.reload();
@@ -343,9 +320,6 @@ function getshippingInfo() {
         dataType: 'json',
         success: function (profileData) {
             profileData.forEach(function (shipping) {
-                // console.log('shipping', shipping);
-                // <p> <span class="text-black"> ${shipping.csaEntryId} </span></p>
-
                 var profile = `  
                 <div class="col-md-6">
 							<div class="card">
@@ -421,7 +395,6 @@ function getshippingInfo() {
         });
     }
     function deleteShippingAddress(csaEntryId) {
-        console.log('csaEntryId', csaEntryId);
         $.ajax({
             url: `${SETTINGS.backendUrl}/CustomerAccount/DeleteCustShippingAddress/${csaEntryId}`,
             method: 'POST',
@@ -431,7 +404,6 @@ function getshippingInfo() {
                 // Add other headers as needed
             },
             success: function (response) {
-                console.log('Shipping address deleted successfully:', response);
                 toastr.success("Shipping address deleted successfully");
                 getshippingInfo()
                 $('#deleteConfirmationModal').modal('hide');
@@ -457,7 +429,6 @@ function getshippingbyId(id) {
         },
         dataType: 'json',
         success: function (profileData) {
-            // console.log('profileDataddd', profileData);
             $('#shippingname').val(profileData.name)
             $('#contactno').val(profileData.contactNo)
             $('#altcontactno').val(profileData.altContactNo)
@@ -473,7 +444,6 @@ function getshippingbyId(id) {
 
     $("#updateshipping").on('click', function (e) {
         e.preventDefault()
-        console.log('clicked');
         $.ajax({
             url: `${SETTINGS.backendUrl}/CustomerAccount/UpdateCustShippingAddress`,
             method: 'POST',  // Assuming this should be a POST request, change it if necessary
@@ -493,10 +463,6 @@ function getshippingbyId(id) {
                 lctnId: $('#shippingLocation').val(),
             }),
             success: function (response) {
-                // Handle success response
-                //    localStorage.setItem('token', response);
-
-                // console.log('Billing address added successfully:', response);
                 toastr.success("Shipping Info Updated successfully ");
 
                 // You may want to update the UI or perform other actions here
@@ -530,7 +496,6 @@ function addshippingInfo() {
 
         dataType: "json",
         success: function (response) {
-            // console.log(response);
             let li = `<option value="">Select</option>`
             $.each(response, function (index, value) {
                 li += `<option value="${value.lEntryId}">${value.locationName}</option>`
@@ -565,7 +530,6 @@ function addshippingInfo() {
             "lctnId": CountrySelect,
             "remark": Remark,
         };
-        // console.log('userData :', userData);
         $.ajax({
             url: 'https://mig-dev.lifelinemegacorp.com/api/CustomerAccount/AddCustShippingAddress',
             method: 'POST',  // Assuming this should be a POST request, change it if necessary
@@ -576,8 +540,6 @@ function addshippingInfo() {
             },
             data: JSON.stringify(userData), // Convert object to JSON string
             success: function (response) {
-
-                // console.log('Billing address added successfully:', response);
                 toastr.success("Billing address added successfully ");
                 // You may want to update the UI or perform other actions here
                 $("#saveshippinginfo").modal("hide");

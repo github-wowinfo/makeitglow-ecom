@@ -6,8 +6,6 @@ function getQueryParam(name) {
 // Get category ID from the URL
 const refId = getQueryParam('ref');
 
-console.log('refId', refId);
-
 $.ajax({
 	url: `${SETTINGS.backendUrl}/Order/GetOrderPaymentDetailsByPaymentRefId?PaymentRefId=${refId}`,
 	method: 'GET',
@@ -18,7 +16,6 @@ $.ajax({
 		// Add other headers as needed
 	},
 	success: function (data) {
-		console.log('data', data);
 		if (data.data.paymentState === "CAPTURED" || data.data.paymentState === "AUTHORISED") {
 			var confirm = `
             <div class="" style="margin-left: 100px; margin-top: 60px;">

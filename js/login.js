@@ -1,7 +1,5 @@
 var token = localStorage.getItem("token");
-console.log(token);
 var username = localStorage.getItem("userName");
-console.log(username);
 document.getElementById("login").addEventListener("click", function (e) {
   e.preventDefault();
 
@@ -34,7 +32,6 @@ document.getElementById("login").addEventListener("click", function (e) {
 
     return;
   }
-  // console.log(FirstName);
 
   var userData = {
     userType: 2,
@@ -42,7 +39,6 @@ document.getElementById("login").addEventListener("click", function (e) {
     password: Passwords,
     // Add any other required fields for user registration
   };
-  console.log("userData :", userData);
 
   $.ajax({
     url: `${SETTINGS.backendUrl}/Auth/Login`,
@@ -58,14 +54,10 @@ document.getElementById("login").addEventListener("click", function (e) {
 
     success: function (response) {
       var fullName = response.profile.firstName + ' ' + response.profile.lastName;
-
-      console.log(response);
       localStorage.setItem('token', response.token);
       localStorage.setItem('userId', response.profile.userId)
       localStorage.setItem('uid', response.profile.uid)
       localStorage.setItem('userName', fullName)
-      // localStorage.setItem('uid', response.profile.firstName)
-      console.log("Sign In Success:", response.profile);
 
       toastr.success("Login In successful! ");
       // window.location.href = "./index.html";
@@ -86,7 +78,6 @@ document.getElementById("login").addEventListener("click", function (e) {
 
       if (error.responseJSON.message === "Account not confirmed!") {
         $("#openConfirmationM").modal("show");
-        console.log("hi modal");
       }
     },
   });
@@ -121,12 +112,10 @@ document.getElementById("handleConfirmation").addEventListener("click", function
     // contentType: "application/json", // Set the Content-Type
 
     success: function (response) {
-      console.log("Sign In Success:", response);
       toastr.success("Please Confirm your mail ");
       // contentTy  // window.location.href="./index.html";
       // if (response === "Account confirmed!") {
       $("#openConfirmationM").modal("hide");
-      console.log("Close modal");
       // }
       // window.location.href="./index.html";
     },
@@ -142,12 +131,6 @@ document.getElementById("handleConfirmation").addEventListener("click", function
 
 function loginCallBack(resopnse) {
   var decodedCredential = jwtDecode(resopnse.credential);
-  console.log(decodedCredential);
-  // currentEmail = decodedCredential.email;
-  // console.log(currentEmail);
-  // currentName = decodedCredential.given_name;
-  // localStorage.setItem("currentEmail", currentEmail);
-  // localStorage.setItem("currentName", currentName);
   const responseData = {
     email: decodedCredential.email,
     externalLoginId: decodedCredential.sub,
@@ -159,7 +142,6 @@ function loginCallBack(resopnse) {
 
 
 function externalLogin(responseData) {
-  console.log('responseData', responseData);
   $.ajax({
     url: `${SETTINGS.backendUrl}/Auth/LoginWithGoogle`,
     type: "POST",
@@ -172,16 +154,11 @@ function externalLogin(responseData) {
     contentType: "application/json",
     data: JSON.stringify(responseData),
     success: function (response) {
-      console.log("Sign In Success:", response);
       var fullName = response.profile.firstName + ' ' + response.profile.lastName;
-
-      console.log(response);
       localStorage.setItem('token', response.token);
       localStorage.setItem('userId', response.profile.userId)
       localStorage.setItem('uid', response.profile.uid)
       localStorage.setItem('userName', fullName)
-      // localStorage.setItem('uid', response.profile.firstName)
-      console.log("Sign In Success:", response.profile);
 
       toastr.success("Login In successful! ");
       // window.location.href = "./index.html";

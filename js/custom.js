@@ -667,7 +667,6 @@ var MoonCart = function () {
 				var ch = Math.ceil(jQuery(this).outerHeight());
 				jQuery(this).parent().find('.dz-media img').css('--static-height', ch + 'px');
 			});
-			//console.log(ch);
 
 		}, 500);
 
@@ -983,10 +982,11 @@ jQuery(window).on('load', function () {
 
 	setTimeout(function () {
 		jQuery('#loading-area').remove();
-	}, 2000);
+	}, 500);
 
 });
-/*  Window Load END */
+/* Window Load END */
+
 
 /* Window Resize START */
 jQuery(window).on('resize', function () {

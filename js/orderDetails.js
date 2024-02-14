@@ -1,14 +1,13 @@
 function getQueryParam(name) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(name);
-  }
-  
-  // Get category ID from the URL
-  const orderId = getQueryParam('orderId');
-  console.log(orderId);
+}
+
+// Get category ID from the URL
+const orderId = getQueryParam('orderId');
 let shippingId = ''
 $.ajax({
-    url:    `${SETTINGS.backendUrl}/Order/GetOrderDetailsByOrderId?OrderId=${orderId}`,
+    url: `${SETTINGS.backendUrl}/Order/GetOrderDetailsByOrderId?OrderId=${orderId}`,
     method: 'GET',
     dataType: 'json',
     headers: {
@@ -18,7 +17,6 @@ $.ajax({
     },
     success: function (data) {
         // Update Order Details
-        console.log(data);
         updateOrderDetails(data);
     },
     error: function (error) {
@@ -31,7 +29,7 @@ function updateOrderDetails(data) {
     var timestampStr = data.ordrPymnt.paymentCreationTime;
     var timestamp = new Date(timestampStr);
     var formattedDate = formatDate(timestamp);
-    var Tamount = data.ordrPymnt.txnAmount / 100 ;
+    var Tamount = data.ordrPymnt.txnAmount / 100;
 
     function formatDate(date) {
         // Array of month names
@@ -50,7 +48,7 @@ function updateOrderDetails(data) {
 
         return formattedDate;
     }
-   
+
     var orderDetailsHtml = `
     <div class="card p-10 order-head">
        <div class="col-12 row ">
@@ -89,35 +87,35 @@ function updateOrderDetails(data) {
 
     function getStatusText(statusCode) {
         switch (statusCode) {
-          case 1:
-            return 'Confirm Order';
-          case 2:
-            return 'Processing';
-          case 3:
-            return 'Confirmed';
-          case 4:
-            return 'Shipping';
-          case 5:
-            return 'Delivered';
-          case 6:
-            return 'Cancelled';
-          case 7:
-            return 'Refunded';
-          case 0:
-            return 'Deleted';
-          default:
-            return 'Unknown';
+            case 1:
+                return 'Confirm Order';
+            case 2:
+                return 'Processing';
+            case 3:
+                return 'Confirmed';
+            case 4:
+                return 'Shipping';
+            case 5:
+                return 'Delivered';
+            case 6:
+                return 'Cancelled';
+            case 7:
+                return 'Refunded';
+            case 0:
+                return 'Deleted';
+            default:
+                return 'Unknown';
         }
-      }
-      function getTransactionMode(statusCode) {
+    }
+    function getTransactionMode(statusCode) {
         switch (statusCode) {
-          case 1:
-            return 'ONLINE';
-          case 2:
-            return 'COD';
-       
+            case 1:
+                return 'ONLINE';
+            case 2:
+                return 'COD';
+
         }
-      }
+    }
 
     // card2 ... 
 
@@ -131,12 +129,11 @@ function updateOrderDetails(data) {
         },
         dataType: 'json',
         success: function (shipping) {
-            console.log('profileDataddd', shipping);
-        //    if (shipping.length > 0) {
+            //    if (shipping.length > 0) {
             // var shippingHtml = generateAddressHtml(shipping);
             // $('#shippingAddress').append(shippingHtml);
             // <p class="m-1">CUSTOMER ID : <span class="text-black"> ${shipping.custId} </span></p>
-                var shippingInfo = `  
+            var shippingInfo = `  
                 
 							<div class="">
 								<div class="card-body" >
@@ -150,14 +147,14 @@ function updateOrderDetails(data) {
                                 </div>
 							</div>
 						 `;
-                    $('#shippingAddress').append(shippingInfo);
+            $('#shippingAddress').append(shippingInfo);
             // } 
         },
         error: function (error) {
             console.error('Error fetching cart data:', error);
         }
     });
-   
+
 
     if (data.ordrItms && data.ordrItms.length > 0) {
         // Build the table headers outside the loop
@@ -177,7 +174,6 @@ function updateOrderDetails(data) {
         $('#orderDetails1').append(tableHeaders);
 
         data.ordrItms.forEach(order => {
-            console.log('order',order);
             // var amount = order.paidAmount/100
             const row = `
                 <tr>
@@ -190,7 +186,7 @@ function updateOrderDetails(data) {
             `;
             // Append each row inside the loop
             $('#orderDetails1').append(row);
-        }) 
+        })
 
         // Close the tbody after the loop
         $('#orderDetails1').html(tableHeaders + rows + '</tbody>');
@@ -214,7 +210,6 @@ function getBillingInfo() {
         dataType: 'json',
         success: function (profileData) {
             // profileData.forEach(function (Billing) {
-            console.log('profileDatabiili', profileData.length);
             if (profileData.length > 0) {
                 // <p class="m-1">CUSTOMER ID : <span class="text-black"> ${profileData[0].custId} </span></p>
 
@@ -233,14 +228,14 @@ function getBillingInfo() {
 					  </div>
 				    	 </div>`;
                 $('#billingAddress').append(profile);
-            } 
+            }
             // else {
             //     var profile = `<button class="btn btn-secondary btnhover text-uppercase me-2"
             //     id="postButton">Add Billing Info</button>`;
             //     $('#billingAddress').append(profile);
-                // $('#postButton').on('click', function () {
-                //     $('#billingModal').modal('show'); // Adjust 'yourModalId' accordingly
-                // });
+            // $('#postButton').on('click', function () {
+            //     $('#billingModal').modal('show'); // Adjust 'yourModalId' accordingly
+            // });
             // }
             // })
 
@@ -266,10 +261,10 @@ function getBillingInfo() {
         }
     })
 
-   
+
 }
 
 $(document).ready(function () {
     getBillingInfo()
-   
+
 });

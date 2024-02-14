@@ -13,7 +13,6 @@
             // Add other headers as needed
         },
         success: function (data) {
-            console.log('data', data);
             
             if (data && data.length > 0) {
                 data.forEach(order => {
@@ -91,8 +90,6 @@
                             // Add other headers as needed
                         },
                         success: function (orderDetails) {
-                            // Update Order Details
-                            console.log('datttttt',orderDetails);
                             updateOrderDetails(order.ordrID, orderDetails);
                         },
                         error: function (error) {
@@ -122,7 +119,6 @@
             // Build the table headers outside the loop
             
             data.ordrItms.forEach(order => {
-                console.log('order', order);
                 const row = `
                     <div>
                         <p class="product-item"><a href="javascript:void(0);"><img src="${order.itmimg}" alt="" width="80px"></a></p>
