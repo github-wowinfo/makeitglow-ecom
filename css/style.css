@@ -18982,7 +18982,7 @@ section {
 }
 
 .text-red {
-  color: #f22462;
+  color: #d23636;
 }
 
 .text-green {
@@ -51997,4 +51997,95 @@ footer.footer-dark .icon-bx-wraper {
 
 .shippingBtn {
   padding: 5px 10px;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Dosis:500);
+
+body{
+  /* background: #F1F1F1; */
+}
+
+.container{
+  /* width: 1200px; */
+  /* margin: auto; */
+}
+
+.timeline{
+  /* counter-reset: year 2016; */
+  /* position: relative; */
+}
+
+.timeline li{
+  list-style: none;
+  float: left;
+  width: 33.3333%;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: 'Dosis', sans-serif;
+}
+
+ul:nth-child(1){
+  color: #4caf50;
+}
+
+.timeline li:before{
+  /* counter-increment: year; */
+  content: "";
+  width: 50px;
+  height: 50px;
+  border: 3px solid #4caf50;
+  border-radius: 50%;
+  display: block;
+  text-align: center;
+  line-height: 50px;
+  margin: 0 auto 10px auto;
+  background: #F1F1F1;
+  color: #000;
+  transition: all ease-in-out .3s;
+  cursor: pointer;
+}
+
+.timeline li:after{
+  content: "";
+  position: absolute;
+  width: 94%;
+  height: 1px;
+  background-color: #F1F1F1;
+  top: 25px;
+  left: -50%;
+  z-index: 0;
+  transition: all ease-in-out .3s;
+}
+
+.timeline li:first-child:after{
+  content: none;
+}
+.timeline li.active{
+  color: #555555;
+
+}
+.timeline li.active:before{
+  background: #4caf50;
+  color: #F1F1F1;
+}
+
+.timeline li.active + li:after{
+  background: #4caf50;
+}
+
+@media (max-width: 376px){
+.orderConfirmation .card{
+  margin: 10px !important;
+}
+.orderConfirmation h3{
+  font-size: 20px !important;
+}
+.confirm-para{
+  margin-left: 30px !important;
+}
+.confirm-para1{
+  margin-left: 30px !important;
+
+}
 }
