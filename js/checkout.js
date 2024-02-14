@@ -407,7 +407,8 @@ document.getElementById("placeorder").addEventListener("click", function (e) {
       error: function (error) {
         console.error('Error adding shipping address:', error);
         // Handle error response
-        toastr.error('not found', error);
+        // toastr.error(error.responseJSON.message);
+        showErrorModal('Order Placement Error', 'There was an error placing the COD order. Please try again.');
 
       }
     });
@@ -456,6 +457,7 @@ document.getElementById("placeorder").addEventListener("click", function (e) {
         console.error('Error adding shipping address:', error);
         // Handle error response
         toastr.error('not found', error);
+        showErrorModal('Order Placement Error', 'There was an error placing the COD order. Please try again.');
 
       }
     });
@@ -465,6 +467,14 @@ document.getElementById("placeorder").addEventListener("click", function (e) {
 }
 
 )
+
+function showErrorModal(title, message) {
+  // Add your code to display a modal with the provided title and message
+  // For example, if you are using Bootstrap, you can use the following code
+  $('#errorModalTitle').text(title);
+  $('#errorModalMessage').text(message);
+  $('#errorModal').modal('show');
+}
 
 $(document).ready(function () {
   getCartCheckout()
