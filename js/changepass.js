@@ -6,9 +6,7 @@ $(document).ready(function () {
     var newPassword = $("#newPassword").val();
     var confirmPassword = $("#confirmPassword").val();
 
-    console.log(currentPassword),
-      console.log(newPassword),
-      console.log(confirmPassword)
+
 
     // Validate passwords
     //   if (newPassword !== confirmPassword) {
@@ -54,10 +52,6 @@ $(document).ready(function () {
         newPassword: newPassword,
       }),
       success: function (response) {
-        // localStorage.setItem('token', response.token);
-
-        // Assuming the server returns a success message
-        console.log("Change Password Success:", response.message);
         toastr.success(response.message);
       },
       error: function (error) {

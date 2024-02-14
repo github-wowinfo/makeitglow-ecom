@@ -8,8 +8,6 @@ function getQueryParam(name) {
 // Get category ID from the URL
 const orderID = getQueryParam('orderID');
 
-console.log('orderId', orderID);
-
 // Simulating data for demonstration
 // var data = {
 //     data: {

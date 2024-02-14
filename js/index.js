@@ -7,7 +7,6 @@ function fetchDataAndPopulateSwiper() {
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
-        // console.log()
 
       }
       return response.json();
@@ -38,7 +37,6 @@ function createSwiperSlide(product) {
 
   var swiperSlide = document.createElement('div');
   swiperSlide.className = 'swiper-slide bg-light';
-  //  console.log(`${SETTINGS.backendUrl}${product.image2}`);
   var contentHTML = `
   <div class="container-fluid">
     <div class="banner-content">
@@ -95,13 +93,7 @@ $(document).ready(function () {
     method: 'GET',
     dataType: 'json',
     success: function (data) {
-      // Iterate over the products in the response and append them to the masonry layout
-      // console.log('product', data);
       $.each(data, function (index, product) {
-        // toastr.success("Item Added to Cart");
-        // console.log('producttrending', product);
-        // Generate HTML for the product card with actual data
-        console.log('product', product);
         if (product !== null) {
           var productCardHtml = `
               <li class="card-container col-6 col-xl-3 col-lg-3 col-md-4 col-sm-6 Begs wow fadeInUp" data-wow-delay="0.1s">
@@ -192,8 +184,6 @@ $(document).ready(function () {
 );
 
 function quckview(id) {
-  // console.log(id);
-  // e.preventDefault();
   $('#modalBody').empty();
   // Make an AJAX request to fetch product data
   $.ajax({
@@ -201,10 +191,6 @@ function quckview(id) {
     method: 'GET',
     dataType: 'json',
     success: function (product) {
-      // Build the HTML for the product details using the API response
-      //  console.log('response',product);
-
-      console.log('products', product);
 
       var modalData = `<div class="row g-xl-4 g-3">
   <div class="col-xl-6 col-md-6">
@@ -311,7 +297,6 @@ function addToCart(id) {
       contentType: "application/json",
       data: JSON.stringify(obj),
       success: function (response) {
-        console.log("Sign In Success:", response);
         toastr.success("Item Added to Cart");
         getCart()
       },
@@ -330,7 +315,6 @@ function addToWishlist(id) {
     "itmVrntId": id,
     "qty": quantity
   };
-  console.log(obj);
 
   if (token === null) {
     window.location.href = "./login.html";
@@ -348,7 +332,6 @@ function addToWishlist(id) {
       data: JSON.stringify(obj),
 
       success: function (response) {
-        console.log("Sign In Success:", response);
         toastr.success("Item Added to Wishlist");
       },
       error: function (error) {

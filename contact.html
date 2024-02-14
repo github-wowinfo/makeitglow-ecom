@@ -38,9 +38,9 @@
 	<link rel="stylesheet" type="text/css" href="vendor/lightgallery/dist/css/lightgallery.css">
 	<link rel="stylesheet" type="text/css" href="vendor/lightgallery/dist/css/lg-thumbnail.css">
 	<link rel="stylesheet" type="text/css" href="vendor/lightgallery/dist/css/lg-zoom.css">
-	<link rel="stylesheet" type="text/css" href="css/style.css"> 
-    <!-- toastr msg. ... -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<!-- toastr msg. ... -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 	<!-- GOOGLE FONTS-->
 	<link rel="preconnect" href="https://fonts.googleapis.com/">
 	<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
@@ -60,7 +60,7 @@
 			</div>
 		</div>
 		<!-- Header -->
-	<header	 class="site-header mo-left header header-light">
+		<header class="site-header mo-left header header-light">
 			<!-- Main Header -->
 			<div class="sticky-header main-bar-wraper navbar-expand-lg">
 				<div class="main-bar clearfix">
@@ -137,7 +137,7 @@
 										</a>
 										<div class="user-dropdown" id="user-dropdown">
 										</div>
-											<span id="userName" class="text-black"></span>
+										<span id="userName" class="text-black"></span>
 									</li>
 								</ul>
 							</div>
@@ -294,7 +294,7 @@
 
 
 			<!-- SearchBar -->
-			<div class="dz-search-area dz-offcanvas offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop">
+			<!-- <div class="dz-search-area dz-offcanvas offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop">
 				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
 					&times;
 				</button>
@@ -434,47 +434,49 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			<!-- SearchBar -->
 
 			<!-- Sidebar cart -->
 			<div class="offcanvas dz-offcanvas offcanvas offcanvas-end " tabindex="-1" id="offcanvasRight">
 				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
-				  &times;
+					&times;
 				</button>
 				<div class="offcanvas-body">
-				  <div class="product-description">
-					<div class="dz-tabs">
-					  <ul class="nav nav-tabs center" id="myTab" role="tablist">
-						<li class="nav-item" role="presentation">
-						  <button class="nav-link active" id="shopping-cart" data-bs-toggle="tab"
-							data-bs-target="#shopping-cart-pane" type="button" role="tab" aria-controls="shopping-cart-pane"
-							aria-selected="true">Shopping Cart
-							<span class="badge badge-light" id="cartCount1"></span>
-						  </button>
-						</li>
-						<li class="nav-item" role="presentation">
-						  <button class="nav-link" id="wishlist" data-bs-toggle="tab" data-bs-target="#wishlist-pane"
-							type="button" role="tab" aria-controls="wishlist-pane" aria-selected="false">Wishlist
-							<span class="badge badge-light" id="whislistCount"></span>
-						  </button>
-						</li>
-					  </ul>
-					  <div class="tab-content pt-4" id="dz-shopcart-sidebar">
-						<div class="tab-pane fade show active" id="shopping-cart-pane" role="tabpanel"
-							aria-labelledby="shopping-cart" tabindex="0">
+					<div class="product-description">
+						<div class="dz-tabs">
+							<ul class="nav nav-tabs center" id="myTab" role="tablist">
+								<li class="nav-item" role="presentation">
+									<button class="nav-link active" id="shopping-cart" data-bs-toggle="tab"
+										data-bs-target="#shopping-cart-pane" type="button" role="tab"
+										aria-controls="shopping-cart-pane" aria-selected="true">Shopping Cart
+										<span class="badge badge-light" id="cartCount1"></span>
+									</button>
+								</li>
+								<li class="nav-item" role="presentation">
+									<button class="nav-link" id="wishlist" data-bs-toggle="tab"
+										data-bs-target="#wishlist-pane" type="button" role="tab"
+										aria-controls="wishlist-pane" aria-selected="false">Wishlist
+										<span class="badge badge-light" id="whislistCount"></span>
+									</button>
+								</li>
+							</ul>
+							<div class="tab-content pt-4" id="dz-shopcart-sidebar">
+								<div class="tab-pane fade show active" id="shopping-cart-pane" role="tabpanel"
+									aria-labelledby="shopping-cart" tabindex="0">
 
-							<div class="empty text-center mt-5" id="empty">
-							  <h4>Opps ! Sorry Your Cart is Empty</h4>
-							  <img src="./images/empty-cart.webp" alt="">
-								<p>
-								 Looks like you have not added anything to you cart. Go ahead & explore top categories.</p>
-							</div>
-							
-							<div class="shop-sidebar-cart ">
-								
-								<ul class="sidebar-cart-list" id="cartItem">
-									<!-- <li>
+									<div class="empty text-center mt-5" id="empty">
+										<h4>Opps ! Sorry Your Cart is Empty</h4>
+										<img src="./images/empty-cart.webp" alt="">
+										<p>
+											Looks like you have not added anything to you cart. Go ahead & explore top
+											categories.</p>
+									</div>
+
+									<div class="shop-sidebar-cart ">
+
+										<ul class="sidebar-cart-list" id="cartItem">
+											<!-- <li>
 						<div class="cart-widget">
 						  <div class="dz-media me-3">
 							<img src="images/shop/shop-cart/pic1.jpg" alt="">
@@ -531,17 +533,17 @@
 						  </a>
 						</div>
 					  </li> -->
-								</ul>
-								
-								<div id="shopping-cart-pane1" style="flex-direction: column;">
-									<div class="cart-total " >
-										<h5 class="mb-0">Subtotal :</h5>
-										<h5 class="mb-0 totalamount"></h5>
-									</div>
-									
+										</ul>
 
-									<div class="mt-auto">
-										<!-- <div class="shipping-time">
+										<div id="shopping-cart-pane1" style="flex-direction: column;">
+											<div class="cart-total ">
+												<h5 class="mb-0">Subtotal :</h5>
+												<h5 class="mb-0 totalamount"></h5>
+											</div>
+
+
+											<div class="mt-auto">
+												<!-- <div class="shipping-time">
 							<div class="dz-icon">
 							  <i class="flaticon flaticon-ship"></i>
 							</div>
@@ -554,22 +556,22 @@
 							  </div>
 							</div>
 						  </div> -->
-										<!-- <a href="shop-checkout.html" class="btn btn-light btn-block m-b20">Checkout</a> -->
-										<a href="shop-checkout.html"
-											class="btn btn-secondary btn-block rounded-1">Checkout</a>
-									</div>
+												<!-- <a href="shop-checkout.html" class="btn btn-light btn-block m-b20">Checkout</a> -->
+												<a href="shop-checkout.html"
+													class="btn btn-secondary btn-block rounded-1">Checkout</a>
+											</div>
 
+										</div>
+
+
+
+									</div>
 								</div>
-								
-								
-								
-							</div>
-						</div>
-						<div class="tab-pane fade" id="wishlist-pane" role="tabpanel" aria-labelledby="wishlist"
-							tabindex="0">
-							<div class="shop-sidebar-cart">
-								<ul class="sidebar-cart-list" id="whishlistItem">
-									<!-- <li>
+								<div class="tab-pane fade" id="wishlist-pane" role="tabpanel" aria-labelledby="wishlist"
+									tabindex="0">
+									<div class="shop-sidebar-cart">
+										<ul class="sidebar-cart-list" id="whishlistItem">
+											<!-- <li>
 						<div class="cart-widget">
 						  <div class="dz-media me-3">
 							<img src="images/shop/shop-cart/pic1.jpg" alt="">
@@ -617,15 +619,15 @@
 						  </a>
 						</div>
 					  </li> -->
-								</ul>
-								<!-- <div class="mt-auto">
+										</ul>
+										<!-- <div class="mt-auto">
 					  <a href="shop-wishlist.html" class="btn btn-secondary btn-block">Check Your Favourite</a>
 					</div> -->
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-					</div>
-				  </div>
 				</div>
 			</div>
 			<!-- Sidebar cart -->
@@ -673,34 +675,38 @@
 									<div class="dzFormMsg"></div>
 									<label class="form-label">Your Name</label>
 									<div class="input-group">
-										<input required type="text" class="form-control" name="dzName" id="name" placeholder="Enter Your Name">
+										<input required type="text" class="form-control" name="dzName" id="name"
+											placeholder="Enter Your Name">
 									</div>
 									<label class="form-label">Email Address</label>
 									<div class="input-group">
-										<input required type="text" class="form-control" name="dzEmail" id="email" placeholder="Enetr mail Id" >
+										<input required type="text" class="form-control" name="dzEmail" id="email"
+											placeholder="Enetr mail Id">
 									</div>
 									<div class=" row">
 										<div class="col-6">
-									        <label class="form-label" >Phone Number</label>
-									        <div class="input-group">
-										    <input required type="text" class="form-control" name="dzPhoneNumber" id="number" maxlength="10" placeholder="Enter Phone Number">
-									       </div>
-								       </div>
-									   <div class="col-6">
-										<label class="form-label">Location</label>
+											<label class="form-label">Phone Number</label>
+											<div class="input-group">
+												<input required type="text" class="form-control" name="dzPhoneNumber"
+													id="number" maxlength="10" placeholder="Enter Phone Number">
+											</div>
+										</div>
+										<div class="col-6">
+											<label class="form-label">Location</label>
 											<select class="default-select w-100 " id="locationSelection">
 											</select>
-										 
-								   </div>
-							    	</div>
+
+										</div>
+									</div>
 									<label class="form-label">Subject</label>
 									<div class="input-group m-b30">
-										<input name="subject"  required placeholder="Enter Subject"
-											class="form-control " id="subject"></input>
+										<input name="subject" required placeholder="Enter Subject" class="form-control "
+											id="subject"></input>
 									</div>
 									<label class="form-label">Massage</label>
 									<div class="input-group">
-										<textarea name="dzMessage" rows="2" required placeholder="Type here ..What you want to tell with us.."
+										<textarea name="dzMessage" rows="2" required
+											placeholder="Type here ..What you want to tell with us.."
 											class="form-control m-b10" id="messages"></textarea>
 									</div>
 									<div>

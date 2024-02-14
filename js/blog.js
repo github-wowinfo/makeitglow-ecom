@@ -4,7 +4,6 @@ $.ajax({
     dataType: "json",
     success: function (response) {
         response.forEach(function (blogItem) {
-            console.log('resp', blogItem);
             var timestampStr = blogItem.creationTime;
 
             // Parse the timestamp string into a Date object
@@ -12,9 +11,6 @@ $.ajax({
 
             // Format the Date object into the desired format
             var formattedDate = formatDate(timestamp);
-
-            // Display the formatted date
-            console.log(formattedDate);
 
             function formatDate(date) {
                 // Array of month names

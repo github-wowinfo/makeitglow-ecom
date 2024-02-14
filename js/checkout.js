@@ -22,18 +22,15 @@ else {
     dataType: 'json',
     success: function (cartData) {
       cartCount === cartData.length
-      console.log(cartData.length === 0);
       // Update cart items
 
       if (cartData.length === 0) {
         $('#shop-checkout').css('display', 'none')
-        console.log('cart empty hidden');
         $('#cartImg').css('display', 'block');
       } else {
         $('#cartImg').css('display', 'none');
         // Hide the form and show other elements if needed
         $('#shop-checkout').css('display', 'flex')
-        console.log('cart empty hidden1');
       }
 
     },
@@ -42,12 +39,7 @@ else {
       console.error('Error fetching cart data:', error);
     },
   });
-  console.log('cart empty hidden1');
 }
-
-
-
-console.log('cartCount', cartCount);
 function cartData() {
 
 }
@@ -63,7 +55,6 @@ function getCartCheckout() {
     },
     dataType: 'json',
     success: function (cartData) {
-      // console.log(cartData);
       productCount = cartData.length
       subtotal = calculateSubtotal(cartData);
 
@@ -93,7 +84,6 @@ function getCartCheckout() {
 
       //       // Update cart items
       cartData.forEach(function (cartItem) {
-        // console.log('cartitem', cartItem);
         var cartItemHTML = `
         <div class="cart-item style-1" >
         <div class="dz-media">
@@ -161,7 +151,6 @@ function getshippinginfo() {
         else {
           // Hide the form and show other elements if needed
           $('#showForm').hide();
-          console.log('Form hidden');
           shippingId = $(this).val()
         }
       });
@@ -236,7 +225,6 @@ function getshippinginfo() {
           // Hide the shipping form when no address is selected
           $('#shippingForm').hide();
         }
-        console.log(selectedData);
       });
     },
     error: function (error) {
@@ -261,8 +249,6 @@ function getLocation() {
     },
     dataType: 'json',
     success: function (profileData) {
-      // profileData.forEach(function (shipping) {
-      //   console.log('shipping', shipping);
       let li = `<option value="">Select Location</option>`
       $.each(profileData, function (index, value) {
         li += `<option value="${value.lEntryId}">${value.locationName}</option>`
@@ -304,7 +290,6 @@ document.getElementById("saveshippinginfo").addEventListener("click", function (
     "remark": Remark,
   };
 
-  console.log('userData :', userData);
   $.ajax({
     url: `${SETTINGS.backendUrl}/CustomerAccount/AddCustShippingAddress`,
     method: 'POST',  // Assuming this should be a POST request, change it if necessary
@@ -315,15 +300,9 @@ document.getElementById("saveshippinginfo").addEventListener("click", function (
     },
     data: JSON.stringify(userData), // Convert object to JSON string
     success: function (response) {
-      console.log('response', response.data);
       shippingId = response.data
-      // console.log('Billing address added successfully:', response);
       toastr.success("Shipping address added successfully ");
       getshippinginfo()
-      // You may want to update the UI or perform other actions here
-      // $("#saveshippinginfo").modal("hide");
-      // location.reload()
-
     },
     error: function (error) {
       console.error('Error adding shipping address:', error.responseJSON.title);
@@ -336,7 +315,6 @@ document.getElementById("saveshippinginfo").addEventListener("click", function (
   // }
 })
 
-console.log('shippingId', shippingId);
 $(document).ready(function () {
   // Check the checkbox state on page load
   if ($('#basic_checkbox_3').is(':checked') && shippingId !== 0) {
@@ -361,8 +339,6 @@ $(document).ready(function () {
 });
 
 document.getElementById("placeorder").addEventListener("click", function (e) {
-  console.log();
-  console.log('response', shippingId);
   e.preventDefault()
   var selectedAccordion = document.querySelector('input[name="flexRadioDefault"]:checked');
   if (selectedAccordion.id === 'flexRadioDefault4') {
@@ -378,7 +354,6 @@ document.getElementById("placeorder").addEventListener("click", function (e) {
       "type": 1
     };
 
-    console.log('userdata', userData);
     $.ajax({
       url: `${SETTINGS.backendUrl}/Order/PlaceOrderWithOnline`,
       method: 'POST',  // Assuming this should be a POST request, change it if necessary
@@ -389,8 +364,6 @@ document.getElementById("placeorder").addEventListener("click", function (e) {
       },
       data: JSON.stringify(userData), // Convert object to JSON string
       success: function (response) {
-        console.log('response', response);
-        // console.log('Billing address added successfully:', response);
         toastr.success("Order Placed ");
         if (response.paymentLink) {
           // Redirect to the payment link
@@ -438,8 +411,6 @@ document.getElementById("placeorder").addEventListener("click", function (e) {
       },
       data: JSON.stringify(userData), // Convert object to JSON string
       success: function (response) {
-        console.log('response', response);
-        // console.log('Billing address added successfully:', response);
         toastr.success("Order Placed COD ");
         window.location.href = `orderpaymentCOD.html?orderID=${response.orderId}`;
         // if (response.paymentLink) {

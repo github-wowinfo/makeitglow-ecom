@@ -11,8 +11,6 @@ function getQueryParam(name) {
 const itemId = getQueryParam('Id');
 let variantId = ''; // Declare variantId globally
 let productquantity = '1';
-console.log('var', variantId);
-// console.log('var', Quantity);
 
 
 $(document).ready(function () {
@@ -23,8 +21,6 @@ $(document).ready(function () {
     method: 'GET',
     dataType: 'json',
     success: function (data) {
-      // Iterate over the products in the response and append them to the masonry layout
-      // console.log('data', data);
       $('#title').append(data.itemName)
       $('#shortDescription').append(data.shortDescription)
       $('#longDescription').append(data.longDescription)
@@ -108,12 +104,10 @@ $(document).ready(function () {
 
       data.vrnts.forEach(function (variant, index) {
         variantId = variant.vrntEntryId
-        console.log('variantId', variantId);
 
 
         if (data.vrnts.length > 0) {
           variantId = data.vrnts[0].vrntEntryId;
-          console.log('Initial variantId', variantId);
           pricingHTML += `
         <span class="price-num Tab-contents" id="tab${index + 1}" ${index + 1 === initialTab ? '' : 'style="display: none;"'}>
             ${variant.sellingPrice} AED <del>${variant.mrp} AED</del>
@@ -129,7 +123,6 @@ $(document).ready(function () {
               "sellingPrice": 30 // Example Selling Price
               // Add other variant details if needed
             };
-            // console.log('sel',variantInfo);
 
             var selectedVariant = data.vrnts.find(function (variant) {
               return variant.vrntEntryId === variantId;
@@ -137,8 +130,6 @@ $(document).ready(function () {
             if (selectedVariant) {
               var totalPrice = productquantity * selectedVariant.mrp;
               $("#displayedPrice").text(' AED ' + totalPrice);
-              // updateDisplayedPrice(totalPrice);
-              console.log('mera', totalPrice);
               // Update the displayed price on the page
             }
             // Calculate the new price based on quantity
@@ -160,7 +151,6 @@ $(document).ready(function () {
 
   window.updateVariantId = function (event, newVariantId) {
     variantId = newVariantId;
-    console.log('Updated variantId', variantId);
     // $("#displayedPrice").text( variantId);
 
 
@@ -209,32 +199,17 @@ $(document).ready(function () {
   // Add event listener for quantity input change
 });
 
-// Function to update the displayed price on the page
-// function updateDisplayedPrice(Price) {
-//   console.log("increase price of : $", Price)
-//   // $("#displayedPrice").textContent( totalPrice);
-//   var displayedPriceElement = document.getElementById("displayedPrice");
-//   displayedPriceElement.textContent = " Price: $" + Price;
-//   // handleBootstrapTouchSpin()
-
-// }
-
-// const Price= document.getElementById("price").value;
-// console.log("Total Price: $" + Price");
 
 var token = localStorage.getItem("token");
-// console.log('token', token);
 
 // add to cart  api.... 
 document.getElementById("cart").addEventListener("click", function (e) {
   e.preventDefault();
-  // console.log('U variantId', variantId);
 
   var obj = {
     "itmVrntId": variantId,
     "qty": productquantity
   }
-  console.log(obj)
   if (token === null) {
     window.location.href = "./login.html";
 
@@ -252,7 +227,6 @@ document.getElementById("cart").addEventListener("click", function (e) {
       data: JSON.stringify(obj),
 
       success: function (response) {
-        console.log("Sign In Success:", response);
         toastr.success("Item Added to Cart");
         getCart()
       },
@@ -274,7 +248,6 @@ document.getElementById("whislist").addEventListener("click", function (e) {
     "itmVrntId": variantId,
 
   }
-  console.log(obj)
   if (token === null) {
 
     window.location.href = "./login.html";
@@ -293,7 +266,6 @@ document.getElementById("whislist").addEventListener("click", function (e) {
       data: JSON.stringify(obj),
 
       success: function (response) {
-        console.log("Sign In Success:", response);
         toastr.success("Item Added to Whish list");
       },
       error: function (error) {

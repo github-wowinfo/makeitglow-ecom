@@ -6,7 +6,6 @@ $.ajax({
   success: function (response) {
     let options = '<option value="">Select</option>';
     $.each(response, function (index, value) {
-      // console.log(value);
       options += `<option value="${value.countryId}">${value.countryName}</option>`;
     });
     $('#countrySelect').html(options);
@@ -20,9 +19,6 @@ $.ajax({
 $('#countrySelect').on('change', function () {
   // Get the selected countryId
   let selectedCountryId = $(this).val();
-  // console.log('Selected Country ID:', selectedCountryId);
-
-  // Clear existing options in locationSelected
   $('#locationSelected').empty();
 
   // Location AJAX request
@@ -33,15 +29,9 @@ $('#countrySelect').on('change', function () {
     success: function (response) {
       let options = '<option value="">Select</option>';
       $.each(response, function (index, value) {
-        // console.log(value);
         options += `<option value="${value.lEntryId}">${value.locationName}</option>`;
       });
       $('#locationSelected').html(options);
-      // $.each(response, function (index, value) {
-      //   $('#locationSelected').append(`<option value="${value.lEntryId}">${value.locationName}</option>`);
-      // });
-
-      // Refresh Bootstrap Select after updating options
       $('#locationSelected').selectpicker('refresh');
     }
   });
@@ -55,13 +45,11 @@ $.ajax({
   // url: 'https://mig-dev.lifelinemegacorp.com/api/Masters/GetAllReferences',
   dataType: "json",
   success: function (response) {
-    // console.log(response);
     let li = `<option value="">Select</option>`
     $.each(response, function (index, value) {
       li += `<option value="${value.refEntryId}">${value.referenceName}</option>`
     });
     $('#refrenceSelect').append(li);
-    // $('#refrenceSelect').selectric('refresh');
   }
 })
 
@@ -127,13 +115,6 @@ document.getElementById("postButton").addEventListener("click", function (e) {
     return;
   }
 
-  // Validate address (not empty)
-  // if (Addresses === '') {
-  //   // alert("Address is a required field.");
-  //   toastr.error("Please enter a valid address.");
-
-  //   return;
-  // }  // console.log(FirstName);
 
   var userData = {
     "userType": 2,
@@ -149,7 +130,6 @@ document.getElementById("postButton").addEventListener("click", function (e) {
 
     // Add any other required fields for user registration
   };
-  // console.log('userData :', userData);
 
   $.ajax({
     url: `${SETTINGS.backendUrl}/Auth/Register`,
@@ -162,36 +142,14 @@ document.getElementById("postButton").addEventListener("click", function (e) {
 
       // Save the token in localStorage
       localStorage.setItem('token', response.token);
-      console.log('Registration Success:', response);
 
       // Handle the response from the server after successful registration
       // Show success toast
       toastr.success("Registered successfully! ");
       window.location.href = "./login.html";
 
-
-      //   $.ajax({
-      //     url: `${SETTINGS.backendUrl}Auth/ConfirmAccountByEmail?Email=${EmailId}`,
-      //     type: 'POST', // or 'POST' or other method
-      //     dataType: 'json',
-      //     // Add headers or other configurations as needed
-
-      //     success: function(secondApiResponse) {
-      //         console.log('Second API Success:', secondApiResponse);
-      //         // Handle the response from the second API
-      //         toastr.success("Confirmation mail sent to your mail id ");
-      //         // Redirect to another page or perform other actions as needed
-      //         // window.location.href = "./login.html";
-      //     },
-      //     error: function(secondApiError) {
-      //         console.log('Second API Error:', secondApiError);
-      //         // Handle errors from the second API
-      //     }
-      // });
-      // window.location.href = "./login.html"; // Replace with your desired redirect URL
     },
     error: function (error) {
-      // console.log('Registration Error:', error);
       console.log("Registration Error::", error.responseJSON.message);
       toastr.error(error.responseJSON.message);
       // toastr.error("error occured");
@@ -210,12 +168,6 @@ document.getElementById('togglePassword').addEventListener('click', function () 
 
 function loginCallBack(resopnse) {
   var decodedCredential = jwtDecode(resopnse.credential);
-  console.log(decodedCredential);
-  // currentEmail = decodedCredential.email;
-  // console.log(currentEmail);
-  // currentName = decodedCredential.given_name;
-  // localStorage.setItem("currentEmail", currentEmail);
-  // localStorage.setItem("currentName", currentName);
   const responseData = {
     userType: 2,
     // name: decodedCredential.name,
@@ -242,7 +194,6 @@ function externalLogin(responseData) {
     contentType: "application/json",
     data: JSON.stringify(responseData),
     success: function (response) {
-      console.log("Sign In Success:", response);
       localStorage.setItem('token', response.token);
       toastr.success("Registered successfully! ");
       window.location.href = "./login.html";

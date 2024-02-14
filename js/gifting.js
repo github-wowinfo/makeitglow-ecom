@@ -6,9 +6,7 @@ $.ajax({
   method: 'GET',
   dataType: 'json',
   success: function (data) {
-    // console.log('data', data);
     $.each(data, function (index, product) {
-      console.log('product', product);
       // var variantMrp = (product.vrnts.length > 0) ? product.vrnts[0].mrp : 0;
       // var sellingPrice = (product.vrnts.length > 0) ? product.vrnts[0].sellingPrice : 0;
 
@@ -91,7 +89,6 @@ $.ajax({
 
 
 function quckview(id) {
-  console.log(id);
 
   $('#modalBody').empty();
   // Make an AJAX request to fetch product data
@@ -100,8 +97,6 @@ function quckview(id) {
     method: 'GET',
     dataType: 'json',
     success: function (product) {
-      // Build the HTML for the product details using the API response
-      console.log('response', product);
 
 
       var modalData = `<div class="row g-xl-4 g-3">
@@ -205,7 +200,6 @@ function addToCart(id) {
       contentType: "application/json",
       data: JSON.stringify(obj),
       success: function (response) {
-        console.log("Sign In Success:", response);
         toastr.success("Item Added to Cart");
         getCart()
 
@@ -226,7 +220,6 @@ function addToWishlist(id) {
     "itmVrntId": id,
     "qty": quantity
   };
-  console.log(obj);
 
   if (token === null) {
     window.location.href = "./login.html";
@@ -244,7 +237,6 @@ function addToWishlist(id) {
       data: JSON.stringify(obj),
 
       success: function (response) {
-        console.log("Sign In Success:", response);
         toastr.success("Item Added to Wishlist");
       },
       error: function (error) {
