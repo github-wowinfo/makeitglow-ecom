@@ -18982,7 +18982,7 @@ section {
 }
 
 .text-red {
-  color: #f22462;
+  color: #d23636;
 }
 
 .text-green {
@@ -52006,8 +52006,8 @@ body{
 }
 
 .container{
-  width: 1200px;
-  margin: auto;
+  /* width: 1200px; */
+  /* margin: auto; */
 }
 
 .timeline{
@@ -52031,9 +52031,9 @@ ul:nth-child(1){
 
 .timeline li:before{
   /* counter-increment: year; */
-  content: counter(year);
-  width: 20px;
-  height: 20px;
+  content: "";
+  width: 50px;
+  height: 50px;
   border: 3px solid #4caf50;
   border-radius: 50%;
   display: block;
@@ -52049,12 +52049,12 @@ ul:nth-child(1){
 .timeline li:after{
   content: "";
   position: absolute;
-  width: 100%;
+  width: 94%;
   height: 1px;
-  background-color: black;
+  background-color: #F1F1F1;
   top: 25px;
   left: -50%;
-  /* z-index: -1; */
+  z-index: 0;
   transition: all ease-in-out .3s;
 }
 
@@ -52063,6 +52063,7 @@ ul:nth-child(1){
 }
 .timeline li.active{
   color: #555555;
+
 }
 .timeline li.active:before{
   background: #4caf50;
@@ -52071,4 +52072,20 @@ ul:nth-child(1){
 
 .timeline li.active + li:after{
   background: #4caf50;
+}
+
+@media (max-width: 376px){
+.orderConfirmation .card{
+  margin: 10px !important;
+}
+.orderConfirmation h3{
+  font-size: 20px !important;
+}
+.confirm-para{
+  margin-left: 30px !important;
+}
+.confirm-para1{
+  margin-left: 30px !important;
+
+}
 }
