@@ -141,7 +141,8 @@ function getshippinginfo() {
         li += `<option value="${value.csaEntryId}">${value.name} (${value.addressLine1})</option>`;
       });
       li += `<option value="newAddress" style='color: black !important;  ' >Add New Address</option>`;
-      $('#shippingAddress').html(li); // Use html() instead of append() to replace existing options
+      $('#shippingAddress').html(li); 
+      // Use html() instead of append() to replace existing options
 
       $('#shippingAddress').on('change', function () {
         var selectedValue = $(this).val();
