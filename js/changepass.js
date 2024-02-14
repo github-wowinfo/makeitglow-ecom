@@ -48,10 +48,12 @@ $(document).ready(function () {
       }),
       success: function (response) {
         toastr.success(response.message);
+        // window.location.href('#login')
+        window.location.href = "./login.html";
       },
       error: function (error) {
         console.error("Change Password Error:", error);
-        toastr.error("Failed to change password. Please try again.");
+        toastr.error(error.responseJSON.message)
 
       }
     });
