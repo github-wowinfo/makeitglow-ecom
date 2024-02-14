@@ -14,7 +14,7 @@ if (token === null) {
   <ul>
     <li><a href="./account.html">My Account</a></li> 
     <li><a href="./OrderTracking.html">My Orders</a></li> 
-    <li><a href="#/" onClick="logout()">Logout</a></li> 
+    <li><a href="#" onClick="logout()">Logout</a></li> 
  </ul>
  `
   $('#user-dropdown').append(dropdown)
