@@ -268,9 +268,6 @@ function quckview(id) {
   });
 }
 
-
-
-
 // Define the function to handle adding an item to the cart
 function addToCart(id) {
   // Assuming variantId and quantity are defined somewhere in your code
@@ -342,4 +339,57 @@ function addToWishlist(id) {
   }
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+  setTimeout(openModal, 6000); // Open modal after 1 minute (60,000 milliseconds)
+});
 
+function openModal() {
+  var modal = document.getElementById("newsletterModal");
+  modal.style.display = "block";
+}
+
+function closeModal() {
+  var modal = document.getElementById("newsletterModal");
+  modal.style.display = "none";
+}
+
+$(document).ready(function () {
+  $("#newsletter").on("click", function (e) {
+    e.preventDefault()
+    var email = $("#email").val();
+    // Validate email format
+    if (!isValidEmail(email)) {
+      toastr.error("Invalid email format. Please enter a valid email address.");
+      return;
+    }
+    // var token = "your_authentication_token";
+    // If email is valid, proceed with the AJAX request
+    $.ajax({
+      url: `${SETTINGS.backendUrl}/Ecom/AddSubscribeUs`,
+      method: "POST",
+      contentType: "application/json",
+      headers: {
+        "Authorization": "Bearer " + token,
+      },
+      data: JSON.stringify({
+        email: email,
+      }),
+      success: function (data) {
+        console.log("Successfull Subscribe.");
+        toastr.success("Successfull Subscribe.");
+        closeModal()
+
+      },
+      error: function (error) {
+        console.error("Failed to Subscribe:", error);
+        toastr.error("Failed to Subscribe");
+      }
+    });
+  });
+  // Function to validate email format
+  function isValidEmail(email) {
+    // Simple email validation using regular expression
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+});

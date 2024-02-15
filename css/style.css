@@ -22322,7 +22322,7 @@ select.btn-group .dropdown-toggle .caret:before {
   position: relative;
 }
 
-.dz-ajax-overlay .btn:before,
+/* .dz-ajax-overlay .btn:before, */
 .dz-ajax-overlay .wp-block-button__link:before,
 .dz-ajax-overlay .woocommerce .widget_shopping_cart .buttons a:before,
 .woocommerce .widget_shopping_cart .buttons .dz-ajax-overlay a:before,
@@ -52088,4 +52088,30 @@ ul:nth-child(1){
   margin-left: 30px !important;
 
 }
+}
+
+/* Add your main styles here */
+
+/* .modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+} */
+
+.modal-content {
+  /* Add your modal content styles here */
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
 }
