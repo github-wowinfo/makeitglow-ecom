@@ -208,7 +208,8 @@ document.getElementById("cart").addEventListener("click", function (e) {
     e.preventDefault();
 
     var obj = {
-        "itmVrntId": variantId,
+        "itemType": 2,
+        "prdctID": variantId,
         "qty": productquantity
     }
     if (token === null) {
