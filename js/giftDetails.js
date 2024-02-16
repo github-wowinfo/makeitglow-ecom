@@ -285,8 +285,8 @@
 //   // Assuming you have the necessary variables like itemId, variantId, token, etc.
 
 function getQueryParam(name) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(name);
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(name);
 }
 
 const itemId = getQueryParam('Id')
@@ -294,51 +294,51 @@ console.log('id', itemId);
 
 
 $.ajax({
-    url: `${SETTINGS.backendUrl}/Items/GetGiftItemById?id=${itemId}`,
-    method: 'GET',
-    dataType: 'json',
-    success: function (data) {
-        console.log('data', data);
-        $('#title').append(data.itemName)
-        $('#shortDescription').append(data.shortDescription)
-        $('#longDescription').append(data.longDescription)
-        $('#title1').append(data.itemName)
-        $('#categoryName').append(data.categoryName)
-        var price = `<span class="price-num">
+  url: `${SETTINGS.backendUrl}/Items/GetGiftItemById?id=${itemId}`,
+  method: 'GET',
+  dataType: 'json',
+  success: function (data) {
+    console.log('data', data);
+    $('#title').append(data.itemName)
+    $('#shortDescription').append(data.shortDescription)
+    $('#longDescription').append(data.longDescription)
+    $('#title1').append(data.itemName)
+    $('#categoryName').append(data.categoryName)
+    var price = `<span class="price-num">
         ${data.sellingPrice} AED <del>${data.mrp} AED</del>
       </span>`
-        $('#pricing').append(price)
+    $('#pricing').append(price)
 
-        var productImage = `
+    var productImage = `
             <div class="swiper-btn-center-lr">
   <div class="swiper product-gallery-swiper2">
     <div class="swiper-wrapper" id="lightgallery">
       <div class="swiper-slide">
         <div class="dz-media DZoomImage">
-          <a class="mfp-link lg-item" href="${SETTINGS.ImageUrl}${data.thumbnail}"
-            data-src="${SETTINGS.ImageUrl}${data.thumbnail}">
+          <a class="mfp-link lg-item" href="${data.mainImage1}"
+            data-src="${data.mainImage1}">
             <!-- <i  class="feather icon-maximize dz-maximize top-left"></i> -->
           </a>
-          <img src="${SETTINGS.ImageUrl}${data.thumbnail}" alt="image" />
+          <img src="${data.mainImage1}" alt="image" />
         </div>
       </div>
       <div class="swiper-slide">
         <div class="dz-media DZoomImage">
-          <a class="mfp-link lg-item" href="${SETTINGS.ImageUrl}${data.thumbnail}"
-            data-src="${SETTINGS.ImageUrl}${data.thumbnail}">
+          <a class="mfp-link lg-item" href="${data.image2}"
+            data-src="${data.image2}">
             <!-- <i class="feather icon-maximize dz-maximize top-left"></i> -->
           </a>
-          <img src="${SETTINGS.ImageUrl}${data.thumbnail}" alt="image" />
+          <img src="${data.image2}" alt="image" />
         </div>
       </div>
 
       <div class="swiper-slide">
         <div class="dz-media DZoomImage">
-          <a class="mfp-link lg-item" href="${SETTINGS.ImageUrl}${data.thumbnail}"
-            data-src="${SETTINGS.ImageUrl}${data.thumbnail}">
+          <a class="mfp-link lg-item" href="${data.image3}"
+            data-src="${data.image3}">
             <!-- <i class="feather icon-maximize dz-maximize top-left"></i> -->
           </a>
-          <img src="${SETTINGS.ImageUrl}${data.thumbnail}" alt="image" />
+          <img src="${data.image3}" alt="image" />
         </div>
       </div>
     </div>
@@ -346,21 +346,21 @@ $.ajax({
   <div class="swiper product-gallery-swiper thumb-swiper-lg">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
-        <img src="${SETTINGS.ImageUrl}${data.thumbnail}" alt="image" />
+        <img src="${data.mainImage1}" alt="image" />
       </div>
       <div class="swiper-slide">
-        <img src="${SETTINGS.ImageUrl}${data.thumbnail}" alt="image" />
+        <img src="${data.image2}" alt="image" />
       </div>
       <div class="swiper-slide">
-        <img src="${SETTINGS.ImageUrl}${data.thumbnail}" alt="image" />
+        <img src="${data.image3}" alt="image" />
       </div>
     </div>
   </div>
   </div>
     `
-        $('#imageContentgift').append(productImage);
+    $('#imageContentgift').append(productImage);
 
-    }
+  }
 })
 
 
@@ -368,77 +368,77 @@ var token = localStorage.getItem("token");
 
 // add to cart  api.... 
 document.getElementById("cart").addEventListener("click", function (e) {
-    e.preventDefault();
+  e.preventDefault();
 
-    var obj = {
-        "itemType": 2,
-        "prdctID": itemId,
-        "qty": productquantity
-    }
-    if (token === null) {
-        window.location.href = "./login.html";
+  var obj = {
+    "itemType": 2,
+    "prdctID": itemId,
+    "qty": productquantity
+  }
+  if (token === null) {
+    window.location.href = "./login.html";
 
-    } else {
-        $.ajax({
-            url: `${SETTINGS.backendUrl}/Ecom/AddToCart`,
-            type: "POST",
-            headers: {
-                Authorization: "Bearer " + token,
-                "Content-Type": "application/json",
-                // Add other headers as needed
-            },
-            dataType: "json", // Change the datatype according to your response type
-            contentType: "application/json", // Set the Content-Type
-            data: JSON.stringify(obj),
+  } else {
+    $.ajax({
+      url: `${SETTINGS.backendUrl}/Ecom/AddToCart`,
+      type: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+        // Add other headers as needed
+      },
+      dataType: "json", // Change the datatype according to your response type
+      contentType: "application/json", // Set the Content-Type
+      data: JSON.stringify(obj),
 
-            success: function (response) {
-                toastr.success("Item Added to Cart");
-                getCart()
-            },
+      success: function (response) {
+        toastr.success("Item Added to Cart");
+        getCart()
+      },
 
-            error: function (error) {
-                console.log("Sign in Error:", error);
-                toastr.error(error.responseJSON.title);
+      error: function (error) {
+        console.log("Sign in Error:", error);
+        toastr.error(error.responseJSON.title);
 
-            },
-        });
-    }
+      },
+    });
+  }
 
 });
 
 // whish list api.... 
 document.getElementById("whislist").addEventListener("click", function (e) {
-    e.preventDefault();
-    var obj = {
-        "itmVrntId": variantId,
+  e.preventDefault();
+  var obj = {
+    "itmVrntId": variantId,
 
-    }
-    if (token === null) {
+  }
+  if (token === null) {
 
-        window.location.href = "./login.html";
+    window.location.href = "./login.html";
 
-    } else {
-        $.ajax({
-            url: `${SETTINGS.backendUrl}/Ecom/AddToWishlist`,
-            type: "POST",
-            headers: {
-                Authorization: "Bearer " + token,
-                "Content-Type": "application/json",
-                // Add other headers as needed
-            },
-            dataType: "json", // Change the datatype according to your response type
-            contentType: "application/json", // Set the Content-Type
-            data: JSON.stringify(obj),
+  } else {
+    $.ajax({
+      url: `${SETTINGS.backendUrl}/Ecom/AddToWishlist`,
+      type: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+        // Add other headers as needed
+      },
+      dataType: "json", // Change the datatype according to your response type
+      contentType: "application/json", // Set the Content-Type
+      data: JSON.stringify(obj),
 
-            success: function (response) {
-                toastr.success("Item Added to Whish list");
-            },
-            error: function (error) {
-                console.log("Sign in Error:", error);
-                toastr.error(error.responseJSON.title);
+      success: function (response) {
+        toastr.success("Item Added to Whish list");
+      },
+      error: function (error) {
+        console.log("Sign in Error:", error);
+        toastr.error(error.responseJSON.title);
 
-            },
-        });
-    }
+      },
+    });
+  }
 
 });
