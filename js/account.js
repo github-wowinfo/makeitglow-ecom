@@ -405,7 +405,7 @@ function getshippingInfo() {
             },
             success: function (response) {
                 toastr.success("Shipping address deleted successfully");
-                getshippingInfo()
+                // getshippingInfo()
                 $('#deleteConfirmationModal').modal('hide');
                 // Remove the corresponding card from the UI
                 $(`.delete-button[data-csa-entry-id="${csaEntryId}"]`).closest('.card').remove();
@@ -549,7 +549,7 @@ function addshippingInfo() {
             error: function (error) {
                 console.error('Error adding billing address:', error);
                 // Handle error response
-                toastr.error(error);
+                toastr.error(error.responseJSON.title);
 
             }
         });
