@@ -353,6 +353,11 @@ function closeModal() {
   modal.style.display = "none";
 }
 
+function closeSubscriptionModal() {
+  // Add your code to close the modal here
+  $("#newsletter").modal("hide");
+}
+
 $(document).ready(function () {
   $("#newsletter").on("click", function (e) {
     e.preventDefault()
@@ -377,12 +382,15 @@ $(document).ready(function () {
       success: function (data) {
         console.log("Successfull Subscribe.");
         toastr.success("Successfull Subscribe.");
-        closeModal()
+        console.log(data);
+        if (data.status==='Success') {
+          closeModal();
+        }
 
       },
       error: function (error) {
         console.error("Failed to Subscribe:", error);
-        toastr.error("Failed to Subscribe");
+        toastr.error( error.responseJSON.message);
       }
     });
   });
@@ -392,4 +400,6 @@ $(document).ready(function () {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   }
+
+
 });
