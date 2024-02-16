@@ -340,33 +340,61 @@ function addToWishlist(id) {
   }
 }
 
-// document.addEventListener("DOMContentLoaded", function() {
-//   setTimeout(openModal, 6000); // Open modal after 1 minute (60,000 milliseconds)
-// });
+document.addEventListener("DOMContentLoaded", function () {
+  var modalShown = sessionStorage.getItem("modalShown");
+  var lastModalTime = sessionStorage.getItem("lastModalTime");
+  var oneWeekInMillis = 7 * 24 * 60 * 60 * 1000; // One week in milliseconds
 
-function hasWeekPassed(lastDisplayTimestamp) {
-  const now = new Date().getTime();
-  const weekInMilliseconds = 7 * 24 * 60 * 60 * 1000; // 1 week in milliseconds
-  return now - lastDisplayTimestamp > weekInMilliseconds;
-}
+  if (!modalShown) {
+    openModal(); // Open modal the first time in the session
+    sessionStorage.setItem("modalShown", "true");
+    sessionStorage.setItem("lastModalTime", Date.now());
+  } else if (lastModalTime && (Date.now() - parseInt(lastModalTime)) >= oneWeekInMillis) {
+    openModal(); // Open modal after one week if it has been shown before in the session
+    sessionStorage.setItem("lastModalTime", Date.now());
+  }
+});
 
 function openModal() {
-  const modalDisplayed = sessionStorage.getItem('modalDisplayed');
-  if (!modalDisplayed) {
-    const lastDisplayTimestamp = sessionStorage.getItem('lastDisplayTimestamp');
-    if (!lastDisplayTimestamp || hasWeekPassed(Number(lastDisplayTimestamp))) {
-      var modal = document.getElementById("newsletterModal");
-      modal.style.display = "block";
-      sessionStorage.setItem('lastDisplayTimestamp', new Date().getTime());
-      sessionStorage.setItem('modalDisplayed', true);
-    }
-  }
+  var modal = document.getElementById("newsletterModal");
+  modal.style.display = "block";
 }
 
 function closeModal() {
   var modal = document.getElementById("newsletterModal");
   modal.style.display = "none";
 }
+
+
+
+// function hasMinutePassed(lastDisplayTimestamp) {
+//   const now = new Date().getTime();
+//   const minuteInMilliseconds = 60 * 1000; // 1 minute in milliseconds
+//   return now - lastDisplayTimestamp > minuteInMilliseconds;
+// }
+
+// function openModal() {
+//   const modalDisplayed = sessionStorage.getItem('modalDisplayed');
+//   if (!modalDisplayed) {
+//     const lastDisplayTimestamp = sessionStorage.getItem('lastDisplayTimestamp');
+//     if (!lastDisplayTimestamp || hasMinutePassed(Number(lastDisplayTimestamp))) {
+//       var modal = document.getElementById("newsletterModal");
+//       modal.style.display = "block";
+//       sessionStorage.setItem('lastDisplayTimestamp', new Date().getTime());
+//       sessionStorage.setItem('modalDisplayed', true);
+
+//       // Close the modal after one minute
+//       setTimeout(function () {
+//         closeModal();
+//       }, 60000); // 60000 milliseconds = 1 minute
+//     }
+//   }
+// }
+
+// function closeModal() {
+//   var modal = document.getElementById("newsletterModal");
+//   modal.style.display = "none";
+// }
 
 
 function closeSubscriptionModal() {
