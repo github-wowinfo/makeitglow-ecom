@@ -1,5 +1,6 @@
 {/* <h5 class="title"><a href="./giftDetails.html?Id=${product.gftItmEntryId}">${product.itemTitle}</a></h5> */ }
 
+// var giftitem = product.gftItmEntryId;
 
 $.ajax({
   url: `${SETTINGS.backendUrl}/Items/GetAllGiftItems`,
@@ -220,7 +221,8 @@ function addToWishlist(id) {
   var quantity = '1';
 
   var obj = {
-    "itmVrntId": id,
+    "itemType": 2,
+    "prdctID": id,
     "qty": quantity
   };
 

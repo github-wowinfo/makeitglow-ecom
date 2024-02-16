@@ -307,7 +307,7 @@ function addToCart(id) {
 }
 
 function addToWishlist(id) {
-  var quantity = '1';
+  // var quantity = '1';
 
   var obj = {
     "itemType": 1,

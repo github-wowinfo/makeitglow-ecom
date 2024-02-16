@@ -310,7 +310,8 @@ function addToCart(id) {
   var quantity = '1';
 
   var obj = {
-    "itmVrntId": id,
+    "itemType": 1,
+    "prdctID": id,
     "qty": quantity
   };
 
