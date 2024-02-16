@@ -352,8 +352,8 @@ document.getElementById("placeorder").addEventListener("click", function (e) {
       "totalAmount": (subtotal + shipping) * 100,
       "paidAmount": (subtotal + shipping) * 100,
       "remark": "",
-      "isGiftOrder": false,
-      "type": 1
+      // "isGiftOrder": false,
+      // "type": 1
     };
 
     $.ajax({
@@ -398,8 +398,8 @@ document.getElementById("placeorder").addEventListener("click", function (e) {
       "totalAmount": (subtotal + shipping) * 100,
       "paidAmount": 0,
       "remark": "",
-      "isGiftOrder": false,
-      "type": 1
+      // "isGiftOrder": false,
+      // "type": 1
 
     };
 
