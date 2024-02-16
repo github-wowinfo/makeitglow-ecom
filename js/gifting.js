@@ -6,9 +6,9 @@ $.ajax({
   method: 'GET',
   dataType: 'json',
   success: function (data) {
-    console.log('data', data);
+    // console.log('data', data);
     $.each(data, function (index, product) {
-      console.log('product', product);
+      // console.log('product', product);
       // var variantMrp = (product.vrnts.length > 0) ? product.vrnts[0].mrp : 0;
       // var sellingPrice = (product.vrnts.length > 0) ? product.vrnts[0].sellingPrice : 0;
 
@@ -17,7 +17,7 @@ $.ajax({
             class="col-6 col-xl-4 col-lg-4 col-md-4 col-sm-6 m-md-b15 m-b30 grid-5">
             <div class="shop-card card">
                 <div class="dz-media">
-                    <a href="./giftDetails.html?Id=${product.itemName}">
+                    <a href="./giftDetails.html?Id=${product.gftItmEntryId}">
                         <img src="${product.thumbnail}" alt="image">
                         <div class="shop-meta">
                         <a href="javascript:void(0);" class="btn btn-secondary btn-icon"
@@ -66,7 +66,7 @@ $.ajax({
                     </a>
                 </div>
                 <div class="dz-content">
-                    <h5 class="title"><a href="./giftDetails.html?Id=${product.itemName}">${product.itemName}</a></h5>
+                    <h5 class="title"><a href="./giftDetails.html?Id=${product.gftItmEntryId}">${product.itemName}</a></h5>
                     
                     <h6 class="price">
                         <del>${product.mrp} AED</del>
@@ -99,7 +99,7 @@ function quckview(id) {
     dataType: 'json',
     success: function (product) {
 
-      console.log('quickviewproduct', product);
+      // console.log('quickviewproduct', product);
       var modalData = `<div class="row g-xl-4 g-3">
 	<div class="col-xl-6 col-md-6">
 	  <div class="dz-product-detail mb-0">
