@@ -292,7 +292,7 @@ function getQueryParam(name) {
 const itemId = getQueryParam('Id')
 console.log('id', itemId);
 
-
+let productquantity = '1';
 $.ajax({
   url: `${SETTINGS.backendUrl}/Items/GetGiftItemById?id=${itemId}`,
   method: 'GET',
@@ -359,7 +359,11 @@ $.ajax({
   </div>
     `
     $('#imageContentgift').append(productImage);
+    $("input[name='demo_vertical2']").on('change', function () {
+      // Get the selected quantity
+      productquantity = $(this).val();
 
+    });
   }
 })
 
@@ -410,7 +414,9 @@ document.getElementById("cart").addEventListener("click", function (e) {
 document.getElementById("whislist").addEventListener("click", function (e) {
   e.preventDefault();
   var obj = {
-    "itmVrntId": variantId,
+    // "itmVrntId": variantId,
+    "itemType": 2,
+    "prdctID": itemId,
 
   }
   if (token === null) {

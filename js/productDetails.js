@@ -6,7 +6,6 @@ function getQueryParam(name) {
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get(name);
 }
-
 // Get category ID from the URL
 const itemId = getQueryParam('Id');
 let variantId = ''; // Declare variantId globally
@@ -207,7 +206,8 @@ document.getElementById("cart").addEventListener("click", function (e) {
   e.preventDefault();
 
   var obj = {
-    "itmVrntId": variantId,
+    "itemType": 1,
+    "prdctID": variantId,
     "qty": productquantity
   }
   if (token === null) {
@@ -245,7 +245,8 @@ document.getElementById("cart").addEventListener("click", function (e) {
 document.getElementById("whislist").addEventListener("click", function (e) {
   e.preventDefault();
   var obj = {
-    "itmVrntId": variantId,
+      "itemType": 1,
+    "prdctID": variantId,
 
   }
   if (token === null) {
