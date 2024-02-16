@@ -354,7 +354,8 @@ function updateQuantity(id, action, quantity, encodedCartData) {
   }
 
   var obj = {
-    "itmVrntId": id,
+    "itemType": 1,
+    "prdctID": id,
     "qty": currentQuantity.toString()
   };
   inputField.val(currentQuantity);
