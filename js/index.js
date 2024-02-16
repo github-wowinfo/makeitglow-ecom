@@ -339,19 +339,34 @@ function addToWishlist(id) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-  setTimeout(openModal, 6000); // Open modal after 1 minute (60,000 milliseconds)
-});
+// document.addEventListener("DOMContentLoaded", function() {
+//   setTimeout(openModal, 6000); // Open modal after 1 minute (60,000 milliseconds)
+// });
+
+function hasWeekPassed(lastDisplayTimestamp) {
+  const now = new Date().getTime();
+  const weekInMilliseconds = 7 * 24 * 60 * 60 * 1000; // 1 week in milliseconds
+  return now - lastDisplayTimestamp > weekInMilliseconds;
+}
 
 function openModal() {
-  var modal = document.getElementById("newsletterModal");
-  modal.style.display = "block";
+  const modalDisplayed = sessionStorage.getItem('modalDisplayed');
+  if (!modalDisplayed) {
+    const lastDisplayTimestamp = sessionStorage.getItem('lastDisplayTimestamp');
+    if (!lastDisplayTimestamp || hasWeekPassed(Number(lastDisplayTimestamp))) {
+      var modal = document.getElementById("newsletterModal");
+      modal.style.display = "block";
+      sessionStorage.setItem('lastDisplayTimestamp', new Date().getTime());
+      sessionStorage.setItem('modalDisplayed', true);
+    }
+  }
 }
 
 function closeModal() {
   var modal = document.getElementById("newsletterModal");
   modal.style.display = "none";
 }
+
 
 function closeSubscriptionModal() {
   // Add your code to close the modal here
@@ -383,14 +398,14 @@ $(document).ready(function () {
         console.log("Successfull Subscribe.");
         toastr.success("Successfull Subscribe.");
         console.log(data);
-        if (data.status==='Success') {
+        if (data.status === 'Success') {
           closeModal();
         }
 
       },
       error: function (error) {
         console.error("Failed to Subscribe:", error);
-        toastr.error( error.responseJSON.message);
+        toastr.error(error.responseJSON.message);
       }
     });
   });

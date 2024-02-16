@@ -93,6 +93,7 @@ function getCart() {
         cartCount === cartData.length
         // Update cart items
         cartData.forEach(function (cartItem) {
+          console.log('cartItem', cartItem);
           var cartItemHTML = `
             <li>
               <div class="cart-widget">
