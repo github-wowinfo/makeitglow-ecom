@@ -91,7 +91,7 @@ function getCartCheckout() {
       </div>
       <div class="dz-content">
         <div>
-        <h6 class="title mb-0">${cartItem.itemName}</h6>
+        <h6 class="title mb-0">${cartItem.itemTitle}</h6>
         <p>Qty: ${cartItem.qty}</p>
         </div>
         <span class="price">${cartItem.mrp}</span>
