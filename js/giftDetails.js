@@ -372,7 +372,7 @@ document.getElementById("cart").addEventListener("click", function (e) {
 
     var obj = {
         "itemType": 2,
-        "prdctID": variantId,
+        "prdctID": itemId,
         "qty": productquantity
     }
     if (token === null) {
