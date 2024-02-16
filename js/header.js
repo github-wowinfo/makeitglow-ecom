@@ -101,7 +101,7 @@ function getCart() {
                   <img src="${SETTINGS.ImageUrl}${cartItem.thumbnail}" alt="">
                 </div>
                 <div class="cart-content">
-                  <h6 class="title"><a href="product-thumbnail.html">${cartItem.itemName}</a></h6>
+                  <h6 class="title"><a href="product-thumbnail.html">${cartItem.itemTitle}</a></h6>
                   <div class="d-flex align-items-center">
                     <h6 class="dz-price text-primary mb-0">${cartItem.mrp}AED</h6>
                     <div class="btn-quantity light quantity-sm ms-5">
