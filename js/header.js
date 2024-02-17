@@ -66,12 +66,10 @@ function getCart() {
       headers: {
         Authorization: "Bearer " + token,
         "Content-Type": "application/json",
-        // Add other headers as needed
       },
       dataType: 'json',
       success: function (cartData) {
         cartCount === cartData.length
-        // Update cart items
 
         if (cartData.length === 0) {
           // $('#empty').css('display', 'block')
@@ -82,8 +80,6 @@ function getCart() {
           // Hide the form and show other elements if needed
           $('#shopping-cart-pane1').css('display', 'block');
         }
-
-
         var subtotal1 = calculateSubtotal1(cartData);
         $('#shopping-cart-pane .cart-total h5:last-child').text(subtotal1.toFixed(2) + 'AED ');
         // Clear existing content
@@ -131,20 +127,14 @@ function getCart() {
           // Append the item to the cart list
           $('#cartItem').append(cartItemHTML);
         });
-
-        // Calculate and update total amount
         var totalAmount = calculateTotalAmount(cartItem);
         $('.totalamount').text('AED', + totalAmount.toFixed(2));
       },
-
       error: function (error) {
         console.error('Error fetching cart data:', error);
       },
     });
   }
-
-
-
 }
 
 // Function to calculate total amount based on cart data
@@ -202,6 +192,7 @@ function getWhishlist() {
       // $('#whislistCount').append(cartData.length)
 
       // Update cart items
+      
       cartData.forEach(function (whishlistItem) {
         var cartItemHTML = `
                    <li>
@@ -266,7 +257,6 @@ function deleteCartItem(cartEntryId) {
       type: "POST", // Use POST instead of DELETE
       headers: {
         Authorization: "Bearer " + token,
-        // Add other headers as needed
       },
       data: {
         Id: cartEntryId,
@@ -292,11 +282,10 @@ function deleteWishlistItem(wshLstEntryId) {
       type: "POST", // Use POST instead of DELETE
       headers: {
         Authorization: "Bearer " + token,
-        // Add other headers as needed
       },
-      // data: {
-      //   Id: wshLstEntryId,
-      // },
+      data: {
+        Id: wshLstEntryId,
+      },
       success: function (response) {
         toastr.success("Item Deleted from Wishlist");
         getWhishlist()
@@ -310,15 +299,12 @@ function deleteWishlistItem(wshLstEntryId) {
 }
 
 function addToCart(id) {
-
   var quantity = '1';
-
   var obj = {
     "itemType": 1,
     "prdctID": id,
     "qty": quantity
   };
-
   if (token === null) {
     window.location.href = "./login.html";
   } else {
@@ -335,7 +321,6 @@ function addToCart(id) {
       success: function (response) {
         toastr.success("Item Added to Cart");
         getCart()
-
       },
       error: function (error) {
         console.log("Sign in Error:", error);
@@ -355,7 +340,6 @@ function updateQuantity(id, action, quantity, encodedCartData) {
   } else if (action === 'decrease' && currentQuantity > 1) {
     currentQuantity -= 1;
   }
-
   var obj = {
     "itemType": 1,
     "prdctID": id,
@@ -363,9 +347,6 @@ function updateQuantity(id, action, quantity, encodedCartData) {
   };
   inputField.val(currentQuantity);
   // Update subtotal
-
-
-
   if (token === null) {
     window.location.href = "./login.html";
   } else {
@@ -394,9 +375,6 @@ function updateQuantity(id, action, quantity, encodedCartData) {
     });
   }
 }
-
-
-
 
 var handleBootstrapTouchSpin = function () {
   if ($("input[name='demo_vertical2']").length > 0) {
