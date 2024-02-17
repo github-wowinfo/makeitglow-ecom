@@ -196,7 +196,10 @@ function getWhishlist() {
     },
     dataType: 'json',
     success: function (cartData) {
-      $('#whislistCount').append(cartData.length)
+
+      $('#whishlistItem').empty();
+      $('#whislistCount').text(cartData.length);
+      // $('#whislistCount').append(cartData.length)
 
       // Update cart items
       cartData.forEach(function (whishlistItem) {
