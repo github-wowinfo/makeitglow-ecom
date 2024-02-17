@@ -166,8 +166,8 @@ function getBillingInfo() {
 
 
             } else {
-                var profile = `<button class="btn btn-secondary btnhover text-uppercase me-2"
-                id="postButton">Add Billing Info</button>`;
+                var profile = `<button class="btn btn-secondary btnhover text-uppercase me-2 rounded-1" style="width: 14rem;"
+                id="postButton" >Add Billing Info</button>`;
                 $('#billingAddress').append(profile);
                 $('#postButton').on('click', function () {
                     $('#billingModal').modal('show'); // Adjust 'yourModalId' accordingly
