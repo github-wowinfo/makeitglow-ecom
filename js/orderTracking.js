@@ -61,13 +61,9 @@
                                 </div>
 
                                 <div class="p-5 mt-2 mb-2 d-flex " id="orderlist-${order.ordrID}">
-                                    <div class="ms-5">
-                                        <img src="./images/product/bluberry/blue.jpg" alt="" width="100px">
-                                    </div>
+                                   
                                     <div class="ms-5 ">
-                                        <p class="mb-1 text-darkgreen"><strong>Blueberry Muffin Whipped Soap</strong></p>
-                                        <p class="mb-1">Blueberry Soap boasts a delightful blueberry scent and shea butter, creating a sensory experience.</p>
-
+                                       
                                         <a href="./orderDetails.html?orderId=${order.ordrID} "
                                             data-bs-toggle="modal" class="btn btn-secondary btnhover text-uppercase mt-2 rounded-1 p-2 ">
                                             View Order Details
