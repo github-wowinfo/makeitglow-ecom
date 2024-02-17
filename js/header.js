@@ -97,7 +97,7 @@ function getCart() {
                   <img src="${SETTINGS.ImageUrl}${cartItem.thumbnail}" alt="">
                 </div>
                 <div class="cart-content">
-                  <h6 class="title"><a href="product-thumbnail.html">${cartItem.itemName}</a></h6>
+                  <h6 class="title"><a href="product-thumbnail.html">${cartItem.itemTitle}</a></h6>
                   <div class="d-flex align-items-center">
                     <h6 class="dz-price text-primary mb-0">${cartItem.mrp}AED</h6>
                     <div class="btn-quantity light quantity-sm ms-5">
@@ -186,7 +186,10 @@ function getWhishlist() {
     },
     dataType: 'json',
     success: function (cartData) {
-      $('#whislistCount').append(cartData.length)
+
+      $('#whishlistItem').empty();
+      $('#whislistCount').text(cartData.length);
+      // $('#whislistCount').append(cartData.length)
 
       // Update cart items
       
@@ -195,10 +198,10 @@ function getWhishlist() {
                    <li>
                           <div class="cart-widget">
                             <div class="dz-media me-3">
-                              <img src="${whishlistItem.mainImage1}" alt="${whishlistItem.itemName}">
+                              <img src="${SETTINGS.ImageUrl}${whishlistItem.thumbnail}" alt="${whishlistItem.itemTitle}">
                             </div>
                             <div class="cart-content">
-                              <h6 class="title"><a href="product-thumbnail.html">${whishlistItem.itemName}</a></h6>
+                              <h6 class="title"><a href="product-thumbnail.html">${whishlistItem.itemTitle}</a></h6>
                               <div class="d-flex align-items-center">
                          
                                 <h6 class="dz-price text-primary mb-0">${whishlistItem.mrp}AED</h6>

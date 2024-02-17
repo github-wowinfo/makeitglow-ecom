@@ -341,17 +341,17 @@ function addToWishlist(id) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  var modalShown = sessionStorage.getItem("modalShown");
-  var lastModalTime = sessionStorage.getItem("lastModalTime");
+  var modalShown = localStorage.getItem("modalShown");
+  var lastModalTime = localStorage.getItem("lastModalTime");
   var oneWeekInMillis = 7 * 24 * 60 * 60 * 1000; // One week in milliseconds
 
   if (!modalShown) {
     openModal(); // Open modal the first time in the session
-    sessionStorage.setItem("modalShown", "true");
-    sessionStorage.setItem("lastModalTime", Date.now());
+    localStorage.setItem("modalShown", "true");
+    localStorage.setItem("lastModalTime", Date.now());
   } else if (lastModalTime && (Date.now() - parseInt(lastModalTime)) >= oneWeekInMillis) {
     openModal(); // Open modal after one week if it has been shown before in the session
-    sessionStorage.setItem("lastModalTime", Date.now());
+    localStorage.setItem("lastModalTime", Date.now());
   }
 });
 
