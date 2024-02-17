@@ -11,13 +11,16 @@ function populateDropdown(url, dropdownSelector, selectedValue) {
             });
             $(dropdownSelector).html(options); // Use html() to replace existing options
             $(dropdownSelector).val(selectedValue); // Set the selected value
-            $(dropdownSelector).selectric('refresh');
+
+            // Initialize Bootstrap Select after populating options
+            $(dropdownSelector).selectpicker('refresh');
         },
         error: function (error) {
             console.error("Error fetching data:", error);
         }
     });
 }
+
 
 function populateReferenceDropdown(url, dropdownSelector, selectedValue) {
     $.ajax({
@@ -31,7 +34,8 @@ function populateReferenceDropdown(url, dropdownSelector, selectedValue) {
             });
             $(dropdownSelector).html(options); // Use html() to replace existing options
             $(dropdownSelector).val(selectedValue); // Set the selected value
-            $(dropdownSelector).selectric('refresh');
+            $(dropdownSelector).selectpicker('refresh');
+
         },
         error: function (error) {
             console.error("Error fetching data:", error);
@@ -501,7 +505,7 @@ function addshippingInfo() {
                 li += `<option value="${value.lEntryId}">${value.locationName}</option>`
             });
             $('#countrySelection').append(li);
-            // $('#countrySelection').selectric('refresh');
+            $('#countrySelection').selectpicker('refresh');
         }
     })
     var saveshipping = document.getElementById('saveshippinginfo');
