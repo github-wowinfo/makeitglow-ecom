@@ -256,6 +256,7 @@ function getLocation() {
         li += `<option value="${value.lEntryId}">${value.locationName}</option>`
       });
       $('#locationSelection').append(li);
+      $('#locationSelection').selectpicker('refresh');
 
       // })
 
