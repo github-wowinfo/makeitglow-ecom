@@ -49344,12 +49344,20 @@ a {
     --title: #fff;
     --white: #fff;
   }
+  .site-header.style-1 .extra-nav .extra-cell .username>* {
+    --title: #fff !important;
+    --white: #fff !important;
+  }
 }
 
 .site-header.style-1 .is-fixed .extra-nav .extra-cell>* {
   --title: var(--secondary);
   --white: var(--secondary);
 }
+/* .site-header.style-1 .is-fixed .extra-nav .extra-cell .username>* {
+  --title: var(--secondary) !important;
+  --white: var(--secondary) !important;
+} */
 
 .header-info-bar {
   position: relative;
@@ -52025,7 +52033,8 @@ body{
   font-family: 'Dosis', sans-serif;
 }
 
-ul:nth-child(1){
+/* ul:nth-child(1) */
+.timeline li  .timeline1 {
   color: #4caf50;
 }
 

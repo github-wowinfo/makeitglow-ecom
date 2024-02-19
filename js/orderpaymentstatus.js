@@ -34,7 +34,7 @@ $.ajax({
 					<!-- <h1><a href="http://developerstips.com/">DevelopersTips</a></h1> -->
 					<div class="container">
 						<ul class="timeline">
-						  <li class="active">order placed </li>
+						  <li class="active timeline1">order placed </li>
 						  <li>shipped </li>
 						  <li>dilevered</li>
 						</ul>

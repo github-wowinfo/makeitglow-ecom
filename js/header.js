@@ -13,7 +13,7 @@ if (token === null) {
   var dropdown = `
   <ul>
     <li><a href="./account.html">My Account</a></li> 
-    <li><a href="./OrderTracking.html">My Orders</a></li> 
+    <li><a href="./MyOrder.html">My Orders</a></li> 
     <li><a href="#" onClick="logout()">Logout</a></li> 
  </ul>
  `

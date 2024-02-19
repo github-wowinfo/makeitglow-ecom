@@ -70,6 +70,7 @@ function createSwiperSlide(product) {
     </div>
   </div>
   `;
+  // console.log('m product', product);
 
   swiperSlide.innerHTML = contentHTML;
   return swiperSlide;
@@ -169,7 +170,7 @@ $(document).ready(function () {
               </li>
             `;
         }
-
+  //  console.log('t pro', product);
         // Append the product card HTML to the masonry layout
         $('#masonry').append(productCardHtml);
       });
