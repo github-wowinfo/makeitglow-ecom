@@ -21,6 +21,7 @@ $(document).ready(function() {
             method: 'GET',
             dataType: 'json',
             success: function(data) {
+                console.log('data',data);
                 // On successful API call, update the accordion with events for the selected year
                 updateAccordion(data);
             },
@@ -78,14 +79,12 @@ $(document).ready(function() {
             // accordionTabContents.append(tabContent);
         });
         accordionTabGroup.on('click', '.tab', function() {
-            // Extract the year from the clicked tab's text
-            var selectedYear = $(this).text();
-            
-            // Make AJAX request to get events for the selected year
+            // accordionTabGroup.on('change', '.radio', function () {
+
+                var selectedYear = $(this).text();
+            // var selectedYear = $(this).attr('id').replace('tab-', '');
             getEventsByYear(selectedYear);
         });
-
-        // Trigger click on the first tab to show its content
         accordionTabGroup.find('.tab:first').trigger('click');
 
         // Trigger click on the first tab to show its content
@@ -113,8 +112,10 @@ $(document).ready(function() {
         var accordionHTML = '';
 
         events.forEach(function (event) {
+            console.log('event',event);
             accordionHTML += `
-                        <div class="accordion-item mt-5 active">
+            <div class="accordion dz-accordion accordion-sm" id="accordionFaq">
+            <div class="accordion-item mt-5 active">
                             <h2 class="accordion-header" id="heading${event.id}">
                                 <a href="#" class="accordion-button collapsed"
                                     data-bs-toggle="collapse" data-bs-target="#collapse${event.eventEntryId}"
@@ -143,9 +144,12 @@ $(document).ready(function() {
                                 </div>
                                 </div>
                             </div>
-                        </div>`;
+                        </div>
+									 </div>
+                        `;
         });
-        $('#accordionFaq').html(accordionHTML);
+        $('#three-tab-content').html(accordionHTML);
+        // console.log(accordionHTML);
 
         lightGallery(document.getElementById('lightgallery'))
     }
@@ -166,13 +170,7 @@ $(document).ready(function() {
                             </a>
                         </li>`;
         });
-
         return imagesHTML;
-
     }
-
-    // Call the function to fetch data and populate accordion tabs
     getEventYears();
-
-
 });
