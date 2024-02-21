@@ -1,18 +1,112 @@
-$(document).ready(function () {
-    $.ajax({
-        url: `${SETTINGS.backendUrl}/Masters/GetAllEvents`,
-        method: 'GET',
-        dataType: 'json',
-        success: function (data) {
-            // Assuming data is an array of events
-            // You can process the data and update the HTML accordingly
-            updateAccordion(data);
+ 
+$(document).ready(function() {
+    // Function to make AJAX request
+    function getEventYears() {
+        $.ajax({
+            url: 'https://mig-dev.lifelinemegacorp.com/api/Masters/GetEventYears',
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                // On successful API call, populate the accordion tabs
+                populateAccordion(data);
+            },
+            error: function(error) {
+                console.error('Error fetching data from the API:', error);
+            }
+        });
+    }
+    function getEventsByYear(year) {
+        $.ajax({
+            url: `${SETTINGS.backendUrl}/Masters/GetAllEventsByYear/${year}`,
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                // On successful API call, update the accordion with events for the selected year
+                updateAccordion(data);
+            },
+            error: function(error) {
+                console.error('Error fetching events for the year:', error);
+            }
+        });
+    }
 
-        },
-        error: function (error) {
-            console.error('Error fetching data:', error);
-        }
-    });
+    // Function to populate accordion tabs with data
+    function populateAccordion(eventYears) {
+        // Assuming eventYears is an array of year values
+
+        // Get the accordion wrapper and the tab content wrapper
+        var accordionTabGroup = $('.accordion_tab_group');
+        // var accordionTabContents = $('.accordion_tab_contents');
+
+        // Loop through each year and create tabs and content
+        $.each(eventYears, function(index, year) {
+            // Create radio input for the tab
+            var radioInput = $('<input>', {
+                type: 'radio',
+                id: 'tab-' + year,
+                name: 'accordion_group',
+                class: 'radio'
+            });
+
+            // Create label for the tab
+            var tabLabel = $('<label>', {
+                for: 'tab-' + year,
+                class: 'tab',
+                text: year
+            });
+
+            // Append radio input and label to the accordion tab group
+            accordionTabGroup.append(radioInput);
+            accordionTabGroup.append(tabLabel);
+
+            // Create div for the tab content
+            // var tabContent = $('<div>', {
+            //     class: 'accordion_tab_content',
+            //     id: 'tab-' + year + '-content'
+            // });
+
+            // // Create accordion div for the tab content
+            // var accordionDiv = $('<div>', {
+            //     class: 'accordion dz-accordion accordion-sm',
+            //     id: 'accordionFaq-' + year
+            // });
+
+            // // Append accordion div to the tab content
+            // tabContent.append(accordionDiv);
+
+            // // Append tab content to the accordion tab contents
+            // accordionTabContents.append(tabContent);
+        });
+        accordionTabGroup.on('click', '.tab', function() {
+            // Extract the year from the clicked tab's text
+            var selectedYear = $(this).text();
+            
+            // Make AJAX request to get events for the selected year
+            getEventsByYear(selectedYear);
+        });
+
+        // Trigger click on the first tab to show its content
+        accordionTabGroup.find('.tab:first').trigger('click');
+
+        // Trigger click on the first tab to show its content
+        // accordionTabGroup.find('.radio:first').prop('checked', true);
+        // accordionTabGroup.find('.tab:first').trigger('click');
+    }
+
+    // $.ajax({
+    //     url: `${SETTINGS.backendUrl}/Masters/GetAllEvents`,
+    //     method: 'GET',
+    //     dataType: 'json',
+    //     success: function (data) {
+    //         // Assuming data is an array of events
+    //         // You can process the data and update the HTML accordingly
+    //         updateAccordion(data);
+
+    //     },
+    //     error: function (error) {
+    //         console.error('Error fetching data:', error);
+    //     }
+    // });
 
     function updateAccordion(events) {
         // Assuming each event has properties like title, description, images
@@ -76,6 +170,9 @@ $(document).ready(function () {
         return imagesHTML;
 
     }
+
+    // Call the function to fetch data and populate accordion tabs
+    getEventYears();
 
 
 });

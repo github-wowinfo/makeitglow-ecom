@@ -34897,11 +34897,11 @@ del {
   color: var(--title);
 }
 
-@media only screen and (max-width: 1280px) {
+/* @media only screen and (max-width: 1280px) {
   .banner-social-media {
-    /* display: none; */
+    display: none;
   }
-}
+} */
 
 .swiper-five {
   position: relative;
@@ -42639,7 +42639,7 @@ body .working-location img {
 }
 
 .filter-area .grid-area .nav .nav-item {
-  align-item: center;
+  align-items: center;
 }
 
 .filter-area .grid-area .nav .nav-item .nav-link {
@@ -44270,11 +44270,11 @@ body .working-location img {
   padding-top: 25px;
 }
 
-@media only screen and (max-width: 1199px) {
+/* @media only screen and (max-width: 1199px) {
   .dz-product-detail .dz-media {
-    /* min-height: 280px; */
+    min-height: 280px;
   }
-}
+} */
 
 @media only screen and (max-width: 767px) {
   .dz-product-detail .dz-media {
@@ -50586,7 +50586,7 @@ a {
   height: 28px;
   display: flex;
   align-items: center;
-  justidy-content: center;
+  justify-content: center;
 }
 
 .sidebar-cart-list li {
@@ -50974,14 +50974,14 @@ footer {
   }
 }
 
-footer .widget_about {
-  /* @include respond('tab-land'){
+/* footer .widget_about {
+  @include respond('tab-land'){
 			text-align: center;
 			max-width: 550px;
 			margin-left: auto;
 			margin-right: auto;
-		} */
-}
+		}
+} */
 
 footer .widget_about p {
   margin-bottom: 20px;
@@ -51003,11 +51003,10 @@ footer .footer-title {
   line-height: 1.2;
 }
 
-footer .social {
-  /* display: flex; */
-  /* padding: 1rem; */
-
-}
+/* footer .social {
+  display: flex;
+  padding: 1rem;
+} */
 
 footer .social a {
   padding: 0;
@@ -51659,10 +51658,6 @@ footer.footer-dark .icon-bx-wraper {
 {
     /* background-color:purple; */
 /* } */
-*/ .accordion_tab_contents {
-  /* width: 200%; */
-  /* position:relative; */
-}
 
 .accordion_tab_contents .accordion_tab_content {
   display: none;
@@ -52009,20 +52004,6 @@ footer.footer-dark .icon-bx-wraper {
 
 @import url(https://fonts.googleapis.com/css?family=Dosis:500);
 
-body{
-  /* background: #F1F1F1; */
-}
-
-.container{
-  /* width: 1200px; */
-  /* margin: auto; */
-}
-
-.timeline{
-  /* counter-reset: year 2016; */
-  /* position: relative; */
-}
-
 .timeline li{
   list-style: none;
   float: left;
@@ -52112,10 +52093,6 @@ body{
   border: 1px solid #ccc;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 } */
-
-.modal-content {
-  /* Add your modal content styles here */
-}
 
 .close {
   position: absolute;
