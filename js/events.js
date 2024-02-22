@@ -101,7 +101,7 @@ $(document).ready(function() {
             accordionHTML += `
                 <div class="accordion dz-accordion accordion-sm" id="accordionFaq">
                      <div class="accordion-item mt-5 active">
-                            <h2 class="accordion-header" id="heading${event.id}"  >
+                            <h2 class="accordion-header" id="heading${event.id}" onClick="fetchData(${event.eventEntryId})">
                                 <a href="#" class="accordion-button collapsed"
                                     data-bs-toggle="collapse" data-bs-target="#collapse${event.eventEntryId}"
                                     aria-expanded="true" aria-controls="collapse${event.id}">
@@ -134,56 +134,35 @@ $(document).ready(function() {
     //     </div>
     //     </div>
     // </div>
-    $.ajax({
-        url: `https://mig-dev.lifelinemegacorp.com/api/Masters/GetEvent/${event.eventEntryId}`,
-        method: 'GET',
-        success: function (data) {
-            // Populate the accordion body with the fetched data
-            $(`#collapse${eventEntryId} .accordion-body`).html(`
-                <p>${data.description}</p>
-                <div class="dz-post-text demo-gallery">
-                    <div class="demo-gallery lg-gallery">
-                        <ul id="lightgallery" class="list-unstyled wp-container-5 wp-block-gallery-3 wp-block-gallery has-nested-images columns-4 is-cropped" style="border: none;">
-                            ${getImagesHTML(data.eventMediaFiles)}
-                        </ul>
-                    </div>
-                </div>
-            `);
-            $(`#collapse${eventEntryId}`).collapse('show');
-        },
-        error: function (error) {
-            console.error('Error fetching data:', error);
-        }
-    });
         lightGallery(document.getElementById('lightgallery'))
     }
     getEventYears();
   });
 
-//  function fetchData(eventEntryId) {
-//     console.log('eventEntryId',eventEntryId);
-//         $.ajax({
-//             url: `https://mig-dev.lifelinemegacorp.com/api/Masters/GetEvent/${eventEntryId}`,
-//             method: 'GET',
-//             success: function (data) {
-//                 // Populate the accordion body with the fetched data
-//                 $(`#collapse${eventEntryId} .accordion-body`).html(`
-//                     <p>${data.description}</p>
-//                     <div class="dz-post-text demo-gallery">
-//                         <div class="demo-gallery lg-gallery">
-//                             <ul id="lightgallery" class="list-unstyled wp-container-5 wp-block-gallery-3 wp-block-gallery has-nested-images columns-4 is-cropped" style="border: none;">
-//                                 ${getImagesHTML(data.eventMediaFiles)}
-//                             </ul>
-//                         </div>
-//                     </div>
-//                 `);
-//                 $(`#collapse${eventEntryId}`).collapse('show');
-//             },
-//             error: function (error) {
-//                 console.error('Error fetching data:', error);
-//             }
-//         });
-//     }
+ function fetchData(eventEntryId) {
+    console.log('eventEntryId',eventEntryId);
+        $.ajax({
+            url: `https://mig-dev.lifelinemegacorp.com/api/Masters/GetEvent/${eventEntryId}`,
+            method: 'GET',
+            success: function (data) {
+                // Populate the accordion body with the fetched data
+                $(`#collapse${eventEntryId} .accordion-body`).html(`
+                    <p>${data.description}</p>
+                    <div class="dz-post-text demo-gallery">
+                        <div class="demo-gallery lg-gallery">
+                            <ul id="lightgallery" class="list-unstyled wp-container-5 wp-block-gallery-3 wp-block-gallery has-nested-images columns-4 is-cropped" style="border: none;">
+                                ${getImagesHTML(data.eventMediaFiles)}
+                            </ul>
+                        </div>
+                    </div>
+                `);
+                // $(`#collapse${eventEntryId}`).collapse('show');
+            },
+            error: function (error) {
+                console.error('Error fetching data:', error);
+            }
+        });
+    }
     function getImagesHTML(images) {
         var imagesHTML = '';
 
