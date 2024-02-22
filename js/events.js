@@ -92,21 +92,6 @@ $(document).ready(function() {
         // accordionTabGroup.find('.tab:first').trigger('click');
     }
 
-    // $.ajax({
-    //     url: `${SETTINGS.backendUrl}/Masters/GetAllEvents`,
-    //     method: 'GET',
-    //     dataType: 'json',
-    //     success: function (data) {
-    //         // Assuming data is an array of events
-    //         // You can process the data and update the HTML accordingly
-    //         updateAccordion(data);
-
-    //     },
-    //     error: function (error) {
-    //         console.error('Error fetching data:', error);
-    //     }
-    // });
-
     function updateAccordion(events) {
         // Assuming each event has properties like title, description, images
         var accordionHTML = '';
@@ -114,9 +99,9 @@ $(document).ready(function() {
         events.forEach(function (event) {
             console.log('event',event);
             accordionHTML += `
-            <div class="accordion dz-accordion accordion-sm" id="accordionFaq">
-            <div class="accordion-item mt-5 active">
-                            <h2 class="accordion-header" id="heading${event.id}">
+                <div class="accordion dz-accordion accordion-sm" id="accordionFaq">
+                     <div class="accordion-item mt-5 active">
+                            <h2 class="accordion-header" id="heading${event.id}"  >
                                 <a href="#" class="accordion-button collapsed"
                                     data-bs-toggle="collapse" data-bs-target="#collapse${event.eventEntryId}"
                                     aria-expanded="true" aria-controls="collapse${event.id}">
@@ -124,35 +109,81 @@ $(document).ready(function() {
                                     <span class="toggle-close"></span>
                                 </a>
                             </h2>
-                            <div id="collapse${event.eventEntryId}" class="accordion-collapse collapse"
-                                aria-labelledby="heading${event.id}" data-bs-parent="#accordionFaq">
-                                <div class="accordion-body">
-                                    <p>${event.description}</p>
-                                    <!-- Add image rendering logic here -->
-                                    <div class="dz-post-text demo-gallery">
-
-                                    <div class="dz-post-text demo-gallery">
-                                    <div class="demo-gallery lg-gallery">
-                                        <ul id="lightgallery"
-                                            class=" list-unstyled wp-container-5 wp-block-gallery-3 wp-block-gallery has-nested-images columns-4 is-cropped"
-                                            style="border: none;">
-                                            ${getImagesHTML(event.eventMediaFiles)}
-                                        </ul>
-                                    </div>
-                                  </div>
-                                    
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-									 </div>
-                        `;
+                    </div>
+			    </div>`;
         });
-        $('#three-tab-content').html(accordionHTML);
+        $('#tab-content').html(accordionHTML);
         // console.log(accordionHTML);
+    //     <div id="collapse${event.eventEntryId}" class="accordion-collapse collapse"
+    //     aria-labelledby="heading${event.id}" data-bs-parent="#accordionFaq">
+    //     <div class="accordion-body">
+    //         <p>${event.description}</p>
+    //         <!-- Add image rendering logic here -->
+    //         <div class="dz-post-text demo-gallery">
 
+    //         <div class="dz-post-text demo-gallery">
+    //         <div class="demo-gallery lg-gallery">
+    //             <ul id="lightgallery"
+    //                 class=" list-unstyled wp-container-5 wp-block-gallery-3 wp-block-gallery has-nested-images columns-4 is-cropped"
+    //                 style="border: none;">
+    //                 ${getImagesHTML(event.eventMediaFiles)}
+    //             </ul>
+    //         </div>
+    //       </div>
+            
+    //     </div>
+    //     </div>
+    // </div>
+    $.ajax({
+        url: `https://mig-dev.lifelinemegacorp.com/api/Masters/GetEvent/${event.eventEntryId}`,
+        method: 'GET',
+        success: function (data) {
+            // Populate the accordion body with the fetched data
+            $(`#collapse${eventEntryId} .accordion-body`).html(`
+                <p>${data.description}</p>
+                <div class="dz-post-text demo-gallery">
+                    <div class="demo-gallery lg-gallery">
+                        <ul id="lightgallery" class="list-unstyled wp-container-5 wp-block-gallery-3 wp-block-gallery has-nested-images columns-4 is-cropped" style="border: none;">
+                            ${getImagesHTML(data.eventMediaFiles)}
+                        </ul>
+                    </div>
+                </div>
+            `);
+            $(`#collapse${eventEntryId}`).collapse('show');
+        },
+        error: function (error) {
+            console.error('Error fetching data:', error);
+        }
+    });
         lightGallery(document.getElementById('lightgallery'))
     }
+    getEventYears();
+  });
+
+//  function fetchData(eventEntryId) {
+//     console.log('eventEntryId',eventEntryId);
+//         $.ajax({
+//             url: `https://mig-dev.lifelinemegacorp.com/api/Masters/GetEvent/${eventEntryId}`,
+//             method: 'GET',
+//             success: function (data) {
+//                 // Populate the accordion body with the fetched data
+//                 $(`#collapse${eventEntryId} .accordion-body`).html(`
+//                     <p>${data.description}</p>
+//                     <div class="dz-post-text demo-gallery">
+//                         <div class="demo-gallery lg-gallery">
+//                             <ul id="lightgallery" class="list-unstyled wp-container-5 wp-block-gallery-3 wp-block-gallery has-nested-images columns-4 is-cropped" style="border: none;">
+//                                 ${getImagesHTML(data.eventMediaFiles)}
+//                             </ul>
+//                         </div>
+//                     </div>
+//                 `);
+//                 $(`#collapse${eventEntryId}`).collapse('show');
+//             },
+//             error: function (error) {
+//                 console.error('Error fetching data:', error);
+//             }
+//         });
+//     }
     function getImagesHTML(images) {
         var imagesHTML = '';
 
@@ -172,5 +203,3 @@ $(document).ready(function() {
         });
         return imagesHTML;
     }
-    getEventYears();
-});

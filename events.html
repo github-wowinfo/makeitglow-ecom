@@ -748,20 +748,31 @@
 									<label for="" class="tab text-grey" id="five-tab">2025</label>
 									<label for="" class="tab text-grey" id="six-tab">2026</label> -->
 								</div>
-								<div class="accordion_tab_contents col-xl-9 col-lg-9 order-lg-1 order-2" id="three-tab-content">
+								<div class="accordion_tab_contents col-xl-9 col-lg-9 order-lg-1 order-2" id="tab-content">
 
-									<div class="accordion_tab_content " >
-
-										
- 
-
-									</div>
-									<div class="accordion_tab_content" id="four-tab-content">
+						 
+									<!-- <div class="accordion_tab_content" id="four-tab-content">
 										<h2 class="accordion_tab_title">2024</h2>
 										<div class="accordion dz-accordion accordion-sm" id="accordionFaq1">
 										</div>
 
+									</div> -->
+									<div id="collapse${event.eventEntryId}" class="accordion-collapse collapse"
+									aria-labelledby="heading${event.id}" data-bs-parent="#accordionFaq">
+									<div class="accordion-body">
+										<p>${event.description}</p>
+										<!-- Add image rendering logic here -->
+										<div class="dz-post-text demo-gallery">
+											<div class="demo-gallery lg-gallery">
+												<ul id="lightgallery"
+													class="list-unstyled wp-container-5 wp-block-gallery-3 wp-block-gallery has-nested-images columns-4 is-cropped"
+													style="border: none;">
+													${getImagesHTML(event.eventMediaFiles)}
+												</ul>
+											</div>
+										</div>
 									</div>
+								</div>
 
 								</div>
 							</div>
