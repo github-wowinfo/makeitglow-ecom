@@ -1,16 +1,16 @@
- 
-$(document).ready(function() {
+
+$(document).ready(function () {
     // Function to make AJAX request
     function getEventYears() {
         $.ajax({
             url: 'https://mig-dev.lifelinemegacorp.com/api/Masters/GetEventYears',
             type: 'GET',
             dataType: 'json',
-            success: function(data) {
+            success: function (data) {
                 // On successful API call, populate the accordion tabs
                 populateAccordion(data);
             },
-            error: function(error) {
+            error: function (error) {
                 console.error('Error fetching data from the API:', error);
             }
         });
@@ -20,12 +20,12 @@ $(document).ready(function() {
             url: `${SETTINGS.backendUrl}/Masters/GetAllEventsByYear/${year}`,
             method: 'GET',
             dataType: 'json',
-            success: function(data) {
-                console.log('data',data);
+            success: function (data) {
+                console.log('data', data);
                 // On successful API call, update the accordion with events for the selected year
                 updateAccordion(data);
             },
-            error: function(error) {
+            error: function (error) {
                 console.error('Error fetching events for the year:', error);
             }
         });
@@ -40,7 +40,7 @@ $(document).ready(function() {
         // var accordionTabContents = $('.accordion_tab_contents');
 
         // Loop through each year and create tabs and content
-        $.each(eventYears, function(index, year) {
+        $.each(eventYears, function (index, year) {
             // Create radio input for the tab
             var radioInput = $('<input>', {
                 type: 'radio',
@@ -78,10 +78,10 @@ $(document).ready(function() {
             // // Append tab content to the accordion tab contents
             // accordionTabContents.append(tabContent);
         });
-        accordionTabGroup.on('click', '.tab', function() {
+        accordionTabGroup.on('click', '.tab', function () {
             // accordionTabGroup.on('change', '.radio', function () {
 
-                var selectedYear = $(this).text();
+            var selectedYear = $(this).text();
             // var selectedYear = $(this).attr('id').replace('tab-', '');
             getEventsByYear(selectedYear);
         });
@@ -93,12 +93,11 @@ $(document).ready(function() {
     }
 
     function updateAccordion(events) {
-        // Assuming each event has properties like title, description, images
         var accordionHTML = '';
 
         events.forEach(function (event) {
-            console.log('event',event);
             accordionHTML += `
+<<<<<<< HEAD
                 <div class="accordion dz-accordion accordion-sm" id="accordionFaq">
                      <div class="accordion-item mt-5 active">
                             <h2 class="accordion-header" id="heading${event.id}" onClick="fetchData(${event.eventEntryId})">
@@ -109,18 +108,30 @@ $(document).ready(function() {
                                     <span class="toggle-close"></span>
                                 </a>
                             </h2>
+=======
+            <div class="accordion dz-accordion accordion-sm" id="accordionFaq">
+                <div class="accordion-item mt-5 active">
+                    <h2 class="accordion-header" id="heading${event.id}">
+                        <a href="#" class="accordion-button collapsed"
+                            data-bs-toggle="collapse" data-bs-target="#collapse${event.eventEntryId}"
+                            aria-expanded="false" aria-controls="collapse${event.id}"
+                            onclick="loadEventData(${event.eventEntryId})">
+                            ${event.title} - ${event.eventDate}
+                            <span class="toggle-close"></span>
+                        </a>
+                    </h2>
+                    <div id="collapse${event.eventEntryId}" class="accordion-collapse collapse"
+                        aria-labelledby="heading${event.id}" data-bs-parent="#accordionFaq">
+                        <div class="accordion-body">
+                            <!-- Content for the accordion item goes here -->
+                        </div>
+>>>>>>> 62e2ae8ff715a0115f47912762eff183c94d042d
                     </div>
-			    </div>`;
+                </div>
+            </div>`;
         });
-        $('#tab-content').html(accordionHTML);
-        // console.log(accordionHTML);
-    //     <div id="collapse${event.eventEntryId}" class="accordion-collapse collapse"
-    //     aria-labelledby="heading${event.id}" data-bs-parent="#accordionFaq">
-    //     <div class="accordion-body">
-    //         <p>${event.description}</p>
-    //         <!-- Add image rendering logic here -->
-    //         <div class="dz-post-text demo-gallery">
 
+<<<<<<< HEAD
     //         <div class="dz-post-text demo-gallery">
     //         <div class="demo-gallery lg-gallery">
     //             <ul id="lightgallery"
@@ -165,9 +176,83 @@ $(document).ready(function() {
     }
     function getImagesHTML(images) {
         var imagesHTML = '';
+=======
+        $('#tab-content').html(accordionHTML);
 
-        images.forEach(function (image, index) {
-            imagesHTML += `
+        // Initialize LightGallery
+        lightGallery(document.getElementById('lightgallery'));
+    }
+    getEventYears();
+});
+
+
+function loadEventData(eventEntryId) {
+    console.log('eventEntryId', eventEntryId);
+    $.ajax({
+        url: `https://mig-dev.lifelinemegacorp.com/api/Masters/GetEvent/${eventEntryId}`,
+        method: 'GET',
+        success: function (data) {
+            // Populate the accordion body with the fetched data
+            $(`#collapse${eventEntryId} .accordion-body`).html(`
+                    <p>${data.description}</p>
+                    <div class="dz-post-text demo-gallery">
+                        <div class="demo-gallery lg-gallery">
+                            <ul id="lightgallery" class="list-unstyled wp-container-5 wp-block-gallery-3 wp-block-gallery has-nested-images columns-4 is-cropped" style="border: none;">
+                                ${getImagesHTML(data.eventMediaFiles)}
+                            </ul>
+                        </div>
+                    </div>
+                `);
+            $(`#collapse${eventEntryId}`).collapse('show');
+        },
+        error: function (error) {
+            console.error('Error fetching data:', error);
+        }
+    });
+    // Make API call using eventEntryId
+    // fetch('your-api-url/' + eventEntryId)
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         // Process API response
+    //         console.log('API response:', data);
+    //         // Update the accordion item content with the API data
+    //         $('#collapse' + eventEntryId + ' .accordion-body').html('API response: ' + JSON.stringify(data));
+    //     })
+    //     .catch(error => {
+    //         console.error('API error:', error);
+    //     });
+}
+
+//  function fetchData(eventEntryId) {
+//     console.log('eventEntryId',eventEntryId);
+//         $.ajax({
+//             url: `https://mig-dev.lifelinemegacorp.com/api/Masters/GetEvent/${eventEntryId}`,
+//             method: 'GET',
+//             success: function (data) {
+//                 // Populate the accordion body with the fetched data
+//                 $(`#collapse${eventEntryId} .accordion-body`).html(`
+//                     <p>${data.description}</p>
+//                     <div class="dz-post-text demo-gallery">
+//                         <div class="demo-gallery lg-gallery">
+//                             <ul id="lightgallery" class="list-unstyled wp-container-5 wp-block-gallery-3 wp-block-gallery has-nested-images columns-4 is-cropped" style="border: none;">
+//                                 ${getImagesHTML(data.eventMediaFiles)}
+//                             </ul>
+//                         </div>
+//                     </div>
+//                 `);
+//                 $(`#collapse${eventEntryId}`).collapse('show');
+//             },
+//             error: function (error) {
+//                 console.error('Error fetching data:', error);
+//             }
+//         });
+//     }
+function getImagesHTML(images) {
+    var imagesHTML = '';
+>>>>>>> 62e2ae8ff715a0115f47912762eff183c94d042d
+
+    images.forEach(function (image, index) {
+        imagesHTML += `
                         <li class="wp-block-image size-large"
                             data-responsive="${image.filePath} 375, ${image.filePath} 480, ${image.filePath} 800"
                             data-src="${SETTINGS.ImageUrl}${image.filePath}"
@@ -179,6 +264,6 @@ $(document).ready(function() {
                                     alt="img-${index + 1}">
                             </a>
                         </li>`;
-        });
-        return imagesHTML;
-    }
+    });
+    return imagesHTML;
+}
