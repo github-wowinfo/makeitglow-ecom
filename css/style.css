@@ -52134,11 +52134,26 @@ footer.footer-dark .icon-bx-wraper {
   flex-direction: row; 
   /* float: right; */
 }
+.blogsimg{
+  height:30rem !important;
+}
+.blogsimg img{
+  height:30rem !important;
+}
 
-
+@media only screen and (max-width: 768px){
+  .blogsimg{
+    height:20rem !important;
+  }
+  .blogsimg img{
+    height:20rem !important;
+  }
+}
 @media only screen and (max-width: 575px){
+  .user-dropdown{
+    position: relative !important;
+  }
   .myorder{ 
-
     margin:1.5rem .5rem !important;
   }
   .myorder .orderp{
@@ -52170,4 +52185,17 @@ footer.footer-dark .icon-bx-wraper {
     flex-direction: column; 
     /* float: right; */
   }
+  .blogsimg{
+    height:10rem !important;
+  }
+  .blogsimg img{
+    height:10rem !important;
+  }
+  .dz-card.style-1 .dz-info{
+    padding: 7px !important;
+  }
+  .dz-card.style-1 .dz-info a{
+    font-size: 14px !important;
+  }
+
 }
