@@ -46966,14 +46966,14 @@ table.wishlist_table {
 
 @media only screen and (min-width: 300px) and (max-width: 991px) {
   .registration-media img {
-    height: 280px;
+    height:fit-content;
     object-fit: contain;
   }
 }
 
 @media only screen and (max-width: 767px) {
   .registration-media img {
-    height: 240px;
+    height: auto;
   }
 }
 
@@ -47012,7 +47012,7 @@ table.wishlist_table {
 
 @media only screen and (max-width: 1199px) {
   .start-side-content {
-    padding: 120px 20px 0px;
+    /* padding: 120px 20px 0px; */
   }
 }
 
@@ -47052,7 +47052,7 @@ table.wishlist_table {
 }
 
 .end-side-content {
-  padding: 0px 30px;
+  /* padding: 0px 30px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -47060,7 +47060,7 @@ table.wishlist_table {
 
 @media only screen and (min-width: 300px) and (max-width: 1024px) {
   .end-side-content {
-    padding: 80px;
+    /* padding: 80px; */
   }
 }
 
@@ -52150,8 +52150,12 @@ footer.footer-dark .icon-bx-wraper {
   }
 }
 @media only screen and (max-width: 575px){
-  .user-dropdown{
+  /* .user-dropdown{
+  } */
+  .user-icon:hover .user-dropdown {
     position: relative !important;
+    padding-bottom: 100px !important;
+
   }
   .myorder{ 
     margin:1.5rem .5rem !important;
