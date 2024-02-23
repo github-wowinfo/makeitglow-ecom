@@ -97,18 +97,6 @@ $(document).ready(function () {
 
         events.forEach(function (event) {
             accordionHTML += `
-<<<<<<< HEAD
-                <div class="accordion dz-accordion accordion-sm" id="accordionFaq">
-                     <div class="accordion-item mt-5 active">
-                            <h2 class="accordion-header" id="heading${event.id}" onClick="fetchData(${event.eventEntryId})">
-                                <a href="#" class="accordion-button collapsed"
-                                    data-bs-toggle="collapse" data-bs-target="#collapse${event.eventEntryId}"
-                                    aria-expanded="true" aria-controls="collapse${event.id}">
-                                    ${event.title} - ${event.eventDate}
-                                    <span class="toggle-close"></span>
-                                </a>
-                            </h2>
-=======
             <div class="accordion dz-accordion accordion-sm" id="accordionFaq">
                 <div class="accordion-item mt-5 active">
                     <h2 class="accordion-header" id="heading${event.id}">
@@ -123,64 +111,25 @@ $(document).ready(function () {
                     <div id="collapse${event.eventEntryId}" class="accordion-collapse collapse"
                         aria-labelledby="heading${event.id}" data-bs-parent="#accordionFaq">
                         <div class="accordion-body">
-                            <!-- Content for the accordion item goes here -->
                         </div>
->>>>>>> 62e2ae8ff715a0115f47912762eff183c94d042d
                     </div>
                 </div>
             </div>`;
         });
 
-<<<<<<< HEAD
-    //         <div class="dz-post-text demo-gallery">
-    //         <div class="demo-gallery lg-gallery">
-    //             <ul id="lightgallery"
-    //                 class=" list-unstyled wp-container-5 wp-block-gallery-3 wp-block-gallery has-nested-images columns-4 is-cropped"
-    //                 style="border: none;">
-    //                 ${getImagesHTML(event.eventMediaFiles)}
-    //             </ul>
-    //         </div>
-    //       </div>
-            
-    //     </div>
-    //     </div>
-    // </div>
-        lightGallery(document.getElementById('lightgallery'))
-    }
-    getEventYears();
-  });
-
- function fetchData(eventEntryId) {
-    console.log('eventEntryId',eventEntryId);
-        $.ajax({
-            url: `https://mig-dev.lifelinemegacorp.com/api/Masters/GetEvent/${eventEntryId}`,
-            method: 'GET',
-            success: function (data) {
-                // Populate the accordion body with the fetched data
-                $(`#collapse${eventEntryId} .accordion-body`).html(`
-                    <p>${data.description}</p>
-                    <div class="dz-post-text demo-gallery">
-                        <div class="demo-gallery lg-gallery">
-                            <ul id="lightgallery" class="list-unstyled wp-container-5 wp-block-gallery-3 wp-block-gallery has-nested-images columns-4 is-cropped" style="border: none;">
-                                ${getImagesHTML(data.eventMediaFiles)}
-                            </ul>
-                        </div>
-                    </div>
-                `);
-                // $(`#collapse${eventEntryId}`).collapse('show');
-            },
-            error: function (error) {
-                console.error('Error fetching data:', error);
-            }
-        });
-    }
-    function getImagesHTML(images) {
-        var imagesHTML = '';
-=======
         $('#tab-content').html(accordionHTML);
+        // lightGallery(document.getElementById('lightgallery'));
+        // $('#container-fluid').css('display', 'none')
+        var $lightGallery = $('#lightgallery');
+    
+        $lightGallery.lightGallery();
+    
+        $lightGallery.on('onAfterOpen.lg', function() {
+            $('#headers').css('opacity', '0');
+        });
+
 
         // Initialize LightGallery
-        lightGallery(document.getElementById('lightgallery'));
     }
     getEventYears();
 });
@@ -203,11 +152,13 @@ function loadEventData(eventEntryId) {
                         </div>
                     </div>
                 `);
-            $(`#collapse${eventEntryId}`).collapse('show');
+            // $(`#collapse${eventEntryId}`).collapse('show');
+            lightGallery(document.getElementById('lightgallery'))
         },
         error: function (error) {
             console.error('Error fetching data:', error);
         }
+        
     });
     // Make API call using eventEntryId
     // fetch('your-api-url/' + eventEntryId)
@@ -249,7 +200,6 @@ function loadEventData(eventEntryId) {
 //     }
 function getImagesHTML(images) {
     var imagesHTML = '';
->>>>>>> 62e2ae8ff715a0115f47912762eff183c94d042d
 
     images.forEach(function (image, index) {
         imagesHTML += `

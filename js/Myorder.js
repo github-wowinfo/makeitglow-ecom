@@ -41,16 +41,16 @@
                     }
 
                     const orderHtml = `
-                        <div class="card m-5 rounded-1" style="border: 1px solid gainsboro;">
-                            <div class=" rounded-1" style="border: 1px solid gainsboro;">
-                                <div class="d-flex rounded-1 p-5" style="background-color: rgb(245, 247, 248); justify-content: space-between; border: none;">
+                        <div class="card myorder rounded-1" style="border: 1px solid gainsboro;">
+                            <div class="rounded-1" style="border: 1px solid gainsboro;">
+                                <div class="d-flex orderp rounded-1 " style="background-color: rgb(245, 247, 248); justify-content: space-between; border: none;">
                                     <div class="d-flex justify-content-center">
-                                        <div class="ms-5 mt-3">
+                                        <div class=" detail mt-3">
                                             <p class="  "><strong class="text-darkgreen"> ORDER Placed :  </strong> ${formattedDate}</p>
                                         </div>
                                         
                                     </div>
-                                    <div class="ms-5 ">
+                                    <div class="detail">
                                         <a href="./orderDetails.html?orderId=${order.ordrID} "
                                             data-bs-toggle="modal" class="btn   btnhover text-uppercase mt-2 rounded-1   ">
                                             View Order Details
@@ -60,12 +60,12 @@
                                 </div>
 
                                 <div class="p-5 mt-2 mb-2 d-flex " id="orderlist-${order.ordrID}">
-                                     <div class="ms-5 ">
+                                     <div class="ms-5 orderid">
                                      <h4 class="mb-1 text-darkgreen "><strong>Order id : </strong></h4>
                                      <h4 class="mb-1 text-darkgreen"> ${order.ordrID}</strong></h4>
                                      </div>
 
-                                     <div class="ms-6">
+                                     <div class="ms-6 orderid">
                                             <p class="mb-1 text-darkgreen"><strong> Total :</strong></p>
                                             <p class="mb-1"> ${amount} AED</p>
                                         </div>
