@@ -46968,6 +46968,7 @@ table.wishlist_table {
   .registration-media img {
     height:fit-content;
     object-fit: contain;
+    margin: 0px 5%;
   }
 }
 
@@ -47049,6 +47050,33 @@ table.wishlist_table {
   .start-side-content {
     padding: 120px 15px 80px 15px;
   }
+  .end-side-content {
+    /* padding: 0px 30px; */
+    display: flex;
+    flex-direction: row !important;
+    justify-content: center;
+  
+  }
+}
+@media only screen and (max-width: 575px) {
+  .end-side-content {
+    /* padding: 0px 30px; */
+    display: flex;
+    flex-direction: row !important;
+    justify-content: center;
+  
+  }
+  .regisPass{
+    display: flex;
+    flex-direction: column;
+  }
+  .regisPass .inputwidth {
+    width: fit-content;
+  }
+  .regisPass .inputwidths {
+    width: 400px;
+    margin-top: 20px;
+  }
 }
 
 .end-side-content {
@@ -47058,7 +47086,7 @@ table.wishlist_table {
   justify-content: center;
 }
 
-@media only screen and (min-width: 300px) and (max-width: 1024px) {
+@media only screen  and (max-width: 1024px) {
   .end-side-content {
     /* padding: 80px; */
   }
@@ -47067,6 +47095,21 @@ table.wishlist_table {
 @media only screen and (max-width: 767px) {
   .end-side-content {
     padding: 60px;
+  }
+  
+}
+@media only screen and (max-width: 768px) {
+  .end-side-content {
+    /* padding: 0px 30px; */
+    display: flex;
+    flex-direction: row !important;
+    justify-content: center;
+  }
+  .start-side-content {
+    /* padding: 120px 15px 0px; */
+    display: flex;
+    /* flex-direction: row !important; */
+    justify-content: center;
   }
 }
 
@@ -48974,7 +49017,7 @@ a {
   }
 
   .mo-left .header-nav .logo-header {
-    display: block;
+    /* display: block; */
     float: none;
     height: auto !important;
     max-width: 100%;
@@ -51089,6 +51132,7 @@ footer .fb-inner .copyright-text a {
   footer .footer-bottom p {
     font-size: 13px;
   }
+  
 }
 
 @media only screen and (max-width: 991px) {
