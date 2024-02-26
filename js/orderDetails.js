@@ -51,8 +51,8 @@ function updateOrderDetails(data) {
 
     var orderDetailsHtml = `
     <div class="card p-10 order-head">
-       <div class="col-12 row ">
-           <div class="col-6">
+       <div class="col-12 row orderD ">
+           <div class="col-6 ">
              <h2 class="mb-2">Order Details: ${orderId}</h2>
              <p class="mb-2"><strong> Payment Date :</strong> ${formattedDate}</p>
              <div class="d-flex">
@@ -72,7 +72,7 @@ function updateOrderDetails(data) {
     </div>
 
     <div class="card p-5 order-head ">
-       <div class="d-flex">
+       <div class="d-flex orderD">
          <div class="col-6 " id="billingAddress" >
          </div>
 

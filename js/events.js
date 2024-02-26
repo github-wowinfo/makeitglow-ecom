@@ -111,7 +111,6 @@ $(document).ready(function () {
                     <div id="collapse${event.eventEntryId}" class="accordion-collapse collapse"
                         aria-labelledby="heading${event.id}" data-bs-parent="#accordionFaq">
                         <div class="accordion-body">
-                            <!-- Content for the accordion item goes here -->
                         </div>
                     </div>
                 </div>
@@ -119,9 +118,18 @@ $(document).ready(function () {
         });
 
         $('#tab-content').html(accordionHTML);
+        // lightGallery(document.getElementById('lightgallery'));
+        // $('#container-fluid').css('display', 'none')
+        var $lightGallery = $('#lightgallery');
+    
+        $lightGallery.lightGallery();
+    
+        $lightGallery.on('onAfterOpen.lg', function() {
+            $('#headers').css('opacity', '0');
+        });
+
 
         // Initialize LightGallery
-        lightGallery(document.getElementById('lightgallery'));
     }
     getEventYears();
 });
@@ -144,11 +152,13 @@ function loadEventData(eventEntryId) {
                         </div>
                     </div>
                 `);
-            $(`#collapse${eventEntryId}`).collapse('show');
+            // $(`#collapse${eventEntryId}`).collapse('show');
+            lightGallery(document.getElementById('lightgallery'))
         },
         error: function (error) {
             console.error('Error fetching data:', error);
         }
+        
     });
     // Make API call using eventEntryId
     // fetch('your-api-url/' + eventEntryId)

@@ -34,6 +34,7 @@ function createSwiperSlide(product) {
   if (product === null) {
     return null; // Skip null values
   }
+  console.log('featuressss',product);
 
   var swiperSlide = document.createElement('div');
   swiperSlide.className = 'swiper-slide bg-light';
@@ -45,7 +46,7 @@ function createSwiperSlide(product) {
           <div class="swiper-content">
             <div class="content-info">
               <h1 class="title mb-2" data-swiper-parallax="-20">${product.itemTitle}</h1>
-              <p class="text mb-0" data-swiper-parallax="-40">${product.shrtDescptn}</p>
+              <p class="text mb-0" data-swiper-parallax="-40">${product.shortDescription}</p>
               <div class="swiper-meta-items" data-swiper-parallax="-50">
                 <div class="meta-content">
                   <span class="price-name">Price</span>
@@ -53,7 +54,7 @@ function createSwiperSlide(product) {
                 </div>
               </div>
               <div class="content-btn" data-swiper-parallax="-60">
-                <a class="btn btn-secondary me-xl-3 me-2 btnhover20" href="#" id="addToCartButton" onclick="addToCart(${product.vrntEntryId})">ADD TO CART</a>
+                <a class="btn btn-secondary me-xl-3 me-2 btnhover20" href="#" id="addToCartButton" onclick="addToCart(${product.itmVrntId})">ADD TO CART</a>
                 <a class="btn btn-outline-secondary btnhover20" href="./productDetails.html?Id=${product.itemId}">VIEW DETAILS</a>
               </div>
             </div>
@@ -62,7 +63,7 @@ function createSwiperSlide(product) {
         <div class="col-md-6 col-sm-6">
           <div class="banner-media">
             <div class="img-preview" data-swiper-parallax="-100">
-              <img src="${product.mainImage1}" alt="banner-media">
+              <img src="${product.thumbnail}" alt="banner-media">
             </div>
           </div>
         </div>
@@ -70,7 +71,7 @@ function createSwiperSlide(product) {
     </div>
   </div>
   `;
-  // console.log('m product', product);
+  console.log('itmVrntId', product.itmVrntId);
 
   swiperSlide.innerHTML = contentHTML;
   return swiperSlide;
@@ -96,19 +97,20 @@ $(document).ready(function () {
     success: function (data) {
       $.each(data, function (index, product) {
         if (product !== null) {
+          console.log('trending', product);
           var productCardHtml = `
               <li class="card-container col-6 col-xl-3 col-lg-3 col-md-4 col-sm-6 Begs wow fadeInUp" data-wow-delay="0.1s">
                 <div class="shop-card">
                   <a href='./productDetails.html?Id=${product.itemId}'>
                     <div class="dz-media">
-                      <img src="${product.mainImage1}" alt="${product.itemTitle}">
+                      <img src="${product.thumbnail}" alt="${product.itemTitle}">
                       <div class="shop-meta">
 													<a href="./productDetails.html?Id=${product.itemId}" class="btn btn-secondary btn-icon"
 														data-bs-toggle="modal" class="open-quick-view" data-bs-target="#quickViewModal" onclick="quckview(${product.itemId})" >
 														<i class="fa-solid fa-eye d-md-none d-block"></i>
 														<span class="d-md-block d-none">Quick View</span>
 													</a>
-													<div class="btn btn-primary meta-icon dz-wishicon"  id="whislist" onclick="addToWishlist(${product.vrntEntryId})">
+													<div class="btn btn-primary meta-icon dz-wishicon"  id="whislist" onclick="addToWishlist(${product.itmVrntId})">
 														<svg class="dz-heart-fill" width="14" height="12"
 															viewBox="0 0 14 12" fill="none"
 															xmlns="http://www.w3.org/2000/svg">
@@ -126,7 +128,7 @@ $(document).ready(function () {
 															</path>
 														</svg>
 													</div>
-													<div class="btn btn-primary meta-icon dz-carticon" id="addToCartButton" onclick="addToCart(${product.vrntEntryId})">
+													<div class="btn btn-primary meta-icon dz-carticon" id="addToCartButton" onclick="addToCart(${product.itmVrntId})">
 														<svg class="dz-cart-check" width="15" height="15"
 															viewBox="0 0 15 15" fill="none"z
 															xmlns="http://www.w3.org/2000/svg">
@@ -280,6 +282,7 @@ function addToCart(id) {
     "prdctID": id,
     "qty": quantity
   };
+  // console.log('id',id);
 
   if (token === null) {
     window.location.href = "./login.html";
