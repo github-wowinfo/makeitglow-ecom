@@ -50,7 +50,7 @@ function createSwiperSlide(product) {
               <div class="swiper-meta-items" data-swiper-parallax="-50">
                 <div class="meta-content">
                   <span class="price-name">Price</span>
-                  <span class="price-num">${product.sellingPrice} AED<del style="color: red;">${product.mrp} AED</del></span>
+                  <span class="price-num">${product.mrp !== product.sellingPrice ? `<del>${product.mrp} AED</del>` : ''} ${product.sellingPrice} AED</span>
                 </div>
               </div>
               <div class="content-btn" data-swiper-parallax="-60">
