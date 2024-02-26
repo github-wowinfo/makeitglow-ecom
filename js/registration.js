@@ -64,8 +64,8 @@ document.getElementById("postButton").addEventListener("click", function (e) {
   const Passwords = document.getElementById("password").value;
   const PhoneNum = document.getElementById("phone").value;
   // const Addresses = document.getElementById("address").value;
-  const Countries = document.getElementById("locationSelected").value;
-  const RefId = document.getElementById("refrenceSelect").value;
+  // const Countries = document.getElementById("locationSelected").value;
+  // const RefId = document.getElementById("refrenceSelect").value;
   // Validate first name  (not empty)
   document.querySelectorAll('.error').forEach(element => {
     element.textContent = '';
@@ -123,10 +123,10 @@ document.getElementById("postButton").addEventListener("click", function (e) {
     "firstName": FirstName,
     "lastName": LastName,
     "phoneNumber": PhoneNum,
-    "addressLine1": '',
+    // "addressLine1": '',
     // "addressLine2": "",
-    "lctnId": Countries,
-    "refId": RefId
+    // "lctnId": Countries,
+    // "refId": RefId
 
     // Add any other required fields for user registration
   };
