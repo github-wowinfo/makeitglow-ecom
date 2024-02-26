@@ -70,7 +70,7 @@ $.ajax({
                     <h5 class="title"><a href="./giftDetails.html?Id=${product.gftItmEntryId}">${product.itemName}</a></h5>
                     
                     <h6 class="price">
-                        <del>${product.mrp} AED</del>
+                        ${product.mrp !== product.sellingPrice ? `<del>${product.mrp} AED</del>` : ''}
                         ${product.sellingPrice} AED
                     </h6>
                 </div>

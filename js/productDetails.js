@@ -109,7 +109,7 @@ $(document).ready(function () {
           variantId = data.vrnts[0].vrntEntryId;
           pricingHTML += `
         <span class="price-num Tab-contents" id="tab${index + 1}" ${index + 1 === initialTab ? '' : 'style="display: none;"'}>
-            ${variant.sellingPrice} AED <del>${variant.mrp} AED</del>
+        ${variant.mrp !== variant.sellingPrice ? `<del>${variant.mrp} AED</del>` : ''} ${variant.sellingPrice} AED 
         </span>`;
           $("input[name='demo_vertical2']").on('change', function () {
             // Get the selected quantity
@@ -245,7 +245,7 @@ document.getElementById("cart").addEventListener("click", function (e) {
 document.getElementById("whislist").addEventListener("click", function (e) {
   e.preventDefault();
   var obj = {
-      "itemType": 1,
+    "itemType": 1,
     "prdctID": variantId,
 
   }

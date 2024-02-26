@@ -304,12 +304,13 @@ $.ajax({
     $('#longDescription').append(data.longDescription)
     $('#title1').append(data.itemName)
     $('#categoryName').append(data.categoryName)
-    
-    data.giftIncludedItems.forEach(function(item) {
+
+    data.giftIncludedItems.forEach(function (item) {
       $('#includes').append(item.includedItemName);
-  });
+    });
     var price = `<span class="price-num">
-        ${data.sellingPrice} AED <del>${data.mrp} AED</del>
+        ${data.mrp !== data.sellingPrice ? `<del>${data.mrp} AED</del>` : ''}
+                        ${data.sellingPrice} AED
       </span>`
     $('#pricing').append(price)
 
