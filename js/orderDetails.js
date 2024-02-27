@@ -29,7 +29,7 @@ function updateOrderDetails(data) {
     var timestampStr = data.ordrPymnt.paymentCreationTime;
     var timestamp = new Date(timestampStr);
     var formattedDate = formatDate(timestamp);
-    var Tamount = data.ordrPymnt.txnAmount / 100;
+    var Tamount = data.totalAmount / 100;
 
     function formatDate(date) {
         // Array of month names
@@ -54,19 +54,19 @@ function updateOrderDetails(data) {
        <div class="col-12 row orderD ">
            <div class="col-6 ">
              <h2 class="mb-2">Order Details: ${orderId}</h2>
-             <p class="mb-2"><strong> Payment Date :</strong> ${formattedDate}</p>
+             <p class="mb-2"><strong> Payment Date :</strong> ${formattedDate}</p> 
              <div class="d-flex">
                 <h6 class="me-3">Status :</h6>
                 <p class="text-green"><strong>${getStatusText(data.status)}</strong></p>
              </div>
+             <div class="d-flex">
+                <h6 class="me-3">Amount :</h6>
+                <p class="text-green"><strong>${Tamount} AED</strong></p>
+             </div>
            </div>
           
            <div class="col-6" id="payment">
-             <h2 class="mb-2">Payment Details</h2>
-              <p class="mb-2"><strong> Order Id :</strong> ${data.ordrPymnt.refNo}</p>
-               <p class="mb-2"><strong> Transaction Amount :</strong> ${Tamount}</p>
-               <p class="mb-2"><strong> Transaction Mode :</strong> ${getTransactionMode(data.ordrPymnt.txnMode)}</p>
-              <h6 class="me-2">${data.ordrPymnt.paymentStatusMsg}</h6>
+             
           </div>
       </div>
     </div>
@@ -84,6 +84,16 @@ function updateOrderDetails(data) {
   
     `;
     $('#orderDetails').html(orderDetailsHtml);
+    if (data.ordrPymnt !== null) {
+        var payment = `
+    <h2 class="mb-2">Payment Details</h2>
+                  <p class="mb-2"><strong> Order Id :</strong> ${data.ordrPymnt.refNo}</p>
+                   <p class="mb-2"><strong> Transaction Amount :</strong> ${Tamount} AED</p>
+                   <p class="mb-2"><strong> Transaction Mode :</strong> ${getTransactionMode(data.ordrPymnt.txnMode)}</p>
+                  <h6 class="me-2">${data.ordrPymnt.paymentStatusMsg}</h6>
+    `
+        $('#payment').html(payment);
+    }
 
     function getStatusText(statusCode) {
         switch (statusCode) {

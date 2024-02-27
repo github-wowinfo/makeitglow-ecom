@@ -99,7 +99,7 @@ function getCart() {
                 <div class="cart-content">
                   <h6 class="title"><a href="product-thumbnail.html">${cartItem.itemTitle}</a></h6>
                   <div class="d-flex align-items-center">
-                    <h6 class="dz-price text-primary mb-0">${cartItem.mrp}AED</h6>
+                    <h6 class="dz-price text-primary mb-0">${cartItem.sellingPrice}AED</h6>
                     <div class="btn-quantity light quantity-sm ms-5">
                        <div class="input-group bootstrap-touchspin">
                            <span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span>
@@ -142,7 +142,7 @@ function calculateTotalAmount(cartItem) {
   var totalAmount = 0;
   cartItem.forEach(function (cartItem) {
     // totalAmount += cartItem.vrnts[0].sellingPrice.mrp* cartItem.quantity;
-    totalAmount += cartItem.mrp * cartItem.quantity;
+    totalAmount += cartItem.sellingPrice * cartItem.quantity;
 
   });
   return totalAmount;
@@ -192,7 +192,7 @@ function getWhishlist() {
       // $('#whislistCount').append(cartData.length)
 
       // Update cart items
-      
+
       cartData.forEach(function (whishlistItem) {
         var cartItemHTML = `
                    <li>
@@ -204,7 +204,7 @@ function getWhishlist() {
                               <h6 class="title"><a href="product-thumbnail.html">${whishlistItem.itemTitle}</a></h6>
                               <div class="d-flex align-items-center">
                          
-                                <h6 class="dz-price text-primary mb-0">${whishlistItem.mrp}AED</h6>
+                                <h6 class="dz-price text-primary mb-0">${whishlistItem.sellingPrice}AED</h6>
                                 
                                 <a href="/" id="cart" class="btn btn-secondary p-1 ms-4 rounded" id="addToCartButton" onclick="addToCart(${whishlistItem.itmVrntId})">ADD TO CART</a>
                                 </div>
@@ -233,7 +233,7 @@ function calculateSubtotal1(cartData) {
 
   cartData.forEach(function (amount) {
     // Assuming "mrp" is the key for the Manufacturer's Recommended Price
-    var mrp = parseFloat(amount.mrp * amount.qty);
+    var mrp = parseFloat(amount.sellingPrice * amount.qty);
     subtotal += mrp;
   });
 

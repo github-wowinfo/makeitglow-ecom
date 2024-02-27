@@ -94,7 +94,7 @@ function getCartCheckout() {
         <h6 class="title mb-0">${cartItem.itemTitle}</h6>
         <p>Qty: ${cartItem.qty}</p>
         </div>
-        <span class="price">${cartItem.mrp}</span>
+        <span class="price">${cartItem.sellingPrice}</span>
       </div>
 									</div>
               `;
@@ -118,7 +118,7 @@ function calculateSubtotal(cartData) {
 
   cartData.forEach(function (amount) {
     // Assuming "mrp" is the key for the Manufacturer's Recommended Price
-    var mrp = parseFloat(amount.mrp * amount.qty);
+    var mrp = parseFloat(amount.sellingPrice * amount.qty);
     subtotal += mrp;
   });
 
