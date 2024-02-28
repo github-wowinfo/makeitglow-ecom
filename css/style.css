@@ -49017,7 +49017,7 @@ a {
   }
 
   .mo-left .header-nav .logo-header {
-    /* display: block; */
+    display: block;
     float: none;
     height: auto !important;
     max-width: 100%;
