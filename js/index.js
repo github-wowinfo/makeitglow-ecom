@@ -34,7 +34,7 @@ function createSwiperSlide(product) {
   if (product === null) {
     return null; // Skip null values
   }
-  console.log('featuressss',product);
+  console.log('featuressss', product);
 
   var swiperSlide = document.createElement('div');
   swiperSlide.className = 'swiper-slide bg-light';
@@ -50,7 +50,7 @@ function createSwiperSlide(product) {
               <div class="swiper-meta-items" data-swiper-parallax="-50">
                 <div class="meta-content">
                   <span class="price-name">Price</span>
-                  <span class="price-num">${product.sellingPrice} AED<del style="color: red;">${product.mrp} AED</del></span>
+                  <span class="price-num">${product.mrp !== product.sellingPrice ? `<del>${product.mrp} AED</del>` : ''} ${product.sellingPrice} AED</span>
                 </div>
               </div>
               <div class="content-btn" data-swiper-parallax="-60">
@@ -161,7 +161,7 @@ $(document).ready(function () {
                       <!-- ... (star rating code) ... -->
                     </ul>
                     <h6 class="price">
-                      <del>${product.mrp} AED</del>
+                    ${product.mrp !== product.sellingPrice ? `<del>${product.mrp} AED</del>` : ''}
                       ${product.sellingPrice} AED
                     </h6>
                   </div>
@@ -172,7 +172,7 @@ $(document).ready(function () {
               </li>
             `;
         }
-  //  console.log('t pro', product);
+        //  console.log('t pro', product);
         // Append the product card HTML to the masonry layout
         $('#masonry').append(productCardHtml);
       });
@@ -229,7 +229,7 @@ function quckview(id) {
         <div class="meta-content m-b20 d-flex align-items-end">
           <div class="me-3">
             <span class="form-label">Price</span>
-            <span class="price-num">${product.vrnts[0].sellingPrice}AED <del> ${product.vrnts[0].mrp}AED</del></span>
+            <span class="price-num">${product.vrnts[0].mrp !== product.vrnts[0].sellingPrice ? `<del>${product.vrnts[0].mrp} AED</del>` : ''} ${product.vrnts[0].sellingPrice}AED </span>
           </div>
          
         </div>

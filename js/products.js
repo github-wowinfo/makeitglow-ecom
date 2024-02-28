@@ -1,27 +1,27 @@
 // Function to get query parameter by name
 function getQueryParam(name) {
-  const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get(name);
+	const urlParams = new URLSearchParams(window.location.search);
+	return urlParams.get(name);
 }
 
 // Get category ID from the URL
 const catId = getQueryParam("catId");
 
 $(document).ready(function () {
-  // Fetch data from the API
-  $.ajax({
-    url: `${SETTINGS.backendUrl}/Items/GetItemByCategoryId?id=${catId}`,
-    method: "GET",
-    dataType: "json",
-    success: function (data) {
-      // Iterate over the products in the response and append them to the masonry layout
-      $.each(data, function (index, product) {
-        // Generate HTML for the product card with actual data
-        var variantMrp = product.vrnts.length > 0 ? product.vrnts[0].mrp : 0;
-        var sellingPrice =
-          product.vrnts.length > 0 ? product.vrnts[0].sellingPrice : 0;
+	// Fetch data from the API
+	$.ajax({
+		url: `${SETTINGS.backendUrl}/Items/GetItemByCategoryId?id=${catId}`,
+		method: "GET",
+		dataType: "json",
+		success: function (data) {
+			// Iterate over the products in the response and append them to the masonry layout
+			$.each(data, function (index, product) {
+				// Generate HTML for the product card with actual data
+				var variantMrp = product.vrnts.length > 0 ? product.vrnts[0].mrp : 0;
+				var sellingPrice =
+					product.vrnts.length > 0 ? product.vrnts[0].sellingPrice : 0;
 
-        var productCardHtml = `
+				var productCardHtml = `
           <div class="col-6 col-xl-3 col-lg-3 col-md-4 col-sm-6 m-md-b15 m-b30 grid-5">
 							<div class="shop-card">
 								<div class="dz-media">
@@ -77,7 +77,7 @@ $(document).ready(function () {
 									<h5 class="title"><a href="./productDetails.html?Id=${product.itemEntryId}">${product.itemName}</a></h5>
 									
 									<h6 class="price">
-										<del>${variantMrp} AED</del>
+									${variantMrp !== sellingPrice ? `<del>${variantMrp} AED</del>` : ''}
 										${sellingPrice} AED
 									</h6>
 								</div>
@@ -86,31 +86,31 @@ $(document).ready(function () {
 						</div>
           `;
 
-        // Append the product card HTML to the masonry layout
-        $("#productList").append(productCardHtml);
-      });
+				// Append the product card HTML to the masonry layout
+				$("#productList").append(productCardHtml);
+			});
 
-      // Initialize or update your Masonry layout here (if needed)
-      // ...
+			// Initialize or update your Masonry layout here (if needed)
+			// ...
 
-      // Optionally, apply any other logic or styles needed after appending the cards
-      // ...
-    },
-    error: function (error) {
-      console.error("Error fetching data:", error);
-    },
-  });
+			// Optionally, apply any other logic or styles needed after appending the cards
+			// ...
+		},
+		error: function (error) {
+			console.error("Error fetching data:", error);
+		},
+	});
 });
 
 function quckview(id) {
-  $("#modalBody").empty();
-  // Make an AJAX request to fetch product data
-  $.ajax({
-    url: `${SETTINGS.backendUrl}/Items/GetItemById?id=${id}`,
-    method: "GET",
-    dataType: "json",
-    success: function (product) {
-      var modalData = `<div class="row g-xl-4 g-3">
+	$("#modalBody").empty();
+	// Make an AJAX request to fetch product data
+	$.ajax({
+		url: `${SETTINGS.backendUrl}/Items/GetItemById?id=${id}`,
+		method: "GET",
+		dataType: "json",
+		success: function (product) {
+			var modalData = `<div class="row g-xl-4 g-3">
 	<div class="col-xl-6 col-md-6">
 	  <div class="dz-product-detail mb-0">
 		<div class="swiper-btn-center-lr">
@@ -147,7 +147,7 @@ function quckview(id) {
 		  <div class="meta-content m-b20 d-flex align-items-end">
 			<div class="me-3">
 			  <span class="form-label">Price</span>
-			  <span class="price-num">${product.vrnts[0].sellingPrice}AED <del> ${product.vrnts[0].mrp}AED</del></span>
+			  <span class="price-num">${product.vrnts[0].mrp !== product.vrnts[0].sellingPrice ? `<del>${product.vrnts[0].mrp} AED</del>` : ''} ${product.vrnts[0].sellingPrice}AED </span>
 			</div>
 		   
 		  </div>
@@ -180,85 +180,85 @@ function quckview(id) {
 	  </div>
 	</div>
   </div>`;
-      $("#modalBody").append(modalData);
-    },
-    error: function (error) {
-      console.error("Error fetching product data:", error);
-    },
-  });
+			$("#modalBody").append(modalData);
+		},
+		error: function (error) {
+			console.error("Error fetching product data:", error);
+		},
+	});
 }
 
 // whish list api....
 
 // Define the function to handle adding an item to the cart
 function addToCart(id) {
-  // Assuming variantId and quantity are defined somewhere in your code
-  // var variantId = '';
-  var quantity = "1";
+	// Assuming variantId and quantity are defined somewhere in your code
+	// var variantId = '';
+	var quantity = "1";
 
-  var obj = {
-    itemType: 1,
-    prdctID: id,
-    qty: quantity,
-  };
+	var obj = {
+		itemType: 1,
+		prdctID: id,
+		qty: quantity,
+	};
 
-  if (token === null) {
-    window.location.href = "./login.html";
-  } else {
-    $.ajax({
-      url: `${SETTINGS.backendUrl}/Ecom/AddToCart`,
-      type: "POST",
-      headers: {
-        Authorization: "Bearer " + token,
-        "Content-Type": "application/json",
-        // Add other headers as needed
-      },
-      dataType: "json",
-      contentType: "application/json",
-      data: JSON.stringify(obj),
-      success: function (response) {
-        toastr.success("Item Added to Cart");
-        getCart();
-      },
-      error: function (error) {
-        console.log("Sign in Error:", error);
-        toastr.error(error.responseJSON.message);
-      },
-    });
-  }
+	if (token === null) {
+		window.location.href = "./login.html";
+	} else {
+		$.ajax({
+			url: `${SETTINGS.backendUrl}/Ecom/AddToCart`,
+			type: "POST",
+			headers: {
+				Authorization: "Bearer " + token,
+				"Content-Type": "application/json",
+				// Add other headers as needed
+			},
+			dataType: "json",
+			contentType: "application/json",
+			data: JSON.stringify(obj),
+			success: function (response) {
+				toastr.success("Item Added to Cart");
+				getCart();
+			},
+			error: function (error) {
+				console.log("Sign in Error:", error);
+				toastr.error(error.responseJSON.message);
+			},
+		});
+	}
 }
 
 function addToWishlist(id) {
-  var quantity = "1";
+	var quantity = "1";
 
-  var obj = {
-    itemType: 1,
-    prdctID: id,
-    qty: quantity,
-  };
+	var obj = {
+		itemType: 1,
+		prdctID: id,
+		qty: quantity,
+	};
 
-  if (token === null) {
-    window.location.href = "./login.html";
-  } else {
-    $.ajax({
-      url: `${SETTINGS.backendUrl}/Ecom/AddToWishlist`,
-      type: "POST",
-      headers: {
-        Authorization: "Bearer " + token,
-        "Content-Type": "application/json",
-        // Add other headers as needed
-      },
-      dataType: "json", // Change the datatype according to your response type
-      contentType: "application/json", // Set the Content-Type
-      data: JSON.stringify(obj),
+	if (token === null) {
+		window.location.href = "./login.html";
+	} else {
+		$.ajax({
+			url: `${SETTINGS.backendUrl}/Ecom/AddToWishlist`,
+			type: "POST",
+			headers: {
+				Authorization: "Bearer " + token,
+				"Content-Type": "application/json",
+				// Add other headers as needed
+			},
+			dataType: "json", // Change the datatype according to your response type
+			contentType: "application/json", // Set the Content-Type
+			data: JSON.stringify(obj),
 
-      success: function (response) {
-        toastr.success("Item Added to Wishlist");
-      },
-      error: function (error) {
-        console.log("Sign in Error:", error);
-        toastr.error(error);
-      },
-    });
-  }
+			success: function (response) {
+				toastr.success("Item Added to Wishlist");
+			},
+			error: function (error) {
+				console.log("Sign in Error:", error);
+				toastr.error(error);
+			},
+		});
+	}
 }

@@ -13,40 +13,40 @@
             // Add other headers as needed
         },
         success: function (data) {
-            
+            console.log('data',data);
             if (data && data.length > 0) {
                 data.forEach(order => {
                     // Build the table headers outside the loop
-                    var amount = order.paidAmount / 100;
-                    var timestampStr = order.ordrPymnt.paymentCreationTime;
-                    var timestamp = new Date(timestampStr);
-                    var formattedDate = formatDate(timestamp);
+                    var amount = order.totalAmount / 100;
+                    // var timestampStr = order.ordrPymnt.paymentCreationTime;
+                    // var timestamp = new Date(timestampStr);
+                    // var formattedDate = formatDate(timestamp);
 
-                    function formatDate(order) {
-                        // Array of month names
-                        var monthNames = [
-                            "January", "February", "March",
-                            "April", "May", "June", "July",
-                            "August", "September", "October",
-                            "November", "December"
-                        ];
-                        // Extract day, month, and year
-                        var day = order.getDate();
-                        var monthIndex = order.getMonth();
-                        var year = order.getFullYear();
-                        // Format the date string
-                        var formattedDate = day + " " + monthNames[monthIndex] + " " + year;
+                    // function formatDate(order) {
+                    //     // Array of month names
+                    //     var monthNames = [
+                    //         "January", "February", "March",
+                    //         "April", "May", "June", "July",
+                    //         "August", "September", "October",
+                    //         "November", "December"
+                    //     ];
+                    //     // Extract day, month, and year
+                    //     var day = order.getDate();
+                    //     var monthIndex = order.getMonth();
+                    //     var year = order.getFullYear();
+                    //     // Format the date string
+                    //     var formattedDate = day + " " + monthNames[monthIndex] + " " + year;
 
-                        return formattedDate;
-                    }
-
+                    //     return formattedDate;
+                    // }
+{/* <p class="  "><strong class="text-darkgreen"> ORDER Placed :  </strong> ${formattedDate}</p> */}
                     const orderHtml = `
                         <div class="card myorder rounded-1" style="border: 1px solid gainsboro;">
                             <div class="rounded-1" style="border: 1px solid gainsboro;">
                                 <div class="d-flex orderp rounded-1 " style="background-color: rgb(245, 247, 248); justify-content: space-between; border: none;">
                                     <div class="d-flex justify-content-center">
                                         <div class=" detail mt-3">
-                                            <p class="  "><strong class="text-darkgreen"> ORDER Placed :  </strong> ${formattedDate}</p>
+                                            
                                         </div>
                                         
                                     </div>
