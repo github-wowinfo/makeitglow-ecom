@@ -89,7 +89,7 @@ function initSwiper() {
 fetchDataAndPopulateSwiper();
 
 $(document).ready(function () {
-  // Fetch data from the API
+  
   $.ajax({
     url: 'https://mig-dev.lifelinemegacorp.com/api/Ecom/GetAllTrendingProducts',
     method: 'GET',
@@ -98,6 +98,9 @@ $(document).ready(function () {
       $.each(data, function (index, product) {
         if (product !== null) {
           console.log('trending', product);
+          var discountPercentage = ((product.mrp - product.sellingPrice) / product.mrp) * 100;
+          console.log('trending', discountPercentage);
+
           var productCardHtml = `
               <li class="card-container col-6 col-xl-3 col-lg-3 col-md-4 col-sm-6 Begs wow fadeInUp" data-wow-delay="0.1s">
                 <div class="shop-card">
@@ -161,18 +164,22 @@ $(document).ready(function () {
                       <!-- ... (star rating code) ... -->
                     </ul>
                     <h6 class="price">
+                    
                     ${product.mrp !== product.sellingPrice ? `<del>${product.mrp} AED</del>` : ''}
                       ${product.sellingPrice} AED
                     </h6>
                   </div>
                   <div class="product-tag">
-                    <!-- ... (product tags or badges) ... -->
+                  ${product.mrp !== product.sellingPrice ? `
+				          <span class="badge badge-secondary p-2">SALE</span>
+                  <span class="badge badge-primary p-2">(${discountPercentage.toFixed(2)}% off)</span>` : ''}
                   </div>
-                </div>
-              </li>
-            `;
+                  </div>
+                  </div>
+                  </li>
+                  `;
         }
-        //  console.log('t pro', product);
+         console.log('t pro', product);
         // Append the product card HTML to the masonry layout
         $('#masonry').append(productCardHtml);
       });

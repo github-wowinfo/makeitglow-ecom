@@ -21,6 +21,9 @@ $(document).ready(function () {
 				var sellingPrice =
 					product.vrnts.length > 0 ? product.vrnts[0].sellingPrice : 0;
 
+					var discountPercentage = ((product.vrnts[0].mrp - product.vrnts[0].sellingPrice) / product.vrnts[0].mrp) * 100;
+					console.log('ttttt',data);
+
 				var productCardHtml = `
           <div class="col-6 col-xl-3 col-lg-3 col-md-4 col-sm-6 m-md-b15 m-b30 grid-5">
 							<div class="shop-card">
@@ -81,6 +84,11 @@ $(document).ready(function () {
 										${sellingPrice} AED
 									</h6>
 								</div>
+								<div class="product-tag">
+                  ${product.vrnts[0].mrp !== product.vrnts[0].sellingPrice ? `
+				  <span class="badge badge-secondary p-2">SALE</span>
+				  <span class="badge badge-primary p-2">${discountPercentage.toFixed(2)} % OFF</span>` : ''}
+                  </div>
 
 							</div>
 						</div>

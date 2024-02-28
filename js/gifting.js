@@ -9,7 +9,10 @@ $.ajax({
   success: function (data) {
     // console.log('data', data);
     $.each(data, function (index, product) {
-      // console.log('product', product);
+      console.log('product', product);
+      var discountPercentage = ((product.mrp - product.sellingPrice) / product.mrp) * 100;
+      console.log('product', discountPercentage);
+
       // var variantMrp = (product.vrnts.length > 0) ? product.vrnts[0].mrp : 0;
       // var sellingPrice = (product.vrnts.length > 0) ? product.vrnts[0].sellingPrice : 0;
 
@@ -74,6 +77,11 @@ $.ajax({
                         ${product.sellingPrice} AED
                     </h6>
                 </div>
+                <div class="product-tag">
+                  ${product.mrp !== product.sellingPrice ? `
+				          <span class="badge badge-secondary p-2">SALE</span>
+                  <span class="badge badge-primary p-2">(${discountPercentage.toFixed(2)}% off)</span>` : ''}
+                  </div>
 
             </div>
         </div>
