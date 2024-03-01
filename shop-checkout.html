@@ -1030,6 +1030,7 @@
 						</div>
 					</div>
 				</div>
+				<!-- <div class="personalinfo"></div> -->
 			</div>
 
 		</div>
@@ -1118,6 +1119,40 @@
 
 		<button class="scroltop" type="button"><i class="fas fa-arrow-up"></i></button>
 
+		<!-- <div class="modal fade" id="profileEdited" tabindex="-1" role="dialog" aria-labelledby="CompleteProfileModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="CompleteProfileModalLabel">Complete Profile Data</h5>
+						 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+					</button>
+					</div>
+					<div class="modal-body">
+						Your profile is the key to unlocking a tailored user experience. Help us help you by completing your profile data for smoother processes and meaningful connections.
+					</div>
+					<div class="modal-footer">
+					<button type="button" class="btn btn-secondary rounded-1" id="confirmationdone" onclick="redirectToAnotherPage() ">Complete Profile</button>
+					</div>
+				</div>
+			</div>
+		</div> -->
+		
+		<div class="modal fade" id="profileEdited" tabindex="-1" role="dialog" aria-labelledby="CompleteProfileModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="CompleteProfileModalLabel">Complete Profile Data</h5>
+					</div>
+					<div class="modal-body">
+						Your profile is the key to unlocking a tailored user experience. Help us help you by completing your profile data for smoother processes and meaningful connections.
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary rounded-1" id="confirmationdone" onclick="redirectToAnotherPage()">Complete Profile</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 
 	</div>
 
@@ -1147,9 +1182,22 @@
 	<script src="js/dz.carousel.js"></script><!-- DZ CAROUSEL JS -->
 	<script src="js/dz.ajax.js"></script><!-- AJAX -->
 	<script src="js/custom.js"></script><!-- CUSTOM JS -->
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+	<script>
+		$(document).ready(function () {
+			$('#profileEdited').on('click', function (e) {
+            if (e.target !== this) {
+                return; // Do nothing if the click is not directly on the modal background
+            }
+        });
+    });
+		function redirectToAnotherPage() {
+        window.location.href = './account.html';
+    }
+  </script>
 
 </body>
-
-<!-- Mirrored from mooncart.dexignzone.com/xhtml/shop-checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Dec 2023 12:28:03 GMT -->
 
 </html>

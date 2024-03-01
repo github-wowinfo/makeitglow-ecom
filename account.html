@@ -791,7 +791,7 @@
 
 		<div class="modal quick-view-modal fade" id="billingModal" tabindex="-1" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
+				<div class="modal-content rounded-1">
 					<div class="modal-header col-6">
 						<h5 class="modal-title" id="billingModalLabel">Add Billing Info</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
@@ -848,7 +848,7 @@
 							<!-- Add more fields as needed -->
 
 
-							<button type="submit" class="btn btn-primary mt-5" id="saveinfo">Save Billing Info</button>
+							<button type="submit" class="btn btn-primary mt-5 rounded-1" id="saveinfo">Save Billing Info</button>
 						</form>
 					</div>
 				</div>
@@ -857,7 +857,7 @@
 
 		<div class="modal quick-view-modal fade" id="shippingModal" tabindex="-1" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
+				<div class="modal-content rounded-1">
 					<div class="modal-header">
 						<h5 class="modal-title" id="shippingModalLabel">Add shipping Info</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
@@ -920,7 +920,7 @@
 							<!-- Add more fields as needed -->
 
 
-							<button type="submit" class="btn btn-primary mt-5" id="saveshippinginfo">Save Shipping
+							<button type="submit" class="btn btn-primary mt-5 rounded-1" id="saveshippinginfo">Save Shipping
 								Info</button>
 						</form>
 					</div>
@@ -928,9 +928,9 @@
 			</div>
 		</div>
 
-		<div class="modal quick-view-modal fade" id="profileEdit" tabindex="-1" aria-hidden="true">
+		<div class="modal quick-view-modal fade " id="profileEdit" tabindex="-1" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
+				<div class="modal-content rounded-1 " id="profiledt">
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 						<i class="icon feather icon-x"></i>
 					</button>
@@ -969,7 +969,7 @@
 								<div class="col-md-4 mt-3">
 									<div class="form-group">
 										<label for="companyName">Phone Number</label>
-										<input type="text" class="form-control" id="phoneNumber"
+										<input type="text" class="form-control" id="phoneNumber" maxlength="10"
 											placeholder="Phone Number" required>
 									</div>
 								</div>
@@ -992,7 +992,7 @@
 							<!-- Add more fields as needed -->
 
 
-							<button type="submit" class="btn btn-primary mt-5" id="updateProfile">Update
+							<button type="submit" class="btn btn-primary mt-5 rounded-1" id="updateProfile">Update
 								Profile</button>
 						</form>
 					</div>
@@ -1002,7 +1002,7 @@
 
 		<div class="modal quick-view-modal fade" id="EditBilling" tabindex="-1" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
+				<div class="modal-content rounded-1">
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 						<i class="icon feather icon-x"></i>
 					</button>
@@ -1068,7 +1068,7 @@
 
 		<div class="modal quick-view-modal fade" id="EditShipping" tabindex="-1" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
+				<div class="modal-content rounded-1">
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 						<i class="icon feather icon-x"></i>
 					</button>
@@ -1131,7 +1131,7 @@
 							<!-- Add more fields as needed -->
 
 
-							<button type="submit" class="btn btn-primary mt-5" id="updateshipping">Update
+							<button type="submit" class="btn btn-primary mt-5 rounded-1" id="updateshipping">Update
 								Billing Address</button>
 						</form>
 					</div>
@@ -1169,6 +1169,100 @@
 	<script src="vendor/lightgallery/dist/plugins/zoom/lg-zoom.min.js"></script>
 	<script src="js/dz.ajax.js"></script><!-- AJAX -->
 	<script src="js/custom.js"></script><!-- CUSTOM JS -->
+	<script>
+		// sessionStorage.setItem('comingFromCheckout', 'true');
+
+//         function openModal() {
+// 			var modal = document.getElementById('profileEdit')
+// 			var modal1 = document.getElementById('profiledt')
+
+//             modal.style.display = 'block';
+// 		    modal.style.opacity = (modal.style.opacity === '1') ? '0' : '1';
+// 			modal.style.backdropFilter = 'brightness(0.5)';
+
+// 			modal1.style.marginTop = '3rem'
+//             modal.style.pointerEvents = (modal.style.pointerEvents === 'none') ? 'auto' : 'none';
+     
+//         }
+ 
+//           document.addEventListener('DOMContentLoaded', function() {
+//             // Open modal on page load
+//             openModal();
+
+// 			if (isDataFilled()) {
+        
+//                  $('#profileEdited').modal('hide');
+				 
+//               }
+//           });
+		  
+// function isDataFilled() {
+    
+//     return (
+//         profileData.firstName !== null ||
+//         profileData.lastName !== null ||
+//         profileData.phoneNumber !== null ||
+//         profileData.lctnId !== null ||
+//         profileData.refID !== null ||
+//         profileData.addressLine1 !== null ||
+//         profileData.addressLine2 !== null
+//     );
+
+// }
+   
+// document.addEventListener('DOMContentLoaded', function() {
+//     openModal();
+
+//     if (isDataFilled()) {
+//         $('#profileEdited').modal('hide');
+//     }
+// 	var updateProfileBtn = document.getElementById('updateProfile');
+//     if (updateProfileBtn) {
+//         updateProfileBtn.addEventListener('click', function () {
+  
+//             closeModal();
+//         }
+// 		);
+//     }
+// });
+
+// function openModal() {
+//     var modal = document.getElementById('profileEdit');
+//     var modal1 = document.getElementById('profiledt');
+
+//     modal.style.display = 'block';
+//     modal.style.opacity = (modal.style.opacity === '1') ? '0' : '1';
+//     modal.style.backdropFilter = 'brightness(0.5)';
+    
+//     modal1.style.marginTop = '3rem';
+//     modal.style.pointerEvents = (modal.style.pointerEvents === 'none') ? 'auto' : 'none';
+// }
+// function closeModal() {
+//     var modal = document.getElementById('profileEdit');
+// 	modal.classList.add('hidden');
+//     // Close the modal
+//     // modal.style.display = 'none';
+//     // // modal.style.opacity = '0';
+//     // modal.style.opacity = (modal.style.opacity === '0') ? '1' : '0';
+
+//     // modal.style.backdropFilter = 'none';
+//     // modal.style.pointerEvents = 'auto';
+// }
+
+// function isDataFilled() {
+//     // Assuming profileData is an object
+//     return (
+//         profileData.firstName !== null &&
+//         profileData.lastName !== null &&
+//         profileData.phoneNumber !== null &&
+//         profileData.lctnId !== null &&
+//         profileData.refID !== null &&
+//         profileData.addressLine1 !== null &&
+//         profileData.addressLine2 !== null
+//     );
+// }
+
+   </script>
 
 </body>
 

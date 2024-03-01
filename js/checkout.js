@@ -40,7 +40,91 @@ else {
     },
   });
 }
-function cartData() {
+function isAnyFieldEmpty() {
+  var fields = ["firstName", "lastName", "locationSelect", "refernceSelect", "phoneNumber", "profileaddress1", "profileaddress2"];
+
+  for (var i = 0; i < fields.length; i++) {
+      var value = $("#" + fields[i]).val();
+      if (!value || value.trim() === "") {
+          return true; // Return true if any field is empty
+      }
+  }
+
+  return false; // Return false if all fields are filled
+}
+
+
+function getProfile() {
+  $.ajax({
+      url: `${SETTINGS.backendUrl}/Auth/GetProfile`,
+      method: 'GET',
+      headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+          // Add other headers as needed
+      },
+      dataType: 'json',
+      success: function (profileData) {
+        console.log('pppp',profileData);
+          if (profileData) {  // Check if profileData is not null
+
+          // var profile = `
+          // <div class="col-md-12">
+          //   <div class="card">
+          //     <div class="card-body" >
+          //                     <div class="mb-3"> <h2>Personal Info</h2></div>
+          //                    <p class="m-1">CUSTOMER ID : <span class="text-black"> ${profileData.uid}</span></p>
+          //                    <p class="m-1"> <span class="text-black "> ${profileData.firstName} ${profileData.lastName}</span></p>
+          //                    <p class="m-1">  <span class="text-black "> ${profileData.phoneNumber}</span></p>
+          //                    <p class="m-1"> <span class="text-black "> ${profileData.email}</span></p>
+          //                    <p class="m-1"> <span class="text-black "> ${profileData.location}</span></p>
+          //                    <p class="m-1">  <span class="text-black "> ${profileData.addressLine1}</span></p>
+          //                    <p class="m-1 ">  <span class="text-black "> ${profileData.addressLine2}</span></p>
+          //                    <a href="javascript:void(0);" 
+          //                    data-bs-toggle="modal" class="open-quick-view shippingBtn  btn btn-secondary btnhover text-uppercase rounded-1 mt-2 me-2 " data-bs-target="#profileEdit">
+          //                    Edit
+          //                    </a>
+          //                    <a href="./changepass.html" 
+          //                     data-bs-toggle="modal" class="btn btn-secondary shippingBtn btnhover text-uppercase mt-2 rounded-1 "    >
+          //                     Change Password</a>
+          //                     </div>
+          //               </div>
+          //                  </div>`;
+
+          // // Append the item to the cart list
+          // $('#personalinfo').append(profile);
+
+          $('#firstName').val(profileData.firstName)
+          $('#lastName').val(profileData.lastName)
+          $('#phoneNumber').val(profileData.phoneNumber)
+          $('#profileaddress1').val(profileData.addressLine1)
+          $('#profileaddress2').val(profileData.addressLine2)
+
+            // Check if any of the form fields is empty
+            console.log("Profile Data:", profileData.addressLine1);
+
+          if (profileData.firstName === null|| profileData.lastName === null|| profileData.phoneNumber === null|| profileData.lctnId === null|| profileData.refID === null|| profileData.addressLine1 === null|| profileData.addressLine2 === null) {
+              console.log("Condition is true");
+              $('#profileEdited').modal('show');
+              
+          } else {
+              console.log("Condition is false");
+              $('#profileEdited').modal('hide');
+          }
+
+
+          // populateDropdown(`${SETTINGS.backendUrl}/Masters/GetAllLocations`, '#countrySelect', profileData.lctnId);
+          populateDropdown(`${SETTINGS.backendUrl}/Masters/GetAllLocations`, '#locationSelect', profileData.lctnId);
+          populateReferenceDropdown(`${SETTINGS.backendUrl}/Masters/GetAllReferences`, '#refernceSelect', profileData.refID);
+      } else {
+          // If data is null, hide the place or take appropriate action
+          // $('#profileEdited').modal('hide');
+      }
+  },
+          error: function (error) {
+          console.error('Error fetching cart data:', error);
+      }
+  });
 
 }
 
@@ -270,7 +354,6 @@ function getLocation() {
 
 shippingId = document.getElementById("shippingAddress").value;
 
-
 document.getElementById("saveshippinginfo").addEventListener("click", function (e) {
   e.preventDefault()
   // function addshippingAddress() {
@@ -451,8 +534,11 @@ function showErrorModal(title, message) {
 }
 
 $(document).ready(function () {
+  getProfile()
   getCartCheckout()
   getshippinginfo()
+  // openProfileEditModal();
   getLocation()
   updateCheckoutView();
+ 
 });

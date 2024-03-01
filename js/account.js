@@ -60,6 +60,8 @@ function getProfile() {
         },
         dataType: 'json',
         success: function (profileData) {
+            if (profileData) {  // Check if profileData is not null
+
             var profile = `
             <div class="col-md-12">
 							<div class="card">
@@ -95,8 +97,12 @@ function getProfile() {
             populateDropdown(`${SETTINGS.backendUrl}/Masters/GetAllLocations`, '#countrySelect', profileData.lctnId);
             populateDropdown(`${SETTINGS.backendUrl}/Masters/GetAllLocations`, '#locationSelect', profileData.lctnId);
             populateReferenceDropdown(`${SETTINGS.backendUrl}/Masters/GetAllReferences`, '#refernceSelect', profileData.refID);
-        },
-        error: function (error) {
+        } else {
+            // If data is null, hide the place or take appropriate action
+            $('#personalinfo').hide();
+        }
+    },
+            error: function (error) {
             console.error('Error fetching cart data:', error);
         }
     });
@@ -122,7 +128,7 @@ $("#updateProfile").on('click', function (e) {
             addressLine2: $('#profileaddress2').val(),
         }),
         success: function (response) {
-            toastr.success("Account Info Updated successfully ");
+            toastr.success("Account Info Updated successfully ",error);
             $("#profileEdit").modal("hide");
         },
         error: function (error) {
@@ -233,7 +239,7 @@ function getBillingInfo() {
             },
             data: JSON.stringify(userData), // Convert object to JSON string
             success: function (response) {
-                toastr.success("Billing address added successfully ");
+                toastr.success("Billing address added successfully ",error.message);
 
                 $("#saveinfo").modal("hide");
             },
@@ -482,8 +488,6 @@ function getshippingbyId(id) {
     })
 
 }
-
-
 
 // .................get shippingInfo function end .................. 
 
