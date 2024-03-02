@@ -40,20 +40,10 @@ else {
     },
   });
 }
-function isAnyFieldEmpty() {
-  var fields = ["firstName", "lastName", "locationSelect", "refernceSelect", "phoneNumber", "profileaddress1", "profileaddress2"];
 
-  for (var i = 0; i < fields.length; i++) {
-      var value = $("#" + fields[i]).val();
-      if (!value || value.trim() === "") {
-          return true; // Return true if any field is empty
-      }
-  }
+function cartData(){
 
-  return false; // Return false if all fields are filled
 }
-
-
 function getProfile() {
   $.ajax({
       url: `${SETTINGS.backendUrl}/Auth/GetProfile`,
@@ -114,8 +104,8 @@ function getProfile() {
 
 
           // populateDropdown(`${SETTINGS.backendUrl}/Masters/GetAllLocations`, '#countrySelect', profileData.lctnId);
-          populateDropdown(`${SETTINGS.backendUrl}/Masters/GetAllLocations`, '#locationSelect', profileData.lctnId);
-          populateReferenceDropdown(`${SETTINGS.backendUrl}/Masters/GetAllReferences`, '#refernceSelect', profileData.refID);
+          // populateDropdown(`${SETTINGS.backendUrl}/Masters/GetAllLocations`, '#locationSelect', profileData.lctnId);
+          // populateReferenceDropdown(`${SETTINGS.backendUrl}/Masters/GetAllReferences`, '#refernceSelect', profileData.refID);
       } else {
           // If data is null, hide the place or take appropriate action
           // $('#profileEdited').modal('hide');
@@ -224,14 +214,16 @@ function getshippinginfo() {
       $.each(profileData, function (index, value) {
         li += `<option value="${value.csaEntryId}">${value.name} (${value.addressLine1})</option>`;
       });
-      li += `<option value="newAddress" style='color: black !important;  ' >Add New Address</option>`;
+      li += `<option value="newAddress" style='color: black !important;'>Add New Address</option>`;
       $('#shippingAddress').append(li);
-      $('#shippingAddress').selectpicker('refresh');
+      // $('#shippingAddress').selectpicker('refresh');
       // Use html() instead of append() to replace existing options
 
       $('#shippingAddress').on('change', function () {
         var selectedValue = $(this).val();
+        console.log('gsdgdsgdhgdhdg',selectedValue);
         if (selectedValue === "newAddress") {
+          console.log('gsdgdsgdhgdhdg');
           addnewaddress();
         }
         else {
@@ -340,11 +332,9 @@ function getLocation() {
         li += `<option value="${value.lEntryId}">${value.locationName}</option>`
       });
       $('#locationSelection').append(li);
-      $('#locationSelection').selectpicker('refresh');
+      // $('#locationSelection').selectpicker('refresh');
 
       // })
-
-
     },
     error: function (error) {
       console.error('Error fetching cart data:', error);
@@ -358,7 +348,7 @@ document.getElementById("saveshippinginfo").addEventListener("click", function (
   e.preventDefault()
   // function addshippingAddress() {
   const Name = document.getElementById("name").value;
-  const ContactNo = document.getElementById("contactNum").value;
+  const ContactNo = document.getElementById("contactNum").value; 
   const AltContactNo = document.getElementById("altcontactNum").value;
   const Address1 = document.getElementById("addresses1").value;
   const Address2 = document.getElementById("addresses2").value;
@@ -539,6 +529,6 @@ $(document).ready(function () {
   getshippinginfo()
   // openProfileEditModal();
   getLocation()
-  updateCheckoutView();
+  // updateCheckoutView();
  
 });

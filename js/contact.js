@@ -81,9 +81,10 @@ document.getElementById("submit").addEventListener("click", function (e) {
 $.ajax({
   type: "GET",
   url: `${SETTINGS.backendUrl}/Masters/GetAllLocations`,
-
   dataType: "json",
-  success: function (response) {
+  success: function (response)
+  
+  {
     let li = `<option value="">Select</option>`
     $.each(response, function (index, value) {
       li += `<option value="${value.lEntryId}">${value.locationName}</option>`
@@ -91,3 +92,4 @@ $.ajax({
     $('#locationSelection').append(li);
   }
 })
+// console.log('loc',value);
