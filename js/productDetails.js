@@ -22,28 +22,7 @@ $(document).ready(function () {
     success: function (data) 
     
     {
-      if (data.metaTags) {
-        // Keywords
-        if (data.metaTags.keywords) {
-            $('meta[name="keywords"]').attr('content', data.metaTags.keywords);
-        }
-        
-        // Description
-        if (data.metaTags.description) {
-            $('meta[name="description"]').attr('content', data.metaTags.description);
-            $('meta[property="og:description"]').attr('content', data.metaTags.description);
-        }
-
-        // Title
-        if (data.metaTags.title) {
-            $('meta[property="og:title"]').attr('content', data.metaTags.title);
-        }
-
-        // Add more meta tags if needed
-    }
-
-
-
+   
       $('#title').append(data.itemName)
       $('#shortDescription').append(data.shortDescription)
       $('#longDescription').append(data.longDescription)
@@ -124,10 +103,32 @@ $(document).ready(function () {
 
       });
         // Update meta tags with API data
-    document.querySelector('meta[name="description"]').content = data.metaTags;
-    document.querySelector('meta[property="og:title"]').content = data.metapropertytitle;
-    document.querySelector('meta[property="og:description"]').content = data.metapropertydescription;
+    // document.querySelector('meta[name="description"]').content = data.metaTags;
+    // document.querySelector('meta[property="og:title"]').content = data.metapropertytitle;
+    // document.querySelector('meta[property="og:description"]').content = data.metapropertydescription;
     // Add more lines to update other meta tags as needed
+
+    if (data.metaTags) {
+      // Keywords
+      if (data.metaTags ) {
+          $('meta[name="keywords"]').attr('content', data.metaTags);
+      }
+      
+      // Description
+      if (data.metapropertydescription) {
+          $('meta[name="description"]').attr('content', data.metapropertydescription);
+          $('meta[property="og:description"]').attr('content', data.metapropertydescription);
+      }
+
+      // Title
+      if (data.metapropertytitle) {
+          $('meta[property="og:title"]').attr('content', data.metapropertytitle);
+      }
+      console.log('content', data.metaTags);
+      console.log('content', data.metapropertytitle);
+      console.log('content', data.metapropertydescription);
+      // Add more meta tags if needed
+  }
 
 
       volumeHTML += '</div>';
