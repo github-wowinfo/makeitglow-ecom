@@ -28,6 +28,12 @@ $(document).ready(function () {
       $('#longDescription').append(data.longDescription)
       $('#title1').append(data.itemName)
       $('#categoryName').append(data.categoryName)
+      $('meta[name="keywords"]').attr('content', data.metaTags);
+      $('meta[name="description"]').attr('content', data.metapropertydescription);
+          $('meta[property="og:description"]').attr('content', data.metapropertydescription);
+          $('meta[property="og:title"]').attr('content', data.metapropertytitle);
+      
+
 
        
       var productImage = `<div class="swiper-btn-center-lr">
@@ -110,9 +116,9 @@ $(document).ready(function () {
 
     if (data.metaTags) {
       // Keywords
-      if (data.metaTags ) {
+      // if (data.metaTags ) {
           $('meta[name="keywords"]').attr('content', data.metaTags);
-      }
+      // }
       
       // Description
       if (data.metapropertydescription) {
