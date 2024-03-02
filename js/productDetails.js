@@ -19,7 +19,31 @@ $(document).ready(function () {
     url: `${SETTINGS.backendUrl}/Items/GetItemById?id=${itemId}`,
     method: 'GET',
     dataType: 'json',
-    success: function (data) {
+    success: function (data) 
+    
+    {
+      if (data.metaTags) {
+        // Keywords
+        if (data.metaTags.keywords) {
+            $('meta[name="keywords"]').attr('content', data.metaTags.keywords);
+        }
+        
+        // Description
+        if (data.metaTags.description) {
+            $('meta[name="description"]').attr('content', data.metaTags.description);
+            $('meta[property="og:description"]').attr('content', data.metaTags.description);
+        }
+
+        // Title
+        if (data.metaTags.title) {
+            $('meta[property="og:title"]').attr('content', data.metaTags.title);
+        }
+
+        // Add more meta tags if needed
+    }
+
+
+
       $('#title').append(data.itemName)
       $('#shortDescription').append(data.shortDescription)
       $('#longDescription').append(data.longDescription)
