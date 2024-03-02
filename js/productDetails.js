@@ -26,6 +26,7 @@ $(document).ready(function () {
       $('#title1').append(data.itemName)
       $('#categoryName').append(data.categoryName)
 
+       
       var productImage = `<div class="swiper-btn-center-lr">
 <div class="swiper product-gallery-swiper2">
   <div class="swiper-wrapper" id="lightgallery">
@@ -76,6 +77,7 @@ $(document).ready(function () {
   `
       $('#imageContent').append(productImage);
       $('#howtouse').append(data.vrnts[0].howToUse);
+      console.log('prodetailssss',data);
 
       // Generate pricing HTML dynamically based on API response
       var pricingHTML = '';
@@ -97,6 +99,13 @@ $(document).ready(function () {
         //  </label>`;
 
       });
+        // Update meta tags with API data
+    document.querySelector('meta[name="description"]').content = data.metaTags;
+    document.querySelector('meta[property="og:title"]').content = data.metapropertytitle;
+    document.querySelector('meta[property="og:description"]').content = data.metapropertydescription;
+    // Add more lines to update other meta tags as needed
+
+
       volumeHTML += '</div>';
       // Append volume HTML to the '#volume' element
       $('#volume').append(volumeHTML);
