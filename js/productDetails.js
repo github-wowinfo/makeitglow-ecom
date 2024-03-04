@@ -28,23 +28,20 @@ $(document).ready(function () {
       $('#longDescription').append(data.longDescription)
       $('#title1').append(data.itemName)
       $('#categoryName').append(data.categoryName)
+      $('#meta-discription').append(data.metaTags);
       
-      document.querySelector('#meta-tag').setAttribute('content', data.metaTags);
-      document.querySelector('#meta-discription').setAttribute('content', data.metapropertydescription);
-      document.querySelector('#meta-title').setAttribute('content', data.metapropertytitle);
-      document.querySelector('#meta-discription').setAttribute('content', data.metapropertydescription);
+      // document.querySelector('#meta-tag').setAttribute('content', data.metaTags);
+      // document.querySelector('#meta-title').setAttribute('content', data.metapropertytitle);
+      // document.querySelector('#meta-discription').setAttribute('content', data.metapropertydescription);
       
-      // $('meta[name="keywords"]').attr('content', data.metaTags);
-      // $('meta[name="description"]').attr('content', data.metapropertydescription);
-      // $('meta[property="og:description"]').attr('content', data.metapropertydescription);
-      // $('meta[property="og:title"]').attr('content', data.metapropertytitle);
+      $("meta[name='keywords']").attr("content", data.metaTags);
+      $("meta[name='description']").attr("content", data.metapropertydescription);
+      $("meta[property='og:description']").attr("content", data.metapropertydescription);
+      $("meta[property='og:title']").attr("content", data.metapropertytitle);
 
-    // document.querySelector('meta[name="description"]').content = data.metaTags;
-    // document.querySelector('meta[property="og:title"]').content = data.metapropertytitle;
-    // document.querySelector('meta[property="og:description"]').content = data.metapropertydescription;
-    
-
-
+      // document.querySelector('meta[name="description"]').content = data.metaTags;
+      // document.querySelector('meta[property="og:title"]').content = data.metapropertytitle;
+      // document.querySelector('meta[property="og:description"]').content = data.metapropertydescription;
        
       var productImage = `<div class="swiper-btn-center-lr">
 <div class="swiper product-gallery-swiper2">
@@ -106,7 +103,6 @@ $(document).ready(function () {
       var volumeHTML = '<label class="form-label">Size</label><div class="btn-group product-size mb-0">';
       data.vrnts.forEach(function (variant, index) {
 
-
         volumeHTML += `
            <input type="radio" class="btn-check" name="btnradio1" id="btnradio${index + 1}" ${index === 0 ? 'checked' : ''} />
            <label style="padding:5px; width:fit-content" class="btn btn-light Tab ${index === 0 ? 'active' : ''}" for="btnradio${index + 1}" onclick="handleButtonClick(event, 'tab${index + 1}', ${variant.vrntEntryId})">
@@ -124,7 +120,7 @@ $(document).ready(function () {
     // document.querySelector('meta[property="og:description"]').content = data.metapropertydescription;
     // Add more lines to update other meta tags as needed
 
-  //   if (data.metaTags) {
+    //   if (data.metaTags) {
   //     // Keywords
   //     // if (data.metaTags ) {
   //         $('meta[name="keywords"]').attr('content', data.metaTags);
@@ -142,7 +138,7 @@ $(document).ready(function () {
   //     }
   //     
   //     // Add more meta tags if needed
-  // }
+    // }
   console.log('content', data.metaTags);
       console.log('content', data.metapropertytitle);
       console.log('content', data.metapropertydescription);
