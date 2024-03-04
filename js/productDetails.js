@@ -29,10 +29,10 @@ $(document).ready(function () {
       $('#title1').append(data.itemName)
       $('#categoryName').append(data.categoryName)
       
-      document.querySelector('meta[name="keywords"]').setAttribute('content', data.metaTags);
-      document.querySelector('meta[name="description"]').setAttribute('content', data.metapropertydescription);
-      document.querySelector('meta[property="og:title"]').setAttribute('content', data.metapropertytitle);
-      document.querySelector('meta[property="og:description"]').setAttribute('content', data.metapropertydescription);
+      document.querySelector('#meta-tag').setAttribute('content', data.metaTags);
+      document.querySelector('#meta-discription').setAttribute('content', data.metapropertydescription);
+      document.querySelector('#meta-title').setAttribute('content', data.metapropertytitle);
+      document.querySelector('#meta-discription').setAttribute('content', data.metapropertydescription);
       
       // $('meta[name="keywords"]').attr('content', data.metaTags);
       // $('meta[name="description"]').attr('content', data.metapropertydescription);
