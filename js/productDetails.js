@@ -29,10 +29,10 @@ $(document).ready(function () {
       $('#title1').append(data.itemName)
       $('#categoryName').append(data.categoryName)
       
-      $('meta[name="keywords"]').attr('content', data.metaTags);
-      $('meta[name="description"]').attr('content', data.metapropertydescription);
-      $('meta[property="og:description"]').attr('content', data.metapropertydescription);
-      $('meta[property="og:title"]').attr('content', data.metapropertytitle);
+      $('meta[name="keywords"]').append('content', data.metaTags);
+      $('meta[name="description"]').append('content', data.metapropertydescription);
+      $('meta[property="og:description"]').append('content', data.metapropertydescription);
+      $('meta[property="og:title"]').append('content', data.metapropertytitle);
       
 
 

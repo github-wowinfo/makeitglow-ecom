@@ -923,13 +923,13 @@ var MoonCart = function () {
 			cartButton();
 			handleColorFilter();
 			handleLightgallery();
-			handleOpenModal();
+			// handleOpenModal();
 			// handleSupport();
 			menuHover();
 			wishlistBtn();
 			navScroller();
 			handleMagnifyGallery();
-			handleOpenModalCookie();
+			// handleOpenModalCookie();
 
 		},
 
