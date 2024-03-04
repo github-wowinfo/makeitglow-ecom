@@ -29,13 +29,19 @@ $(document).ready(function () {
       $('#title1').append(data.itemName)
       $('#categoryName').append(data.categoryName)
       
+      document.querySelector('meta[name="keywords"]').setAttribute('content', data.metaTags);
+      document.querySelector('meta[name="description"]').setAttribute('content', data.metapropertydescription);
+      document.querySelector('meta[property="og:title"]').setAttribute('content', data.metapropertytitle);
+      document.querySelector('meta[property="og:description"]').setAttribute('content', data.metapropertydescription);
+      
       // $('meta[name="keywords"]').attr('content', data.metaTags);
       // $('meta[name="description"]').attr('content', data.metapropertydescription);
       // $('meta[property="og:description"]').attr('content', data.metapropertydescription);
       // $('meta[property="og:title"]').attr('content', data.metapropertytitle);
-        document.querySelector('meta[name="description"]').content = data.metaTags;
-    document.querySelector('meta[property="og:title"]').content = data.metapropertytitle;
-    document.querySelector('meta[property="og:description"]').content = data.metapropertydescription;
+
+    // document.querySelector('meta[name="description"]').content = data.metaTags;
+    // document.querySelector('meta[property="og:title"]').content = data.metapropertytitle;
+    // document.querySelector('meta[property="og:description"]').content = data.metapropertydescription;
     
 
 
