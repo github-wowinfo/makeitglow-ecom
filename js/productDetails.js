@@ -28,16 +28,19 @@ $(document).ready(function () {
       $('#longDescription').append(data.longDescription)
       $('#title1').append(data.itemName)
       $('#categoryName').append(data.categoryName)
-      $('#meta-discription').append(data.metaTags);
+      $('#metatag').append(data.metaTags);
+      $('#metadiscription').append(data.metapropertydescription);
+      $('#metatitle').append(data.metapropertytitle);
+      
       
       // document.querySelector('#meta-tag').setAttribute('content', data.metaTags);
       // document.querySelector('#meta-title').setAttribute('content', data.metapropertytitle);
       // document.querySelector('#meta-discription').setAttribute('content', data.metapropertydescription);
       
-      $("meta[name='keywords']").attr("content", data.metaTags);
-      $("meta[name='description']").attr("content", data.metapropertydescription);
-      $("meta[property='og:description']").attr("content", data.metapropertydescription);
-      $("meta[property='og:title']").attr("content", data.metapropertytitle);
+      // $("meta[name='keywords']").attr("content", data.metaTags);
+      // $("meta[name='description']").attr("content", data.metapropertydescription);
+      // $("meta[property='og:description']").attr("content", data.metapropertydescription);
+      // $("meta[property='og:title']").attr("content", data.metapropertytitle);
 
       // document.querySelector('meta[name="description"]').content = data.metaTags;
       // document.querySelector('meta[property="og:title"]').content = data.metapropertytitle;
